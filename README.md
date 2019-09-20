@@ -70,7 +70,7 @@ $ pip install pyinstaller
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
 - Version：0.0.1b
-- 作者：山原　喜寛
+- 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
 - E-mail：yoshihiro@yamahara.email
