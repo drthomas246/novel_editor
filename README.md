@@ -1,5 +1,5 @@
 # novel_editor
-
+　[English versionw](https://github.com/drthomas246/novel_editor/wiki)
 ![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
 ![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
 ![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)
@@ -98,7 +98,6 @@ This software includes the work that is distributed in the [Apache License 2.0](
 Copyright 2005–2019, PyInstaller Development Team.  
 Distributed under the GPL license  
 https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt
-
 
 - naritoブログ  
 [Tkinterで、行番号付きText](https://torina.top/detail/412/)  
