@@ -13,8 +13,8 @@
 - jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
-$ pip install jaconv
-$ pip install janome
+$ pip install 'jaconv==0.2.4'
+$ pip install 'Janome==0.3.9'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
