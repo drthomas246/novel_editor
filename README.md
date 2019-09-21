@@ -1,5 +1,10 @@
 # novel_editor
 
+![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
+![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
+![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)
+![リリース](https://img.shields.io/github/v/release/drthomas246/novel_editor?include_prereleases)
+
 - python で作った、「[小説家になろう](https://syosetu.com/)」の投稿用エディタです。
 - キャラクター、職種、場所、イベント、小説、をわけて管理することで小説を少しでも楽にかけるようにしてあります。
 - TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
