@@ -1,6 +1,6 @@
 # novel_editor
 
-- python で作った、「小説家になろう」の投稿用エディタです。
+- python で作った、「[小説家になろう](https://syosetu.com/)」の投稿用エディタです。
 - キャラクター、職種、場所、イベント、小説、をわけて管理することで小説を少しでも楽にかけるようにしてあります。
 - また、TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
 
@@ -31,6 +31,7 @@ $ pip install janome
 | Ctrl+W | 名前をつけて保存 |
 | Ctrl+S | 上書き保存 |
 | Ctrl+Shift+C | 文字数、行数カウントダイアログ表示 |
+| Ctrl+R | 選択文字列にルビを振る |
 | Ctrl+X | 切り取り |
 | Ctrl+C | コピー |
 | Ctrl+V | ペースト |
@@ -79,7 +80,7 @@ $ pip install pyinstaller
 ## Special thanks
 - jaconv (文字変換)ライブラリ  
 Copyright (C) 2014, Yukino Ikegami.  
-Released under the MIT license
+Released under the MIT license  
 https://raw.githubusercontent.com/ikegami-yukino/jaconv/master/LICENSE
 
 - janome (形態素解析エンジン)ライブラリ  
@@ -88,7 +89,7 @@ This software includes the work that is distributed in the [Apache License 2.0](
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
-Distributed under the GPL license
+Distributed under the GPL license  
 https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt
 
 
