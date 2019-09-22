@@ -100,6 +100,7 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-e>', self.open_file)
         # 保存ダイアロクを表示する
         self.text.bind('<Control-Key-w>', self.save_file)
+        # 小説家になろうを開く
         self.text.bind('<Control-Key-u>', self.open_url)
         # 上書き保存する
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
