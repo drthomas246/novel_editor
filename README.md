@@ -1,5 +1,10 @@
 # novel_editor
-　[English versionw](https://github.com/drthomas246/novel_editor/wiki)
+<div style="text-align: right;">
+
+　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
+
+</div>
+
 ![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
 ![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
 ![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)
@@ -9,6 +14,7 @@
 - キャラクター、職種、場所、イベント、小説、をわけて管理することで小説を少しでも楽にかけるようにしてあります。
 - TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
 - Ctrl+Rで選択文字列の漢字部分にルビを振ることができます。
+- Ctrl+Uで小説家になろうのユーザーページを開くことができます。
 
 ## 使用方法
 
