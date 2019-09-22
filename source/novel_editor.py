@@ -4,6 +4,7 @@
 import os
 import zipfile
 import shutil
+import webbrowser
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
@@ -99,6 +100,7 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-e>', self.open_file)
         # 保存ダイアロクを表示する
         self.text.bind('<Control-Key-w>', self.save_file)
+        self.text.bind('<Control-Key-u>', self.open_url)
         # 上書き保存する
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
         # 文字数と行数をカウントする
@@ -109,6 +111,10 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
+
+    def open_url(self,event=None):
+        """小説家になろうのユーザーページを開く"""
+        webbrowser.open("https://syosetu.com/user/top/")
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""

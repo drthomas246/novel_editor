@@ -39,6 +39,7 @@ $ pip install 'Janome==0.3.9'
 | Ctrl+S | 上書き保存 |
 | Ctrl+Shift+C | 文字数、行数カウントダイアログ表示 |
 | Ctrl+R | 選択文字列にルビを振る |
+| Ctrl+U | 小説家になろうのユーザーページを開く |
 | Ctrl+X | 切り取り |
 | Ctrl+C | コピー |
 | Ctrl+V | ペースト |
