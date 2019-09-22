@@ -61,6 +61,7 @@ class LineFrame(ttk.Frame):
             os.makedirs('./{0}'.format(val[0]))
 
     def create_widgets(self):
+        """ウェジット配置"""
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
         self.text = CustomText(self,font=("",18),undo=True)
