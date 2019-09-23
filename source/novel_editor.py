@@ -14,8 +14,7 @@ import jaconv
 from janome.tokenizer import Tokenizer
 
 tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
-now_path = ""
-file_path = ""
+
 # Janomeを使って日本語の形態素解析
 tokenizer = Tokenizer()
 
@@ -54,6 +53,9 @@ class LineFrame(ttk.Frame):
 
     def initialize(self):
         """初期化処理"""
+        self.now_path = ""
+        self.file_path = ""
+        self.last_text=""
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
             shutil.rmtree('./data')
@@ -102,6 +104,7 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-w>', self.save_file)
         # 小説家になろうを開く
         self.text.bind('<Control-Key-u>', self.open_url)
+        self.text.bind('<Control-Key-f>', self.find_dialog)
         # 上書き保存する
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
         # 文字数と行数をカウントする
@@ -164,13 +167,13 @@ class LineFrame(ttk.Frame):
     def overwrite_save_file(self,event=None):
         """上書き保存処理"""
         # ファイルパスが存在するとき
-        if not file_path == "":
+        if not self.file_path == "":
             # 編集中のファイルを保存する
-            self.open_file_save(now_path)
+            self.open_file_save(self.now_path)
             # zipファイルにまとめる
-            shutil.make_archive(file_path,"zip","./data")
+            shutil.make_archive(self.file_path,"zip","./data")
             # 拡張子の変更を行う
-            shutil.move("{0}.zip".format(file_path),"{0}.ned".format(file_path))
+            shutil.move("{0}.zip".format(self.file_path),"{0}.ned".format(self.file_path))
         # ファイルパスが存在しないとき
         else:
             # 保存ダイアログを開く
@@ -178,7 +181,6 @@ class LineFrame(ttk.Frame):
 
     def save_file(self,event=None):
         """ファイルを保存処理"""
-        global file_path
         # ファイル保存ダイアログを表示する
         fTyp = [("小説エディタ",".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
@@ -187,14 +189,12 @@ class LineFrame(ttk.Frame):
         if not filepath == "":
             # 拡張子を除いて保存する
             filepath, ___ = os.path.splitext(filepath)
-            file_path = filepath
+            self.file_path = filepath
             # 上書き保存処理
             self.overwrite_save_file()
 
     def open_file(self,event=None):
         """ファイルを開く処理"""
-        global file_path
-        global now_path
         # ファイルを開くダイアログを開く
         fTyp = [("小説エディタ",".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
@@ -214,8 +214,8 @@ class LineFrame(ttk.Frame):
             self.TreeGetLoop()
             # ファイルパスを拡張子抜きで表示する
             filepath, ___ = os.path.splitext(filepath)
-            file_path = filepath
-            now_path = ""
+            self.file_path = filepath
+            self.now_path = ""
             # テキストビューを新にする
             self.text.delete('1.0', 'end')
 
@@ -228,6 +228,91 @@ class LineFrame(ttk.Frame):
             files = os.listdir(path)
             for filename in files:
                 self.tree.insert(val[0], 'end', text=os.path.splitext(filename)[0])
+
+    def find_dialog(self,event=None):
+        """検索ボックスを作成する"""
+        self.sub_win = tk.Toplevel(self)
+        self.sub_win.geometry("260x75")
+        self.text_var = ttk.Entry(self.sub_win,width=40)
+        self.text_var.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        button = ttk.Button(
+            self.sub_win,
+            text = '検索',
+            width = str('検索'),
+            padding = (10, 5),
+            command = self.search
+            )
+        button.grid(row=1, column=1)
+        # 最前面に表示し続ける
+        self.sub_win.attributes("-topmost", True)
+        self.sub_win.title(u'検索')
+        self.text_var.focus()
+
+    def search_start(self, texts):
+        """検索の初回処理."""
+        # 各変数の初期化
+        self.next_pos_index = 0
+        self.all_pos = []
+
+        # はじめは1.0から検索し、見つかれば、それの最後+1文字の時点から再検索
+        # all_posには、['1.7', '3,1', '5.1'...]のような検索文字が見つかった地点の最初のインデックスが入っていく
+        start_index = '1.0'
+        while True:
+            pos = self.text.search(texts, start_index, stopindex='end')
+            if not pos:  # 検索文字がもう見つからければbreak
+                break
+            self.all_pos.append(pos)
+            start_index = '{0} + 1c'.format(pos)  # 最後から+1文字を起点に、再検索
+
+        # 最初のマッチ部分、all_pos[0]を選択させておく
+        self.search_next(texts)
+
+    def search_next(self, texts):
+        """検索の続きの処理."""
+        try:
+            # 今回のマッチ部分の取得を試みる
+            pos = self.all_pos[self.next_pos_index]
+        except IndexError:
+            # all_posが空でなくIndexErrorならば、全てのマッチを見た、ということ
+            # なのでnext_post_indexを0にし、最初からまたマッチを見せる
+            if self.all_pos:
+                self.next_pos_index = 0
+                self.search_next(texts)
+        else:
+            # 次のマッチ部分を取得できればここ
+            start = pos
+            end = '{0} + {1}c'.format(pos, len(texts))
+
+            # マッチ部分〜マッチ部分+文字数分 の範囲を選択する
+            self.text.tag_add('sel', start, end)
+
+            # インサートカーソルをマッチした部分に入れ、スクロール、フォーカスも合わせておく
+            self.text.mark_set('insert', start)
+            self.text.see('insert')
+            self.text.focus()
+            # 次回取得分のために+1
+            self.next_pos_index += 1
+
+    def search(self, event=None):
+        """文字の検索を行う."""
+        # 現在選択中の部分を解除
+        self.text.tag_remove('sel', '1.0', 'end')
+
+        # 現在検索ボックスに入力されてる文字
+        now_text = self.text_var.get()
+
+        if not now_text:
+            # 空欄だったら処理しない
+            pass
+        elif now_text != self.last_text:
+            # 前回の入力と違う文字なら、検索を最初から行う
+            self.search_start(now_text)
+        else:
+            # 前回の入力と同じなら、検索の続きを行う
+            self.search_next(now_text)
+
+        # 今回の入力を、「前回入力文字」にする
+        self.last_text = now_text
 
     def message_window(self,event=None):
         """ダイアログを表示する."""
@@ -257,32 +342,33 @@ class LineFrame(ttk.Frame):
                 )
             button.grid(row=1, column=1)
             self.txt.focus()
+            self.sub_win.title(u'{0}に挿入'.format(self.tree.item(curItem)["text"]))
         # 子アイテムを右クリックしたとき
         else:
-            # 項目を削除する
-            file_name = self.tree.item(curItem)["text"]
-            text = self.tree.item(parentItem)["text"]
-            # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
-            if messagebox.askokcancel(u"項目削除", "{0}を削除しますか？".format(file_name)):
-                global now_path
-                # パスを取得する
-                for val in tree_folder:
-                    if text == val[1]:
-                        path = "./{0}/{1}.txt".format(val[0],file_name)
-                        self.tree.delete(curItem)
-                        now_path=""
-                        break
-                # パスが存在したとき
-                if not path == "":
-                    os.remove(path)
-                    self.text.delete('1.0', tk.END)
-                    self.text.focus()
+            if str(self.tree.item(curItem)["text"]):
+                # 項目を削除する
+                file_name = self.tree.item(curItem)["text"]
+                text = self.tree.item(parentItem)["text"]
+                # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
+                if messagebox.askokcancel(u"項目削除", "{0}を削除しますか？".format(file_name)):
+                    # パスを取得する
+                    for val in tree_folder:
+                        if text == val[1]:
+                            path = "./{0}/{1}.txt".format(val[0],file_name)
+                            self.tree.delete(curItem)
+                            self.now_path=""
+                            break
+                    # パスが存在したとき
+                    if not path == "":
+                        os.remove(path)
+                        self.text.delete('1.0', tk.END)
+                        self.text.focus()
 
     def SubWinOk(self):
         """ダイアログの実行ボタンが押されたとき."""
-        global now_path
         file_name=self.txt.get()
         self.sub_win.destroy()
+        self.open_file_save(self.now_path)
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
         text = self.tree.item(curItem)["text"]
         path = ""
@@ -291,7 +377,7 @@ class LineFrame(ttk.Frame):
             if text == val[1]:
                 path = "./{0}/{1}.txt".format(val[0],file_name)
                 tree = self.tree.insert(val[0], 'end', text=file_name)
-                now_path = path
+                self.now_path = path
                 break
 
         # パスが存在すれば新規作成する
@@ -306,22 +392,22 @@ class LineFrame(ttk.Frame):
             self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
             self.text.focus()
 
-    def open_file_save(self,now_path):
+    def open_file_save(self,path):
         """開いてるファイルを保存する."""
         # 編集ファイルを保存する
-        if not now_path == "":
-            f = open(now_path,'w')
+        if not path == "":
+            f = open(path,'w')
             f.write(self.text.get("1.0",tk.END+'-1c'))
             f.close()
+            self.now_path = path
 
     def OnDoubleClick(self, event=None):
         """ツリービューをダブルクリックしたとき."""
-        global now_path
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
         # 開いているファイルを保存
-        self.open_file_save(now_path)
+        self.open_file_save(self.now_path)
 
         # 条件によって分離
         sub_text = self.tree.item(curItem)["text"]
@@ -329,7 +415,7 @@ class LineFrame(ttk.Frame):
         for val in tree_folder:
             if text == val[1]:
                 path = "./{0}/{1}.txt".format(val[0],sub_text)
-                now_path = path
+                self.now_path = path
                 self.text.focus()
                 break
 

@@ -1,9 +1,6 @@
 # novel_editor
-<div style="text-align: right;">
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
-
-</div>
 
 ![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
 ![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
@@ -50,6 +47,7 @@ $ pip install 'Janome==0.3.9'
 | Ctrl+C | コピー |
 | Ctrl+V | ペースト |
 | Ctrl+A | すべて選択 |
+| Ctrl+F | 検索 |
 | Ctrl+Z | UNDO |
 | Ctrl+Shift+Z | REDO |
 | Tab | 名前の一覧表示 |
@@ -82,9 +80,18 @@ $ pip install pyinstaller
 .nedの実体はzipファイルの拡張子を変更してあるだけですので、.zipに戻すと解凍できます。(但し、解凍ソフトによっては文字化けする恐れがあります。)  
 解凍すると、dataフォルダの中に、大項目のcharacter (キャラクター)、occupation (職種)、space (場所)、event (イベント)、nobel (小説)フォルダができています。それぞれのフォルダの中に小項目のテキストフォルダができていますので、そこにデータがテキスト形式で保存されています。
 
+## 改変履歴
+
+- Version 0.0.3  
+検索を追加
+- Version 0.0.2b  
+小説家になろうのユーザーページを開けるようにする
+- Version 0.0.1b  
+初版発行
+
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.2b1
+- Version：0.0.3b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -108,4 +115,5 @@ https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt
 
 - naritoブログ  
 [Tkinterで、行番号付きText](https://torina.top/detail/412/)  
+[Tkinterで、検索ボックス](https://torina.top/detail/407/)  
 Copyright Narito Takizawa All Rights Reserved.
