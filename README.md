@@ -82,7 +82,7 @@ $ pip install pyinstaller
 
 ## 改変履歴
 
-- Version 0.0.3  
+- Version 0.0.3b  
 検索を追加
 - Version 0.0.2b  
 小説家になろうのユーザーページを開けるようにする
