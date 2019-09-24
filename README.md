@@ -3,10 +3,10 @@
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
 [![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor/builds/588904606)
-![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
-![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
+[![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
+[![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE)
-[![リリース](https://img.shields.io/github/v/release/drthomas246/novel_editor?include_prereleases)](https://github.com/drthomas246/novel_editor/releases)
+[![リリース](https://img.shields.io/github/v/release/drthomas246/novel_editor?include_prereleases)](https://github.com/drthomas246/novel_editor/releases)  
 ![ドキュメント](https://img.shields.io/badge/document-ja-green)
 ![コミットメッセージ](https://img.shields.io/badge/Commit_message-ja-green)
 ![コードコメント](https://img.shields.io/badge/code_comment-ja-green)
