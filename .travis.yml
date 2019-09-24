@@ -9,6 +9,6 @@ dist: xenial
 services:
   - xvfb
 script:
-  - python ./source/novel_editor.py
+  - coverage run ./source/novel_editor.py
 after_success:
   - coveralls
