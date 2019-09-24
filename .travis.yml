@@ -4,6 +4,7 @@ python:
 install:
   - pip install 'jaconv==0.2.4'
   - pip install 'Janome==0.3.9'
+  - pip install coveralls
 dist: xenial
 services:
   - xvfb
