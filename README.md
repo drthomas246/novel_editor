@@ -2,6 +2,7 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
+[![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
 ![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)
 ![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)
 ![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)
