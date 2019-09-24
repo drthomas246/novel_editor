@@ -123,9 +123,7 @@ class LineFrame(ttk.Frame):
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
-        if 'ぁ' <= char <= 'ん':
-            return True
-        return False
+        return (0x3040 < ord(char) < 0x3094)
 
     def ruby(self,event=None):
         """ルビをふる"""
