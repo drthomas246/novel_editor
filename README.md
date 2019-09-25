@@ -17,6 +17,7 @@
 - TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
 - Ctrl+Rで選択文字列の漢字部分にルビを振ることができます。
 - Ctrl+Uで小説家になろうのユーザーページを開くことができます。
+- 登場人物がシンタックスハイライトされます。（一部作動しない名前がある）
 
 ## 使用方法
 
@@ -104,6 +105,8 @@ $ coverage html
 
 ## 改変履歴
 
+- Version 0.0.4b  
+名前のシンタックスハイライトを追加
 - Version 0.0.3b  
 検索を追加
 - Version 0.0.2b  
@@ -113,7 +116,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.3b
+- Version：0.0.4b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -143,4 +146,5 @@ This software includes the work that is distributed in the [Apache License 2.0](
 - naritoブログ  
 [Tkinterで、行番号付きText](https://torina.top/detail/412/)  
 [Tkinterで、検索ボックス](https://torina.top/detail/407/)  
+[Tkinterで、Pythonコードをハイライトする](https://torina.top/detail/415/)  
 Copyright Narito Takizawa All Rights Reserved.

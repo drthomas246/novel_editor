@@ -16,7 +16,7 @@ from janome.tokenizer import Tokenizer
 tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
 # Janomeを使って日本語の形態素解析
 tokenizer = Tokenizer()
-
+color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon']
 class CustomText(tk.Text):
     """Textの、イベントを拡張したウィジェット."""
     def __init__(self, master, **kwargs):
@@ -115,6 +115,57 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
+
+    def create_tags(self):
+        """タグの作成"""
+        i = 0
+        # キャラクターから一覧を作る。
+        children = self.tree.get_children('data/character')
+        for child in children:
+            childname = self.tree.item(child,"text")
+            self.text.tag_configure(
+                childname, foreground=color[i]
+            )
+            i += 1
+
+    def all_highlight(self, event=None):
+        """全てハイライト"""
+        # 全てのテキストを取得
+        src = self.text.get('1.0', 'end - 1c')
+
+        # 全てのハイライトを一度解除する
+        for tag in self.text.tag_names():
+            self.text.tag_remove(tag, '1.0', 'end')
+
+        # ハイライトする
+        self._highlight('1.0', src)
+
+    def line_highlight(self, event=None):
+        """現在行だけハイライト"""
+        start = 'insert linestart'
+        end = 'insert lineend'
+
+        # 現在行のテキストを取得
+        src = self.text.get(start, end)
+
+        # その行のハイライトを一度解除する
+        for tag in self.text.tag_names():
+            self.text.tag_remove(tag, start, end)
+
+        # ハイライトする
+        self._highlight(start, src)
+
+    def _highlight(self, start, src):
+        """ハイライトの共通処理"""
+        self.create_tags()
+        self.text.mark_set('range_start', start)
+        for token in tokenizer.tokenize(src):
+            content=token.surface
+            self.text.mark_set(
+                'range_end', 'range_start+{0}c'.format(len(content))
+            )
+            self.text.tag_add(token.surface, 'range_start', 'range_end')
+            self.text.mark_set('range_start', 'range_end')
 
     def open_url(self,event=None):
         """小説家になろうのユーザーページを開く"""
@@ -447,6 +498,8 @@ class LineFrame(ttk.Frame):
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             self.line_numbers.create_text(3, y, anchor=tk.NW, text=current,font=("",12))
             current += 1
+            # シンタックスハイライトをする
+            self.line_highlight()
 
     def tab(self,event=None):
         """タブ押下時の処理"""
@@ -556,4 +609,4 @@ if __name__ == "__main__":
 
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.mainloop()
+    root.update()
