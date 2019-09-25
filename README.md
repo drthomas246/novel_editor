@@ -90,8 +90,14 @@ $ pip install pyinstaller
 ```
 $ pip install coverage
 ```
-- coverage.batを実行してカバレッジを計測します。  
-htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力されています。
+- つぎのコマンドを入力してカバレッジを計測します。
+```
+$ coverage run ./source/novel_editor.py arg1 arg2
+```
+- その後以下のコマンドを実行して、htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力します。
+```
+$ coverage html
+```
 
 ## 改変履歴
 
