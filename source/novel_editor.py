@@ -14,7 +14,6 @@ import jaconv
 from janome.tokenizer import Tokenizer
 
 tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
-
 # Janomeを使って日本語の形態素解析
 tokenizer = Tokenizer()
 
