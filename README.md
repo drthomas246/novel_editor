@@ -85,6 +85,14 @@ $ pip install pyinstaller
 .nedの実体はzipファイルの拡張子を変更してあるだけですので、.zipに戻すと解凍できます。(但し、解凍ソフトによっては文字化けする恐れがあります。)  
 解凍すると、dataフォルダの中に、大項目のcharacter (キャラクター)、occupation (職種)、space (場所)、event (イベント)、nobel (小説)フォルダができています。それぞれのフォルダの中に小項目のテキストフォルダができていますので、そこにデータがテキスト形式で保存されています。
 
+- Pythonコードのカバレッジを計測するためにCoveragepyを使用しています。  
+使用方法は、Coveragepyをインストールします。
+```
+$ pip install coverage
+```
+- coverage.batを実行してカバレッジを計測します。  
+htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力されています。
+
 ## 改変履歴
 
 - Version 0.0.3b  
@@ -117,6 +125,11 @@ This software includes the work that is distributed in the [Apache License 2.0](
 Copyright 2005–2019, PyInstaller Development Team.  
 Distributed under the GPL license  
 https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt
+
+- Coveragepy  
+Copyright(C) 2009–2019, Ned Batchelder.  
+This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
+
 
 - naritoブログ  
 [Tkinterで、行番号付きText](https://torina.top/detail/412/)  
