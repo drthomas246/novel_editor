@@ -17,7 +17,7 @@
 - TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
 - Ctrl+Rで選択文字列の漢字部分にルビを振ることができます。
 - Ctrl+Uで小説家になろうのユーザーページを開くことができます。
-- 登場人物がシンタックスハイライトされます。（一部作動しない名前がある）
+- 登場人物がシンタックスハイライトされます。
 
 ## 使用方法
 
@@ -105,7 +105,7 @@ $ coverage html
 
 ## 改変履歴
 
-- Version 0.0.4b  
+- Version 0.0.4b1  
 名前のシンタックスハイライトを追加
 - Version 0.0.3b  
 検索を追加
@@ -116,7 +116,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.4b
+- Version：0.0.4b1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/

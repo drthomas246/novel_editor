@@ -14,9 +14,10 @@ import jaconv
 from janome.tokenizer import Tokenizer
 
 tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
+color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon']
 # Janomeを使って日本語の形態素解析
 tokenizer = Tokenizer()
-color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon']
+
 class CustomText(tk.Text):
     """Textの、イベントを拡張したウィジェット."""
     def __init__(self, master, **kwargs):
@@ -90,7 +91,7 @@ class LineFrame(ttk.Frame):
         # テキスト内でのスクロール時
         self.text.bind('<<Scroll>>', self.update_line_numbers)
         # テキストの変更時
-        self.text.bind('<<Change>>', self.update_line_numbers)
+        self.text.bind('<<Change>>', self.Change_setting)
         # ウィジェットのサイズが変わった際。行番号の描画を行う
         self.text.bind('<Configure>', self.update_line_numbers)
         # Tab押下時(インデント、又はコード補完)
@@ -115,18 +116,30 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
-
+        self.text.bind('<Control-Key-l>', self.all_highlight)
     def create_tags(self):
         """タグの作成"""
         i = 0
+        system_dic= "喜寛,固有名詞,ヨシヒロ"
         # キャラクターから一覧を作る。
         children = self.tree.get_children('data/character')
         for child in children:
+            # ユーザー定義辞書の設定
+            reading = ""
             childname = self.tree.item(child,"text")
+            for token in tokenizer.tokenize(childname):
+                reading += token.phonetic
+            system_dic += "\n{0},固有名詞,{1}".format(childname,reading)
+            # タグの作成
             self.text.tag_configure(
                 childname, foreground=color[i]
             )
             i += 1
+        f = open("./userdic.csv",'w', encoding='utf-8')
+        f.write(system_dic)
+        f.close()
+        # Janomeを使って日本語の形態素解析
+        self.t = Tokenizer("./userdic.csv", udic_type="simpledic", udic_enc="utf8")
 
     def all_highlight(self, event=None):
         """全てハイライト"""
@@ -159,12 +172,12 @@ class LineFrame(ttk.Frame):
         """ハイライトの共通処理"""
         self.create_tags()
         self.text.mark_set('range_start', start)
-        for token in tokenizer.tokenize(src):
+        for token in self.t.tokenize(src):
             content=token.surface
             self.text.mark_set(
                 'range_end', 'range_start+{0}c'.format(len(content))
             )
-            self.text.tag_add(token.surface, 'range_start', 'range_end')
+            self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
 
     def open_url(self,event=None):
@@ -440,6 +453,7 @@ class LineFrame(ttk.Frame):
             self.tree.selection_set(tree)
             self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
             self.text.focus()
+            self.create_tags()
 
     def open_file_save(self,path):
         """開いてるファイルを保存する."""
@@ -498,8 +512,13 @@ class LineFrame(ttk.Frame):
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             self.line_numbers.create_text(3, y, anchor=tk.NW, text=current,font=("",12))
             current += 1
-            # シンタックスハイライトをする
-            self.line_highlight()
+
+
+    def Change_setting(self, event=None):
+        """テキストの変更時"""
+        self.update_line_numbers()
+        # シンタックスハイライトをする
+        self.all_highlight()
 
     def tab(self,event=None):
         """タブ押下時の処理"""
@@ -609,4 +628,4 @@ if __name__ == "__main__":
 
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.mainloop()
+    root.update()
