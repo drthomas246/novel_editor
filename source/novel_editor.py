@@ -14,7 +14,7 @@ import jaconv
 from janome.tokenizer import Tokenizer
 
 tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
-color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon']
+color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon','tan1','rosy brown','indian red']
 # Janomeを使って日本語の形態素解析
 tokenizer = Tokenizer()
 
@@ -177,7 +177,10 @@ class LineFrame(ttk.Frame):
             self.text.mark_set(
                 'range_end', 'range_start+{0}c'.format(len(content))
             )
-            self.text.tag_add(content, 'range_start', 'range_end')
+            if src[0]=="\u3000":
+                self.text.tag_add(content, 'range_start+1c', 'range_end+1c')
+            else:
+                self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
 
     def open_url(self,event=None):
@@ -619,6 +622,15 @@ class LineFrame(ttk.Frame):
             start_i += 1
             end_i += 1
 
+def on_closing():
+    """終了時の処理"""
+    if messagebox.askokcancel(u"小説エディタ", u"終了してもいいですか？"):
+        shutil.rmtree("./data")
+        if os.path.isfile("./userdic.csv"):
+            os.remove("./userdic.csv")
+
+        root.destroy()
+
 if __name__ == "__main__":
     root = tk.Tk()
 
@@ -626,6 +638,7 @@ if __name__ == "__main__":
     root.title(u'小説エディタ')
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
 
+    root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
     root.mainloop()
