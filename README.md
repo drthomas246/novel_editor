@@ -35,8 +35,8 @@ $ pip install 'Janome==0.3.9'
 
 - 上記ライブラリ以外は標準ライブラリを使っていますので、上記をインストールすれば、実行できるはずです。
 
-- Windows用にコンパイルした物をdistフォルダに入れてあります。(64bit用)ダブルクリックすれば起動します。  
-また、削除は、novel_editor.exeとその同じフォルダにあるdataフォルダを削除してください。レジストリは汚していません。
+- Windows用にコンパイルした物がReleasesにあります(64bit用)。ダブルクリックすれば起動します。  
+また、削除は、novel_editor.exeを削除してください。レジストリは汚していません。
 
 ## コマンド一覧
 - 通常時 (文字入力画面)
@@ -96,7 +96,7 @@ $ pip install coverage
 ```
 - つぎのコマンドを入力してカバレッジを計測します。
 ```
-$ coverage run ./source/novel_editor.py arg1 arg2
+$ coverage run ./source/novel_editor.py
 ```
 - その後以下のコマンドを実行して、htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力します。
 ```
@@ -105,6 +105,8 @@ $ coverage html
 
 ## 改変履歴
 
+- Version 0.0.5b  
+終了処理を追加
 - Version 0.0.4b1  
 名前のシンタックスハイライトを追加
 - Version 0.0.3b  
@@ -116,7 +118,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.4b1
+- Version：0.0.5b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
