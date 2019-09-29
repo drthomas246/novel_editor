@@ -129,7 +129,7 @@ $ coverage html
 - jaconv (文字変換)ライブラリ  
 Copyright (C) 2014, Yukino Ikegami.  
 Released under the MIT license  
-https://raw.githubusercontent.com/ikegami-yukino/jaconv/master/LICENSE
+[https://raw.githubusercontent.com/ikegami-yukino/jaconv/master/LICENSE](https://raw.githubusercontent.com/ikegami-yukino/jaconv/master/LICENSE)
 
 - janome (形態素解析エンジン)ライブラリ  
 Copyright(C) 2015, Tomoko Uchida. All Rights Reserved.  
@@ -138,7 +138,7 @@ This software includes the work that is distributed in the [Apache License 2.0](
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
 Distributed under the GPL license  
-https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt
+[https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt](https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt)
 
 - Coveragepy  
 Copyright(C) 2009–2019, Ned Batchelder.  

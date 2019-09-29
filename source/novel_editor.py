@@ -46,6 +46,7 @@ class CustomText(tk.Text):
 class LineFrame(ttk.Frame):
     """メインフレーム処理."""
     def __init__(self, master=None, **kwargs):
+        """初期設定"""
         super().__init__(master, **kwargs)
         self.initialize()
         self.create_widgets()
@@ -90,6 +91,10 @@ class LineFrame(ttk.Frame):
         """イベントの設定."""
         # テキスト内でのスクロール時
         self.text.bind('<<Scroll>>', self.update_line_numbers)
+        self.text.bind('<Up>', self.update_line_numbers)
+        self.text.bind('<Down>', self.update_line_numbers)
+        self.text.bind('<Left>', self.update_line_numbers)
+        self.text.bind('<Right>', self.update_line_numbers)
         # テキストの変更時
         self.text.bind('<<Change>>', self.Change_setting)
         # ウィジェットのサイズが変わった際。行番号の描画を行う
@@ -116,7 +121,7 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
-        self.text.bind('<Control-Key-l>', self.all_highlight)
+
     def create_tags(self):
         """タグの作成"""
         i = 0
@@ -492,6 +497,8 @@ class LineFrame(ttk.Frame):
             self.text.insert(tk.END, f.read())
             f.close()
             self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
+            # シンタックスハイライトをする
+            self.all_highlight()
 
     def update_line_numbers(self,event=None):
         """行番号の描画."""
@@ -501,11 +508,11 @@ class LineFrame(ttk.Frame):
         # Textの0, 0座標、つまり一番左上が何行目にあたるかを取得
         first_row = self.text.index('@0,0')
         first_row_number = int(first_row.split('.')[0])
-        current = first_row_number
+        i = self.text.index("@0,0")
         while True:
             # dlineinfoは、その行がどの位置にあり、どんなサイズか、を返す
             # (3, 705, 197, 13, 18) のように帰る(x,y,width,height,baseline)
-            dline = self.text.dlineinfo('{0}.0'.format(current))
+            dline= self.text.dlineinfo(i)
             # dlineinfoに、存在しない行や、スクロールしないと見えない行を渡すとNoneが帰る
             if dline is None:
                 break
@@ -513,15 +520,15 @@ class LineFrame(ttk.Frame):
                 y = dline[1]  # y座標を取得
 
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
-            self.line_numbers.create_text(3, y, anchor=tk.NW, text=current,font=("",12))
-            current += 1
-
+            linenum = str(i).split(".")[0]
+            self.line_numbers.create_text(3, y, anchor=tk.NW, text=linenum,font=("",12))
+            i = self.text.index("%s+1line" % i)
 
     def Change_setting(self, event=None):
         """テキストの変更時"""
         self.update_line_numbers()
-        # シンタックスハイライトをする
-        self.all_highlight()
+        # その行のハイライトを行う
+        self.line_highlight()
 
     def tab(self,event=None):
         """タブ押下時の処理"""
@@ -641,4 +648,4 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.mainloop()
+    root.update()
