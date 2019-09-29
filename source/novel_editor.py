@@ -506,8 +506,6 @@ class LineFrame(ttk.Frame):
         self.line_numbers.delete(tk.ALL)
 
         # Textの0, 0座標、つまり一番左上が何行目にあたるかを取得
-        first_row = self.text.index('@0,0')
-        first_row_number = int(first_row.split('.')[0])
         i = self.text.index("@0,0")
         while True:
             # dlineinfoは、その行がどの位置にあり、どんなサイズか、を返す
@@ -648,4 +646,4 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.update()
+    root.mainloop()
