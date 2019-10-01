@@ -47,6 +47,7 @@ $ pip install 'Janome==0.3.9'
 | Ctrl+W | 名前をつけて保存 |
 | Ctrl+S | 上書き保存 |
 | Ctrl+Shift+C | 文字数、行数カウントダイアログ表示 |
+| Ctrl+Shift+F | フォントサイズの変更 |
 | Ctrl+R | 選択文字列にルビを振る |
 | Ctrl+U | 小説家になろうのユーザーページを開く |
 | Ctrl+X | 切り取り |
@@ -104,6 +105,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.0.6b  
+フォントサイズの変更を追加
 - Version 0.0.5b1  
 行番号の処理を変更
 - Version 0.0.5b  
@@ -119,7 +122,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.5b1
+- Version：0.0.6b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
