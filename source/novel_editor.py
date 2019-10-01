@@ -679,7 +679,7 @@ if __name__ == "__main__":
     root.title(u'小説エディタ')
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
 
-
+    # 画像ファイルのbase 64データ
     data = '''R0lGODlhEAAQAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wArAAArMwArZgArmQArzAAr
         /wBVAABVMwBVZgBVmQBVzABV/wCAAACAMwCAZgCAmQCAzACA/wCqAACqMwCqZgCq
         mQCqzACq/wDVAADVMwDVZgDVmQDVzADV/wD/AAD/MwD/ZgD/mQD/zAD//zMAADMA
@@ -700,7 +700,8 @@ if __name__ == "__main__":
         mDKCDRlmYsgQorKF0JQR26exYSaBkz46pHgRWr2BysQIZLhwJUeN+9A85Diyo0Zo
         +8TcQJmxIs6VAD4qdLhv4UmBYmIUJFlxHzEAGwlunDkwxs6lTqPuywRgJlVlPwfq
         LBq26MOeMRNSTRgQADs=
-        ''' 
+        '''
+    # アイコンを設定
     root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=data))
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
