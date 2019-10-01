@@ -105,6 +105,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.0.6b1  
+画像ファイルを取り込み
 - Version 0.0.6b  
 フォントサイズの変更を追加
 - Version 0.0.5b1  
@@ -122,7 +124,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.6b
+- Version：0.0.6b1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
