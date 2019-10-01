@@ -7,6 +7,7 @@ import shutil
 import webbrowser
 import tkinter as tk
 import tkinter.ttk as ttk
+import tkinter.font as Font
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 
@@ -57,6 +58,7 @@ class LineFrame(ttk.Frame):
         self.now_path = ""
         self.file_path = ""
         self.last_text=""
+        self.int_var=16
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
             shutil.rmtree('./data')
@@ -68,7 +70,7 @@ class LineFrame(ttk.Frame):
         """ウェジット配置"""
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
-        self.text = CustomText(self,font=("",18),undo=True)
+        self.text = CustomText(self,font=("",self.int_var),undo=True)
         self.line_numbers = tk.Canvas(self, width=30)
         self.ysb = ttk.Scrollbar(
             self, orient=tk.VERTICAL, command=self.text.yview)
@@ -117,6 +119,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
+        # フォントサイズの変更
+        self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
         # ツリービューをダブルクリックしたときにその項目を表示する
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューで右クリックしたときにダイアログを表示する
@@ -187,6 +191,38 @@ class LineFrame(ttk.Frame):
             else:
                 self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
+
+    def font_dialog(self,event=None):
+        """フォントサイズダイアログを作成"""
+        self.sub_wins = tk.Toplevel(self)
+        self.sub_wins.geometry("200x75")
+        self.intSpin = ttk.Spinbox(self.sub_wins,from_=12,to=72)
+        self.intSpin.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        button = ttk.Button(
+            self.sub_wins,
+            text = 'サイズ変更',
+            width = str('サイズ変更'),
+            padding = (10, 5),
+            command = self.size_Change
+            )
+        button.grid(row=1, column=1)
+        self.intSpin.set(self.int_var)
+        self.sub_wins.title(u'フォントサイズの変更')
+
+    def size_Change(self):
+        """フォントのサイズを変える"""
+        # 比較のため数値列に変更
+        self.int_var = int(self.intSpin.get())
+        if self.int_var < 12: # 12より下の値を入力した時、12にする
+            self.int_var = 12
+        elif 72 < self.int_var: # 72より上の値を入力した時、72にする
+            self.int_var = 72
+        # 文字列にもどす
+        self.int_var=str(self.int_var)
+        self.sub_wins.destroy()
+        # フォントサイズの変更
+        myFont = Font.Font(size=self.int_var)
+        self.text.configure(font=myFont)
 
     def open_url(self,event=None):
         """小説家になろうのユーザーページを開く"""
@@ -301,12 +337,12 @@ class LineFrame(ttk.Frame):
 
     def find_dialog(self,event=None):
         """検索ボックスを作成する"""
-        self.sub_win = tk.Toplevel(self)
-        self.sub_win.geometry("260x75")
-        self.text_var = ttk.Entry(self.sub_win,width=40)
+        sub_win = tk.Toplevel(self)
+        sub_win.geometry("260x75")
+        self.text_var = ttk.Entry(sub_win,width=40)
         self.text_var.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
-            self.sub_win,
+            sub_win,
             text = '検索',
             width = str('検索'),
             padding = (10, 5),
@@ -314,8 +350,8 @@ class LineFrame(ttk.Frame):
             )
         button.grid(row=1, column=1)
         # 最前面に表示し続ける
-        self.sub_win.attributes("-topmost", True)
-        self.sub_win.title(u'検索')
+        sub_win.attributes("-topmost", True)
+        sub_win.title(u'検索')
         self.text_var.focus()
 
     def search_start(self, texts):
@@ -643,7 +679,8 @@ if __name__ == "__main__":
     root.title(u'小説エディタ')
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
 
+    root.iconbitmap(default='./ico/editor.ico')
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.mainloop()
+    root.update_idletasks()
