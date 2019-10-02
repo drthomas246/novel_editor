@@ -150,9 +150,16 @@ Distributed under the GPL license
 Copyright(C) 2009–2019, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
 
-
+### 参考文献
 - naritoブログ  
 [Tkinterで、行番号付きText](https://torina.top/detail/412/)  
 [Tkinterで、検索ボックス](https://torina.top/detail/407/)  
 [Tkinterで、Pythonコードをハイライトする](https://torina.top/detail/415/)  
 Copyright Narito Takizawa All Rights Reserved.
+
+### 使用フォント
+- 数式フォント　ver1.3  
+Copyright(C) 2016-2019 [キユマヤ園](http://sapphire.hacca.jp/font/fontabout.html)
+
+- あいでぃーぽっぷまる  
+Copyright(C) 2017 [Masaru Inoue](http://idfont.jp/infos_mb.htm) All Rights Reserved.
