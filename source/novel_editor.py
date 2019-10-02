@@ -14,11 +14,6 @@ import tkinter.filedialog as filedialog
 import jaconv
 from janome.tokenizer import Tokenizer
 
-tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
-color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon','tan1','rosy brown','indian red']
-# Janomeを使って日本語の形態素解析
-tokenizer = Tokenizer()
-
 class CustomText(tk.Text):
     """Textの、イベントを拡張したウィジェット."""
     def __init__(self, master, **kwargs):
@@ -186,6 +181,7 @@ class LineFrame(ttk.Frame):
             self.text.mark_set(
                 'range_end', 'range_start+{0}c'.format(len(content))
             )
+            # 全角スペースの時は一つずらす
             if src[0]=="\u3000":
                 self.text.tag_add(content, 'range_start+1c', 'range_end+1c')
             else:
@@ -673,8 +669,12 @@ def on_closing():
         root.destroy()
 
 if __name__ == "__main__":
+    # 初期処理
+    tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
+    color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon','tan1','rosy brown','indian red']
+    # Janomeを使って日本語の形態素解析
+    tokenizer = Tokenizer()
     root = tk.Tk()
-
     app = LineFrame(root)
     root.title(u'小説エディタ')
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
@@ -706,4 +706,4 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
-    root.mainloop()
+    root.update_idletasks()
