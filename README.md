@@ -22,6 +22,7 @@
 ## 使用方法
 
 - 開発環境は、Windows 10 python Version 3.7.4 64bit版を使用しています。
+- Ubuntu 19.04でも起動できることを確認しました。
 - それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
 
 - jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリを使用しています。
@@ -43,6 +44,7 @@ $ pip install 'Janome==0.3.9'
 
 | コマンド | 処理内容 |
 :--:|:--:
+| Ctrl+N | 新規作成 |
 | Ctrl+E | ファイルを開く |
 | Ctrl+W | 名前をつけて保存 |
 | Ctrl+S | 上書き保存 |
@@ -105,6 +107,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.0.7b  
+新規作成を追加
 - Version 0.0.6b1  
 画像ファイルを取り込み
 - Version 0.0.6b  
@@ -124,7 +128,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.0.6b1
+- Version：0.0.7b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
