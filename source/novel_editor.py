@@ -110,6 +110,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-f>', self.find_dialog)
         # 上書き保存する
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
+        # 新規作成する
+        self.text.bind('<Control-Key-n>', self.new_open)
         # 文字数と行数をカウントする
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
@@ -266,6 +268,24 @@ class LineFrame(ttk.Frame):
         # メッセージボックスの表示
         messagebox.showinfo(u"文字数と行数", "文字数 : {0}文字　行数 : {1}行".format(len(self.text.get('1.0', 'end'))-new_line,new_line))
 
+    def new_file(self):
+        """新規作成をするための準備"""
+        self.initialize()
+        for val in tree_folder:
+            self.tree.delete(val[0])
+
+        # ツリービューを表示する
+        self.TreeGetLoop()
+
+    def new_open(self,event=None):
+        """新規作成をする"""
+        if messagebox.askokcancel(u"小説エディタ", u"上書き保存しますか？"):
+            self.overwrite_save_file()
+            self.new_file
+
+        elif messagebox.askokcancel(u"小説エディタ", u"今の編集を破棄して新規作成しますか？"):
+            self.new_file
+
     def overwrite_save_file(self,event=None):
         """上書き保存処理"""
         # ファイルパスが存在するとき
@@ -417,7 +437,7 @@ class LineFrame(ttk.Frame):
         self.last_text = now_text
 
     def message_window(self,event=None):
-        """ダイアログを表示する."""
+        """ツリービューの選択ダイアログを表示する."""
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
@@ -467,7 +487,7 @@ class LineFrame(ttk.Frame):
                         self.text.focus()
 
     def SubWinOk(self):
-        """ダイアログの実行ボタンが押されたとき."""
+        """ツリービューの選択ダイアログの実行ボタンが押されたとき."""
         file_name=self.txt.get()
         self.sub_win.destroy()
         self.open_file_save(self.now_path)
