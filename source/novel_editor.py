@@ -120,6 +120,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
         # 新規作成する
         self.text.bind('<Control-Key-n>', self.new_open)
+        # helpページを開く
+        self.text.bind('<Control-Key-h>',self.open_help)
         # 文字数と行数をカウントする
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
@@ -159,7 +161,6 @@ class LineFrame(ttk.Frame):
         """全てハイライト"""
         # 全てのテキストを取得
         src = self.text.get('1.0', 'end - 1c')
-
         # 全てのハイライトを一度解除する
         for tag in self.text.tag_names():
             self.text.tag_remove(tag, '1.0', 'end')
@@ -171,10 +172,8 @@ class LineFrame(ttk.Frame):
         """現在行だけハイライト"""
         start = 'insert linestart'
         end = 'insert lineend'
-
         # 現在行のテキストを取得
         src = self.text.get(start, end)
-
         # その行のハイライトを一度解除する
         for tag in self.text.tag_names():
             self.text.tag_remove(tag, start, end)
@@ -186,6 +185,7 @@ class LineFrame(ttk.Frame):
         """ハイライトの共通処理"""
         self.create_tags()
         self.text.mark_set('range_start', start)
+        # 形態素解析を行う
         for token in self.t.tokenize(src):
             content=token.surface
             self.text.mark_set(
@@ -233,6 +233,10 @@ class LineFrame(ttk.Frame):
     def open_url(self,event=None):
         """小説家になろうのユーザーページを開く"""
         webbrowser.open("https://syosetu.com/user/top/")
+
+    def open_help(self,event=None):
+        """helpページを開く"""
+        webbrowser.open('file://' + os.path.abspath(os.path.dirname(__file__)) + "/../README.html")
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
@@ -327,8 +331,7 @@ class LineFrame(ttk.Frame):
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
-            filepath, ___ = os.path.splitext(filepath)
-            self.file_path = filepath
+            self.file_path, ___ = os.path.splitext(filepath)
             # 上書き保存処理
             self.overwrite_save_file()
 
@@ -563,12 +566,16 @@ class LineFrame(ttk.Frame):
                 # テキストを読み取り専用を解除する
                 self.text.configure(state='normal')
                 self.text.focus()
-                break
+                self.path_read_text()
+                return
 
+        self.now_path = ""
+
+    def path_read_text(self):
         # パスが存在すれば読み込んで表示する
-        if not path == "":
+        if not self.now_path == "":
             self.text.delete('1.0', tk.END)
-            f = open(path)
+            f = open(self.now_path)
             self.text_text=f.read()
             self.text.insert(tk.END,self.text_text)
             f.close()
