@@ -236,7 +236,7 @@ class LineFrame(ttk.Frame):
 
     def open_help(self,event=None):
         """helpページを開く"""
-        webbrowser.open('file://' + os.path.abspath(os.path.dirname(__file__)) + "/../README.html")
+        webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
