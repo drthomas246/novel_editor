@@ -45,6 +45,10 @@ class LineFrame(ttk.Frame):
         """初期設定"""
         super().__init__(master, **kwargs)
         self.initialize()
+
+        self.menu_bar = tk.Menu(self.master)
+        self.master.config(menu=self.menu_bar)
+
         self.create_widgets()
         self.create_event()
 
@@ -69,6 +73,39 @@ class LineFrame(ttk.Frame):
 
     def create_widgets(self):
         """ウェジット配置"""
+        # メニューの配置
+        File_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Edit_menu = tk.Menu(self.menu_bar, tearoff=0)
+        List_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Processing_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Help_menu = tk.Menu(self.menu_bar, tearoff=0)
+        # ファイルメニュー
+        File_menu.add_command(label='新規作成', command=self.new_open)
+        File_menu.add_command(label='開く', command=self.open_file)
+        File_menu.add_separator()
+        File_menu.add_command(label='上書き保存', command=self.overwrite_save_file)
+        File_menu.add_command(label='保存', command=self.save_file)
+        File_menu.add_separator()
+        File_menu.add_command(label='閉じる', command=on_closing)
+        self.menu_bar.add_cascade(label='ファイル', menu=File_menu)
+        # 編集メニュー
+        Edit_menu.add_command(label='検索', command=self.find_dialog)
+        Edit_menu.add_command(label='やり直し', command=self.redo)
+        self.menu_bar.add_cascade(label='編集', menu=Edit_menu)
+        # 処理メニュー
+        Processing_menu.add_command(label='ルビ', command=self.ruby)
+        Processing_menu.add_command(label='文字数のカウント', command=self.moji_count)
+        Processing_menu.add_command(label='フォントサイズの変更', command=self.font_dialog)
+        Processing_menu.add_separator()
+        Processing_menu.add_command(label='小説家になろうのページを開く', command=self.open_url)
+        self.menu_bar.add_cascade(label='処理', menu=Processing_menu)
+        # リストメニュー
+        List_menu.add_command(label='項目を増やす', command=self.message_window)
+        List_menu.add_command(label='項目を削除', command=self.message_window)
+        self.menu_bar.add_cascade(label='リスト', menu=List_menu)
+        # ヘルプメニュー
+        Help_menu.add_command(label='ヘルプ', command=self.open_help)
+        self.menu_bar.add_cascade(label='ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
         self.text = CustomText(self,font=("",self.int_var),undo=True)
@@ -236,7 +273,7 @@ class LineFrame(ttk.Frame):
 
     def open_help(self,event=None):
         """helpページを開く"""
-        webbrowser.open('file://' + os.path.abspath(os.path.dirname(__file__)) + "/../README.html")
+        webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
@@ -566,12 +603,12 @@ class LineFrame(ttk.Frame):
                 # テキストを読み取り専用を解除する
                 self.text.configure(state='normal')
                 self.text.focus()
-                self.path_read_text()
+                self.path_read_text(text,sub_text)
                 return
 
         self.now_path = ""
 
-    def path_read_text(self):
+    def path_read_text(self,text,sub_text):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
             self.text.delete('1.0', tk.END)
@@ -726,8 +763,8 @@ if __name__ == "__main__":
     # Janomeを使って日本語の形態素解析
     tokenizer = Tokenizer()
     root = tk.Tk()
-    app = LineFrame(root)
     root.title(u'小説エディタ')
+    app = LineFrame(root)
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
 
     # 画像ファイルのbase 64データ
