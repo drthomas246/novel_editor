@@ -566,12 +566,12 @@ class LineFrame(ttk.Frame):
                 # テキストを読み取り専用を解除する
                 self.text.configure(state='normal')
                 self.text.focus()
-                self.path_read_text()
+                self.path_read_text(text,sub_text)
                 return
 
         self.now_path = ""
 
-    def path_read_text(self):
+    def path_read_text(self,text,sub_text):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
             self.text.delete('1.0', tk.END)
