@@ -1,76 +1,25 @@
-# Contributor Covenant Code of Conduct
+# コントリビュータの行動規範
 
-## Our Pledge
+オープンで歓迎的な雰囲気のコミュニティを育成するため、プロジェクトのコ ントリビュータとメンテナとして、私たちは問題のレポート、機能追加の要求、 ドキュメントの更新、プルリクエストやパッチのサブミット、その他のあらゆ る活動に貢献するすべての人を尊重することを誓います。
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, sex characteristics, gender identity and expression,
-level of experience, education, socio-economic status, nationality, personal
-appearance, race, religion, or sexual identity and orientation.
+経験の有無、性別、性自認や性別表現、性的指向、障碍、容姿、体型、人種、 民族、年齢、宗教、国籍に関わりなく、このプロジェクトに参加することが誰 にとっても嫌がらせのない体験であるように、私達は努めています。
 
-## Our Standards
+容認できない行動の例としては以下のものがあります:
 
-Examples of behavior that contributes to creating a positive environment
-include:
+性的な言葉・画像の使用
+個人攻撃
+荒らしや侮辱/軽蔑のためのコメント
+公的および私的な嫌がらせ
+物理的または電子的な連絡先といった個人情報を、明確な許可なしに公開する
+その他の倫理、もしくは職業倫理に反する行為
+プロジェクトのメンテナは、この行動規範に従っていない、コメント、コミッ ト、コード、wiki の編集、issue、その他の貢献に対して、削除、編集、拒否 する権利と義務を有します。また、他の不適切、脅迫的、攻撃的、嫌がらせと 考えられる行動を取ったコントリビュータに対して、一時的もしくは恒久的な 追放を行う権利と義務を有します。
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+この行動規範を承認することにより、プロジェクトのメンテナは、この行動規 範を公平かつ一貫してプロジェクト管理のあらゆる側面に対して適用すること を誓います。行動規範に従わない、もしくは実施しないプロジェクトのメンテ ナは、プロジェクトチームから恒久的に外されることがあります。
 
-Examples of unacceptable behavior by participants include:
+この行動規範はこのプロジェクト内、または公共空間で個人がプロジェクトや コミュニティを代表しているときに適用されます。
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
- advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
- address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
- professional setting
+暴言、嫌がらせ、またはそれ以外の受け入れられない行動は yoshihiro@yamahara.email 経由でプロジェクトのメンテナに報告してください。
 
-## Our Responsibilities
+すべての苦情はレビュー、調査され、状況に応じて必要かつ適切と判断された 対応を取ります。メンテナは報告者についての守秘義務を有します。
 
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
-
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
-
-## Scope
-
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
-
-## Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at drthomas@hobofoto.net. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
-
-Project maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
-
-## Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
-
-[homepage]: https://www.contributor-covenant.org
-
-For answers to common questions about this code of conduct, see
-https://www.contributor-covenant.org/faq
+この行動規範は、https://www.contributor-covenant.org/ja/version/1/3/0/code-of-conduct.html で公開 されている コントリビュータ協定 バー ジョン 1.3.0 に適合しています。
