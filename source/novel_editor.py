@@ -66,7 +66,7 @@ class LineFrame(ttk.Frame):
             self.font="メイリオ"
         elif pf == 'Darwin':
             self.font="Osaka-等幅"
-        elif pt == 'Linux':
+        elif pf == 'Linux':
             self.font="IPAゴシック"
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
