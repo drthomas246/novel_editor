@@ -5,6 +5,7 @@ import os
 import zipfile
 import shutil
 import webbrowser
+import platform
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as Font
@@ -64,6 +65,13 @@ class LineFrame(ttk.Frame):
         self.text_text=""
         # 文字の大きさ
         self.int_var=16
+        pf = platform.system()
+        if pf == 'Windows':
+            self.font="メイリオ"
+        elif pf == 'Darwin':
+            self.font="Osaka-等幅"
+        elif pf == 'Linux':
+            self.font="IPAゴシック"
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
             shutil.rmtree('./data')
@@ -114,7 +122,7 @@ class LineFrame(ttk.Frame):
         self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
-        self.text = CustomText(self,font=("",self.int_var),undo=True)
+        self.text = CustomText(self,font=(self.font,self.int_var),undo=True)
         self.line_numbers = tk.Canvas(self, width=30)
         self.ysb = ttk.Scrollbar(
             self, orient=tk.VERTICAL, command=self.text.yview)
@@ -270,8 +278,7 @@ class LineFrame(ttk.Frame):
         self.int_var=str(self.int_var)
         self.sub_wins.destroy()
         # フォントサイズの変更
-        myFont = Font.Font(size=self.int_var)
-        self.text.configure(font=myFont)
+        self.text.configure(font=(self.font, self.int_var))
 
     def open_url(self,event=None):
         """小説家になろうのユーザーページを開く"""
