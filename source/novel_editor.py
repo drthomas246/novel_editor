@@ -6,7 +6,6 @@ import zipfile
 import shutil
 import webbrowser
 import platform
-import PySimpleGUI as sg
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as Font
