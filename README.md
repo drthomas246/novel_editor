@@ -77,6 +77,7 @@ $ pip install 'Janome==0.3.9'
 :--:|:--:
 | キャラクター、職種、場所、イベント、小説の大項目を選択して右クリック | 小項目作成ダイアログを表示 |
 | 小項目を選択して右クリック | 小項目削除ダイアログを表示 |
+| Ctrl+G | ファイル名の変更 |
 
 ## その他
 ### 実行ファイルに変換
@@ -108,8 +109,10 @@ $ coverage html
 ```
 
 ## 改変履歴
-- Version 0.1.0b  
+- Version 0.1.1b  
 バージョン調整
+- Version 0.1.0b  
+ファイル名の変更を追加
 - Version 0.0.7b2  
 保存に関する重大な欠陥を修復
 - Version 0.0.7b1  
@@ -135,7 +138,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.1.0b
+- Version：0.1.1b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
