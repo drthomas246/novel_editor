@@ -110,9 +110,9 @@ $ coverage html
 
 ## 改変履歴
 - Version 0.1.1b  
-バージョン調整
-- Version 0.1.0b  
 ファイル名の変更を追加
+- Version 0.1.0b  
+バージョン調整
 - Version 0.0.7b2  
 保存に関する重大な欠陥を修復
 - Version 0.0.7b1  
