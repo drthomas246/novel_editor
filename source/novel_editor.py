@@ -548,8 +548,8 @@ class LineFrame(ttk.Frame):
             button.grid(row=1, column=0)
             button = ttk.Button(
                 self.sub_win,
-                text = 'キャンセル',
-                width = str('キャンセル'),
+                text = u'キャンセル',
+                width = str(u'キャンセル'),
                 padding = (10, 5),
                 command = self.sub_win.destroy
                 )
