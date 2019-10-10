@@ -138,6 +138,7 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
         # ツリービューをダブルクリックしたときにその項目を表示する
         self.tree.bind("<Double-1>", self.OnDoubleClick)
+        # ツリービューの名前を変更する
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
