@@ -40,6 +40,44 @@ class CustomText(tk.Text):
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
 
+class Mydialog():
+    def __init__(self, message, button1, button2,title,text):
+        self.sub_name_win = tk.Toplevel(message)
+        self.sub_name_win.geometry("260x75")
+        self.txt_name = ttk.Entry(self.sub_name_win,width=40)
+        self.txt_name.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        button = ttk.Button(
+            self.sub_name_win,
+            text = button1,
+            width = str(button1),
+            padding = (10, 5),
+            command = self.sub_name_OK
+        )
+        button.grid(row=1, column=0)
+        if button2 == True:
+            button = ttk.Button(
+                self.sub_name_win,
+                text = 'キャンセル',
+                width = str('キャンセル'),
+                padding = (10, 5),
+                command = self.sub_name_win.destroy
+                )
+
+            button.grid(row=1, column=1)
+            self.txt_name.focus()
+            if not text == False:
+                self.txt_name.insert(tk.END,text)
+                self.txt_name.select_range(0, 'end')
+
+            self.sub_name_win.title(title)
+            self.txt_name.focus()
+
+    def sub_name_OK(self, event=None):
+        self.txt=self.txt_name.get()
+        self.sub_name_win.destroy()
+        return self.txt
+
+
 class LineFrame(ttk.Frame):
     """メインフレーム処理."""
     def __init__(self, master=None, **kwargs):
@@ -472,28 +510,38 @@ class LineFrame(ttk.Frame):
         # 親アイテムをクリックしたとき
         if str(self.tree.item(curItem)["text"]) and (not str(self.tree.item(parentItem)["text"])):
             # サブダイヤログを表示する
-            self.sub_win = tk.Toplevel(self)
-            self.sub_win.geometry("260x75")
-            self.txt = ttk.Entry(self.sub_win,width=40)
-            self.txt.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
-            button = ttk.Button(
-                self.sub_win,
-                text = '実行',
-                width = str('実行'),
-                padding = (10, 5),
-                command = self.SubWinOk
-                )
-            button.grid(row=1, column=0)
-            button = ttk.Button(
-                self.sub_win,
-                text = 'キャンセル',
-                width = str('キャンセル'),
-                padding = (10, 5),
-                command = self.sub_win.destroy
-                )
-            button.grid(row=1, column=1)
-            self.txt.focus()
-            self.sub_win.title(u'{0}に挿入'.format(self.tree.item(curItem)["text"]))
+            title=u'{0}に挿入'.format(self.tree.item(curItem)["text"])
+            dialog = Mydialog(self,"挿入",True,title,False)
+            root.wait_window(dialog.sub_name_win)
+            # テキストを読み取り専用を解除する
+            self.text.configure(state='normal')
+            file_name=dialog.txt
+            del dialog
+            if not file_name== "":
+                self.open_file_save(self.now_path)
+                curItem = self.tree.focus()              #選択アイテムの認識番号取得
+                text = self.tree.item(curItem)["text"]
+                path = ""
+                # 選択されているフォルダを見つける
+                for val in tree_folder:
+                    if text == val[1]:
+                        path = "./{0}/{1}.txt".format(val[0],file_name)
+                        tree = self.tree.insert(val[0], 'end', text=file_name)
+                        self.now_path = path
+                        break
+
+                # パスが存在すれば新規作成する
+                if not path == "":
+                    self.text.delete('1.0', tk.END)
+                    f = open(path, mode='w')
+                    f.write("")
+                    f.close()
+                    # ツリービューを選択状態にする
+                    self.tree.see(tree)
+                    self.tree.selection_set(tree)
+                    self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
+                    self.text.focus()
+                    self.create_tags()
         # 子アイテムを右クリックしたとき
         else:
             if str(self.tree.item(curItem)["text"]):
@@ -514,37 +562,6 @@ class LineFrame(ttk.Frame):
                         os.remove(path)
                         self.text.delete('1.0', tk.END)
                         self.text.focus()
-
-    def SubWinOk(self):
-        """ツリービューの選択ダイアログの実行ボタンが押されたとき."""
-        # テキストを読み取り専用を解除する
-        self.text.configure(state='normal')
-        file_name=self.txt.get()
-        self.sub_win.destroy()
-        self.open_file_save(self.now_path)
-        curItem = self.tree.focus()              #選択アイテムの認識番号取得
-        text = self.tree.item(curItem)["text"]
-        path = ""
-        # 選択されているフォルダを見つける
-        for val in tree_folder:
-            if text == val[1]:
-                path = "./{0}/{1}.txt".format(val[0],file_name)
-                tree = self.tree.insert(val[0], 'end', text=file_name)
-                self.now_path = path
-                break
-
-        # パスが存在すれば新規作成する
-        if not path == "":
-            self.text.delete('1.0', tk.END)
-            f = open(path, mode='w')
-            f.write("")
-            f.close()
-            # ツリービューを選択状態にする
-            self.tree.see(tree)
-            self.tree.selection_set(tree)
-            self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
-            self.text.focus()
-            self.create_tags()
 
     def open_file_save(self,path):
         """開いてるファイルを保存する."""
@@ -597,50 +614,25 @@ class LineFrame(ttk.Frame):
         parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
         if not text == "":
-            self.sub_name_win = tk.Toplevel(self)
-            self.sub_name_win.geometry("260x75")
-            self.txt_name = ttk.Entry(self.sub_name_win,width=40)
-            self.txt_name.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
-            co_text = self.tree.item(curItem)["text"]
-            button = ttk.Button(
-                self.sub_name_win,
-                text = '実行',
-                width = str('実行'),
-                padding = (10, 5),
-                command = self.SubWin_name_Ok
-                )
-            button.grid(row=1, column=0)
-            button = ttk.Button(
-                self.sub_name_win,
-                text = 'キャンセル',
-                width = str('キャンセル'),
-                padding = (10, 5),
-                command = self.sub_name_win.destroy
-                )
-            button.grid(row=1, column=1)
-            self.txt_name.focus()
-            self.txt_name.insert(tk.END,co_text)
-            self.txt_name.select_range(0, 'end')
-            self.sub_name_win.title(u'{0}の名前を変更'.format(co_text))
-
-    def SubWin_name_Ok(self, event=None):
-        curItem = self.tree.focus()              #選択アイテムの認識番号取得
-        parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
-        text = self.tree.item(parentItem)["text"]
-        sub_text = self.tree.item(curItem)["text"]
-        co_text = self.txt_name.get()
-        self.sub_name_win.destroy()
-        for val in tree_folder:
-            if text == val[1]:
-                path1 = "./{0}/{1}.txt".format(val[0],sub_text)
-                path2 = "./{0}/{1}.txt".format(val[0],co_text)
-                self.now_path = path2
-                # テキストの名前を変更する
-                os.rename(path1, path2)
-                self.tree.delete(curItem)
-                Item = self.tree.insert(parentItem, 'end', text=co_text)
-                self.tree.selection_set(Item)
-                return
+            sub_text = self.tree.item(curItem)["text"]
+            title= '{0}の名前を変更'.format(sub_text)
+            dialog2=Mydialog(self,"変更",True,title,sub_text)
+            root.wait_window(dialog2.sub_name_win)
+            # テキストを読み取り専用を解除する
+            self.text.configure(state='normal')
+            co_text=dialog2.txt
+            del dialog2
+            for val in tree_folder:
+                if text == val[1]:
+                    path1 = "./{0}/{1}.txt".format(val[0],sub_text)
+                    path2 = "./{0}/{1}.txt".format(val[0],co_text)
+                    self.now_path = path2
+                    # テキストの名前を変更する
+                    os.rename(path1, path2)
+                    self.tree.delete(curItem)
+                    Item = self.tree.insert(parentItem, 'end', text=co_text)
+                    self.tree.selection_set(Item)
+                    return
 
     def update_line_numbers(self,event=None):
         """行番号の描画."""
