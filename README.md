@@ -110,6 +110,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.1.1bAM1  
+ソースを見直し
 - Version 0.1.1bAM  
 ファイル名の変更を追加
 - Version 0.1.0bAM1  
