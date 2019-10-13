@@ -6,7 +6,6 @@ import zipfile
 import shutil
 import webbrowser
 import platform
-#import pprint
 import textwrap
 import tkinter as tk
 import tkinter.ttk as ttk
