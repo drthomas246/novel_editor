@@ -69,8 +69,8 @@ class Mydialog():
                 self.txt_name.insert(tk.END,text)
                 self.txt_name.select_range(0, 'end')
 
-            self.sub_name_win.title(title)
-            self.txt_name.focus()
+        self.sub_name_win.title(title)
+        self.txt_name.focus()
 
     def sub_name_OK(self, event=None):
         self.txt=self.txt_name.get()
@@ -513,11 +513,11 @@ class LineFrame(ttk.Frame):
             title=u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self,"挿入",True,title,False)
             root.wait_window(dialog.sub_name_win)
-            # テキストを読み取り専用を解除する
-            self.text.configure(state='normal')
             file_name=dialog.txt
             del dialog
             if not file_name== "":
+                # テキストを読み取り専用を解除する
+                self.text.configure(state='normal')
                 self.open_file_save(self.now_path)
                 curItem = self.tree.focus()              #選択アイテムの認識番号取得
                 text = self.tree.item(curItem)["text"]
