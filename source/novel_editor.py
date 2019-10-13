@@ -6,6 +6,8 @@ import zipfile
 import shutil
 import webbrowser
 import platform
+#import pprint
+import textwrap
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as Font
@@ -327,8 +329,14 @@ class LineFrame(ttk.Frame):
         """文字数と行数を表示する"""
         # 行数の取得
         new_line = int(self.text.index('end-1c').split('.')[0])
+        # 文字列の取得
+        moji = self.text.get('1.0', 'end')
+        # ２０文字で区切ったときの行数を数える
+        gen_mai = 0
+        for val in moji.splitlines():
+            gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
-        messagebox.showinfo(u"文字数と行数", "文字数 : {0}文字　行数 : {1}行".format(len(self.text.get('1.0', 'end'))-new_line,new_line))
+        messagebox.showinfo(u"文字数と行数、原稿用紙枚数", "文字数 : {0}文字　行数 : {1}行　\n 原稿用紙 : {2}枚".format(len(moji)-new_line,new_line,-(-gen_mai//20)))
 
     def new_file(self):
         """新規作成をするための準備"""
