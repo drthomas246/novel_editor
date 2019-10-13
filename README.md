@@ -3,7 +3,7 @@
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
 [![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
-[![coverage](https://img.shields.io/badge/coverage-98-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
+[![coverage](https://img.shields.io/badge/coverage-95-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
 [![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/badge/license-MIT-green)](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE)
@@ -110,13 +110,15 @@ $ coverage html
 ```
 
 ## 改変履歴
-- Version 0.1.1bAM1  
+- Version 0.1.2b  
+タイトルを挿入
+- Version 0.1.1b1  
 ソースを見直し
-- Version 0.1.1bAM  
+- Version 0.1.1b  
 ファイル名の変更を追加
-- Version 0.1.0bAM1  
+- Version 0.1.0b1  
 メニューの充実
-- Version 0.1.0bAM  
+- Version 0.1.0b  
 メニューを追加
 - Version 0.0.7b2  
 保存に関する重大な欠陥を修復
@@ -143,7 +145,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.1.1bAM1
+- Version：0.1.2b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
