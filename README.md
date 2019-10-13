@@ -40,7 +40,8 @@ $ pip install 'Janome==0.3.9'
 また、削除は、novel_editorフォルダを削除してください。レジストリは汚していません。
 
 ## コマンド一覧
-- 通常時 (文字入力画面)
+
+### 通常時 (文字入力画面)
 
 | コマンド | 処理内容 |
 :--:|:--:
@@ -62,7 +63,7 @@ $ pip install 'Janome==0.3.9'
 | Tab | 名前の一覧表示 |
 | Ctrl+H | ヘルプを表示する |
 
-- Tabキー押下時 (文字入力画面)
+### Tabキー押下時 (文字入力画面)
 
 | コマンド | 処理内容 |
 :--:|:--:
@@ -71,7 +72,7 @@ $ pip install 'Janome==0.3.9'
 | ↑↓キー | 一覧を選択 |
 | Enter | 一覧を決定 |
 
-- 通常時 (リスト画面)
+### 通常時 (リスト画面)
 
 | コマンド | 処理内容 |
 :--:|:--:
@@ -109,12 +110,14 @@ $ coverage html
 ```
 
 ## 改変履歴
-- Version 0.1.1b1  
+- Version 0.1.1bAM1  
 ソースを見直し
-- Version 0.1.1b  
+- Version 0.1.1bAM  
 ファイル名の変更を追加
-- Version 0.1.0b  
-バージョン調整
+- Version 0.1.0bAM1  
+メニューの充実
+- Version 0.1.0bAM  
+メニューを追加
 - Version 0.0.7b2  
 保存に関する重大な欠陥を修復
 - Version 0.0.7b1  
@@ -140,7 +143,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.1.1b1
+- Version：0.1.1bAM1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
