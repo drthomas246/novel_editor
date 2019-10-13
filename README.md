@@ -110,6 +110,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.1.2bAM1  
+原稿用紙で何枚かか数えれるようになる
 - Version 0.1.2bAM  
 タイトルを挿入
 - Version 0.1.1bAM1  

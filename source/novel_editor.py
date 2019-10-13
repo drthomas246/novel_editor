@@ -6,8 +6,6 @@ import zipfile
 import shutil
 import webbrowser
 import platform
-#import pprint
-import textwrap
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as Font
@@ -89,6 +87,10 @@ class LineFrame(ttk.Frame):
         """初期設定"""
         super().__init__(master, **kwargs)
         self.initialize()
+
+        self.menu_bar = tk.Menu(self.master)
+        self.master.config(menu=self.menu_bar)
+
         self.create_widgets()
         self.create_event()
 
@@ -120,6 +122,46 @@ class LineFrame(ttk.Frame):
 
     def create_widgets(self):
         """ウェジット配置"""
+        # メニューの配置
+        File_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Edit_menu = tk.Menu(self.menu_bar, tearoff=0)
+        List_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Processing_menu = tk.Menu(self.menu_bar, tearoff=0)
+        Help_menu = tk.Menu(self.menu_bar, tearoff=0)
+        # ファイルメニュー
+        File_menu.add_command(label=u'新規作成', command=self.new_open)
+        File_menu.add_command(label=u'開く', command=self.open_file)
+        File_menu.add_separator()
+        File_menu.add_command(label=u'保存', command=self.overwrite_save_file)
+        File_menu.add_command(label=u'名前を付けて保存', command=self.save_file)
+        File_menu.add_separator()
+        File_menu.add_command(label=u'閉じる', command=on_closing)
+        self.menu_bar.add_cascade(label=u'ファイル', menu=File_menu)
+        # 編集メニュー
+        Edit_menu.add_command(label=u'やり直し', command=self.redo)
+        Edit_menu.add_command(label=u'戻る', command=self.undo)
+        Edit_menu.add_separator()
+        Edit_menu.add_command(label=u'切り取り', command=self.cut)
+        Edit_menu.add_command(label=u'コピー', command=self.copy)
+        Edit_menu.add_command(label=u'貼り付け', command=self.paste)
+        Edit_menu.add_separator()
+        Edit_menu.add_command(label=u'検索', command=self.find_dialog)
+        self.menu_bar.add_cascade(label=u'編集', menu=Edit_menu)
+        # 処理メニュー
+        Processing_menu.add_command(label=u'ルビ', command=self.ruby)
+        Processing_menu.add_command(label=u'文字数のカウント', command=self.moji_count)
+        Processing_menu.add_command(label=u'フォントサイズの変更', command=self.font_dialog)
+        Processing_menu.add_separator()
+        Processing_menu.add_command(label=u'「小説家になろう」のページを開く', command=self.open_url)
+        self.menu_bar.add_cascade(label=u'処理', menu=Processing_menu)
+        # リストメニュー
+        List_menu.add_command(label=u'項目を増やす', command=self.message_window)
+        List_menu.add_command(label=u'項目を削除', command=self.message_window)
+        List_menu.add_command(label=u'項目の名前を変更', command=self.On_name_Click)
+        self.menu_bar.add_cascade(label=u'リスト', menu=List_menu)
+        # ヘルプメニュー
+        Help_menu.add_command(label=u'ヘルプ', command=self.open_help)
+        self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
         self.text = CustomText(self,font=(self.font,self.int_var),undo=True)
@@ -185,6 +227,8 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
+        # 名前の変更
+        self.tree.bind("<Control-Key-g>", self.On_name_Click)
 
     def create_tags(self):
         """タグの作成"""
@@ -325,18 +369,30 @@ class LineFrame(ttk.Frame):
         """redo処理を行う"""
         self.text.edit_redo()
 
+    def undo(self,event=None):
+        """redo処理を行う"""
+        self.text.edit_undo()
+
+    def copy(self,event=None):
+        """cpoy処理を行う"""
+        self.clipboard_clear()
+        self.clipboard_append(self.text.selection_get())
+
+    def cut(self,event=None):
+        """cut処理を行う"""
+        self.copy()
+        self.text.delete("sel.first", "sel.last")
+
+    def paste(self,event=None):
+        """paste処理を行う"""
+        self.text.insert('insert', self.clipboard_get())
+
     def moji_count(self,event=None):
         """文字数と行数を表示する"""
         # 行数の取得
         new_line = int(self.text.index('end-1c').split('.')[0])
-        # 文字列の取得
-        moji = self.text.get('1.0', 'end')
-        # ２０文字で区切ったときの行数を数える
-        gen_mai = 0
-        for val in moji.splitlines():
-            gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
-        messagebox.showinfo(u"文字数と行数、原稿用紙枚数", "文字数 : {0}文字　行数 : {1}行　\n 原稿用紙 : {2}枚".format(len(moji)-new_line,new_line,-(-gen_mai//20)))
+        messagebox.showinfo(u"文字数と行数", "文字数 : {0}文字　行数 : {1}行".format(len(self.text.get('1.0', 'end'))-new_line,new_line))
 
     def new_file(self):
         """新規作成をするための準備"""
