@@ -114,11 +114,11 @@ $ coverage html
 タイトルを挿入
 - Version 0.1.1bAM1  
 ソースを見直し
-- Version 0.1.1bAM  
+- Version 0.1.1b  
 ファイル名の変更を追加
-- Version 0.1.0bAM1  
+- Version 0.1.0b1  
 メニューの充実
-- Version 0.1.0bAM  
+- Version 0.1.0b  
 メニューを追加
 - Version 0.0.7b2  
 保存に関する重大な欠陥を修復
