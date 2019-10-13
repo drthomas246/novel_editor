@@ -69,8 +69,8 @@ class Mydialog():
                 self.txt_name.insert(tk.END,text)
                 self.txt_name.select_range(0, 'end')
 
-            self.sub_name_win.title(title)
-            self.txt_name.focus()
+        self.sub_name_win.title(title)
+        self.txt_name.focus()
 
     def sub_name_OK(self, event=None):
         self.txt=self.txt_name.get()
