@@ -216,10 +216,10 @@ class LineFrame(ttk.Frame):
         # 新規作成する
         self.text.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.text.bind('<Control-Key-h>',self.open_help)
+        self.text.bind('<Control-Key-h>',self.open_help)# helpページを開く
         # Versionページを開く
         self.text.bind('<Control-Shift-Key-V>',self.open_version)
-        # 文字数と行数をカウントする
+        # 文字数と行数をカウントすShift-る
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
@@ -1465,7 +1465,7 @@ if __name__ == "__main__":
         CU1U0SoNvQ/RRSGNdMhG7XtU0ksxjZHS+izN1NNPaWTNvQx1kw/UU1FVcVP6Ok3V
         1VcJXHW+VmGt1Vb6ZH2P1lt57ZW8XNfb1ddhiZUOWPWEOC1W2WWROza9ZJmNVlrf
         nEUP2mmxzbba867N1ltmtzWv22/JHTbc8sYtV11bzyUv3XXhTbVd2gICADs=
-        ''' 
+        '''
     img = tk.PhotoImage(data=datas)
     label = tk.Label(image=img)
     # タイトルを表示する
