@@ -62,6 +62,7 @@ $ pip install 'Janome==0.3.9'
 | Ctrl+Shift+Z | REDO |
 | Tab | 名前の一覧表示 |
 | Ctrl+H | ヘルプを表示する |
+| Ctrl+Shift+V | バージョン情報 |
 
 ### Tabキー押下時 (文字入力画面)
 
