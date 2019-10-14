@@ -215,8 +215,10 @@ class LineFrame(ttk.Frame):
         # 新規作成する
         self.text.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.text.bind('<Control-Key-h>',self.open_help)
-        # 文字数と行数をカウントする
+        self.text.bind('<Control-Key-h>',self.open_help)# helpページを開く
+        # Versionページを開く
+        self.text.bind('<Control-Shift-Key-V>',self.open_version)
+        # 文字数と行数をカウントすShift-る
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
@@ -334,6 +336,18 @@ class LineFrame(ttk.Frame):
     def open_help(self,event=None):
         """helpページを開く"""
         webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
+
+    def open_version(self, event=None):
+        #global datas
+        window = tk.Toplevel(root)
+        img2 = tk.PhotoImage(data=datas)
+        label = tk.Label(image=img2, text="a generic Toplevel window",master=window)
+        label.pack()
+        label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",master=window)
+        label2.pack(fill = 'x', padx=20, side = 'left')
+        label3 = tk.Label(text="Version 0.1.2 Beta",master=window)
+        label3.pack(fill = 'x', padx=20, side = 'right')
+        window.mainloop()
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
@@ -1450,7 +1464,7 @@ if __name__ == "__main__":
         CU1U0SoNvQ/RRSGNdMhG7XtU0ksxjZHS+izN1NNPaWTNvQx1kw/UU1FVcVP6Ok3V
         1VcJXHW+VmGt1Vb6ZH2P1lt57ZW8XNfb1ddhiZUOWPWEOC1W2WWROza9ZJmNVlrf
         nEUP2mmxzbba867N1ltmtzWv22/JHTbc8sYtV11bzyUv3XXhTbVd2gICADs=
-        ''' 
+        '''
     img = tk.PhotoImage(data=datas)
     label = tk.Label(image=img)
     # タイトルを表示する
