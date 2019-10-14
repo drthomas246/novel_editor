@@ -112,6 +112,8 @@ $ coverage html
 
 ## 改変履歴
 
+- Version 0.1.2b2  
+バージョン情報の表示
 - Version 0.1.2b1  
 原稿用紙で何枚か数えれる
 - Version 0.1.2b  
