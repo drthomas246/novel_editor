@@ -110,11 +110,12 @@ $ coverage html
 ```
 
 ## 改変履歴
+
 - Version 0.1.2b1  
 原稿用紙で何枚か数えれる
 - Version 0.1.2b  
 タイトルを挿入
-- Version 0.1.1b1  
+- Version 0.1.1bAM1  
 ソースを見直し
 - Version 0.1.1b  
 ファイル名の変更を追加
