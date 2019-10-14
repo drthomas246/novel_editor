@@ -162,6 +162,7 @@ class LineFrame(ttk.Frame):
         self.menu_bar.add_cascade(label=u'リスト', menu=List_menu)
         # ヘルプメニュー
         Help_menu.add_command(label=u'ヘルプ', command=self.open_help)
+        Help_menu.add_command(label=u'バージョン情報', command=self.open_version)
         self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
@@ -216,6 +217,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
         self.text.bind('<Control-Key-h>',self.open_help)
+        # Versionページを開く
+        self.text.bind('<Control-Shift-Key-V>',self.open_version)
         # 文字数と行数をカウントする
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
@@ -334,6 +337,18 @@ class LineFrame(ttk.Frame):
     def open_help(self,event=None):
         """helpページを開く"""
         webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
+
+    def open_version(self, event=None):
+        """バージョン情報を表示"""
+        window = tk.Toplevel(root)
+        img2 = tk.PhotoImage(data=datas)
+        label = tk.Label(image=img2, text="a generic Toplevel window",master=window)
+        label.pack()
+        label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",master=window)
+        label2.pack(fill = 'x', padx=20, side = 'left')
+        label3 = tk.Label(text="Version 0.1.2 Beta",master=window)
+        label3.pack(fill = 'x', padx=20, side = 'right')
+        window.mainloop()
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
