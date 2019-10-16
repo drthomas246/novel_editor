@@ -121,28 +121,37 @@ class LineFrame(ttk.Frame):
         """ウェジット配置"""
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
-        self.text = CustomText(self,font=(self.font,self.int_var),undo=True)
-        self.line_numbers = tk.Canvas(self, width=30)
+        self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
+        self.Frame()
+        self.TreeGetLoop()
+
+    def Frame(self):
+        self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
+        self.text = CustomText(self.f1,font=(self.font,self.int_var),undo=True)
+        self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-            self, orient=tk.VERTICAL, command=self.text.yview)
+            self.f1, orient=tk.VERTICAL, command=self.text.yview)
         # 入力欄にスクロールを紐付け
         self.text.configure(yscrollcommand=self.ysb.set)
         # 左から行番号、入力欄、スクロールウィジェット
-        self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
-        self.line_numbers.grid(row=0, column=1, sticky=(tk.N, tk.S))
-        self.text.grid(row=0, column=2, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self.ysb.grid(row=0, column=3, sticky=(tk.N, tk.S))
+        self.line_numbers.grid(row=0, column=0, sticky=(tk.N, tk.S))
+        self.text.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
+        self.f1.columnconfigure(1, weight=1)
+        self.f1.rowconfigure(0, weight=1)
+        self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         # テキスト入力欄のみ拡大されるように
-        self.columnconfigure(2, weight=1)
+        self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
         # ツリービューのリスト表示
-        self.TreeGetLoop()
+        #self.TreeGetLoop()
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
         # テキストにフォーカスを当てる
         self.text.focus()
+        self.create_event_text()
 
-    def create_event(self):
+    def create_event_text(self):
         """イベントの設定."""
         # テキスト内でのスクロール時
         self.text.bind('<<Scroll>>', self.update_line_numbers)
@@ -180,6 +189,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
+
+    def create_event(self):
         # ツリービューをダブルクリックしたときにその項目を表示する
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューの名前を変更する
@@ -359,7 +370,7 @@ class LineFrame(ttk.Frame):
 
         # ツリービューを表示する
         self.TreeGetLoop()
-        self.text.delete('1.0', 'end')
+        self.Frame()
         self.winfo_toplevel().title(u"小説エディタ")
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
@@ -430,7 +441,7 @@ class LineFrame(ttk.Frame):
             self.file_path = filepath
             self.now_path = ""
             # テキストビューを新にする
-            self.text.delete('1.0', 'end')
+            self.Frame()
 
     def TreeGetLoop(self):
         """フォルダにあるファイルを取得してツリービューに挿入."""
@@ -537,8 +548,6 @@ class LineFrame(ttk.Frame):
             title=u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self,"挿入",True,title,False)
             root.wait_window(dialog.sub_name_win)
-            # テキストを読み取り専用を解除する
-            self.text.configure(state='normal')
             file_name=dialog.txt
             del dialog
             if not file_name== "":
@@ -556,7 +565,7 @@ class LineFrame(ttk.Frame):
 
                 # パスが存在すれば新規作成する
                 if not path == "":
-                    self.text.delete('1.0', tk.END)
+                    self.Frame()
                     f = open(path, mode='w')
                     f.write("")
                     f.close()
@@ -565,6 +574,8 @@ class LineFrame(ttk.Frame):
                     self.tree.selection_set(tree)
                     self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
                     self.text.focus()
+                    # テキストを読み取り専用を解除する
+                    self.text.configure(state='normal')
                     self.create_tags()
         # 子アイテムを右クリックしたとき
         else:
@@ -584,7 +595,8 @@ class LineFrame(ttk.Frame):
                     # パスが存在したとき
                     if not path == "":
                         os.remove(path)
-                        self.text.delete('1.0', tk.END)
+                        self.Frame()
+                        #self.text.delete('1.0', tk.END)
                         self.text.focus()
 
     def open_file_save(self,path):
@@ -604,7 +616,7 @@ class LineFrame(ttk.Frame):
         # 開いているファイルを保存
         self.open_file_save(self.now_path)
         # テキストを読み取り専用を解除する
-        self.text.delete('1.0', 'end')
+        self.Frame()
         self.text.configure(state='disabled')
         # 条件によって分離
         sub_text = self.tree.item(curItem)["text"]
