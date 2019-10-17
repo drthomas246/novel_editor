@@ -114,6 +114,8 @@ $ coverage html
 - Version 0.2.0bAM  
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
+- Version 0.1.2b2AM  
+バージョン情報の表示
 - Version 0.1.2bAM1  
 原稿用紙で何枚かか数えれるようになる
 - Version 0.1.2bAM  
