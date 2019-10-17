@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-
+import codecs
 import os
 import zipfile
 import shutil
@@ -12,6 +12,7 @@ import tkinter.ttk as ttk
 import tkinter.font as Font
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
+import xml.etree.ElementTree as ET
 
 import jaconv
 from janome.tokenizer import Tokenizer
@@ -166,29 +167,75 @@ class LineFrame(ttk.Frame):
         self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
-        self.text = CustomText(self,font=(self.font,self.int_var),undo=True)
-        self.line_numbers = tk.Canvas(self, width=30)
+        self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
+        self.Frame()
+        self.TreeGetLoop()
+
+    def Frame(self):
+        """フレーム内の表示"""
+        self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
+        self.text = CustomText(self.f1,font=(self.font,self.int_var),undo=True)
+        self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-            self, orient=tk.VERTICAL, command=self.text.yview)
+            self.f1, orient=tk.VERTICAL, command=self.text.yview)
         # 入力欄にスクロールを紐付け
         self.text.configure(yscrollcommand=self.ysb.set)
         # 左から行番号、入力欄、スクロールウィジェット
-        self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
-        self.line_numbers.grid(row=0, column=1, sticky=(tk.N, tk.S))
-        self.text.grid(row=0, column=2, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self.ysb.grid(row=0, column=3, sticky=(tk.N, tk.S))
+        self.line_numbers.grid(row=0, column=0, sticky=(tk.N, tk.S))
+        self.text.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
+        self.f1.columnconfigure(1, weight=1)
+        self.f1.rowconfigure(0, weight=1)
+        self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         # テキスト入力欄のみ拡大されるように
-        self.columnconfigure(2, weight=1)
+        self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
         # ツリービューのリスト表示
-        self.TreeGetLoop()
+        #self.TreeGetLoop()
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
         # テキストにフォーカスを当てる
         self.text.focus()
+        self.create_event_text()
 
-    def create_event(self):
-        """イベントの設定."""
+    def Frame_character(self):
+        """キャラクターフレームの表示"""
+        # チェック有無変数
+        self.var = tk.IntVar()
+        # value=0のラジオボタンにチェックを入れる
+        self.var.set(0)
+        self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
+        self.label1=tk.Label(self.f1,text=u"呼び名")
+        self.txt_yobi_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.label2=tk.Label(self.f1,text=u"名前")
+        self.txt_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.rdo1 = tk.Radiobutton(self.f1, value=0, variable=self.var, text='男')
+        self.rdo2 = tk.Radiobutton(self.f1, value=1, variable=self.var, text='女')
+        self.rdo3 = tk.Radiobutton(self.f1, value=2, variable=self.var, text='その他')
+        self.label3=tk.Label(self.f1,text=u"誕生日")
+        self.txt_birthday = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.text_body = tk.Text(self.f1,width=80,font=(self.font,self.int_var))
+
+
+        self.label1.grid(row=0, column=1)
+        self.txt_yobi_name.grid(row=1, column=1)
+        self.label2.grid(row=0, column=2)
+        self.txt_name.grid(row=1, column=2)
+        self.rdo1.grid(row=2, column=1)
+        self.rdo2.grid(row=3, column=1)
+        self.rdo3.grid(row=4, column=1)
+        self.label3.grid(row=2, column=2)
+        self.txt_birthday.grid(row=3, column=2)
+        self.text_body.grid(row=5, column=1,columnspan=2, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.f1.columnconfigure(2, weight=1)
+        self.f1.rowconfigure(5, weight=1)
+
+        self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.columnconfigure(1, weight=1)
+        self.rowconfigure(0, weight=1)
+
+    def create_event_text(self):
+        """テキストイベントの設定."""
         # テキスト内でのスクロール時
         self.text.bind('<<Scroll>>', self.update_line_numbers)
         self.text.bind('<Up>', self.update_line_numbers)
@@ -225,6 +272,9 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
+
+    def create_event(self):
+        """ツリービューイベントの設定"""
         # ツリービューをダブルクリックしたときにその項目を表示する
         self.tree.bind("<Double-1>", self.OnDoubleClick)
         # ツリービューの名前を変更する
@@ -252,7 +302,7 @@ class LineFrame(ttk.Frame):
                 childname, foreground=color[i]
             )
             i += 1
-        f = open("./userdic.csv",'w', encoding='utf-8')
+        f = codecs.open("./userdic.csv", 'w', encoding='utf-8')
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
@@ -424,7 +474,7 @@ class LineFrame(ttk.Frame):
 
         # ツリービューを表示する
         self.TreeGetLoop()
-        self.text.delete('1.0', 'end')
+        self.Frame()
         self.winfo_toplevel().title(u"小説エディタ")
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
@@ -495,7 +545,7 @@ class LineFrame(ttk.Frame):
             self.file_path = filepath
             self.now_path = ""
             # テキストビューを新にする
-            self.text.delete('1.0', 'end')
+            self.Frame()
 
     def TreeGetLoop(self):
         """フォルダにあるファイルを取得してツリービューに挿入."""
@@ -602,8 +652,6 @@ class LineFrame(ttk.Frame):
             title=u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self,"挿入",True,title,False)
             root.wait_window(dialog.sub_name_win)
-            # テキストを読み取り専用を解除する
-            self.text.configure(state='normal')
             file_name=dialog.txt
             del dialog
             if not file_name== "":
@@ -614,6 +662,12 @@ class LineFrame(ttk.Frame):
                 # 選択されているフォルダを見つける
                 for val in tree_folder:
                     if text == val[1]:
+                        if val[0] == tree_folder[0][0]:
+                            self.Frame_character()
+                            self.txt_yobi_name.insert(tk.END,file_name)
+                        else:
+                            self.Frame()
+
                         path = "./{0}/{1}.txt".format(val[0],file_name)
                         tree = self.tree.insert(val[0], 'end', text=file_name)
                         self.now_path = path
@@ -621,8 +675,7 @@ class LineFrame(ttk.Frame):
 
                 # パスが存在すれば新規作成する
                 if not path == "":
-                    self.text.delete('1.0', tk.END)
-                    f = open(path, mode='w')
+                    f = codecs.open(path, 'w', encoding='utf-8')
                     f.write("")
                     f.close()
                     # ツリービューを選択状態にする
@@ -630,6 +683,8 @@ class LineFrame(ttk.Frame):
                     self.tree.selection_set(tree)
                     self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
                     self.text.focus()
+                    # テキストを読み取り専用を解除する
+                    self.text.configure(state='normal')
                     self.create_tags()
         # 子アイテムを右クリックしたとき
         else:
@@ -649,15 +704,25 @@ class LineFrame(ttk.Frame):
                     # パスが存在したとき
                     if not path == "":
                         os.remove(path)
-                        self.text.delete('1.0', tk.END)
+                        self.Frame()
                         self.text.focus()
+
+    def save_charactor_file(self):
+        return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\n\t<body>{4}</body>\n</data>'.format(self.txt_yobi_name.get(),self.txt_name.get(),self.var.get(),self.txt_birthday.get(),self.text_body.get('1.0', 'end -1c'))
+        #body='<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n</data>'.format(self.txt_yobi_name.get())
+
 
     def open_file_save(self,path):
         """開いてるファイルを保存する."""
         # 編集ファイルを保存する
         if not path == "":
-            f = open(path,'w')
-            f.write(self.text.get("1.0",tk.END+'-1c'))
+            f = codecs.open(path, 'w', encoding='utf-8')
+            if not path.find(tree_folder[0][0]) == -1:
+                f.write(self.save_charactor_file())
+                self.charactor_file=""
+            else:
+                f.write(self.text.get("1.0",tk.END+'-1c'))
+
             f.close()
             self.now_path = path
 
@@ -669,7 +734,7 @@ class LineFrame(ttk.Frame):
         # 開いているファイルを保存
         self.open_file_save(self.now_path)
         # テキストを読み取り専用を解除する
-        self.text.delete('1.0', 'end')
+        self.Frame()
         self.text.configure(state='disabled')
         # 条件によって分離
         sub_text = self.tree.item(curItem)["text"]
@@ -678,6 +743,10 @@ class LineFrame(ttk.Frame):
             if text == val[1]:
                 path = "./{0}/{1}.txt".format(val[0],sub_text)
                 self.now_path = path
+                if val[0] == tree_folder[0][0]:
+                    self.Frame_character()
+                else:
+                    self.Frame()
                 # テキストを読み取り専用を解除する
                 self.text.configure(state='normal')
                 self.text.focus()
@@ -689,14 +758,23 @@ class LineFrame(ttk.Frame):
     def path_read_text(self,text,sub_text):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
-            self.text.delete('1.0', tk.END)
-            f = open(self.now_path)
-            self.text_text=f.read()
-            self.text.insert(tk.END,self.text_text)
-            f.close()
-            self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
-            # シンタックスハイライトをする
-            self.all_highlight()
+            if not self.now_path.find(tree_folder[0][0]) == -1:
+                tree = ET.parse(self.now_path)
+                elem = tree.getroot()
+                self.txt_yobi_name.insert(tk.END,elem.findtext("call"))
+                self.txt_name.insert(tk.END,elem.findtext("name"))
+                self.var.set(elem.findtext("sex"))
+                self.txt_birthday.insert(tk.END,elem.findtext("birthday"))
+                self.text_body.insert(tk.END,elem.findtext("body"))
+            else:
+                self.text.delete('1.0', tk.END)
+                f = codecs.open(self.now_path, 'r', encoding='utf-8')
+                self.text_text=f.read()
+                self.text.insert(tk.END,self.text_text)
+                f.close()
+                self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
+                # シンタックスハイライトをする
+                self.all_highlight()
 
     def On_name_Click(self, event=None):
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
