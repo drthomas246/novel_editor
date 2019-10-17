@@ -62,6 +62,7 @@ $ pip install 'Janome==0.3.9'
 | Ctrl+Shift+Z | REDO |
 | Tab | 名前の一覧表示 |
 | Ctrl+H | ヘルプを表示する |
+| Ctrl+Shift+V | バージョン情報 |
 
 ### Tabキー押下時 (文字入力画面)
 
@@ -113,6 +114,8 @@ $ coverage html
 - Version 0.2.0b  
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
+- Version 0.1.2b2  
+バージョン情報の表示
 - Version 0.1.2b1  
 原稿用紙で何枚か数えれる
 - Version 0.1.2b  
@@ -150,7 +153,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.1.2b1
+- Version：0.1.2b2
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/

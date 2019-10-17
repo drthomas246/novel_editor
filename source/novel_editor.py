@@ -342,7 +342,7 @@ class LineFrame(ttk.Frame):
         webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
 
     def open_version(self, event=None):
-        #global datas
+        """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
         label = tk.Label(image=img2, text="a generic Toplevel window",master=window)
