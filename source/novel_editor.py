@@ -163,6 +163,7 @@ class LineFrame(ttk.Frame):
         self.menu_bar.add_cascade(label=u'リスト', menu=List_menu)
         # ヘルプメニュー
         Help_menu.add_command(label=u'ヘルプ', command=self.open_help)
+        Help_menu.add_command(label=u'バージョン情報', command=self.open_version)
         self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self,show="tree")
@@ -388,7 +389,7 @@ class LineFrame(ttk.Frame):
         webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
 
     def open_version(self, event=None):
-        #global datas
+        """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
         label = tk.Label(image=img2, text="a generic Toplevel window",master=window)
