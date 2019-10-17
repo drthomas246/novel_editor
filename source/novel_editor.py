@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-
+import codecs
 import os
 import zipfile
 import shutil
@@ -12,6 +12,7 @@ import tkinter.ttk as ttk
 import tkinter.font as Font
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
+import xml.etree.ElementTree as ET
 
 import jaconv
 from janome.tokenizer import Tokenizer
@@ -152,30 +153,23 @@ class LineFrame(ttk.Frame):
         self.text.focus()
         self.create_event_text()
 
-    def Frame_character(self,event=None):
+    def Frame_character(self):
         """キャラクターフレームの表示"""
         # チェック有無変数
-        var = tk.IntVar()
+        self.var = tk.IntVar()
         # value=0のラジオボタンにチェックを入れる
-        var.set(0)
+        self.var.set(0)
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.label1=tk.Label(self.f1,text=u"呼び名")
-        self.txt_yobi_name = ttk.Entry(self.f1,width=40)
+        self.txt_yobi_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
         self.label2=tk.Label(self.f1,text=u"名前")
-        self.txt_name = ttk.Entry(self.f1,width=40)
-        self.rdo1 = tk.Radiobutton(self.f1, value=0, variable=var, text='男')
-        self.rdo2 = tk.Radiobutton(self.f1, value=1, variable=var, text='女')
-        self.rdo3 = tk.Radiobutton(self.f1, value=2, variable=var, text='その他')
+        self.txt_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.rdo1 = tk.Radiobutton(self.f1, value=0, variable=self.var, text='男')
+        self.rdo2 = tk.Radiobutton(self.f1, value=1, variable=self.var, text='女')
+        self.rdo3 = tk.Radiobutton(self.f1, value=2, variable=self.var, text='その他')
         self.label3=tk.Label(self.f1,text=u"誕生日")
-        self.txt_birthday = ttk.Entry(self.f1,width=40)
-        self.button = ttk.Button(
-            self.f1,
-            text = "button1",
-            width = str("button1"),
-            padding = (10, 5),
-            command = self.Frame
-        )
-        self.text_body = tk.Text(self.f1,width=80)
+        self.txt_birthday = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.text_body = tk.Text(self.f1,width=80,font=(self.font,self.int_var))
 
 
         self.label1.grid(row=0, column=1)
@@ -187,7 +181,6 @@ class LineFrame(ttk.Frame):
         self.rdo3.grid(row=4, column=1)
         self.label3.grid(row=2, column=2)
         self.txt_birthday.grid(row=3, column=2)
-        self.button.grid(row=4, column=2)
         self.text_body.grid(row=5, column=1,columnspan=2, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(2, weight=1)
         self.f1.rowconfigure(5, weight=1)
@@ -262,7 +255,7 @@ class LineFrame(ttk.Frame):
                 childname, foreground=color[i]
             )
             i += 1
-        f = open("./userdic.csv",'w', encoding='utf-8')
+        f = codecs.open("./userdic.csv", 'w', encoding='utf-8')
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
@@ -606,6 +599,7 @@ class LineFrame(ttk.Frame):
                     if text == val[1]:
                         if val[0] == tree_folder[0][0]:
                             self.Frame_character()
+                            self.txt_yobi_name.insert(tk.END,file_name)
                         else:
                             self.Frame()
 
@@ -616,7 +610,7 @@ class LineFrame(ttk.Frame):
 
                 # パスが存在すれば新規作成する
                 if not path == "":
-                    f = open(path, mode='w')
+                    f = codecs.open(path, 'w', encoding='utf-8')
                     f.write("")
                     f.close()
                     # ツリービューを選択状態にする
@@ -646,15 +640,24 @@ class LineFrame(ttk.Frame):
                     if not path == "":
                         os.remove(path)
                         self.Frame()
-                        #self.text.delete('1.0', tk.END)
                         self.text.focus()
+
+    def save_charactor_file(self):
+        return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\n\t<body>{4}</body>\n</data>'.format(self.txt_yobi_name.get(),self.txt_name.get(),self.var.get(),self.txt_birthday.get(),self.text_body.get('1.0', 'end -1c'))
+        #body='<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n</data>'.format(self.txt_yobi_name.get())
+
 
     def open_file_save(self,path):
         """開いてるファイルを保存する."""
         # 編集ファイルを保存する
         if not path == "":
-            f = open(path,'w')
-            f.write(self.text.get("1.0",tk.END+'-1c'))
+            f = codecs.open(path, 'w', encoding='utf-8')
+            if not path.find(tree_folder[0][0]) == -1:
+                f.write(self.save_charactor_file())
+                self.charactor_file=""
+            else:
+                f.write(self.text.get("1.0",tk.END+'-1c'))
+
             f.close()
             self.now_path = path
 
@@ -690,14 +693,23 @@ class LineFrame(ttk.Frame):
     def path_read_text(self,text,sub_text):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
-            self.text.delete('1.0', tk.END)
-            f = open(self.now_path)
-            self.text_text=f.read()
-            self.text.insert(tk.END,self.text_text)
-            f.close()
-            self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
-            # シンタックスハイライトをする
-            self.all_highlight()
+            if not self.now_path.find(tree_folder[0][0]) == -1:
+                tree = ET.parse(self.now_path)
+                elem = tree.getroot()
+                self.txt_yobi_name.insert(tk.END,elem.findtext("call"))
+                self.txt_name.insert(tk.END,elem.findtext("name"))
+                self.var.set(elem.findtext("sex"))
+                self.txt_birthday.insert(tk.END,elem.findtext("birthday"))
+                self.text_body.insert(tk.END,elem.findtext("body"))
+            else:
+                self.text.delete('1.0', tk.END)
+                f = codecs.open(self.now_path, 'r', encoding='utf-8')
+                self.text_text=f.read()
+                self.text.insert(tk.END,self.text_text)
+                f.close()
+                self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
+                # シンタックスハイライトをする
+                self.all_highlight()
 
     def On_name_Click(self, event=None):
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
