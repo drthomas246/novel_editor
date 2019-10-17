@@ -113,6 +113,12 @@ $ coverage html
 - Version 0.1.2bAM1  
 原稿用紙で何枚かか数えれるようになる
 - Version 0.1.2bAM  
+- Version 0.2.0b  
+ファイル形式を変更。キャラクター欄を充実  
+今までのファイルと互換性がありません。
+- Version 0.1.2b1  
+原稿用紙で何枚か数えれる
+- Version 0.1.2b  
 タイトルを挿入
 - Version 0.1.1bAM1  
 ソースを見直し
