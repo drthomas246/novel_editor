@@ -1490,8 +1490,6 @@ if __name__ == "__main__":
     pf = platform.system()
     if pf == 'Windows':
         root.overrideredirect(True)
-    else:
-        root.attributes('-fullscreen', True)
 
     root.update()
     # Janomeを使って日本語の形態素解析を起動
