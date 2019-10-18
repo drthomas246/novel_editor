@@ -17,11 +17,20 @@ if not filepath == "":
     for val in tree_folder:
         files=glob.glob("{0}/*".format(val[0]))
         for file in files:
-            f = open(file, 'r', encoding='shift-jis')
-            text_text=f.read()
-            f.close()
-            f = open(file, 'w', encoding='utf-8')
-            f.write(text_text)
+            if val[0] == tree_folder[0][0]:
+                f = open(file, 'r', encoding='shift-jis')
+                text_text=f.read()
+                text_text='<?xml version="1.0"?>\n<data>\n\t<call></call>\n\t<name></name>\n\t<sex>0</sex>\n\t<birthday></birthday>\n\t<body>{0}</body>\n</data>'.format(text_text)
+                f.close()
+                f = open(file, 'w', encoding='utf-8')
+                f.write(text_text)
+                f.close()
+            else:
+                f = open(file, 'r', encoding='shift-jis')
+                text_text=f.read()
+                f.close()
+                f = open(file, 'w', encoding='utf-8')
+                f.write(text_text)
             f.close()
     shutil.make_archive(filepath,"zip","./data")
             # 拡張子の変更を行う
