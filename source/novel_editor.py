@@ -1487,7 +1487,12 @@ if __name__ == "__main__":
     lh=root.winfo_height()
     root.geometry(str(lw)+"x"+str(lh)+"+"+str(int(ww/2-lw/2))+"+"+str(int(wh/2-lh/2)) )
     # 描画するが処理は止めない
-    root.overrideredirect(True)
+    pf = platform.system()
+    if pf == 'Windows':
+        root.overrideredirect(True)
+    else:
+        root.attributes('-fullscreen', True)
+
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
