@@ -1479,7 +1479,15 @@ if __name__ == "__main__":
     label = tk.Label(image=img)
     # タイトルを表示する
     label.pack()
+    # センターに表示する
+    root.update_idletasks()
+    ww=root.winfo_screenwidth()
+    lw=root.winfo_width()
+    wh=root.winfo_screenheight()
+    lh=root.winfo_height()
+    root.geometry(str(lw)+"x"+str(lh)+"+"+str(int(ww/2-lw/2))+"+"+str(int(wh/2-lh/2)) )
     # 描画するが処理は止めない
+    root.overrideredirect(True)
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
@@ -1501,4 +1509,10 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
+    pf = platform.system()
+    if pf == 'Windows':
+        root.state('zoomed')
+    else:
+        root.attributes("-zoomed", "1")
+
     root.mainloop()
