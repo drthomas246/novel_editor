@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-import codecs
 import os
 import zipfile
 import shutil
@@ -47,7 +46,6 @@ class Mydialog():
     def __init__(self, message, button1, button2,title,text):
         """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、title:タイトル、text:選択状態にするかどうか"""
         self.sub_name_win = tk.Toplevel(message)
-        self.sub_name_win.geometry("260x75")
         self.txt_name = ttk.Entry(self.sub_name_win,width=40)
         self.txt_name.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
@@ -255,7 +253,7 @@ class LineFrame(ttk.Frame):
                 childname, foreground=color[i]
             )
             i += 1
-        f = codecs.open("./userdic.csv", 'w', encoding='utf-8')
+        f = open("./userdic.csv", 'w', encoding='utf-8')
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
@@ -305,7 +303,6 @@ class LineFrame(ttk.Frame):
     def font_dialog(self,event=None):
         """フォントサイズダイアログを作成"""
         self.sub_wins = tk.Toplevel(self)
-        self.sub_wins.geometry("200x75")
         self.intSpin = ttk.Spinbox(self.sub_wins,from_=12,to=72)
         self.intSpin.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
@@ -495,7 +492,6 @@ class LineFrame(ttk.Frame):
     def find_dialog(self,event=None):
         """検索ボックスを作成する"""
         sub_win = tk.Toplevel(self)
-        sub_win.geometry("260x75")
         self.text_var = ttk.Entry(sub_win,width=40)
         self.text_var.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
@@ -610,7 +606,7 @@ class LineFrame(ttk.Frame):
 
                 # パスが存在すれば新規作成する
                 if not path == "":
-                    f = codecs.open(path, 'w', encoding='utf-8')
+                    f = open(path, 'w', encoding='utf-8')
                     f.write("")
                     f.close()
                     # ツリービューを選択状態にする
@@ -651,7 +647,7 @@ class LineFrame(ttk.Frame):
         """開いてるファイルを保存する."""
         # 編集ファイルを保存する
         if not path == "":
-            f = codecs.open(path, 'w', encoding='utf-8')
+            f = open(path, 'w', encoding='utf-8')
             if not path.find(tree_folder[0][0]) == -1:
                 f.write(self.save_charactor_file())
                 self.charactor_file=""
@@ -703,7 +699,7 @@ class LineFrame(ttk.Frame):
                 self.text_body.insert(tk.END,elem.findtext("body"))
             else:
                 self.text.delete('1.0', tk.END)
-                f = codecs.open(self.now_path, 'r', encoding='utf-8')
+                f = open(self.now_path, 'r', encoding='utf-8')
                 self.text_text=f.read()
                 self.text.insert(tk.END,self.text_text)
                 f.close()
