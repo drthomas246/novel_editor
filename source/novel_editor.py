@@ -59,8 +59,8 @@ class Mydialog():
         if button2 == True:
             button = ttk.Button(
                 self.sub_name_win,
-                text = 'キャンセル',
-                width = str('キャンセル'),
+                text = u'キャンセル',
+                width = str(u'キャンセル'),
                 padding = (10, 5),
                 command = self.sub_name_win.destroy
                 )
@@ -106,10 +106,11 @@ class LineFrame(ttk.Frame):
         self.text_text=""
         # 文字の大きさ
         self.int_var=16
+        # フォントをOSごとに変える
         pf = platform.system()
         if pf == 'Windows':
             self.font="メイリオ"
-        elif pf == 'Darwin':
+        elif pf == 'Darwin':# MacOS
             self.font="Osaka-等幅"
         elif pf == 'Linux':
             self.font="IPAゴシック"
@@ -171,6 +172,7 @@ class LineFrame(ttk.Frame):
 
     def Frame(self):
         """フレーム内の表示"""
+        #f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.text = CustomText(self.f1,font=(self.font,self.int_var),undo=True)
         self.line_numbers = tk.Canvas(self.f1, width=30)
@@ -207,30 +209,37 @@ class LineFrame(ttk.Frame):
         self.txt_yobi_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
         self.label2=tk.Label(self.f1,text=u"名前")
         self.txt_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
-        self.rdo1 = tk.Radiobutton(self.f1, value=0, variable=self.var, text='男')
-        self.rdo2 = tk.Radiobutton(self.f1, value=1, variable=self.var, text='女')
-        self.rdo3 = tk.Radiobutton(self.f1, value=2, variable=self.var, text='その他')
+        self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
+        self.rdo1 = tk.Radiobutton(self.f2, value=0, variable=self.var, text=u'男')
+        self.rdo2 = tk.Radiobutton(self.f2, value=1, variable=self.var, text=u'女')
+        self.rdo3 = tk.Radiobutton(self.f2, value=2, variable=self.var, text=u'その他')
+        self.rdo1.grid(row=0, column=1)
+        self.rdo2.grid(row=1, column=1)
+        self.rdo3.grid(row=2, column=1)
         self.label3=tk.Label(self.f1,text=u"誕生日")
         self.txt_birthday = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.label4=tk.Label(self.f1,text=u"略歴")
         self.text_body = tk.Text(self.f1,width=80,font=(self.font,self.int_var))
 
 
         self.label1.grid(row=0, column=1)
         self.txt_yobi_name.grid(row=1, column=1)
-        self.label2.grid(row=0, column=2)
+        self.f2.grid(row=2, column=1, rowspan=2)
+        self.label2.grid(row=0, column=2, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.txt_name.grid(row=1, column=2)
-        self.rdo1.grid(row=2, column=1)
-        self.rdo2.grid(row=3, column=1)
-        self.rdo3.grid(row=4, column=1)
         self.label3.grid(row=2, column=2)
         self.txt_birthday.grid(row=3, column=2)
-        self.text_body.grid(row=5, column=1,columnspan=2, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.label4.grid(row=4, column=1,columnspa=2)
+        self.text_body.grid(row=5, column=1,columnspa=2, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.f1.columnconfigure(1, weight=1)
         self.f1.columnconfigure(2, weight=1)
         self.f1.rowconfigure(5, weight=1)
 
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
+        # キャラクターイベントを追加
+        self.create_event_character()
 
     def create_event_text(self):
         """テキストイベントの設定."""
@@ -271,6 +280,59 @@ class LineFrame(ttk.Frame):
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
 
+    def create_event_character(self):
+        """キャラクターランのイベント設定"""
+        # 開くダイアロクを表示する
+        self.txt_yobi_name.bind('<Control-Key-e>', self.open_file)
+        self.txt_name.bind('<Control-Key-e>', self.open_file)
+        self.txt_birthday.bind('<Control-Key-e>', self.open_file)
+        self.text_body.bind('<Control-Key-e>', self.open_file)
+        # 保存ダイアロクを表示する
+        self.txt_yobi_name.bind('<Control-Key-w>', self.save_file)
+        self.txt_name.bind('<Control-Key-w>', self.save_file)
+        self.txt_birthday.bind('<Control-Key-w>', self.save_file)
+        self.text_body.bind('<Control-Key-w>', self.save_file)
+        # 小説家になろうを開く
+        self.txt_yobi_name.bind('<Control-Key-u>', self.open_url)
+        self.txt_name.bind('<Control-Key-u>', self.open_url)
+        self.txt_birthday.bind('<Control-Key-u>', self.open_url)
+        self.text_body.bind('<Control-Key-u>', self.open_url)
+        # 検索ダイアログを開く
+        self.txt_yobi_name.bind('<Control-Key-f>', self.find_dialog)
+        self.txt_name.bind('<Control-Key-f>', self.find_dialog)
+        self.txt_yobi_name.bind('<Control-Key-f>', self.find_dialog)
+        self.text_body.bind('<Control-Key-f>', self.find_dialog)
+        # 上書き保存する
+        self.txt_yobi_name.bind('<Control-Key-s>', self.overwrite_save_file)
+        self.txt_name.bind('<Control-Key-s>', self.overwrite_save_file)
+        self.txt_birthday.bind('<Control-Key-s>', self.overwrite_save_file)
+        self.text_body.bind('<Control-Key-s>', self.overwrite_save_file)
+        # 新規作成する
+        self.txt_yobi_name.bind('<Control-Key-n>', self.new_open)
+        self.txt_name.bind('<Control-Key-n>', self.new_open)
+        self.txt_yobi_name.bind('<Control-Key-n>', self.new_open)
+        self.text_body.bind('<Control-Key-n>', self.new_open)
+        # helpページを開く
+        self.txt_yobi_name.bind('<Control-Key-h>',self.open_help)# helpページを開く
+        self.txt_name.bind('<Control-Key-h>',self.open_help)
+        self.txt_birthday.bind('<Control-Key-h>',self.open_help)
+        self.text_body.bind('<Control-Key-h>',self.open_help)
+        # Versionページを開く
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>',self.open_version)
+        self.txt_name.bind('<Control-Shift-Key-V>',self.open_version)
+        self.txt_birthday.bind('<Control-Shift-Key-V>',self.open_version)
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>',self.open_version)
+        # redo処理
+        self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.redo)
+        self.txt_name.bind('<Control-Shift-Key-Z>', self.redo)
+        self.txt_birthday.bind('<Control-Shift-Key-Z>', self.redo)
+        self.text_body.bind('<Control-Shift-Key-Z>', self.redo)
+        # フォントサイズの変更
+        self.txt_yobi_name.bind('<Control-Shift-Key-F>', self.font_dialog)
+        self.txt_name.bind('<Control-Shift-Key-F>', self.font_dialog)
+        self.txt_birthday.bind('<Control-Shift-Key-F>', self.font_dialog)
+        self.text_body.bind('<Control-Shift-Key-F>', self.font_dialog)
+
     def create_event(self):
         """ツリービューイベントの設定"""
         # ツリービューをダブルクリックしたときにその項目を表示する
@@ -285,7 +347,7 @@ class LineFrame(ttk.Frame):
     def create_tags(self):
         """タグの作成"""
         i = 0
-        system_dic= "喜寛,固有名詞,ヨシヒロ"
+        system_dic= u"喜寛,固有名詞,ヨシヒロ"
         # キャラクターから一覧を作る。
         children = self.tree.get_children('data/character')
         for child in children:
@@ -294,7 +356,7 @@ class LineFrame(ttk.Frame):
             childname = self.tree.item(child,"text")
             for token in tokenizer.tokenize(childname):
                 reading += token.phonetic
-            system_dic += "\n{0},固有名詞,{1}".format(childname,reading)
+            system_dic += u"\n{0},固有名詞,{1}".format(childname,reading)
             # タグの作成
             self.text.tag_configure(
                 childname, foreground=color[i]
@@ -354,8 +416,8 @@ class LineFrame(ttk.Frame):
         self.intSpin.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
             self.sub_wins,
-            text = 'サイズ変更',
-            width = str('サイズ変更'),
+            text = u'サイズ変更',
+            width = str(u'サイズ変更'),
             padding = (10, 5),
             command = self.size_Change
             )
@@ -393,13 +455,14 @@ class LineFrame(ttk.Frame):
         label.pack()
         label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",master=window)
         label2.pack(fill = 'x', padx=20, side = 'left')
-        label3 = tk.Label(text="Version 0.1.2 Beta",master=window)
+        label3 = tk.Label(text="Version 0.2.0 Beta1",master=window)
         label3.pack(fill = 'x', padx=20, side = 'right')
+        window.resizable(width=0, height=0)
         window.mainloop()
 
     def isHiragana(self,char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
-        return (0x3040 < ord(char) < 0x3094)
+        return (0x3040 < ord(char) < 0x3097)
 
     def ruby(self,event=None):
         """ルビをふる"""
@@ -419,7 +482,7 @@ class LineFrame(ttk.Frame):
                 if self.isHiragana(i):
                     hira += i
             # ルビがないときと、記号の時の処理
-            if ruby.replace(hira, '') == "" or token.part_of_speech.split(",")[0] == "記号":
+            if ruby.replace(hira, '') == "" or token.part_of_speech.split(",")[0] == u"記号":
                 hon += token.surface
             else:
                 # ルビ振りを行う
@@ -508,7 +571,7 @@ class LineFrame(ttk.Frame):
     def save_file(self,event=None):
         """ファイルを保存処理"""
         # ファイル保存ダイアログを表示する
-        fTyp = [("小説エディタ",".ned")]
+        fTyp = [(u"小説エディタ",".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
         filepath = filedialog.asksaveasfilename(filetypes = fTyp,initialdir = iDir)
         # ファイルパスが決まったとき
@@ -521,7 +584,7 @@ class LineFrame(ttk.Frame):
     def open_file(self,event=None):
         """ファイルを開く処理"""
         # ファイルを開くダイアログを開く
-        fTyp = [("小説エディタ",".ned")]
+        fTyp = [(u"小説エディタ",".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
         filepath = filedialog.askopenfilename(filetypes = fTyp,initialdir = iDir)
         # ファイル名があるとき
@@ -561,8 +624,8 @@ class LineFrame(ttk.Frame):
         self.text_var.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
         button = ttk.Button(
             sub_win,
-            text = '検索',
-            width = str('検索'),
+            text = u'検索',
+            width = str(u'検索'),
             padding = (10, 5),
             command = self.search
             )
@@ -743,13 +806,16 @@ class LineFrame(ttk.Frame):
                     self.Frame_character()
                 else:
                     self.Frame()
-                # テキストを読み取り専用を解除する
-                self.text.configure(state='normal')
-                self.text.focus()
+                    # テキストを読み取り専用を解除する
+                    self.text.configure(state='normal')
+                    self.text.focus()
                 self.path_read_text(text,sub_text)
+                self.now_path = ""
                 return
 
         self.now_path = ""
+        self.winfo_toplevel().title(u"小説エディタ")
+
 
     def path_read_text(self,text,sub_text):
         # パスが存在すれば読み込んで表示する
@@ -768,9 +834,9 @@ class LineFrame(ttk.Frame):
                 self.text_text=f.read()
                 self.text.insert(tk.END,self.text_text)
                 f.close()
-                self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
-                # シンタックスハイライトをする
-                self.all_highlight()
+            self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
+            # シンタックスハイライトをする
+            self.all_highlight()
 
     def On_name_Click(self, event=None):
         curItem = self.tree.focus()              #選択アイテムの認識番号取得
@@ -778,8 +844,8 @@ class LineFrame(ttk.Frame):
         text = self.tree.item(parentItem)["text"]
         if not text == "":
             sub_text = self.tree.item(curItem)["text"]
-            title= '{0}の名前を変更'.format(sub_text)
-            dialog2=Mydialog(self,"変更",True,title,sub_text)
+            title= u'{0}の名前を変更'.format(sub_text)
+            dialog2=Mydialog(self,u"変更",True,title,sub_text)
             root.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
             self.text.configure(state='normal')
@@ -911,7 +977,7 @@ class LineFrame(ttk.Frame):
                 pri = [token.surface for token in tokenizer.tokenize(text)]
                 hin = [token.part_of_speech.split(',')[0] for token in tokenizer.tokenize(text)]
                 if len(pri)>0:
-                    if hin[len(pri)-1] == '名詞':
+                    if hin[len(pri)-1] == u'名詞':
                         text = pri[len(pri)-1]
                     else:
                         text = ""
@@ -1544,14 +1610,25 @@ if __name__ == "__main__":
     label = tk.Label(image=img)
     # タイトルを表示する
     label.pack()
+    # センターに表示する
+    root.update_idletasks()
+    ww=root.winfo_screenwidth()
+    lw=root.winfo_width()
+    wh=root.winfo_screenheight()
+    lh=root.winfo_height()
+    root.geometry(str(lw)+"x"+str(lh)+"+"+str(int(ww/2-lw/2))+"+"+str(int(wh/2-lh/2)) )
     # 描画するが処理は止めない
+    pf = platform.system()
+    if pf == 'Windows':
+        root.overrideredirect(True)
+
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
     # メイン画面を削除
     root.destroy()
     # 初期処理
-    tree_folder = [['data/character','キャラクター'],['data/occupation','職種'],['data/space','場所'],['data/event','イベント'],['data/nobel','小説']]
+    tree_folder = [['data/character',u'キャラクター'],['data/occupation',u'職種'],['data/space',u'場所'],['data/event',u'イベント'],['data/nobel',u'小説']]
     color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon','tan1','rosy brown','indian red']
     # 再度メイン画面を作成
     root = tk.Tk()
@@ -1566,4 +1643,10 @@ if __name__ == "__main__":
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
+    pf = platform.system()
+    if pf == 'Windows':
+        root.state('zoomed')
+    else:
+        root.attributes("-zoomed", "1")
+
     root.mainloop()
