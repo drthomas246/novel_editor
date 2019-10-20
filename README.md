@@ -111,6 +111,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.0b1  
+軽微な訂正を行う
 - Version 0.2.0b  
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
@@ -153,7 +155,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.1.2b2
+- Version：0.2.0b1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
