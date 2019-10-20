@@ -111,13 +111,9 @@ $ coverage html
 ```
 
 ## 改変履歴
-<<<<<<< HEAD
+- Version 0.2.0bAM1  
+軽微な変更
 - Version 0.2.0bAM  
-=======
-- Version 0.2.0b1  
-軽微な訂正を行う
-- Version 0.2.0b  
->>>>>>> Maintenance-master
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
 - Version 0.1.2b2AM  
@@ -159,11 +155,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-<<<<<<< HEAD
-- Version：0.1.2bAM2
-=======
-- Version：0.2.0b1
->>>>>>> Maintenance-master
+- Version：0.2.0bAM1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
