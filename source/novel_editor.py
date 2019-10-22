@@ -491,7 +491,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.0 Beta1", master=window)
+        label3 = tk.Label(text="Version 0.2.1 BetaAM", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -889,7 +889,7 @@ class LineFrame(ttk.Frame):
         self.winfo_toplevel().title(u"小説エディタ")
 
     def path_read_text(self, text, sub_text):
-        # パスが存在すれば読み込んで表示する
+        """パスが存在すれば読み込んで表示する"""
         if not self.now_path == "":
             if not self.now_path.find(tree_folder[0][0]) == -1:
                 self.txt_yobi_name.delete('0', tk.END)
