@@ -1643,6 +1643,8 @@ if __name__ == "__main__":
     pf = platform.system()
     if pf == 'Windows':
         root.overrideredirect(True)
+    elif pf == 'Linux':
+        root.wm_attributes('-type', 'splash')
 
     root.update()
     # Janomeを使って日本語の形態素解析を起動
