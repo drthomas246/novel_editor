@@ -91,10 +91,6 @@ class LineFrame(ttk.Frame):
         """初期設定"""
         super().__init__(master, **kwargs)
         self.initialize()
-
-        self.menu_bar = tk.Menu(self.master)
-        self.master.config(menu=self.menu_bar)
-
         self.create_widgets()
         self.create_event()
 
@@ -127,53 +123,6 @@ class LineFrame(ttk.Frame):
 
     def create_widgets(self):
         """ウェジット配置"""
-        # メニューの配置
-        File_menu = tk.Menu(self.menu_bar, tearoff=0)
-        Edit_menu = tk.Menu(self.menu_bar, tearoff=0)
-        List_menu = tk.Menu(self.menu_bar, tearoff=0)
-        Processing_menu = tk.Menu(self.menu_bar, tearoff=0)
-        Help_menu = tk.Menu(self.menu_bar, tearoff=0)
-        # ファイルメニュー
-        File_menu.add_command(label=u'新規作成', command=self.new_open)
-        File_menu.add_command(label=u'開く', command=self.open_file)
-        File_menu.add_separator()
-        File_menu.add_command(label=u'保存', command=self.overwrite_save_file)
-        File_menu.add_command(label=u'名前を付けて保存', command=self.save_file)
-        File_menu.add_separator()
-        File_menu.add_command(label=u'閉じる', command=on_closing)
-        self.menu_bar.add_cascade(label=u'ファイル', menu=File_menu)
-        # 編集メニュー
-        Edit_menu.add_command(label=u'やり直し', command=self.redo)
-        Edit_menu.add_command(label=u'戻る', command=self.undo)
-        Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'切り取り', command=self.cut)
-        Edit_menu.add_command(label=u'コピー', command=self.copy)
-        Edit_menu.add_command(label=u'貼り付け', command=self.paste)
-        Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'検索', command=self.find_dialog)
-        self.menu_bar.add_cascade(label=u'編集', menu=Edit_menu)
-        # 処理メニュー
-        Processing_menu.add_command(label=u'ルビ', command=self.ruby)
-        Processing_menu.add_command(label=u'文字数のカウント',
-                                    command=self.moji_count
-                                    )
-        Processing_menu.add_command(label=u'フォントサイズの変更',
-                                    command=self.font_dialog
-                                    )
-        Processing_menu.add_separator()
-        Processing_menu.add_command(label=u'「小説家になろう」のページを開く',
-                                    command=self.open_url
-                                    )
-        self.menu_bar.add_cascade(label=u'処理', menu=Processing_menu)
-        # リストメニュー
-        List_menu.add_command(label=u'項目を増やす', command=self.message_window)
-        List_menu.add_command(label=u'項目を削除', command=self.message_window)
-        List_menu.add_command(label=u'項目の名前を変更', command=self.On_name_Click)
-        self.menu_bar.add_cascade(label=u'リスト', menu=List_menu)
-        # ヘルプメニュー
-        Help_menu.add_command(label=u'ヘルプ', command=self.open_help)
-        Help_menu.add_command(label=u'バージョン情報', command=self.open_version)
-        self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self, show="tree")
         self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
@@ -536,24 +485,6 @@ class LineFrame(ttk.Frame):
     def redo(self, event=None):
         """redo処理を行う"""
         self.text.edit_redo()
-
-    def undo(self, event=None):
-        """redo処理を行う"""
-        self.text.edit_undo()
-
-    def copy(self, event=None):
-        """cpoy処理を行う"""
-        self.clipboard_clear()
-        self.clipboard_append(self.text.selection_get())
-
-    def cut(self, event=None):
-        """cut処理を行う"""
-        self.copy()
-        self.text.delete("sel.first", "sel.last")
-
-    def paste(self, event=None):
-        """paste処理を行う"""
-        self.text.insert('insert', self.clipboard_get())
 
     def moji_count(self, event=None):
         """文字数と行数を表示する"""
