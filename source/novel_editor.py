@@ -1709,9 +1709,11 @@ if __name__ == "__main__":
                                            str(int(wh/2-lh/2)))
                   )
     # windowsのみタイトルバーを削除
-    pf = platform.system()
-    if pf == 'Windows':
+    # OS別判断
+    if os.name == 'nt':
         root.overrideredirect(True)
+    elif os.name == 'posix':
+        root.wm_attributes('-type', 'splash')
     # 描画するが処理は止めない
     root.update()
     # Janomeを使って日本語の形態素解析を起動
