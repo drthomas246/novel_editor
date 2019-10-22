@@ -568,7 +568,7 @@ class LineFrame(ttk.Frame):
         # メッセージボックスの表示
         messagebox.showinfo(
                             u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行\
-             　             \n 原稿用紙 : {2}枚".format(
+                            \n 原稿用紙 : {2}枚".format(
                                                        len(moji)-new_line,
                                                        new_line,
                                                        -(-gen_mai//20)))
@@ -878,7 +878,6 @@ class LineFrame(ttk.Frame):
                 if val[0] == tree_folder[0][0]:
                     self.Frame_character()
                 else:
-                    self.Frame()
                     # テキストを読み取り専用を解除する
                     self.text.configure(state='normal')
                     self.text.focus()
@@ -893,6 +892,10 @@ class LineFrame(ttk.Frame):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
             if not self.now_path.find(tree_folder[0][0]) == -1:
+                self.txt_yobi_name.delete('0', tk.END)
+                self.txt_name.delete('0', tk.END)
+                self.txt_birthday.delete('0', tk.END)
+                self.text_body.delete('1.0', tk.END)
                 tree = ET.parse(self.now_path)
                 elem = tree.getroot()
                 self.txt_yobi_name.insert(tk.END, elem.findtext("call"))
@@ -913,6 +916,7 @@ class LineFrame(ttk.Frame):
             self.all_highlight()
 
     def On_name_Click(self, event=None):
+        """名前の変更"""
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
@@ -935,6 +939,7 @@ class LineFrame(ttk.Frame):
                     self.tree.delete(curItem)
                     Item = self.tree.insert(parentItem, 'end', text=co_text)
                     self.tree.selection_set(Item)
+                    self.path_read_text(val[0], co_text)
                     return
 
     def update_line_numbers(self, event=None):
