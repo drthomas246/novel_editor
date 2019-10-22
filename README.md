@@ -112,8 +112,8 @@ $ coverage html
 
 ## 改変履歴
 - Version 0.2.0b1  
-軽微な変更
-- Version 0.2.0bAM  
+軽微な変更、PEP8に対応
+- Version 0.2.0b  
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
 - Version 0.1.2b2  
