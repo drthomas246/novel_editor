@@ -39,6 +39,10 @@ $ pip install 'Janome==0.3.9'
 - Windows用にコンパイルした物がReleasesにあります(64bit用)。ダブルクリックすれば起動します。  
 また、削除は、novel_editorフォルダを削除してください。レジストリは汚していません。
 
+- __ver0.2.0b以降からセーブファイルの保存形式が変更になっています。今までのファイルを開くと最悪セーブファイル自身が破壊されてしまいます。  
+ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Releasesにあるchange.exeでファイルの保存形式を変換してからご使用ください。  
+一度変更するとその後change.exeを使用せずに保存できるようになります。__
+
 ## コマンド一覧
 
 ### 通常時 (文字入力画面)
@@ -154,7 +158,7 @@ $ coverage html
 初版発行
 
 ## Copyright
-- ファイル名：novel_editor.py、novel_editor.exe
+- ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
 - Version：0.2.0bAM1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019

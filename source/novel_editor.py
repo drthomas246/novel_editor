@@ -1703,11 +1703,11 @@ if __name__ == "__main__":
                                            str(int(ww/2-lw/2)),
                                            str(int(wh/2-lh/2)))
                   )
-    # 描画するが処理は止めない
+    # windowsのみタイトルバーを削除
     pf = platform.system()
     if pf == 'Windows':
         root.overrideredirect(True)
-
+    # 描画するが処理は止めない
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
@@ -1741,5 +1741,7 @@ if __name__ == "__main__":
         root.state('zoomed')
     else:
         root.attributes("-zoomed", "1")
-
+    messagebox.showwarning("セーブファイル変更の案内",
+                           "セーブファイルがVer0.2.0bAMから変更になっています。\
+                           \n必ずReadmeを読んで対応をしてからお使いください。")
     root.mainloop()
