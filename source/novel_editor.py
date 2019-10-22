@@ -8,13 +8,13 @@ import platform
 import textwrap
 import tkinter as tk
 import tkinter.ttk as ttk
-import tkinter.font as Font
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 import xml.etree.ElementTree as ET
 
 import jaconv
 from janome.tokenizer import Tokenizer
+
 
 class CustomText(tk.Text):
     """Textの、イベントを拡張したウィジェット."""
@@ -41,34 +41,38 @@ class CustomText(tk.Text):
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
 
+
 class Mydialog():
     """ダイアログ作成クラス"""
-    def __init__(self, message, button1, button2,title,text):
-        """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、title:タイトル、text:選択状態にするかどうか"""
+    def __init__(self, message, button1, button2, title, text):
+        """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、
+        title:タイトル、text:選択状態にするかどうか"""
         self.sub_name_win = tk.Toplevel(message)
-        self.txt_name = ttk.Entry(self.sub_name_win,width=40)
-        self.txt_name.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        self.txt_name = ttk.Entry(self.sub_name_win, width=40)
+        self.txt_name.grid(row=0, column=0, columnspan=2,
+                           padx=5, pady=5, sticky=tk.W+tk.E, ipady=3
+                           )
         button = ttk.Button(
-            self.sub_name_win,
-            text = button1,
-            width = str(button1),
-            padding = (10, 5),
-            command = self.sub_name_OK
-        )
+                            self.sub_name_win,
+                            text=button1,
+                            width=str(button1),
+                            padding=(10, 5),
+                            command=self.sub_name_OK
+                            )
         button.grid(row=1, column=0)
-        if button2 == True:
+        if button2:
             button = ttk.Button(
-                self.sub_name_win,
-                text = u'キャンセル',
-                width = str(u'キャンセル'),
-                padding = (10, 5),
-                command = self.sub_name_win.destroy
-                )
+                                self.sub_name_win,
+                                text=u'キャンセル',
+                                width=str(u'キャンセル'),
+                                padding=(10, 5),
+                                command=self.sub_name_win.destroy
+                                )
 
             button.grid(row=1, column=1)
             self.txt_name.focus()
-            if not text == False:
-                self.txt_name.insert(tk.END,text)
+            if text is not False:
+                self.txt_name.insert(tk.END, text)
                 self.txt_name.select_range(0, 'end')
 
         self.sub_name_win.title(title)
@@ -76,7 +80,7 @@ class Mydialog():
 
     def sub_name_OK(self, event=None):
         """ダイアログボタンクリック時の処理"""
-        self.txt=self.txt_name.get()
+        self.txt = self.txt_name.get()
         self.sub_name_win.destroy()
         return self.txt
 
@@ -101,19 +105,19 @@ class LineFrame(ttk.Frame):
         # 現在開いているファイル
         self.file_path = ""
         # 検索文字列
-        self.last_text=""
+        self.last_text = ""
         # 現在入力中の初期テキスト
-        self.text_text=""
+        self.text_text = ""
         # 文字の大きさ
-        self.int_var=16
+        self.int_var = 16
         # フォントをOSごとに変える
         pf = platform.system()
         if pf == 'Windows':
-            self.font="メイリオ"
-        elif pf == 'Darwin':# MacOS
-            self.font="Osaka-等幅"
+            self.font = "メイリオ"
+        elif pf == 'Darwin':  # MacOS
+            self.font = "Osaka-等幅"
         elif pf == 'Linux':
-            self.font="IPAゴシック"
+            self.font = "IPAゴシック"
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
             shutil.rmtree('./data')
@@ -150,10 +154,16 @@ class LineFrame(ttk.Frame):
         self.menu_bar.add_cascade(label=u'編集', menu=Edit_menu)
         # 処理メニュー
         Processing_menu.add_command(label=u'ルビ', command=self.ruby)
-        Processing_menu.add_command(label=u'文字数のカウント', command=self.moji_count)
-        Processing_menu.add_command(label=u'フォントサイズの変更', command=self.font_dialog)
+        Processing_menu.add_command(label=u'文字数のカウント',
+                                    command=self.moji_count
+                                    )
+        Processing_menu.add_command(label=u'フォントサイズの変更',
+                                    command=self.font_dialog
+                                    )
         Processing_menu.add_separator()
-        Processing_menu.add_command(label=u'「小説家になろう」のページを開く', command=self.open_url)
+        Processing_menu.add_command(label=u'「小説家になろう」のページを開く',
+                                    command=self.open_url
+                                    )
         self.menu_bar.add_cascade(label=u'処理', menu=Processing_menu)
         # リストメニュー
         List_menu.add_command(label=u'項目を増やす', command=self.message_window)
@@ -165,19 +175,23 @@ class LineFrame(ttk.Frame):
         Help_menu.add_command(label=u'バージョン情報', command=self.open_version)
         self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
-        self.tree = ttk.Treeview(self,show="tree")
+        self.tree = ttk.Treeview(self, show="tree")
         self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
         self.Frame()
         self.TreeGetLoop()
 
     def Frame(self):
         """フレーム内の表示"""
-        #f1フレームにテキストエディタを表示
+        # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
-        self.text = CustomText(self.f1,font=(self.font,self.int_var),undo=True)
+        self.text = CustomText(self.f1, font=(self.font,
+                               self.int_var), undo=True
+                               )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-            self.f1, orient=tk.VERTICAL, command=self.text.yview)
+                                 self.f1, orient=tk.VERTICAL,
+                                 command=self.text.yview
+                                 )
         # 入力欄にスクロールを紐付け
         self.text.configure(yscrollcommand=self.ysb.set)
         # 左から行番号、入力欄、スクロールウィジェット
@@ -190,8 +204,6 @@ class LineFrame(ttk.Frame):
         # テキスト入力欄のみ拡大されるように
         self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
-        # ツリービューのリスト表示
-        #self.TreeGetLoop()
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
         # テキストにフォーカスを当てる
@@ -205,23 +217,34 @@ class LineFrame(ttk.Frame):
         # value=0のラジオボタンにチェックを入れる
         self.var.set(0)
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
-        self.label1=tk.Label(self.f1,text=u"呼び名")
-        self.txt_yobi_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
-        self.label2=tk.Label(self.f1,text=u"名前")
-        self.txt_name = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
+        self.label1 = tk.Label(self.f1, text=u"呼び名")
+        self.txt_yobi_name = ttk.Entry(self.f1, width=40,
+                                       font=(self.font, self.int_var)
+                                       )
+        self.label2 = tk.Label(self.f1, text=u"名前")
+        self.txt_name = ttk.Entry(self.f1, width=40,
+                                  font=(self.font, self.int_var)
+                                  )
         self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
-        self.rdo1 = tk.Radiobutton(self.f2, value=0, variable=self.var, text=u'男')
-        self.rdo2 = tk.Radiobutton(self.f2, value=1, variable=self.var, text=u'女')
-        self.rdo3 = tk.Radiobutton(self.f2, value=2, variable=self.var, text=u'その他')
+        self.rdo1 = tk.Radiobutton(self.f2, value=0,
+                                   variable=self.var, text=u'男'
+                                   )
+        self.rdo2 = tk.Radiobutton(self.f2, value=1,
+                                   variable=self.var, text=u'女'
+                                   )
+        self.rdo3 = tk.Radiobutton(self.f2, value=2,
+                                   variable=self.var, text=u'その他'
+                                   )
         self.rdo1.grid(row=0, column=1)
         self.rdo2.grid(row=1, column=1)
         self.rdo3.grid(row=2, column=1)
-        self.label3=tk.Label(self.f1,text=u"誕生日")
-        self.txt_birthday = ttk.Entry(self.f1,width=40,font=(self.font,self.int_var))
-        self.label4=tk.Label(self.f1,text=u"略歴")
-        self.text_body = tk.Text(self.f1,width=80,font=(self.font,self.int_var))
-
-
+        self.label3 = tk.Label(self.f1, text=u"誕生日")
+        self.txt_birthday = ttk.Entry(self.f1, width=40,
+                                      font=(self.font, self.int_var))
+        self.label4 = tk.Label(self.f1, text=u"略歴")
+        self.text_body = tk.Text(self.f1, width=80,
+                                 font=(self.font, self.int_var)
+                                 )
         self.label1.grid(row=0, column=1)
         self.txt_yobi_name.grid(row=1, column=1)
         self.f2.grid(row=2, column=1, rowspan=2)
@@ -229,8 +252,9 @@ class LineFrame(ttk.Frame):
         self.txt_name.grid(row=1, column=2)
         self.label3.grid(row=2, column=2)
         self.txt_birthday.grid(row=3, column=2)
-        self.label4.grid(row=4, column=1,columnspa=2)
-        self.text_body.grid(row=5, column=1,columnspa=2, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.label4.grid(row=4, column=1, columnspa=2)
+        self.text_body.grid(row=5, column=1, columnspa=2,
+                            sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(1, weight=1)
         self.f1.columnconfigure(2, weight=1)
         self.f1.rowconfigure(5, weight=1)
@@ -270,9 +294,9 @@ class LineFrame(ttk.Frame):
         # 新規作成する
         self.text.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.text.bind('<Control-Key-h>',self.open_help)# helpページを開く
+        self.text.bind('<Control-Key-h>', self.open_help)  # helpページを開く
         # Versionページを開く
-        self.text.bind('<Control-Shift-Key-V>',self.open_version)
+        self.text.bind('<Control-Shift-Key-V>', self.open_version)
         # 文字数と行数をカウントすShift-る
         self.text.bind('<Control-Shift-Key-C>', self.moji_count)
         # redo処理
@@ -313,15 +337,15 @@ class LineFrame(ttk.Frame):
         self.txt_yobi_name.bind('<Control-Key-n>', self.new_open)
         self.text_body.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.txt_yobi_name.bind('<Control-Key-h>',self.open_help)# helpページを開く
-        self.txt_name.bind('<Control-Key-h>',self.open_help)
-        self.txt_birthday.bind('<Control-Key-h>',self.open_help)
-        self.text_body.bind('<Control-Key-h>',self.open_help)
+        self.txt_yobi_name.bind('<Control-Key-h>', self.open_help)
+        self.txt_name.bind('<Control-Key-h>', self.open_help)
+        self.txt_birthday.bind('<Control-Key-h>', self.open_help)
+        self.text_body.bind('<Control-Key-h>', self.open_help)
         # Versionページを開く
-        self.txt_yobi_name.bind('<Control-Shift-Key-V>',self.open_version)
-        self.txt_name.bind('<Control-Shift-Key-V>',self.open_version)
-        self.txt_birthday.bind('<Control-Shift-Key-V>',self.open_version)
-        self.txt_yobi_name.bind('<Control-Shift-Key-V>',self.open_version)
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.open_version)
+        self.txt_name.bind('<Control-Shift-Key-V>', self.open_version)
+        self.txt_birthday.bind('<Control-Shift-Key-V>', self.open_version)
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.open_version)
         # redo処理
         self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.redo)
         self.txt_name.bind('<Control-Shift-Key-Z>', self.redo)
@@ -347,16 +371,16 @@ class LineFrame(ttk.Frame):
     def create_tags(self):
         """タグの作成"""
         i = 0
-        system_dic= u"喜寛,固有名詞,ヨシヒロ"
+        system_dic = u"喜寛,固有名詞,ヨシヒロ"
         # キャラクターから一覧を作る。
         children = self.tree.get_children('data/character')
         for child in children:
             # ユーザー定義辞書の設定
             reading = ""
-            childname = self.tree.item(child,"text")
+            childname = self.tree.item(child, "text")
             for token in tokenizer.tokenize(childname):
                 reading += token.phonetic
-            system_dic += u"\n{0},固有名詞,{1}".format(childname,reading)
+            system_dic += u"\n{0},固有名詞,{1}".format(childname, reading)
             # タグの作成
             self.text.tag_configure(
                 childname, foreground=color[i]
@@ -366,7 +390,9 @@ class LineFrame(ttk.Frame):
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
-        self.t = Tokenizer("./userdic.csv", udic_type="simpledic", udic_enc="utf8")
+        self.t = Tokenizer("./userdic.csv", udic_type="simpledic",
+                           udic_enc="utf8"
+                           )
 
     def all_highlight(self, event=None):
         """全てハイライト"""
@@ -398,29 +424,32 @@ class LineFrame(ttk.Frame):
         self.text.mark_set('range_start', start)
         # 形態素解析を行う
         for token in self.t.tokenize(src):
-            content=token.surface
+            content = token.surface
             self.text.mark_set(
-                'range_end', 'range_start+{0}c'.format(len(content))
-            )
+                               'range_end', 'range_start+{0}c'
+                               .format(len(content))
+                               )
             # 全角スペースの時は一つずらす
-            if src[0]=="\u3000":
+            if src[0] == "\u3000":
                 self.text.tag_add(content, 'range_start+1c', 'range_end+1c')
             else:
                 self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
 
-    def font_dialog(self,event=None):
+    def font_dialog(self, event=None):
         """フォントサイズダイアログを作成"""
         self.sub_wins = tk.Toplevel(self)
-        self.intSpin = ttk.Spinbox(self.sub_wins,from_=12,to=72)
-        self.intSpin.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        self.intSpin = ttk.Spinbox(self.sub_wins, from_=12, to=72)
+        self.intSpin.grid(row=0, column=0, columnspan=2, padx=5,
+                          pady=5, sticky=tk.W+tk.E, ipady=3
+                          )
         button = ttk.Button(
-            self.sub_wins,
-            text = u'サイズ変更',
-            width = str(u'サイズ変更'),
-            padding = (10, 5),
-            command = self.size_Change
-            )
+                            self.sub_wins,
+                            text=u'サイズ変更',
+                            width=str(u'サイズ変更'),
+                            padding=(10, 5),
+                            command=self.size_Change
+                            )
         button.grid(row=1, column=1)
         self.intSpin.set(self.int_var)
         self.sub_wins.title(u'フォントサイズの変更')
@@ -429,48 +458,55 @@ class LineFrame(ttk.Frame):
         """フォントのサイズを変える"""
         # 比較のため数値列に変更
         self.int_var = int(self.intSpin.get())
-        if self.int_var < 12: # 12より下の値を入力した時、12にする
+        if self.int_var < 12:  # 12より下の値を入力した時、12にする
             self.int_var = 12
-        elif 72 < self.int_var: # 72より上の値を入力した時、72にする
+        elif 72 < self.int_var:  # 72より上の値を入力した時、72にする
             self.int_var = 72
         # 文字列にもどす
-        self.int_var=str(self.int_var)
+        self.int_var = str(self.int_var)
         self.sub_wins.destroy()
         # フォントサイズの変更
         self.text.configure(font=(self.font, self.int_var))
 
-    def open_url(self,event=None):
+    def open_url(self, event=None):
         """小説家になろうのユーザーページを開く"""
         webbrowser.open("https://syosetu.com/user/top/")
 
-    def open_help(self,event=None):
+    def open_help(self, event=None):
         """helpページを開く"""
-        webbrowser.open('file://' + os.path.dirname(os.path.abspath(os.path.dirname(__file__))) + "/README.html")
+        webbrowser.open('file://' + os.path.dirname(
+                        os.path.abspath(os.path.dirname(__file__)))
+                        + "/README.html"
+                        )
 
     def open_version(self, event=None):
         """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
-        label = tk.Label(image=img2, text="a generic Toplevel window",master=window)
+        label = tk.Label(image=img2, text="a generic Toplevel window",
+                         master=window
+                         )
         label.pack()
-        label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",master=window)
-        label2.pack(fill = 'x', padx=20, side = 'left')
-        label3 = tk.Label(text="Version 0.2.0 Beta1",master=window)
-        label3.pack(fill = 'x', padx=20, side = 'right')
+        label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",
+                          master=window
+                          )
+        label2.pack(fill='x', padx=20, side='left')
+        label3 = tk.Label(text="Version 0.2.0 Beta1", master=window)
+        label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
 
-    def isHiragana(self,char):
+    def isHiragana(self, char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
         return (0x3040 < ord(char) < 0x3097)
 
-    def ruby(self,event=None):
+    def ruby(self, event=None):
         """ルビをふる"""
         hon = ""
         # 選択文字列を切り取る
-        set_ruby = self.text.get('sel.first','sel.last')
+        set_ruby = self.text.get('sel.first', 'sel.last')
         # 選択文字列を削除する
-        self.text.delete('sel.first','sel.last')
+        self.text.delete('sel.first', 'sel.last')
         # 形態素解析を行う
         for token in tokenizer.tokenize(set_ruby):
             # ルビの取得
@@ -482,38 +518,44 @@ class LineFrame(ttk.Frame):
                 if self.isHiragana(i):
                     hira += i
             # ルビがないときと、記号の時の処理
-            if ruby.replace(hira, '') == "" or token.part_of_speech.split(",")[0] == u"記号":
+            if ruby.replace(
+                            hira, ''
+                            ) == "" or token.part_of_speech.split(
+                                                                  ","
+                                                                  )[0
+                                                                    ] == u"記号":
                 hon += token.surface
             else:
                 # ルビ振りを行う
-                hon += "|{0}≪{1}≫{2}".format(token.surface.replace(hira, ''),ruby.replace(hira, ''),hira)
+                hon += "|{0}≪{1}≫{2}".format(token.surface.replace(hira, ''),
+                                             ruby.replace(hira, ''), hira)
 
         # テキストを表示する
         self.text.insert('insert', hon)
 
-    def redo(self,event=None):
+    def redo(self, event=None):
         """redo処理を行う"""
         self.text.edit_redo()
 
-    def undo(self,event=None):
+    def undo(self, event=None):
         """redo処理を行う"""
         self.text.edit_undo()
 
-    def copy(self,event=None):
+    def copy(self, event=None):
         """cpoy処理を行う"""
         self.clipboard_clear()
         self.clipboard_append(self.text.selection_get())
 
-    def cut(self,event=None):
+    def cut(self, event=None):
         """cut処理を行う"""
         self.copy()
         self.text.delete("sel.first", "sel.last")
 
-    def paste(self,event=None):
+    def paste(self, event=None):
         """paste処理を行う"""
         self.text.insert('insert', self.clipboard_get())
 
-    def moji_count(self,event=None):
+    def moji_count(self, event=None):
         """文字数と行数を表示する"""
         # 行数の取得
         new_line = int(self.text.index('end-1c').split('.')[0])
@@ -524,7 +566,12 @@ class LineFrame(ttk.Frame):
         for val in moji.splitlines():
             gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
-        messagebox.showinfo(u"文字数と行数、原稿用紙枚数", "文字数 : {0}文字　行数 : {1}行　\n 原稿用紙 : {2}枚".format(len(moji)-new_line,new_line,-(-gen_mai//20)))
+        messagebox.showinfo(
+                            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行\
+             　             \n 原稿用紙 : {2}枚".format(
+                                                       len(moji)-new_line,
+                                                       new_line,
+                                                       -(-gen_mai//20)))
 
     def new_file(self):
         """新規作成をするための準備"""
@@ -541,10 +588,12 @@ class LineFrame(ttk.Frame):
         # テキストにフォーカスを当てる
         self.text.focus()
 
-    def new_open(self,event=None):
+    def new_open(self, event=None):
         """新規作成をする"""
         if not self.text.get('1.0', 'end - 1c') == self.text_text:
-            if messagebox.askokcancel(u"小説エディタ", u"上書き保存しますか？"):
+            if messagebox.askokcancel(u"小説エディタ",
+                                      u"上書き保存しますか？"
+                                      ):
                 self.overwrite_save_file()
                 self.new_file()
 
@@ -553,27 +602,31 @@ class LineFrame(ttk.Frame):
         else:
             self.new_file()
 
-    def overwrite_save_file(self,event=None):
+    def overwrite_save_file(self, event=None):
         """上書き保存処理"""
         # ファイルパスが存在するとき
         if not self.file_path == "":
             # 編集中のファイルを保存する
             self.open_file_save(self.now_path)
             # zipファイルにまとめる
-            shutil.make_archive(self.file_path,"zip","./data")
+            shutil.make_archive(self.file_path, "zip", "./data")
             # 拡張子の変更を行う
-            shutil.move("{0}.zip".format(self.file_path),"{0}.ned".format(self.file_path))
+            shutil.move("{0}.zip".format(self.file_path),
+                        "{0}.ned".format(self.file_path)
+                        )
         # ファイルパスが存在しないとき
         else:
             # 保存ダイアログを開く
             self.save_file()
 
-    def save_file(self,event=None):
+    def save_file(self, event=None):
         """ファイルを保存処理"""
         # ファイル保存ダイアログを表示する
-        fTyp = [(u"小説エディタ",".ned")]
+        fTyp = [(u"小説エディタ", ".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.asksaveasfilename(filetypes = fTyp,initialdir = iDir)
+        filepath = filedialog.asksaveasfilename(filetypes=fTyp,
+                                                initialdir=iDir
+                                                )
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
@@ -581,12 +634,14 @@ class LineFrame(ttk.Frame):
             # 上書き保存処理
             self.overwrite_save_file()
 
-    def open_file(self,event=None):
+    def open_file(self, event=None):
         """ファイルを開く処理"""
         # ファイルを開くダイアログを開く
-        fTyp = [(u"小説エディタ",".ned")]
+        fTyp = [(u"小説エディタ", ".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.askopenfilename(filetypes = fTyp,initialdir = iDir)
+        filepath = filedialog.askopenfilename(filetypes=fTyp,
+                                              initialdir=iDir
+                                              )
         # ファイル名があるとき
         if not filepath == "":
             # 初期化する
@@ -615,20 +670,24 @@ class LineFrame(ttk.Frame):
             path = "./{0}".format(val[0])
             files = os.listdir(path)
             for filename in files:
-                self.tree.insert(val[0], 'end', text=os.path.splitext(filename)[0])
+                self.tree.insert(val[0], 'end',
+                                 text=os.path.splitext(filename)[0]
+                                 )
 
-    def find_dialog(self,event=None):
+    def find_dialog(self, event=None):
         """検索ボックスを作成する"""
         sub_win = tk.Toplevel(self)
-        self.text_var = ttk.Entry(sub_win,width=40)
-        self.text_var.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W+tk.E,ipady=3)
+        self.text_var = ttk.Entry(sub_win, width=40)
+        self.text_var.grid(row=0, column=0, columnspan=2, padx=5,
+                           pady=5, sticky=tk.W+tk.E, ipady=3
+                           )
         button = ttk.Button(
-            sub_win,
-            text = u'検索',
-            width = str(u'検索'),
-            padding = (10, 5),
-            command = self.search
-            )
+                            sub_win,
+                            text=u'検索',
+                            width=str(u'検索'),
+                            padding=(10, 5),
+                            command=self.search
+                            )
         button.grid(row=1, column=1)
         # 最前面に表示し続ける
         sub_win.attributes("-topmost", True)
@@ -701,21 +760,25 @@ class LineFrame(ttk.Frame):
         # 今回の入力を、「前回入力文字」にする
         self.last_text = now_text
 
-    def message_window(self,event=None):
+    def message_window(self, event=None):
         """ツリービューの選択ダイアログを表示する."""
-        curItem = self.tree.focus()              #選択アイテムの認識番号取得
-        parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
+        curItem = self.tree.focus()              # 選択アイテムの認識番号取得
+        parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
-        if str(self.tree.item(curItem)["text"]) and (not str(self.tree.item(parentItem)["text"])):
+        if str(self.tree.item(curItem)["text"]
+               ) and (not str(
+                              self.tree.item(parentItem)["text"]
+                              )
+                      ):
             # サブダイヤログを表示する
-            title=u'{0}に挿入'.format(self.tree.item(curItem)["text"])
-            dialog = Mydialog(self,"挿入",True,title,False)
+            title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
+            dialog = Mydialog(self, "挿入", True, title, False)
             root.wait_window(dialog.sub_name_win)
-            file_name=dialog.txt
+            file_name = dialog.txt
             del dialog
-            if not file_name== "":
+            if not file_name == "":
                 self.open_file_save(self.now_path)
-                curItem = self.tree.focus()              #選択アイテムの認識番号取得
+                curItem = self.tree.focus()              # 選択アイテムの認識番号取得
                 text = self.tree.item(curItem)["text"]
                 path = ""
                 # 選択されているフォルダを見つける
@@ -723,11 +786,11 @@ class LineFrame(ttk.Frame):
                     if text == val[1]:
                         if val[0] == tree_folder[0][0]:
                             self.Frame_character()
-                            self.txt_yobi_name.insert(tk.END,file_name)
+                            self.txt_yobi_name.insert(tk.END, file_name)
                         else:
                             self.Frame()
 
-                        path = "./{0}/{1}.txt".format(val[0],file_name)
+                        path = "./{0}/{1}.txt".format(val[0], file_name)
                         tree = self.tree.insert(val[0], 'end', text=file_name)
                         self.now_path = path
                         break
@@ -740,7 +803,9 @@ class LineFrame(ttk.Frame):
                     # ツリービューを選択状態にする
                     self.tree.see(tree)
                     self.tree.selection_set(tree)
-                    self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,file_name))
+                    self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}"
+                                                .format(text, file_name)
+                                                )
                     self.text.focus()
                     # テキストを読み取り専用を解除する
                     self.text.configure(state='normal')
@@ -752,13 +817,15 @@ class LineFrame(ttk.Frame):
                 file_name = self.tree.item(curItem)["text"]
                 text = self.tree.item(parentItem)["text"]
                 # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
-                if messagebox.askokcancel(u"項目削除", "{0}を削除しますか？".format(file_name)):
+                if messagebox.askokcancel(u"項目削除",
+                                          "{0}を削除しますか？".format(file_name)
+                                          ):
                     # パスを取得する
                     for val in tree_folder:
                         if text == val[1]:
-                            path = "./{0}/{1}.txt".format(val[0],file_name)
+                            path = "./{0}/{1}.txt".format(val[0], file_name)
                             self.tree.delete(curItem)
-                            self.now_path=""
+                            self.now_path = ""
                             break
                     # パスが存在したとき
                     if not path == "":
@@ -767,28 +834,34 @@ class LineFrame(ttk.Frame):
                         self.text.focus()
 
     def save_charactor_file(self):
-        return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\n\t<body>{4}</body>\n</data>'.format(self.txt_yobi_name.get(),self.txt_name.get(),self.var.get(),self.txt_birthday.get(),self.text_body.get('1.0', 'end -1c'))
-        #body='<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\n</data>'.format(self.txt_yobi_name.get())
+        return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\
+        \n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\
+        \n\t<body>{4}</body>\n</data>'.format(self.txt_yobi_name.get(),
+                                              self.txt_name.get(),
+                                              self.var.get(),
+                                              self.txt_birthday.get(),
+                                              self.text_body.get('1.0',
+                                                                 'end -1c')
+                                              )
 
-
-    def open_file_save(self,path):
+    def open_file_save(self, path):
         """開いてるファイルを保存する."""
         # 編集ファイルを保存する
         if not path == "":
             f = open(path, 'w', encoding='utf-8')
             if not path.find(tree_folder[0][0]) == -1:
                 f.write(self.save_charactor_file())
-                self.charactor_file=""
+                self.charactor_file = ""
             else:
-                f.write(self.text.get("1.0",tk.END+'-1c'))
+                f.write(self.text.get("1.0", tk.END+'-1c'))
 
             f.close()
             self.now_path = path
 
     def OnDoubleClick(self, event=None):
         """ツリービューをダブルクリックしたとき."""
-        curItem = self.tree.focus()              #選択アイテムの認識番号取得
-        parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
+        curItem = self.tree.focus()              # 選択アイテムの認識番号取得
+        parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
         # 開いているファイルを保存
         self.open_file_save(self.now_path)
@@ -800,7 +873,7 @@ class LineFrame(ttk.Frame):
         path = ""
         for val in tree_folder:
             if text == val[1]:
-                path = "./{0}/{1}.txt".format(val[0],sub_text)
+                path = "./{0}/{1}.txt".format(val[0], sub_text)
                 self.now_path = path
                 if val[0] == tree_folder[0][0]:
                     self.Frame_character()
@@ -809,52 +882,53 @@ class LineFrame(ttk.Frame):
                     # テキストを読み取り専用を解除する
                     self.text.configure(state='normal')
                     self.text.focus()
-                self.path_read_text(text,sub_text)
+                self.path_read_text(text, sub_text)
                 self.now_path = ""
                 return
 
         self.now_path = ""
         self.winfo_toplevel().title(u"小説エディタ")
 
-
-    def path_read_text(self,text,sub_text):
+    def path_read_text(self, text, sub_text):
         # パスが存在すれば読み込んで表示する
         if not self.now_path == "":
             if not self.now_path.find(tree_folder[0][0]) == -1:
                 tree = ET.parse(self.now_path)
                 elem = tree.getroot()
-                self.txt_yobi_name.insert(tk.END,elem.findtext("call"))
-                self.txt_name.insert(tk.END,elem.findtext("name"))
+                self.txt_yobi_name.insert(tk.END, elem.findtext("call"))
+                self.txt_name.insert(tk.END, elem.findtext("name"))
                 self.var.set(elem.findtext("sex"))
-                self.txt_birthday.insert(tk.END,elem.findtext("birthday"))
-                self.text_body.insert(tk.END,elem.findtext("body"))
+                self.txt_birthday.insert(tk.END, elem.findtext("birthday"))
+                self.text_body.insert(tk.END, elem.findtext("body"))
             else:
                 self.text.delete('1.0', tk.END)
                 f = open(self.now_path, 'r', encoding='utf-8')
-                self.text_text=f.read()
-                self.text.insert(tk.END,self.text_text)
+                self.text_text = f.read()
+                self.text.insert(tk.END, self.text_text)
                 f.close()
-            self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}".format(text,sub_text))
+            self.winfo_toplevel().title(
+                    u"小説エディタ\\{0}\\{1}".format(text, sub_text)
+                )
             # シンタックスハイライトをする
             self.all_highlight()
 
     def On_name_Click(self, event=None):
-        curItem = self.tree.focus()              #選択アイテムの認識番号取得
-        parentItem = self.tree.parent(curItem)   #親アイテムの認識番号取得
+        curItem = self.tree.focus()              # 選択アイテムの認識番号取得
+        parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
         if not text == "":
             sub_text = self.tree.item(curItem)["text"]
-            title= u'{0}の名前を変更'.format(sub_text)
-            dialog2=Mydialog(self,u"変更",True,title,sub_text)
+            title = u'{0}の名前を変更'.format(sub_text)
+            dialog2 = Mydialog(self, u"変更", True, title, sub_text)
             root.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
             self.text.configure(state='normal')
-            co_text=dialog2.txt
+            co_text = dialog2.txt
             del dialog2
             for val in tree_folder:
                 if text == val[1]:
-                    path1 = "./{0}/{1}.txt".format(val[0],sub_text)
-                    path2 = "./{0}/{1}.txt".format(val[0],co_text)
+                    path1 = "./{0}/{1}.txt".format(val[0], sub_text)
+                    path2 = "./{0}/{1}.txt".format(val[0], co_text)
                     self.now_path = path2
                     # テキストの名前を変更する
                     os.rename(path1, path2)
@@ -863,7 +937,7 @@ class LineFrame(ttk.Frame):
                     self.tree.selection_set(Item)
                     return
 
-    def update_line_numbers(self,event=None):
+    def update_line_numbers(self, event=None):
         """行番号の描画."""
         # 現在の行番号を全て消す
         self.line_numbers.delete(tk.ALL)
@@ -873,7 +947,7 @@ class LineFrame(ttk.Frame):
         while True:
             # dlineinfoは、その行がどの位置にあり、どんなサイズか、を返す
             # (3, 705, 197, 13, 18) のように帰る(x,y,width,height,baseline)
-            dline= self.text.dlineinfo(i)
+            dline = self.text.dlineinfo(i)
             # dlineinfoに、存在しない行や、スクロールしないと見えない行を渡すとNoneが帰る
             if dline is None:
                 break
@@ -882,7 +956,9 @@ class LineFrame(ttk.Frame):
 
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             linenum = str(i).split(".")[0]
-            self.line_numbers.create_text(3, y, anchor=tk.NW, text=linenum,font=("",12))
+            self.line_numbers.create_text(3, y, anchor=tk.NW,
+                                          text=linenum, font=("", 12)
+                                          )
             i = self.text.index("%s+1line" % i)
 
     def Change_setting(self, event=None):
@@ -891,7 +967,7 @@ class LineFrame(ttk.Frame):
         # その行のハイライトを行う
         self.line_highlight()
 
-    def tab(self,event=None):
+    def tab(self, event=None):
         """タブ押下時の処理"""
         # 文字を選択していないとき
         sel_range = self.text.tag_ranges('sel')
@@ -912,7 +988,8 @@ class LineFrame(ttk.Frame):
         auto_complete_list.bind('<FocusOut>', self.remove_list)
         # (x,y,width,height,baseline)
         x, y, width, height, _ = self.text.dlineinfo(
-            'insert')
+                                                     'insert'
+                                                     )
         # 現在のカーソル位置のすぐ下に補完リストを貼る
         auto_complete_list.place(x=x+width, y=y+height)
         # 補完リストの候補を作成
@@ -933,20 +1010,22 @@ class LineFrame(ttk.Frame):
         # コード補完リストをTreeviewにある'名前'から得る
         children = self.tree.get_children('data/character')
         for child in children:
-            childname = self.tree.item(child,"text")
+            childname = self.tree.item(child, "text")
             # 前列の文字列と同じものを選び出す
-            if childname.startswith(text) or childname.startswith(text.title()):
+            if childname.startswith(text) or childname.startswith(
+                                                                  text.title()
+                                                                  ):
                 my_func_and_class.add(childname)
 
         result = list(my_func_and_class)
         return result
 
-    def remove_list(self,event=None):
+    def remove_list(self, event=None):
         """コード補完リストの削除処理."""
         self.auto_complete_list.destroy()
         self.text.focus()  # テキストウィジェットにフォーカスを戻す
 
-    def selection(self,event=None):
+    def selection(self, event=None):
         """コード補完リストでの選択後の処理."""
         # リストの選択位置を取得
         select_index = self.auto_complete_list.curselection()
@@ -970,13 +1049,15 @@ class LineFrame(ttk.Frame):
             end = 'insert-{0}c'.format(end_i)
             text = self.text.get(start, end)
             # 1文字ずつ見て、スペース、改行、タブ、空文字、句読点にぶつかったら終わり
-            if text in (' ', '　','\t', '\n', '','、','。'):
+            if text in (' ', '　', '\t', '\n', '', '、', '。'):
                 text = self.text.get(end, 'insert')
 
                 # 最終単語を取得する
                 pri = [token.surface for token in tokenizer.tokenize(text)]
-                hin = [token.part_of_speech.split(',')[0] for token in tokenizer.tokenize(text)]
-                if len(pri)>0:
+                hin = [token.part_of_speech.split(',')[0] for token
+                       in tokenizer.tokenize(text)
+                       ]
+                if len(pri) > 0:
                     if hin[len(pri)-1] == u'名詞':
                         text = pri[len(pri)-1]
                     else:
@@ -990,6 +1071,7 @@ class LineFrame(ttk.Frame):
             start_i += 1
             end_i += 1
 
+
 def on_closing():
     """終了時の処理"""
     if messagebox.askokcancel(u"小説エディタ", u"終了してもいいですか？"):
@@ -999,8 +1081,9 @@ def on_closing():
 
         root.destroy()
 
+
 if __name__ == "__main__":
-        # タイトル横の画像ファイルのbase 64データ
+    # タイトル横の画像ファイルのbase 64データ
     data = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
         GRoaGhwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoq
         KisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0NDU1NTc3Nzg4ODo6Ojs7Ozw8
@@ -1612,11 +1695,14 @@ if __name__ == "__main__":
     label.pack()
     # センターに表示する
     root.update_idletasks()
-    ww=root.winfo_screenwidth()
-    lw=root.winfo_width()
-    wh=root.winfo_screenheight()
-    lh=root.winfo_height()
-    root.geometry(str(lw)+"x"+str(lh)+"+"+str(int(ww/2-lw/2))+"+"+str(int(wh/2-lh/2)) )
+    ww = root.winfo_screenwidth()
+    lw = root.winfo_width()
+    wh = root.winfo_screenheight()
+    lh = root.winfo_height()
+    root.geometry("{0}x{1}+{2}+{3}".format(str(lw), str(lh),
+                                           str(int(ww/2-lw/2)),
+                                           str(int(wh/2-lh/2)))
+                  )
     # 描画するが処理は止めない
     pf = platform.system()
     if pf == 'Windows':
@@ -1628,8 +1714,15 @@ if __name__ == "__main__":
     # メイン画面を削除
     root.destroy()
     # 初期処理
-    tree_folder = [['data/character',u'キャラクター'],['data/occupation',u'職種'],['data/space',u'場所'],['data/event',u'イベント'],['data/nobel',u'小説']]
-    color=['sky blue','yellow green','gold','salmon','orange','red','hot pink','dark orchid','purple','midnight blue','light slate blue','dodger blue','dark turquoise','cadet blue','maroon','tan1','rosy brown','indian red']
+    tree_folder = [['data/character', u'キャラクター'], ['data/occupation', u'職種'],
+                   ['data/space', u'場所'], ['data/event', u'イベント'],
+                   ['data/nobel', u'小説']
+                   ]
+    color = ['sky blue', 'yellow green', 'gold', 'salmon', 'orange',
+             'red', 'hot pink', 'dark orchid', 'purple', 'midnight blue',
+             'light slate blue', 'dodger blue', 'dark turquoise', 'cadet blue',
+             'maroon', 'tan1', 'rosy brown', 'indian red'
+             ]
     # 再度メイン画面を作成
     root = tk.Tk()
     # アイコンを設定
