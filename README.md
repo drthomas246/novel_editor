@@ -115,6 +115,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.1bAM  
+各OSに対応
 - Version 0.2.0bAM1  
 軽微な変更、PEP8に対応
 - Version 0.2.0bAM  
@@ -159,7 +161,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.2.0bAM1
+- Version：0.2.1bAM
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
