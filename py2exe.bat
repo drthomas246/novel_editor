@@ -1,2 +1,2 @@
-pyinstaller ./source/novel_editor.py --onefile --noconsole --icon=./ico/editor.ico
+pyinstaller ./source/novel_editor.py --onefile --noconsole --icon=./ico/editor.ico --hidden-import=pyttsx3.drivers --hidden-import=pyttsx3.drivers.dummy --hidden-import=pyttsx3.drivers.espeak --hidden-import=pyttsx3.drivers.nsss --hidden-import=pyttsx3.drivers.sapi5
 pyinstaller ./source/change.py --onefile --noconsole
