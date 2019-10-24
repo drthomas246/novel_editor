@@ -13,6 +13,7 @@ import tkinter.filedialog as filedialog
 import xml.etree.ElementTree as ET
 
 import jaconv
+import pyttsx3
 from janome.tokenizer import Tokenizer
 
 
@@ -156,6 +157,9 @@ class LineFrame(ttk.Frame):
         Processing_menu.add_command(label=u'ルビ', command=self.ruby)
         Processing_menu.add_command(label=u'文字数のカウント',
                                     command=self.moji_count
+                                    )
+        Processing_menu.add_command(label=u'文章の読み上げ',
+                                    command=self.read_text
                                     )
         Processing_menu.add_command(label=u'フォントサイズの変更',
                                     command=self.font_dialog
@@ -303,6 +307,10 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-Z>', self.redo)
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
+        # 意味を検索
+        self.text.bind('<Control-Shift-Key-D>', self.find_dictionaly)
+        # 文章を読み上げ
+        self.text.bind('<Control-Shift-Key-R>', self.read_text)
 
     def create_event_character(self):
         """キャラクターランのイベント設定"""
@@ -472,6 +480,10 @@ class LineFrame(ttk.Frame):
         """小説家になろうのユーザーページを開く"""
         webbrowser.open("https://syosetu.com/user/top/")
 
+    def find_dictionaly(self,event=None):
+        """意味を検索"""
+        webbrowser.open("https://dictionary.goo.ne.jp/srch/jn/{0}/m1u/".format(self.text.selection_get()))
+
     def open_help(self, event=None):
         """helpページを開く"""
         webbrowser.open('file://' + os.path.dirname(
@@ -491,10 +503,36 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.1 BetaAM", master=window)
+        label3 = tk.Label(text="Version 0.2.2 BetaAM", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
+
+    def read_text(self,event=None):
+        """テキストを読み上げる"""
+        self.text.focus()
+        self.read_texts=True
+        self.engine = pyttsx3.init()
+        self.engine.connect('started-word', self.onWord)
+        self.engine.connect('finished-utterance', self.onEnd)
+        self.engine.setProperty('rate', 150)
+        self.engine.say(self.text.get('1.0', 'end - 1c'))
+        self.engine.startLoop()
+
+    def onWord(self, name, location, length):
+        """文章を読み上げstop"""
+        print(location)
+        if self.read_texts:
+            ret = messagebox.askokcancel(u"読み上げ", u"途中で止めますか？")
+            self.read_texts=False
+        if ret:
+            self.engine.stop()
+            self.engine.endLoop()
+
+    def onEnd(self, name, completed):
+        """文章を読み終えたら"""
+        self.engine.stop()
+        self.engine.endLoop()
 
     def isHiragana(self, char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
@@ -670,7 +708,8 @@ class LineFrame(ttk.Frame):
             path = "./{0}".format(val[0])
             files = os.listdir(path)
             for filename in files:
-                self.tree.insert(val[0], 'end',
+                self.tree.insert(val[0],
+                                 'end',
                                  text=os.path.splitext(filename)[0]
                                  )
 

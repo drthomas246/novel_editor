@@ -26,11 +26,12 @@
 - Ubuntu 19.04でも起動できることを確認しました。
 - それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
 
-- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリを使用しています。
+- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
 $ pip install 'Janome==0.3.9'
+$ pip install 'pyttsx3==2.71'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
@@ -116,6 +117,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.2bAM  
+文章の読み上げ機能を追加
 - Version 0.2.1bAM  
 各OSに対応
 - Version 0.2.0bAM1  
@@ -162,7 +165,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.2.1bAM
+- Version：0.2.2bAM
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -178,6 +181,10 @@ Released under the MIT license
 - janome (形態素解析エンジン)ライブラリ  
 Copyright(C) 2015, Tomoko Uchida. All Rights Reserved.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/mocobeta/janome/master/LICENSE.txt).
+
+- pyttsx3 (音声合成)ライブラリ  
+Copyright (C) 2007 Free Software Foundation, Inc.  
+This software is distributed under the terms of the [GNU GPL3](https://raw.githubusercontent.com/nateshmbhat/pyttsx3/master/LICENSE).
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
