@@ -209,3 +209,8 @@ Copyright(C) 2016-2019 [キユマヤ園](http://sapphire.hacca.jp/font/fontabout
 
 - あいでぃーぽっぷまる  
 Copyright(C) 2017 [Masaru Inoue](http://idfont.jp/infos_mb.htm) All Rights Reserved.
+
+### 使用アイコン
+- accessories text editor  
+Copyright(C) BlueMalboro  
+Creative Commons ([Attribution-Noncommercial-No Derivative Works 3.0 Unported](https://creativecommons.org/licenses/by-nc-nd/3.0/))
