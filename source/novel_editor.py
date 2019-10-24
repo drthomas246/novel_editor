@@ -480,9 +480,14 @@ class LineFrame(ttk.Frame):
         """小説家になろうのユーザーページを開く"""
         webbrowser.open("https://syosetu.com/user/top/")
 
-    def find_dictionaly(self,event=None):
+    def find_dictionaly(self, event=None):
         """意味を検索"""
-        webbrowser.open("https://dictionary.goo.ne.jp/srch/jn/{0}/m1u/".format(self.text.selection_get()))
+        webbrowser.open(
+                        'https://dictionary.goo.ne.jp/'
+                        'srch/jn/{0}/m1u/'.format(
+                                                  self.text.selection_get()
+                                                  )
+                        )
 
     def open_help(self, event=None):
         """helpページを開く"""
@@ -508,10 +513,10 @@ class LineFrame(ttk.Frame):
         window.resizable(width=0, height=0)
         window.mainloop()
 
-    def read_text(self,event=None):
+    def read_text(self, event=None):
         """テキストを読み上げる"""
         self.text.focus()
-        self.read_texts=True
+        self.read_texts = True
         self.engine = pyttsx3.init()
         self.engine.connect('started-word', self.onWord)
         self.engine.connect('finished-utterance', self.onEnd)
@@ -524,7 +529,7 @@ class LineFrame(ttk.Frame):
         print(location)
         if self.read_texts:
             ret = messagebox.askokcancel(u"読み上げ", u"途中で止めますか？")
-            self.read_texts=False
+            self.read_texts = False
         if ret:
             self.engine.stop()
             self.engine.endLoop()
@@ -605,8 +610,8 @@ class LineFrame(ttk.Frame):
             gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
         messagebox.showinfo(
-                            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行\
-                            \n 原稿用紙 : {2}枚".format(
+                            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
+                            u"\n 原稿用紙 : {2}枚".format(
                                                        len(moji)-new_line,
                                                        new_line,
                                                        -(-gen_mai//20)))
@@ -1787,7 +1792,7 @@ if __name__ == "__main__":
         root.state('zoomed')
     else:
         root.attributes("-zoomed", "1")
-    messagebox.showwarning("セーブファイル変更の案内",
-                           "セーブファイルがVer0.2.0bAMから変更になっています。\
-                           \n必ずReadmeを読んで対応をしてからお使いください。")
+    messagebox.showwarning(u"セーブファイル変更の案内",
+                           u"セーブファイルがVer0.2.0bAMから変更になっています。"
+                           u"\n必ずReadmeを読んで対応をしてからお使いください。")
     root.mainloop()
