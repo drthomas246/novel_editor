@@ -26,11 +26,12 @@
 - Ubuntu 19.04でも起動できることを確認しました。
 - それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
 
-- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリを使用しています。
+- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
 $ pip install 'Janome==0.3.9'
+$ pip install 'pyttsx3==2.71'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
@@ -42,7 +43,7 @@ $ pip install 'Janome==0.3.9'
 
 - __ver0.2.0b以降からセーブファイルの保存形式が変更になっています。今までのファイルを開くと最悪セーブファイル自身が破壊されてしまいます。  
 ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Releasesにあるchange.exeでファイルの保存形式を変換してからご使用ください。  
-一度変更するとその後はchange.exeを使用せずに保存できるようになります。__
+一度変更するとその後は、change.exeを使用せずに保存できるようになります。__
 
 ## コマンド一覧
 
@@ -56,6 +57,7 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 | Ctrl+S | 上書き保存 |
 | Ctrl+Shift+C | 文字数、行数カウントダイアログ表示 |
 | Ctrl+Shift+F | フォントサイズの変更 |
+| Ctrl+Shift+R | 文章の読み上げ |
 | Ctrl+R | 選択文字列にルビを振る |
 | Ctrl+U | 小説家になろうのユーザーページを開く |
 | Ctrl+X | 切り取り |
@@ -116,6 +118,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.2b  
+文章の読み上げ機能を追加
 - Version 0.2.1b  
 各OSに対応
 - Version 0.2.0b1  
@@ -161,8 +165,13 @@ $ coverage html
 初版発行
 
 ## Copyright
+<<<<<<< HEAD
 - ファイル名：novel_editor.py、novel_editor.exe
 - Version：0.2.1b
+=======
+- ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
+- Version：0.2.2bAM
+>>>>>>> Maintenance
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -178,6 +187,10 @@ Released under the MIT license
 - janome (形態素解析エンジン)ライブラリ  
 Copyright(C) 2015, Tomoko Uchida. All Rights Reserved.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/mocobeta/janome/master/LICENSE.txt).
+
+- pyttsx3 (音声合成)ライブラリ  
+Copyright (C) 2007 Free Software Foundation, Inc.  
+This software is distributed under the terms of the [GNU GPL3](https://raw.githubusercontent.com/nateshmbhat/pyttsx3/master/LICENSE).
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
