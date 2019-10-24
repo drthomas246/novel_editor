@@ -165,13 +165,8 @@ $ coverage html
 初版発行
 
 ## Copyright
-<<<<<<< HEAD
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.2.1b
-=======
-- ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.2.2bAM
->>>>>>> Maintenance
+- Version：0.2.2b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
