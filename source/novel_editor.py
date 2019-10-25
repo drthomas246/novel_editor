@@ -134,12 +134,14 @@ class LineFrame(ttk.Frame):
         """フレーム内の表示"""
         # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
-        self.text = CustomText(self.f1, font=(self.font,
-                               self.int_var), undo=True
+        self.text = CustomText(self.f1,
+                               font=(self.font, self.int_var),
+                               undo=True
                                )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-                                 self.f1, orient=tk.VERTICAL,
+                                 self.f1,
+                                 orient=tk.VERTICAL,
                                  command=self.text.yview
                                  )
         # 入力欄にスクロールを紐付け
@@ -168,31 +170,44 @@ class LineFrame(ttk.Frame):
         self.var.set(0)
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.label1 = tk.Label(self.f1, text=u"呼び名")
-        self.txt_yobi_name = ttk.Entry(self.f1, width=40,
+        self.txt_yobi_name = ttk.Entry(self.f1,
+                                       width=40,
                                        font=(self.font, self.int_var)
                                        )
         self.label2 = tk.Label(self.f1, text=u"名前")
         self.txt_name = ttk.Entry(self.f1, width=40,
-                                  font=(self.font, self.int_var)
+                                  font=(self.font,
+                                        self.int_var
+                                        )
                                   )
         self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
         self.rdo1 = tk.Radiobutton(self.f2, value=0,
-                                   variable=self.var, text=u'男'
+                                   variable=self.var,
+                                   text=u'男'
                                    )
-        self.rdo2 = tk.Radiobutton(self.f2, value=1,
-                                   variable=self.var, text=u'女'
+        self.rdo2 = tk.Radiobutton(self.f2,
+                                   value=1,
+                                   variable=self.var,
+                                   text=u'女'
                                    )
-        self.rdo3 = tk.Radiobutton(self.f2, value=2,
-                                   variable=self.var, text=u'その他'
+        self.rdo3 = tk.Radiobutton(self.f2,
+                                   value=2,
+                                   variable=self.var,
+                                   text=u'その他'
                                    )
         self.rdo1.grid(row=0, column=1)
         self.rdo2.grid(row=1, column=1)
         self.rdo3.grid(row=2, column=1)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
-        self.txt_birthday = ttk.Entry(self.f1, width=40,
-                                      font=(self.font, self.int_var))
+        self.txt_birthday = ttk.Entry(self.f1,
+                                      width=40,
+                                      font=(self.font,
+                                            self.int_var
+                                            )
+                                      )
         self.label4 = tk.Label(self.f1, text=u"略歴")
-        self.text_body = tk.Text(self.f1, width=80,
+        self.text_body = tk.Text(self.f1,
+                                 width=80,
                                  font=(self.font, self.int_var)
                                  )
         self.label1.grid(row=0, column=1)
@@ -344,7 +359,8 @@ class LineFrame(ttk.Frame):
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
-        self.t = Tokenizer("./userdic.csv", udic_type="simpledic",
+        self.t = Tokenizer("./userdic.csv",
+                           udic_type="simpledic",
                            udic_enc="utf8"
                            )
 
@@ -380,7 +396,8 @@ class LineFrame(ttk.Frame):
         for token in self.t.tokenize(src):
             content = token.surface
             self.text.mark_set(
-                               'range_end', 'range_start+{0}c'
+                               'range_end',
+                               'range_start+{0}c'
                                .format(len(content))
                                )
             # 全角スペースの時は一つずらす
@@ -394,8 +411,13 @@ class LineFrame(ttk.Frame):
         """フォントサイズダイアログを作成"""
         self.sub_wins = tk.Toplevel(self)
         self.intSpin = ttk.Spinbox(self.sub_wins, from_=12, to=72)
-        self.intSpin.grid(row=0, column=0, columnspan=2, padx=5,
-                          pady=5, sticky=tk.W+tk.E, ipady=3
+        self.intSpin.grid(row=0,
+                          column=0,
+                          columnspan=2,
+                          padx=5,
+                          pady=5,
+                          sticky=tk.W+tk.E,
+                          ipady=3
                           )
         button = ttk.Button(
                             self.sub_wins,
@@ -446,7 +468,8 @@ class LineFrame(ttk.Frame):
         """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
-        label = tk.Label(image=img2, text="a generic Toplevel window",
+        label = tk.Label(image=img2,
+                         text="a generic Toplevel window",
                          master=window
                          )
         label.pack()
@@ -508,7 +531,8 @@ class LineFrame(ttk.Frame):
                     hira += i
             # ルビがないときと、記号の時の処理
             if ruby.replace(
-                            hira, ''
+                            hira,
+                            ''
                             ) == "" or token.part_of_speech.split(
                                                                   ","
                                                                   )[0
@@ -517,7 +541,9 @@ class LineFrame(ttk.Frame):
             else:
                 # ルビ振りを行う
                 hon += "|{0}≪{1}≫{2}".format(token.surface.replace(hira, ''),
-                                             ruby.replace(hira, ''), hira)
+                                             ruby.replace(hira, ''),
+                                             hira
+                                             )
 
         # テキストを表示する
         self.text.insert('insert', hon)
@@ -540,9 +566,11 @@ class LineFrame(ttk.Frame):
         messagebox.showinfo(
                             u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
                             u"\n 原稿用紙 : {2}枚".format(
-                                                       len(moji)-new_line,
-                                                       new_line,
-                                                       -(-gen_mai//20)))
+                                                         len(moji)-new_line,
+                                                         new_line,
+                                                         -(-gen_mai//20)
+                                                         )
+                            )
 
     def new_file(self):
         """新規作成をするための準備"""
@@ -650,8 +678,13 @@ class LineFrame(ttk.Frame):
         """検索ボックスを作成する"""
         sub_win = tk.Toplevel(self)
         self.text_var = ttk.Entry(sub_win, width=40)
-        self.text_var.grid(row=0, column=0, columnspan=2, padx=5,
-                           pady=5, sticky=tk.W+tk.E, ipady=3
+        self.text_var.grid(row=0,
+                           column=0,
+                           columnspan=2,
+                           padx=5,
+                           pady=5,
+                           sticky=tk.W+tk.E,
+                           ipady=3
                            )
         button = ttk.Button(
                             sub_win,
@@ -1678,7 +1711,8 @@ if __name__ == "__main__":
     lh = root.winfo_height()
     root.geometry("{0}x{1}+{2}+{3}".format(str(lw), str(lh),
                                            str(int(ww/2-lw/2)),
-                                           str(int(wh/2-lh/2)))
+                                           str(int(wh/2-lh/2))
+                                           )
                   )
     # OS別判断
     if os.name == 'nt':
