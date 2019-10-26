@@ -222,7 +222,7 @@ class LineFrame(ttk.Frame):
         self.var.set(0)
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.label1 = tk.Label(self.f1, text=u"呼び名")
-        self.txt_yobi_name = ttk.Entry(self.f1, width=40,
+        self.txt_yobi_name = ttk.Entry(self.f1, width=30,
                                        font=(self.font, self.int_var)
                                        )
         self.label2 = tk.Label(self.f1, text=u"名前")
@@ -242,25 +242,40 @@ class LineFrame(ttk.Frame):
         self.rdo1.grid(row=0, column=1)
         self.rdo2.grid(row=1, column=1)
         self.rdo3.grid(row=2, column=1)
+        self.f3 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"似顔絵")
+        self.cv = self.foto_canvas = tk.Canvas(
+                                               self.f3,
+                                               bg="black",
+                                               width=150,
+                                               height=200)
+        self.foto_canvas.grid(row=0, column=0)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
         self.txt_birthday = ttk.Entry(self.f1, width=40,
                                       font=(self.font, self.int_var))
+        self.foto_button = ttk.Button(
+                                      self.f1,
+                                      width=5,
+                                      text=u'挿入',
+                                      command=self.btn_click
+                                      )
         self.label4 = tk.Label(self.f1, text=u"略歴")
         self.text_body = tk.Text(self.f1, width=80,
                                  font=(self.font, self.int_var)
                                  )
-        self.label1.grid(row=0, column=1)
-        self.txt_yobi_name.grid(row=1, column=1)
+        self.label1.grid(row=0, column=1, columnspa=2)
+        self.txt_yobi_name.grid(row=1, column=1, columnspa=2)
         self.f2.grid(row=2, column=1, rowspan=2)
-        self.label2.grid(row=0, column=2, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self.txt_name.grid(row=1, column=2)
-        self.label3.grid(row=2, column=2)
-        self.txt_birthday.grid(row=3, column=2)
-        self.label4.grid(row=4, column=1, columnspa=2)
-        self.text_body.grid(row=5, column=1, columnspa=2,
+        self.foto_button.grid(row=3, column=2)
+        self.f3.grid(row=0, column=3, rowspan=4)
+        self.label2.grid(row=0, column=4, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.txt_name.grid(row=1, column=4)
+        self.label3.grid(row=2, column=4)
+        self.txt_birthday.grid(row=3, column=4)
+        self.label4.grid(row=4, column=1, columnspa=4)
+        self.text_body.grid(row=5, column=1, columnspa=4,
                             sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(1, weight=1)
-        self.f1.columnconfigure(2, weight=1)
+        self.f1.columnconfigure(4, weight=1)
         self.f1.rowconfigure(5, weight=1)
 
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
@@ -375,6 +390,30 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Button-3>", self.message_window)
         # 名前の変更
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
+
+    def btn_click(self, event=None):
+        """似顔絵ボタンを押したとき"""
+        fTyp = [(u"png画像", ".png")]
+        iDir = os.path.abspath(os.path.dirname(__file__))
+        self.filepath = filedialog.askopenfilename(filetypes=fTyp,
+                                                   initialdir=iDir
+                                                   )
+        if not self.filepath == "":
+            path, ___ = os.path.splitext(os.path.basename(self.now_path))
+            ____, ext = os.path.splitext(os.path.basename(self.filepath))
+            title = shutil.copyfile(self.filepath,
+                                    "./{0}/{1}{2}".format(
+                                                          tree_folder[0][0],
+                                                          path,
+                                                          ext))
+            self.print_png(title)
+
+    def print_png(self, title):
+        """似顔絵ボタンを押されたとき"""
+        if not title == "":
+            self.pngfile = tk.PhotoImage(file=title)
+            self.cv.create_image(1, 1, image=self.pngfile, anchor=tk.NW)
+            self.f3.mainloop()
 
     def create_tags(self):
         """タグの作成"""
@@ -508,7 +547,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.2 BetaAM", master=window)
+        label3 = tk.Label(text="Version 0.2.3 BetaAM", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -713,10 +752,11 @@ class LineFrame(ttk.Frame):
             path = "./{0}".format(val[0])
             files = os.listdir(path)
             for filename in files:
-                self.tree.insert(val[0],
-                                 'end',
-                                 text=os.path.splitext(filename)[0]
-                                 )
+                if os.path.splitext(filename)[1] == ".txt":
+                    self.tree.insert(val[0],
+                                     'end',
+                                     text=os.path.splitext(filename)[0]
+                                     )
 
     def find_dialog(self, event=None):
         """検索ボックスを作成する"""
@@ -947,6 +987,9 @@ class LineFrame(ttk.Frame):
                 self.var.set(elem.findtext("sex"))
                 self.txt_birthday.insert(tk.END, elem.findtext("birthday"))
                 self.text_body.insert(tk.END, elem.findtext("body"))
+                title = "{0}/{1}.png".format(tree_folder[0][0],
+                                             elem.findtext("call"))
+                self.print_png(title)
             else:
                 self.text.delete('1.0', tk.END)
                 f = open(self.now_path, 'r', encoding='utf-8')
