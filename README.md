@@ -118,6 +118,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.3b1  
+言葉の意味検索を向上
 - Version 0.2.3b  
 似顔絵の機能を追加する
 - Version 0.2.2b  
@@ -168,7 +170,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.2.3b
+- Version：0.2.3b1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
