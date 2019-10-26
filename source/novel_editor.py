@@ -6,6 +6,9 @@ import shutil
 import webbrowser
 import platform
 import textwrap
+import json
+import requests
+import bs4
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
@@ -163,6 +166,9 @@ class LineFrame(ttk.Frame):
                                     )
         Processing_menu.add_command(label=u'フォントサイズの変更',
                                     command=self.font_dialog
+                                    )
+        Processing_menu.add_command(label=u'選択文字の意味',
+                                    command=self.find_dictionaly
                                     )
         Processing_menu.add_separator()
         Processing_menu.add_command(label=u'「小説家になろう」のページを開く',
@@ -521,12 +527,33 @@ class LineFrame(ttk.Frame):
 
     def find_dictionaly(self, event=None):
         """意味を検索"""
-        webbrowser.open(
-                        'https://dictionary.goo.ne.jp/'
-                        'srch/jn/{0}/m1u/'.format(
-                                                  self.text.selection_get()
-                                                  )
-                        )
+        # goo検索から
+        get_url_info = requests.get('https://dictionary.goo.ne.jp/'
+                                    'srch/jn/{0}/m1u/'.format(
+                                                              self.text.selection_get()
+                                                              )
+                                    )
+        # BeautifulSoup4をつかって取り出す。
+        bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
+        # scriptの1番目を取り出す
+        text = bs4Obj.script.text
+        # リスト化
+        text = text.split('\r\n')
+        # 一旦"./sample.json"として保存
+        f = open("./sample.json","w")
+        for x in text:
+            f.write(str(x) + "\n")
+        f.close()
+        # ファイルオブジェクトの作成
+        a = open("./sample.json","r")
+        # jsonで扱えるようにする
+        b = json.load(a)
+        a.close()
+        # メッセージの表示
+        messagebox.showwarning(self.text.selection_get(),b["description"])
+        # "./sample.json"の削除
+        os.remove("./sample.json")
+
 
     def open_help(self, event=None):
         """helpページを開く"""
@@ -547,7 +574,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.3 BetaAM", master=window)
+        label3 = tk.Label(text="Version 0.2.3 BetaAM1", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
