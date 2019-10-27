@@ -55,8 +55,13 @@ class Mydialog():
         title:タイトル、text:選択状態にするかどうか"""
         self.sub_name_win = tk.Toplevel(message)
         self.txt_name = ttk.Entry(self.sub_name_win, width=40)
-        self.txt_name.grid(row=0, column=0, columnspan=2,
-                           padx=5, pady=5, sticky=tk.W+tk.E, ipady=3
+        self.txt_name.grid(row=0,
+                           column=0,
+                           columnspan=2,
+                           padx=5,
+                           pady=5,
+                           sticky=tk.W+tk.E,
+                           ipady=3
                            )
         button = ttk.Button(
             self.sub_name_win,
@@ -164,14 +169,15 @@ class LineFrame(ttk.Frame):
         Processing_menu.add_command(label=u'文字数のカウント',
                                     command=self.moji_count
                                     )
+        Processing_menu.add_command(label=u'選択文字の意味',
+                                    command=self.find_dictionaly
+                                    )
         Processing_menu.add_command(label=u'文章の読み上げ',
                                     command=self.read_text
                                     )
+        Processing_menu.add_separator()
         Processing_menu.add_command(label=u'フォントサイズの変更',
                                     command=self.font_dialog
-                                    )
-        Processing_menu.add_command(label=u'選択文字の意味',
-                                    command=self.find_dictionaly
                                     )
         Processing_menu.add_separator()
         Processing_menu.add_command(label=u'「小説家になろう」のページを開く',
@@ -197,8 +203,9 @@ class LineFrame(ttk.Frame):
         """フレーム内の表示"""
         # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
-        self.text = CustomText(self.f1, font=(self.font,
-                                              self.int_var), undo=True
+        self.text = CustomText(self.f1,
+                               font=(self.font, self.int_var),
+                               undo=True
                                )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
@@ -240,23 +247,27 @@ class LineFrame(ttk.Frame):
                                   )
         self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
         self.rdo1 = tk.Radiobutton(self.f2, value=0,
-                                   variable=self.var, text=u'男'
+                                   variable=self.var,
+                                   text=u'男'
                                    )
         self.rdo2 = tk.Radiobutton(self.f2, value=1,
-                                   variable=self.var, text=u'女'
+                                   variable=self.var,
+                                   text=u'女'
                                    )
         self.rdo3 = tk.Radiobutton(self.f2, value=2,
-                                   variable=self.var, text=u'その他'
+                                   variable=self.var,
+                                   text=u'その他'
                                    )
         self.rdo1.grid(row=0, column=1)
         self.rdo2.grid(row=1, column=1)
         self.rdo3.grid(row=2, column=1)
         self.f3 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"似顔絵")
         self.cv = self.foto_canvas = tk.Canvas(
-            self.f3,
-            bg="black",
-            width=150,
-            height=200)
+                                               self.f3,
+                                               bg="black",
+                                               width=150,
+                                               height=200
+                                               )
         self.foto_canvas.grid(row=0, column=0)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
         self.txt_birthday = ttk.Entry(self.f1, width=40,
@@ -446,7 +457,8 @@ class LineFrame(ttk.Frame):
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
-        self.t = Tokenizer("./userdic.csv", udic_type="simpledic",
+        self.t = Tokenizer("./userdic.csv",
+                           udic_type="simpledic",
                            udic_enc="utf8"
                            )
 
@@ -496,8 +508,13 @@ class LineFrame(ttk.Frame):
         """フォントサイズダイアログを作成"""
         self.sub_wins = tk.Toplevel(self)
         self.intSpin = ttk.Spinbox(self.sub_wins, from_=12, to=72)
-        self.intSpin.grid(row=0, column=0, columnspan=2, padx=5,
-                          pady=5, sticky=tk.W+tk.E, ipady=3
+        self.intSpin.grid(row=0,
+                          column=0,
+                          columnspan=2,
+                          padx=5,
+                          pady=5,
+                          sticky=tk.W+tk.E,
+                          ipady=3
                           )
         button = ttk.Button(
             self.sub_wins,
@@ -534,8 +551,8 @@ class LineFrame(ttk.Frame):
         get_url_info = requests.get('https://dictionary.goo.ne.jp/'
                                     'srch/jn/{0}/m1u/'
                                     .format(
-                                        self.text.selection_get()
-                                    )
+                                            self.text.selection_get()
+                                            )
                                     )
         # BeautifulSoup4をつかって取り出す。
         bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
@@ -572,7 +589,8 @@ class LineFrame(ttk.Frame):
         """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
-        label = tk.Label(image=img2, text="a generic Toplevel window",
+        label = tk.Label(image=img2,
+                         text="Version title",
                          master=window
                          )
         label.pack()
@@ -643,7 +661,9 @@ class LineFrame(ttk.Frame):
             else:
                 # ルビ振りを行う
                 hon += "|{0}≪{1}≫{2}".format(token.surface.replace(hira, ''),
-                                             ruby.replace(hira, ''), hira)
+                                             ruby.replace(hira, ''),
+                                             hira
+                                             )
 
         # テキストを表示する
         self.text.insert('insert', hon)
@@ -795,8 +815,13 @@ class LineFrame(ttk.Frame):
         """検索ボックスを作成する"""
         sub_win = tk.Toplevel(self)
         self.text_var = ttk.Entry(sub_win, width=40)
-        self.text_var.grid(row=0, column=0, columnspan=2, padx=5,
-                           pady=5, sticky=tk.W+tk.E, ipady=3
+        self.text_var.grid(row=0,
+                           column=0,
+                           columnspan=2,
+                           padx=5,
+                           pady=5,
+                           sticky=tk.W+tk.E,
+                           ipady=3
                            )
         button = ttk.Button(
             sub_win,
@@ -884,9 +909,9 @@ class LineFrame(ttk.Frame):
         # 親アイテムをクリックしたとき
         if str(self.tree.item(curItem)["text"]
                ) and (not str(
-                   self.tree.item(parentItem)["text"]
-               )
-        ):
+                              self.tree.item(parentItem)["text"]
+                              )
+                      ):
             # サブダイヤログを表示する
             title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self, "挿入", True, title, False)
@@ -958,7 +983,8 @@ class LineFrame(ttk.Frame):
                                               self.var.get(),
                                               self.txt_birthday.get(),
                                               self.text_body.get('1.0',
-                                                                 'end -1c')
+                                                                 'end -1c'
+                                                                 )
                                               )
 
     def open_file_save(self, path):
@@ -1081,8 +1107,11 @@ class LineFrame(ttk.Frame):
 
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             linenum = str(i).split(".")[0]
-            self.line_numbers.create_text(3, y, anchor=tk.NW,
-                                          text=linenum, font=("", 12)
+            self.line_numbers.create_text(3,
+                                          y,
+                                          anchor=tk.NW,
+                                          text=linenum,
+                                          font=("", 12)
                                           )
             i = self.text.index("%s+1line" % i)
 
@@ -1824,9 +1853,11 @@ if __name__ == "__main__":
     lw = root.winfo_width()
     wh = root.winfo_screenheight()
     lh = root.winfo_height()
-    root.geometry("{0}x{1}+{2}+{3}".format(str(lw), str(lh),
+    root.geometry("{0}x{1}+{2}+{3}".format(str(lw),
+                                           str(lh),
                                            str(int(ww/2-lw/2)),
-                                           str(int(wh/2-lh/2)))
+                                           str(int(wh/2-lh/2))
+                                           )
                   )
     # windowsのみタイトルバーを削除
     # OS別判断
@@ -1841,14 +1872,30 @@ if __name__ == "__main__":
     # メイン画面を削除
     root.destroy()
     # 初期処理
-    tree_folder = [['data/character', u'キャラクター'], ['data/occupation', u'職種'],
-                   ['data/space', u'場所'], ['data/event', u'イベント'],
+    tree_folder = [['data/character', u'キャラクター'],
+                   ['data/occupation', u'職種'],
+                   ['data/space', u'場所'],
+                   ['data/event', u'イベント'],
                    ['data/nobel', u'小説']
                    ]
-    color = ['sky blue', 'yellow green', 'gold', 'salmon', 'orange',
-             'red', 'hot pink', 'dark orchid', 'purple', 'midnight blue',
-             'light slate blue', 'dodger blue', 'dark turquoise', 'cadet blue',
-             'maroon', 'tan1', 'rosy brown', 'indian red'
+    color = ['sky blue',
+             'yellow green',
+             'gold',
+             'salmon',
+             'orange',
+             'red',
+             'hot pink',
+             'dark orchid',
+             'purple',
+             'midnight blue',
+             'light slate blue',
+             'dodger blue',
+             'dark turquoise',
+             'cadet blue',
+             'maroon',
+             'tan1',
+             'rosy brown',
+             'indian red'
              ]
     # 再度メイン画面を作成
     root = tk.Tk()
