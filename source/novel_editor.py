@@ -537,22 +537,26 @@ class LineFrame(ttk.Frame):
         bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
         # scriptの1番目を取り出す
         text = bs4Obj.script.text
-        # リスト化
-        text = text.split('\r\n')
-        # 一旦"./sample.json"として保存
-        f = open("./sample.json","w")
-        for x in text:
-            f.write(str(x) + "\n")
-        f.close()
-        # ファイルオブジェクトの作成
-        a = open("./sample.json","r")
-        # jsonで扱えるようにする
-        b = json.load(a)
-        a.close()
-        # メッセージの表示
-        messagebox.showwarning(self.text.selection_get(),b["description"])
-        # "./sample.json"の削除
-        os.remove("./sample.json")
+        if not text == "":
+            # リスト化
+            text = text.split('\r\n')
+            # 一旦"./sample.json"として保存
+            f = open("./sample.json","w")
+            for x in text:
+                f.write(str(x) + "\n")
+            f.close()
+            # ファイルオブジェクトの作成
+            a = open("./sample.json","r")
+            # jsonで扱えるようにする
+            b = json.load(a)
+            a.close()
+            # メッセージの表示
+            messagebox.showwarning(self.text.selection_get(),b["description"])
+            # "./sample.json"の削除
+            os.remove("./sample.json")
+        else:
+            messagebox.showwarning(self.text.selection_get(),u"見つけられませんでした。")
+        
 
 
     def open_help(self, event=None):
