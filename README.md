@@ -118,6 +118,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.3bAM2  
+軽微な変更
 - Version 0.2.3bAM1  
 言葉の意味検索を向上
 - Version 0.2.3bAM  

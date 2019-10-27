@@ -578,7 +578,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.3 BetaAM1", master=window)
+        label3 = tk.Label(text="Version 0.2.3 BetaAM2", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
