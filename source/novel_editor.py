@@ -556,8 +556,6 @@ class LineFrame(ttk.Frame):
             os.remove("./sample.json")
         else:
             messagebox.showwarning(self.text.selection_get(),u"見つけられませんでした。")
-        
-
 
     def open_help(self, event=None):
         """helpページを開く"""
