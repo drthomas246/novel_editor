@@ -529,9 +529,10 @@ class LineFrame(ttk.Frame):
         """意味を検索"""
         # goo検索から
         get_url_info = requests.get('https://dictionary.goo.ne.jp/'
-                                    'srch/jn/{0}/m1u/'.format(
-                                                              self.text.selection_get()
-                                                              )
+                                    'srch/jn/{0}/m1u/'
+                                    .format(
+                                            self.text.selection_get()
+                                            )
                                     )
         # BeautifulSoup4をつかって取り出す。
         bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
@@ -541,21 +542,21 @@ class LineFrame(ttk.Frame):
             # リスト化
             text = text.split('\r\n')
             # 一旦"./sample.json"として保存
-            f = open("./sample.json","w")
+            f = open("./sample.json", "w")
             for x in text:
                 f.write(str(x) + "\n")
             f.close()
             # ファイルオブジェクトの作成
-            a = open("./sample.json","r")
+            a = open("./sample.json", "r")
             # jsonで扱えるようにする
             b = json.load(a)
             a.close()
             # メッセージの表示
-            messagebox.showwarning(self.text.selection_get(),b["description"])
+            messagebox.showwarning(self.text.selection_get(), b["description"])
             # "./sample.json"の削除
             os.remove("./sample.json")
         else:
-            messagebox.showwarning(self.text.selection_get(),u"見つけられませんでした。")
+            messagebox.showwarning(self.text.selection_get(), u"見つけられませんでした。")
 
     def open_help(self, event=None):
         """helpページを開く"""
