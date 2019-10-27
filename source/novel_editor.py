@@ -616,7 +616,6 @@ class LineFrame(ttk.Frame):
 
     def onWord(self, name, location, length):
         """文章を読み上げstop"""
-        print(location)
         if self.read_texts:
             ret = messagebox.askokcancel(u"読み上げ", u"途中で止めますか？")
             self.read_texts = False
