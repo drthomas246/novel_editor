@@ -22,6 +22,7 @@ from janome.tokenizer import Tokenizer
 
 class CustomText(tk.Text):
     """Textの、イベントを拡張したウィジェット."""
+
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.tk.eval('''
@@ -48,6 +49,7 @@ class CustomText(tk.Text):
 
 class Mydialog():
     """ダイアログ作成クラス"""
+
     def __init__(self, message, button1, button2, title, text):
         """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、
         title:タイトル、text:選択状態にするかどうか"""
@@ -57,21 +59,21 @@ class Mydialog():
                            padx=5, pady=5, sticky=tk.W+tk.E, ipady=3
                            )
         button = ttk.Button(
-                            self.sub_name_win,
-                            text=button1,
-                            width=str(button1),
-                            padding=(10, 5),
-                            command=self.sub_name_OK
-                            )
+            self.sub_name_win,
+            text=button1,
+            width=str(button1),
+            padding=(10, 5),
+            command=self.sub_name_OK
+        )
         button.grid(row=1, column=0)
         if button2:
             button = ttk.Button(
-                                self.sub_name_win,
-                                text=u'キャンセル',
-                                width=str(u'キャンセル'),
-                                padding=(10, 5),
-                                command=self.sub_name_win.destroy
-                                )
+                self.sub_name_win,
+                text=u'キャンセル',
+                width=str(u'キャンセル'),
+                padding=(10, 5),
+                command=self.sub_name_win.destroy
+            )
 
             button.grid(row=1, column=1)
             self.txt_name.focus()
@@ -91,6 +93,7 @@ class Mydialog():
 
 class LineFrame(ttk.Frame):
     """メインフレーム処理."""
+
     def __init__(self, master=None, **kwargs):
         """初期設定"""
         super().__init__(master, **kwargs)
@@ -195,13 +198,13 @@ class LineFrame(ttk.Frame):
         # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.text = CustomText(self.f1, font=(self.font,
-                               self.int_var), undo=True
+                                              self.int_var), undo=True
                                )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-                                 self.f1, orient=tk.VERTICAL,
-                                 command=self.text.yview
-                                 )
+            self.f1, orient=tk.VERTICAL,
+            command=self.text.yview
+        )
         # 入力欄にスクロールを紐付け
         self.text.configure(yscrollcommand=self.ysb.set)
         # 左から行番号、入力欄、スクロールウィジェット
@@ -250,20 +253,20 @@ class LineFrame(ttk.Frame):
         self.rdo3.grid(row=2, column=1)
         self.f3 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"似顔絵")
         self.cv = self.foto_canvas = tk.Canvas(
-                                               self.f3,
-                                               bg="black",
-                                               width=150,
-                                               height=200)
+            self.f3,
+            bg="black",
+            width=150,
+            height=200)
         self.foto_canvas.grid(row=0, column=0)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
         self.txt_birthday = ttk.Entry(self.f1, width=40,
                                       font=(self.font, self.int_var))
         self.foto_button = ttk.Button(
-                                      self.f1,
-                                      width=5,
-                                      text=u'挿入',
-                                      command=self.btn_click
-                                      )
+            self.f1,
+            width=5,
+            text=u'挿入',
+            command=self.btn_click
+        )
         self.label4 = tk.Label(self.f1, text=u"略歴")
         self.text_body = tk.Text(self.f1, width=80,
                                  font=(self.font, self.int_var)
@@ -409,9 +412,9 @@ class LineFrame(ttk.Frame):
             ____, ext = os.path.splitext(os.path.basename(self.filepath))
             title = shutil.copyfile(self.filepath,
                                     "./{0}/{1}{2}".format(
-                                                          tree_folder[0][0],
-                                                          path,
-                                                          ext))
+                                        tree_folder[0][0],
+                                        path,
+                                        ext))
             self.print_png(title)
 
     def print_png(self, title):
@@ -479,9 +482,9 @@ class LineFrame(ttk.Frame):
         for token in self.t.tokenize(src):
             content = token.surface
             self.text.mark_set(
-                               'range_end', 'range_start+{0}c'
-                               .format(len(content))
-                               )
+                'range_end', 'range_start+{0}c'
+                .format(len(content))
+            )
             # 全角スペースの時は一つずらす
             if src[0] == "\u3000":
                 self.text.tag_add(content, 'range_start+1c', 'range_end+1c')
@@ -497,12 +500,12 @@ class LineFrame(ttk.Frame):
                           pady=5, sticky=tk.W+tk.E, ipady=3
                           )
         button = ttk.Button(
-                            self.sub_wins,
-                            text=u'サイズ変更',
-                            width=str(u'サイズ変更'),
-                            padding=(10, 5),
-                            command=self.size_Change
-                            )
+            self.sub_wins,
+            text=u'サイズ変更',
+            width=str(u'サイズ変更'),
+            padding=(10, 5),
+            command=self.size_Change
+        )
         button.grid(row=1, column=1)
         self.intSpin.set(self.int_var)
         self.sub_wins.title(u'フォントサイズの変更')
@@ -531,8 +534,8 @@ class LineFrame(ttk.Frame):
         get_url_info = requests.get('https://dictionary.goo.ne.jp/'
                                     'srch/jn/{0}/m1u/'
                                     .format(
-                                            self.text.selection_get()
-                                            )
+                                        self.text.selection_get()
+                                    )
                                     )
         # BeautifulSoup4をつかって取り出す。
         bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
@@ -631,11 +634,11 @@ class LineFrame(ttk.Frame):
                     hira += i
             # ルビがないときと、記号の時の処理
             if ruby.replace(
-                            hira, ''
-                            ) == "" or token.part_of_speech.split(
-                                                                  ","
-                                                                  )[0
-                                                                    ] == u"記号":
+                hira, ''
+            ) == "" or token.part_of_speech.split(
+                ","
+            )[0
+              ] == u"記号":
                 hon += token.surface
             else:
                 # ルビ振りを行う
@@ -679,11 +682,11 @@ class LineFrame(ttk.Frame):
             gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
         messagebox.showinfo(
-                            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
-                            u"\n 原稿用紙 : {2}枚".format(
-                                                       len(moji)-new_line,
-                                                       new_line,
-                                                       -(-gen_mai//20)))
+            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
+            u"\n 原稿用紙 : {2}枚".format(
+                len(moji)-new_line,
+                new_line,
+                -(-gen_mai//20)))
 
     def new_file(self):
         """新規作成をするための準備"""
@@ -796,12 +799,12 @@ class LineFrame(ttk.Frame):
                            pady=5, sticky=tk.W+tk.E, ipady=3
                            )
         button = ttk.Button(
-                            sub_win,
-                            text=u'検索',
-                            width=str(u'検索'),
-                            padding=(10, 5),
-                            command=self.search
-                            )
+            sub_win,
+            text=u'検索',
+            width=str(u'検索'),
+            padding=(10, 5),
+            command=self.search
+        )
         button.grid(row=1, column=1)
         # 最前面に表示し続ける
         sub_win.attributes("-topmost", True)
@@ -881,9 +884,9 @@ class LineFrame(ttk.Frame):
         # 親アイテムをクリックしたとき
         if str(self.tree.item(curItem)["text"]
                ) and (not str(
-                              self.tree.item(parentItem)["text"]
-                              )
-                      ):
+                   self.tree.item(parentItem)["text"]
+               )
+        ):
             # サブダイヤログを表示する
             title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self, "挿入", True, title, False)
@@ -1027,8 +1030,8 @@ class LineFrame(ttk.Frame):
                 self.text.insert(tk.END, self.text_text)
                 f.close()
             self.winfo_toplevel().title(
-                    u"小説エディタ\\{0}\\{1}".format(text, sub_text)
-                )
+                u"小説エディタ\\{0}\\{1}".format(text, sub_text)
+            )
             # シンタックスハイライトをする
             self.all_highlight()
 
@@ -1110,8 +1113,8 @@ class LineFrame(ttk.Frame):
         auto_complete_list.bind('<FocusOut>', self.remove_list)
         # (x,y,width,height,baseline)
         x, y, width, height, _ = self.text.dlineinfo(
-                                                     'insert'
-                                                     )
+            'insert'
+        )
         # 現在のカーソル位置のすぐ下に補完リストを貼る
         auto_complete_list.place(x=x+width, y=y+height)
         # 補完リストの候補を作成
@@ -1135,8 +1138,8 @@ class LineFrame(ttk.Frame):
             childname = self.tree.item(child, "text")
             # 前列の文字列と同じものを選び出す
             if childname.startswith(text) or childname.startswith(
-                                                                  text.title()
-                                                                  ):
+                text.title()
+            ):
                 my_func_and_class.add(childname)
 
         result = list(my_func_and_class)
