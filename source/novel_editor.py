@@ -598,7 +598,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.3 BetaAM2", master=window)
+        label3 = tk.Label(text="Version 0.2.4 BetaAM", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -612,21 +612,68 @@ class LineFrame(ttk.Frame):
         self.engine.connect('finished-utterance', self.onEnd)
         self.engine.setProperty('rate', 150)
         self.engine.say(self.text.get('1.0', 'end - 1c'))
-        self.engine.startLoop()
+        self.i = 0
+        self.textlen = 0
+        self.engine.startLoop(False)
+        self.externalLoop()
+
+    def externalLoop(self):
+        """文章読み上げ繰り返し処理"""
+        self.engine.iterate()
 
     def onWord(self, name, location, length):
         """文章を読み上げstop"""
+        # 今読んでいる場所と選択位置を比較する
+        if location > self.textlen:
+            # すべての選択一度解除する
+            self.text.tag_remove('sel', '1.0', 'end')
+            # 現在読んでいる場所を選択する
+            self.text.tag_add(
+                              'sel',
+                              "{0}.0".format(self.i),
+                              "{0}.0".format(self.i+1)
+                              )
+            # 次の行の長さをtextlenに入力する
+            self.textlen += len(
+                                self.text.get('{0}.0'.format(self.i),
+                                              '{0}.0'.format(self.i+1))
+                                )
+            # カーソルを文章の一番後ろに持ってくる
+            self.text.mark_set('insert', '{0}.0'.format(self.i+1))
+            self.text.see('insert')
+            self.text.focus()
+            # 行を１行増やす
+            self.i += 1
+        # 読み初めての処理
         if self.read_texts:
-            ret = messagebox.askokcancel(u"読み上げ", u"途中で止めますか？")
+            # 読むのを中止するウインドウを作成する
+            self.sub_read_win = tk.Toplevel(self)
+            button = ttk.Button(
+                self.sub_read_win,
+                text=u'中止する',
+                width=str(u'中止する'),
+                padding=(100, 5),
+                command=self.onreadEnd
+            )
+            button.grid(row=1, column=1)
+            # 最前面に表示し続ける
+            self.sub_read_win.attributes("-topmost", True)
+            self.sub_read_win.title(u'読み上げ')
             self.read_texts = False
-        if ret:
-            self.engine.stop()
-            self.engine.endLoop()
+
+    def onreadEnd(self):
+        """中止するボタンを押したときの処理"""
+        self.engine.stop()
+        self.engine.endLoop()
+        self.sub_read_win.destroy()
+        self.text.tag_remove('sel', '1.0', 'end')
 
     def onEnd(self, name, completed):
         """文章を読み終えたら"""
         self.engine.stop()
         self.engine.endLoop()
+        self.sub_read_win.destroy()
+        self.text.tag_remove('sel', '1.0', 'end')
 
     def isHiragana(self, char):
         """引数がひらがなならTrue、さもなければFalseを返す"""
