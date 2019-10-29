@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf8 -*-
 import os
 import zipfile
@@ -6,9 +6,6 @@ import shutil
 import webbrowser
 import platform
 import textwrap
-import json
-import requests
-import bs4
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
@@ -17,6 +14,7 @@ import xml.etree.ElementTree as ET
 
 import jaconv
 import pyttsx3
+import wikipediaapi
 from janome.tokenizer import Tokenizer
 
 
@@ -551,36 +549,18 @@ class LineFrame(ttk.Frame):
 
     def find_dictionaly(self, event=None):
         """意味を検索"""
-        # goo検索から
-        get_url_info = requests.get('https://dictionary.goo.ne.jp/'
-                                    'srch/jn/{0}/m1u/'
-                                    .format(
-                                            self.text.selection_get()
-                                            )
-                                    )
-        # BeautifulSoup4をつかって取り出す。
-        bs4Obj = bs4.BeautifulSoup(get_url_info.text, "html.parser")
-        # scriptの1番目を取り出す
-        text = bs4Obj.script.text
-        if not text == "":
-            # リスト化
-            text = text.split('\r\n')
-            # 一旦"./sample.json"として保存
-            f = open("./sample.json", "w")
-            for x in text:
-                f.write(str(x) + "\n")
-            f.close()
-            # ファイルオブジェクトの作成
-            a = open("./sample.json", "r")
-            # jsonで扱えるようにする
-            b = json.load(a)
-            a.close()
-            # メッセージの表示
-            messagebox.showwarning(self.text.selection_get(), b["description"])
-            # "./sample.json"の削除
-            os.remove("./sample.json")
+        # wikipediaから
+        select_text = self.text.selection_get()
+        page_py = wiki_wiki.page(select_text)
+        # ページがあるかどうか判断
+        if page_py.exists():
+            messagebox.showinfo("「{0}」の意味".format(select_text),
+                                page_py.summary
+                                )
         else:
-            messagebox.showwarning(self.text.selection_get(), u"見つけられませんでした。")
+            messagebox.showwarning("「{0}」の意味".format(select_text),
+                                   u"見つけられませんでした。"
+                                   )
 
     def open_help(self, event=None):
         """helpページを開く"""
@@ -602,7 +582,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.4 BetaAM", master=window)
+        label3 = tk.Label(text="Version 0.2.4 BetaAM.1", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -1921,6 +1901,7 @@ if __name__ == "__main__":
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
+    wiki_wiki = wikipediaapi.Wikipedia('ja')
     # メイン画面を削除
     root.destroy()
     # 初期処理
