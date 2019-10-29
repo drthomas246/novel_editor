@@ -200,7 +200,8 @@ This software is distributed under the terms of the [GNU GPL3](https://raw.githu
 
 - Wikipedia-API (wikipedia検索)ライブラリ  
 Copyright (c) 2017 Martin Majlis  
-[MIT License](https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE)
+Released under the MIT license  
+[https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE](https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE)
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
