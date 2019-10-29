@@ -450,8 +450,10 @@ class LineFrame(ttk.Frame):
             system_dic += u"\n{0},固有名詞,{1}".format(childname, reading)
             # タグの作成
             self.text.tag_configure(
-                childname, foreground=color[i]
-            )
+                                    childname,
+                                    foreground=color[i % len(color)],
+                                    font=(self.font, self.int_var, "bold")
+                                    )
             i += 1
         f = open("./userdic.csv", 'w', encoding='utf-8')
         f.write(system_dic)
@@ -540,6 +542,8 @@ class LineFrame(ttk.Frame):
         self.sub_wins.destroy()
         # フォントサイズの変更
         self.text.configure(font=(self.font, self.int_var))
+        # ハイライトのやり直し
+        self.all_highlight()
 
     def open_url(self, event=None):
         """小説家になろうのユーザーページを開く"""
@@ -658,6 +662,8 @@ class LineFrame(ttk.Frame):
             button.grid(row=1, column=1)
             # 最前面に表示し続ける
             self.sub_read_win.attributes("-topmost", True)
+            # サイズ変更禁止
+            self.sub_read_win.resizable(width=0, height=0)
             self.sub_read_win.title(u'読み上げ')
             self.read_texts = False
 
@@ -1941,7 +1947,9 @@ if __name__ == "__main__":
              'maroon',
              'tan1',
              'rosy brown',
-             'indian red'
+             'indian red',
+             'orange red',
+             'violet red'
              ]
     # 再度メイン画面を作成
     root = tk.Tk()
