@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 import jaconv
 import pyttsx3
 import wikipediaapi
+from PIL import Image, ImageTk
 from janome.tokenizer import Tokenizer
 
 
@@ -211,8 +212,8 @@ class LineFrame(ttk.Frame):
         self.cv = self.foto_canvas = tk.Canvas(
                                                self.f3,
                                                bg="black",
-                                               width=150,
-                                               height=200
+                                               width=149,
+                                               height=199
                                                )
         self.foto_canvas.grid(row=0, column=0)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
@@ -375,11 +376,23 @@ class LineFrame(ttk.Frame):
                                         ext))
             self.print_png(title)
 
+    def resize_png(self, im):
+        if im.size[0] == im.size[1]:
+            resized_image = im.resize((150, 150))
+        elif im.size[0] > im.size[1]:
+            zoom = int(im.size[1] * 150 / im.size[0])
+            resized_image = im.resize((150, zoom))
+        elif im.size[0] < im.size[1]:
+            zoom = int(im.size[0] * 200 / im.size[1])
+            resized_image = im.resize((zoom, 200))
+        return resized_image
+
     def print_png(self, title):
         """似顔絵ボタンを押されたとき"""
         if not title == "":
-            self.pngfile = tk.PhotoImage(file=title)
-            self.cv.create_image(1, 1, image=self.pngfile, anchor=tk.NW)
+            pngfile = Image.open(title)
+            resize = ImageTk.PhotoImage(self.resize_png(pngfile))
+            self.cv.create_image(1, 1, image=resize, anchor=tk.NW)
             self.f3.mainloop()
 
     def create_tags(self):
@@ -532,7 +545,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.4 Beta.1", master=window)
+        label3 = tk.Label(text="Version 0.2.4 Beta.2", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
