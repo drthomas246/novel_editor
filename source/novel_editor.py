@@ -144,53 +144,131 @@ class LineFrame(ttk.Frame):
         Processing_menu = tk.Menu(self.menu_bar, tearoff=0)
         Help_menu = tk.Menu(self.menu_bar, tearoff=0)
         # ファイルメニュー
-        File_menu.add_command(label=u'新規作成', command=self.new_open)
-        File_menu.add_command(label=u'開く', command=self.open_file)
+        File_menu.add_command(label=u'新規作成(N)',
+                              under=5,
+                              accelerator='Ctrl+N',
+                              command=self.new_open
+                              )
+        File_menu.add_command(label=u'開く(O)',
+                              under=3,
+                              accelerator='Ctrl+E',
+                              command=self.open_file
+                              )
         File_menu.add_separator()
-        File_menu.add_command(label=u'保存', command=self.overwrite_save_file)
-        File_menu.add_command(label=u'名前を付けて保存', command=self.save_file)
+        File_menu.add_command(label=u'保存(S)',
+                              under=3,
+                              accelerator='Ctrl+S',
+                              command=self.overwrite_save_file
+                              )
+        File_menu.add_command(label=u'名前を付けて保存(W)',
+                              under=9,
+                              accelerator='Ctrl+W',
+                              command=self.save_file
+                              )
         File_menu.add_separator()
-        File_menu.add_command(label=u'閉じる', command=on_closing)
-        self.menu_bar.add_cascade(label=u'ファイル', menu=File_menu)
+        File_menu.add_command(label=u'閉じる(C)',
+                              under=4,
+                              accelerator='Ctrl+C',
+                              command=on_closing
+                              )
+        self.menu_bar.add_cascade(label=u'ファイル(F)', under=5, menu=File_menu)
         # 編集メニュー
-        Edit_menu.add_command(label=u'やり直し', command=self.redo)
-        Edit_menu.add_command(label=u'戻る', command=self.undo)
+        Edit_menu.add_command(label=u'やり直し(R)',
+                              under=5,
+                              accelerator='Ctrl+Z',
+                              command=self.redo
+                              )
+        Edit_menu.add_command(label=u'戻る(U)',
+                              under=3,
+                              accelerator='Ctrl+Shift+Z',
+                              command=self.undo
+                              )
         Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'切り取り', command=self.cut)
-        Edit_menu.add_command(label=u'コピー', command=self.copy)
-        Edit_menu.add_command(label=u'貼り付け', command=self.paste)
+        Edit_menu.add_command(label=u'切り取り(X)',
+                              under=5,
+                              accelerator='Ctrl+X',
+                              command=self.cut
+                              )
+        Edit_menu.add_command(label=u'コピー(C)',
+                              under=4,
+                              accelerator='Ctrl+C',
+                              command=self.copy
+                              )
+        Edit_menu.add_command(label=u'貼り付け(V)',
+                              under=5,
+                              accelerator='Ctrl+V',
+                              command=self.paste
+                              )
         Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'検索', command=self.find_dialog)
-        self.menu_bar.add_cascade(label=u'編集', menu=Edit_menu)
+        Edit_menu.add_command(label=u'検索(F)',
+                              under=3,
+                              accelerator='Ctrl+F',
+                              command=self.find_dialog
+                              )
+        self.menu_bar.add_cascade(label=u'編集(E)', under=3, menu=Edit_menu)
         # 処理メニュー
-        Processing_menu.add_command(label=u'ルビ', command=self.ruby)
-        Processing_menu.add_command(label=u'文字数のカウント',
+        Processing_menu.add_command(label=u'ルビ(R)',
+                                    under=3,
+                                    accelerator='Ctrl+R',
+                                    command=self.ruby
+                                    )
+        Processing_menu.add_command(label=u'文字数のカウント(C)',
+                                    under=9,
+                                    accelerator='Ctrl+Shift+C',
                                     command=self.moji_count
                                     )
-        Processing_menu.add_command(label=u'選択文字の意味',
+        Processing_menu.add_command(label=u'選択文字の意味(M)',
+                                    under=8,
+                                    accelerator='Ctrl+Shift+F',
                                     command=self.find_dictionaly
                                     )
-        Processing_menu.add_command(label=u'文章の読み上げ',
+        Processing_menu.add_command(label=u'文章の読み上げ(B)',
+                                    under=8,
+                                    accelerator='Ctrl+Shift+R',
                                     command=self.read_text
                                     )
         Processing_menu.add_separator()
-        Processing_menu.add_command(label=u'フォントサイズの変更',
+        Processing_menu.add_command(label=u'フォントサイズの変更(F)',
+                                    under=11,
+                                    accelerator='Ctrl+Shift+F',
                                     command=self.font_dialog
                                     )
         Processing_menu.add_separator()
         Processing_menu.add_command(label=u'「小説家になろう」のページを開く',
                                     command=self.open_url
                                     )
-        self.menu_bar.add_cascade(label=u'処理', menu=Processing_menu)
+        self.menu_bar.add_cascade(label=u'処理(P)',
+                                  under=3,
+                                  menu=Processing_menu
+                                  )
         # リストメニュー
-        List_menu.add_command(label=u'項目を増やす', command=self.message_window)
-        List_menu.add_command(label=u'項目を削除', command=self.message_window)
-        List_menu.add_command(label=u'項目の名前を変更', command=self.On_name_Click)
-        self.menu_bar.add_cascade(label=u'リスト', menu=List_menu)
+        List_menu.add_command(label=u'項目を増やす(U)',
+                              under=7,
+                              accelerator='右クリック',
+                              command=self.message_window
+                              )
+        List_menu.add_command(label=u'項目を削除(D)',
+                              under=6,
+                              accelerator='右クリック',
+                              command=self.message_window
+                              )
+        List_menu.add_command(label=u'項目の名前を変更(C)',
+                              under=9,
+                              accelerator='Ctrl+G',
+                              command=self.On_name_Click
+                              )
+        self.menu_bar.add_cascade(label=u'リスト(L)', under=4, menu=List_menu)
         # ヘルプメニュー
-        Help_menu.add_command(label=u'ヘルプ', command=self.open_help)
-        Help_menu.add_command(label=u'バージョン情報', command=self.open_version)
-        self.menu_bar.add_cascade(label=u'ヘルプ', menu=Help_menu)
+        Help_menu.add_command(label=u'ヘルプ(H)',
+                              under=4,
+                              accelerator='Ctrl+H',
+                              command=self.open_help
+                              )
+        Help_menu.add_command(label=u'バージョン情報(V)',
+                              under=8,
+                              accelerator='Ctrl+Shift+V',
+                              command=self.open_version)
+        self.menu_bar.add_cascade(label=u'ヘルプ(H)', under=4, menu=Help_menu)
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self, show="tree")
         self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
