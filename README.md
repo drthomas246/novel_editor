@@ -26,13 +26,14 @@
 - Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げはできません。)
 - それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
 
-- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリを使用しています。
+- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
 $ pip install 'Janome==0.3.9'
 $ pip install 'pyttsx3==2.71'
 $ pip install 'wikipedia-api==0.5.3'
+$ pip install 'Pillow==6.2.1'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
@@ -119,6 +120,8 @@ $ coverage html
 ```
 
 ## 改変履歴
+- Version 0.2.4b2  
+似顔絵の画像処理を変更
 - Version 0.2.4b1  
 言葉の意味検索をgooからwikipediaへ変更
 - Version 0.2.4b  
@@ -177,7 +180,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py、novel_editor.exe
-- Version：0.2.4b1
+- Version：0.2.4b2
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -202,6 +205,11 @@ This software is distributed under the terms of the [GNU GPL3](https://raw.githu
 Copyright (c) 2017 Martin Majlis  
 Released under the MIT license  
 [https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE](https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE)
+
+- Pillow(画像処理)ライブラリ  
+Copyright © 2010-2019 by Alex Clark and contributors  
+Released under the PIL licens
+[https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
