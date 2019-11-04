@@ -11,6 +11,7 @@ import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 import xml.etree.ElementTree as ET
+from urllib import request, parse
 
 import jaconv
 import pyttsx3
@@ -119,6 +120,11 @@ class LineFrame(ttk.Frame):
         self.int_var = 16
         # フォントをOSごとに変える
         pf = platform.system()
+        # yahooの校正支援
+        self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
+        f = open("./appid.txt")
+        self.APPID = f.read()
+        f.close()
         if pf == 'Windows':
             self.font = "メイリオ"
         elif pf == 'Darwin':  # MacOS
@@ -294,9 +300,11 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Shift-Key-D>', self.find_dictionaly)
         # 文章を読み上げ
         self.text.bind('<Control-Shift-Key-R>', self.read_text)
+        # yahoo文字列解析
+        self.text.bind('<Control-Key-y>', self.yahoo)
 
     def create_event_character(self):
-        """キャラクターランのイベント設定"""
+        """キャラクター欄のイベント設定"""
         # 開くダイアロクを表示する
         self.txt_yobi_name.bind('<Control-Key-e>', self.open_file)
         self.txt_name.bind('<Control-Key-e>', self.open_file)
@@ -545,7 +553,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.2.4 Beta.2", master=window)
+        label3 = tk.Label(text="Version 0.3.0 Beta", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -1204,6 +1212,114 @@ class LineFrame(ttk.Frame):
 
             start_i += 1
             end_i += 1
+
+    def yahoocall(self, appid="", sentence=""):
+        """yahooの校正支援を呼び出す"""
+        url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
+        data = {
+            "appid": appid,
+            "sentence": sentence,
+        }
+        # ここでエンコードして文字→バイトにする！
+        data = parse.urlencode(data).encode("utf-8")
+        # 呼び出し
+        with request.urlopen(url, data=data) as res:
+            html = res.read().decode("utf-8")
+            return html
+
+    def yahooResult(self, html):
+        """校正支援を表示する画面を制作"""
+        xml = ET.fromstring(html)
+        # サブウインドウの表示
+        sub_win = tk.Toplevel(self)
+        # ツリービューの表示
+        self.yahoo_tree = ttk.Treeview(sub_win)
+        self.yahoo_tree["columns"] = (1, 2, 3, 4, 5)
+        # 表スタイルの設定(headingsはツリー形式ではない、通常の表形式)
+        self.yahoo_tree["show"] = "headings"
+        self.yahoo_tree.column(1, width=100)
+        self.yahoo_tree.column(2, width=80)
+        self.yahoo_tree.column(3, width=75)
+        self.yahoo_tree.column(4, width=150)
+        self.yahoo_tree.column(5, width=120)
+        self.yahoo_tree.heading(1, text="先頭からの文字数")
+        self.yahoo_tree.heading(2, text="対象文字数")
+        self.yahoo_tree.heading(3, text="対象表記")
+        self.yahoo_tree.heading(4, text="言い換え候補文字列")
+        self.yahoo_tree.heading(5, text="指摘の詳細情報")
+        # 情報を取り出す
+        for child in list(xml):
+            StartPos = (child.findtext(self.KOUSEI+"StartPos"))
+            Length = (child.findtext(self.KOUSEI+"Length"))
+            Surface = (child.findtext(self.KOUSEI+"Surface"))
+            ShitekiWord = (child.findtext(self.KOUSEI+"ShitekiWord"))
+            ShitekiInfo = (child.findtext(self.KOUSEI+"ShitekiInfo"))
+            self.yahoo_tree.insert("",
+                                   "end",
+                                   values=(StartPos,
+                                           Length,
+                                           Surface,
+                                           ShitekiWord,
+                                           ShitekiInfo
+                                           )
+                                   )
+
+        self.yahoo_tree.grid(row=0, column=0, sticky=(tk.N, tk.S, tk.E, tk.W))
+        # スクロールバーを表示する
+        SCRLBAR_Y = ttk.Scrollbar(sub_win,
+                                  orient=tk.VERTICAL,
+                                  command=self.yahoo_tree.yview
+                                  )
+        self.yahoo_tree.configure(yscroll=SCRLBAR_Y.set)
+        SCRLBAR_Y.grid(row=0, column=1, sticky=(tk.N, tk.S))
+        # 最前面に表示し続ける
+        sub_win.attributes("-topmost", True)
+        sub_win.title(u'文章校正')
+
+    def yahoo(self, event=None):
+        """yahoo校正支援"""
+        html = self.yahoocall(self.APPID,
+                              self.text.get('1.0', 'end -1c')
+                              )
+        self.yahooResult(html)
+        self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
+
+    def OnDoubleClick_yahoo(self, event=None):
+        """yahoo校正支援リストをダブルクリックしたとき"""
+        curItem = self.yahoo_tree.focus()
+        value = self.yahoo_tree.item(curItem)
+        i = 0
+        textlen = 0
+        # 出てくる場所を取得
+        val = int(value.get("values")[0])
+        # 出てくる文字数を取得
+        lenge = value.get("values")[1]
+        # 何行目になるか確認する
+        while True:
+            if val > textlen:
+                i += 1
+                textforlen = textlen
+                textlen += len(
+                                    self.text.get('{0}.0'.format(i),
+                                                  '{0}.0'.format(i+1))
+                                    )
+            else:
+                break
+
+        # 選択状態を一旦削除
+        self.text.tag_remove('sel', '1.0', 'end')
+        # 選択状態にする
+        self.text.tag_add(
+                          'sel',
+                          "{0}.{1}".format(i, val-textforlen),
+                          "{0}.{1}".format(i, val-textforlen+lenge)
+                          )
+        # カーソルの移動
+        self.text.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
+        self.text.see('insert')
+        # フォーカスを合わせる
+        self.text.focus()
+        return
 
 
 def on_closing():
