@@ -118,8 +118,13 @@ $ coverage run ./source/novel_editor.py
 ```
 $ coverage html
 ```
+### Yahoo! 校正支援
+- Yahoo! 校正支援を使って校正をしています。  
+そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releasesファイルにあるappid.txtのデータと入れ替えてください。
 
 ## 改変履歴
+- Version 0.3.0bAM  
+文章校正ができるようになる(要:Yahooデベロッパーネットワーク Client ID)
 - Version 0.2.4bAM2  
 似顔絵の画像処理を変更
 - Version 0.2.4bAM1  
@@ -180,7 +185,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.2.4bAM2
+- Version：0.3.0bAM
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -210,6 +215,9 @@ Released under the MIT license
 Copyright © 2010-2019 by Alex Clark and contributors  
 Released under the PIL licens
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
+
+- Yahoo! 校正支援  
+Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
 
 - pyinstaller  
 Copyright 2005–2019, PyInstaller Development Team.  
