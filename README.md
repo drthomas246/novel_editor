@@ -62,6 +62,7 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 | Ctrl+Shift+R | 文章の読み上げ |
 | Ctrl+R | 選択文字列にルビを振る |
 | Ctrl+U | 小説家になろうのユーザーページを開く |
+| Ctrl+Y | 文章校正を行う |
 | Ctrl+X | 切り取り |
 | Ctrl+C | コピー |
 | Ctrl+V | ペースト |
@@ -120,7 +121,7 @@ $ coverage html
 ```
 ### Yahoo! 校正支援
 - Yahoo! 校正支援を使って校正をしています。  
-そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releasesファイルにあるappid.txtのデータと入れ替えてください。
+そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
 - Version 0.3.0b  
