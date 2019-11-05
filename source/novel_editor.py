@@ -128,10 +128,10 @@ class LineFrame(ttk.Frame):
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
         self.APPID = ""
         if os.path.isfile("./appid.txt"):
-            f = open("./appid.txt")
+            f = open("./appid.txt", "r", encoding="utf-8")
             self.APPID = f.read()
             f.close()
-        if self.APPID == "ここを消して、yahoo Client IDを入力してください":
+        if u"ここを消して、" in self.APPID:
             self.APPID = ""
         if pf == 'Windows':
             self.font = "メイリオ"
@@ -1377,7 +1377,7 @@ class LineFrame(ttk.Frame):
             return
         url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
         data = {
-            "appid": appid,
+            "appid": appid.rstrip('\n'),
             "sentence": sentence,
         }
         html = requests.get(url, params=data)
