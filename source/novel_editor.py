@@ -1380,7 +1380,8 @@ class LineFrame(ttk.Frame):
             "appid": appid.rstrip('\n'),
             "sentence": sentence,
         }
-        html = requests.get(url, params=data)
+        html = requests.post(url, data)
+        print(html.text)
         return html.text
 
     def yahooResult(self, html):
