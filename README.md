@@ -189,7 +189,7 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.3.0bAM
+- Version：0.3.0bAM1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
