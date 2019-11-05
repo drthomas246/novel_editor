@@ -126,9 +126,13 @@ class LineFrame(ttk.Frame):
         pf = platform.system()
         # yahooの校正支援
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
-        f = open("./appid.txt")
-        self.APPID = f.read()
-        f.close()
+        self.APPID = ""
+        if os.path.isfile("./appid.txt"):
+            f = open("./appid.txt")
+            self.APPID = f.read()
+            f.close()
+        if self.APPID == "ここを消して、yahoo Client IDを入力してください":
+            self.APPID = ""
         if pf == 'Windows':
             self.font = "メイリオ"
         elif pf == 'Darwin':  # MacOS
@@ -233,6 +237,11 @@ class LineFrame(ttk.Frame):
                                     under=8,
                                     accelerator='Ctrl+Shift+R',
                                     command=self.read_text
+                                    )
+        Processing_menu.add_command(label=u'文章校正(Y)',
+                                    under=5,
+                                    accelerator='Ctrl+Y',
+                                    command=self.yahoo
                                     )
         Processing_menu.add_separator()
         Processing_menu.add_command(label=u'フォントサイズの変更(F)',
@@ -1360,6 +1369,12 @@ class LineFrame(ttk.Frame):
 
     def yahoocall(self, appid="", sentence=""):
         """yahooの校正支援を呼び出す"""
+        if appid == "":
+            messagebox.showerror("Yahoo! Client ID",
+                                 u"Yahoo! Client IDが見つかりません。\n"
+                                 "Readme.pdfを読んで、設定し直してください。"
+                                 )
+            return
         url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
         data = {
             "appid": appid,
