@@ -11,11 +11,11 @@ import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 import xml.etree.ElementTree as ET
-from urllib import request, parse
 
 import jaconv
 import pyttsx3
 import wikipediaapi
+import requests
 from PIL import Image, ImageTk
 from janome.tokenizer import Tokenizer
 
@@ -557,7 +557,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.3.0 Beta", master=window)
+        label3 = tk.Label(text="Version 0.3.0 Beta1", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -1230,12 +1230,8 @@ class LineFrame(ttk.Frame):
             "appid": appid,
             "sentence": sentence,
         }
-        # ここでエンコードして文字→バイトにする！
-        data = parse.urlencode(data).encode("utf-8")
-        # 呼び出し
-        with request.urlopen(url, data=data) as res:
-            html = res.read().decode("utf-8")
-            return html
+        html = requests.get(url, params=data)
+        return html.text
 
     def yahooResult(self, html):
         """校正支援を表示する画面を制作"""
@@ -1291,8 +1287,9 @@ class LineFrame(ttk.Frame):
         html = self.yahoocall(self.APPID,
                               self.text.get('1.0', 'end -1c')
                               )
-        self.yahooResult(html)
-        self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
+        if not self.APPID == "":
+            self.yahooResult(html)
+            self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
 
     def OnDoubleClick_yahoo(self, event=None):
         """yahoo校正支援リストをダブルクリックしたとき"""

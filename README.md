@@ -23,10 +23,10 @@
 ## 使用方法
 
 - 開発環境は、Windows 10 python Version 3.7.4 64bit版を使用しています。
-- Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げはできません。)
+- Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げ、文章校正はできません。)
 - それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
 
-- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリを使用しています。
+- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリ、requests(HTTP)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
@@ -34,6 +34,7 @@ $ pip install 'Janome==0.3.9'
 $ pip install 'pyttsx3==2.71'
 $ pip install 'wikipedia-api==0.5.3'
 $ pip install 'Pillow==6.2.1'
+$ pip install 'requests==2.22.0'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
@@ -124,6 +125,8 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
+- Version 0.3.0b1  
+Yahoo！デベロッパーネットワークへの接続方法を変更
 - Version 0.3.0b  
 文章校正ができるようになる(要:Yahooデベロッパーネットワーク Client ID)
 - Version 0.2.4bAM2  
@@ -186,7 +189,7 @@ $ coverage html
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.3.0b
+- Version：0.3.0b1
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
@@ -216,6 +219,10 @@ Released under the MIT license
 Copyright © 2010-2019 by Alex Clark and contributors  
 Released under the PIL licens
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
+
+- requests(HTTP)ライブラリ  
+Copyright 2019 Kenneth Reitz  
+This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/psf/requests/master/LICENSE)
 
 - Yahoo! 校正支援  
 Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
