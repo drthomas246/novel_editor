@@ -218,8 +218,8 @@ class LineFrame(ttk.Frame):
                               )
         self.menu_bar.add_cascade(label=u'編集(E)', under=3, menu=Edit_menu)
         # 処理メニュー
-        Processing_menu.add_command(label=u'ルビ(R)',
-                                    under=3,
+        Processing_menu.add_command(label=u'ルビをふる(R)',
+                                    under=6,
                                     accelerator='Ctrl+R',
                                     command=self.ruby
                                     )
@@ -1441,8 +1441,9 @@ class LineFrame(ttk.Frame):
         html = self.yahoocall(self.APPID,
                               self.text.get('1.0', 'end -1c')
                               )
-        self.yahooResult(html)
-        self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
+        if not self.APPID == "":
+            self.yahooResult(html)
+            self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
 
     def OnDoubleClick_yahoo(self, event=None):
         """yahoo校正支援リストをダブルクリックしたとき"""
