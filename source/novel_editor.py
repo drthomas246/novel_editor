@@ -1380,7 +1380,7 @@ class LineFrame(ttk.Frame):
             "appid": appid.rstrip('\n'),
             "sentence": sentence,
         }
-        html = requests.post(url, data)   
+        html = requests.post(url, data)
         return html.text
 
     def yahooResult(self, html):
@@ -1447,6 +1447,7 @@ class LineFrame(ttk.Frame):
         value = self.yahoo_tree.item(curItem)
         i = 0
         textlen = 0
+        textforlen = 0
         # 出てくる場所を取得
         val = int(value.get("values")[0])
         # 出てくる文字数を取得
@@ -1462,7 +1463,8 @@ class LineFrame(ttk.Frame):
                                     )
             else:
                 break
-
+        if i == 0:
+            i = 1
         # 選択状態を一旦削除
         self.text.tag_remove('sel', '1.0', 'end')
         # 選択状態にする
