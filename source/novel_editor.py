@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 import os
+import re
 import zipfile
 import shutil
 import webbrowser
@@ -366,12 +367,21 @@ class LineFrame(ttk.Frame):
         self.label3 = tk.Label(self.f1, text=u"誕生日")
         self.txt_birthday = ttk.Entry(self.f1, width=40,
                                       font=(self.font, self.int_var))
+        self.f4 = tk.Frame(self.f1)
         self.foto_button = ttk.Button(
-            self.f1,
-            width=5,
-            text=u'挿入',
-            command=self.btn_click
-        )
+                                      self.f4,
+                                      width=5,
+                                      text=u'挿入',
+                                      command=self.btn_click
+                                      )
+        self.foto_button_calcel = ttk.Button(
+                                      self.f4,
+                                      width=5,
+                                      text=u'消去',
+                                      command=self.clear_btn_click
+                                      )
+        self.foto_button.grid(row=0, column=1)
+        self.foto_button_calcel.grid(row=1, column=1)
         self.label4 = tk.Label(self.f1, text=u"略歴")
         self.text_body = tk.Text(self.f1, width=80,
                                  font=(self.font, self.int_var)
@@ -379,7 +389,7 @@ class LineFrame(ttk.Frame):
         self.label1.grid(row=0, column=1, columnspa=2)
         self.txt_yobi_name.grid(row=1, column=1, columnspa=2)
         self.f2.grid(row=2, column=1, rowspan=2)
-        self.foto_button.grid(row=3, column=2)
+        self.f4.grid(row=3, column=2)
         self.f3.grid(row=0, column=3, rowspan=4)
         self.label2.grid(row=0, column=4, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.txt_name.grid(row=1, column=4)
@@ -524,6 +534,14 @@ class LineFrame(ttk.Frame):
                                         ext))
             self.print_png(title)
 
+    def clear_btn_click(self, event=None):
+        files = "./{0}/{1}.png".format(tree_folder[0][0],
+                                       self.select_list_item
+                                       )
+        if os.path.isfile(files):
+            os.remove(files)
+            self.cv.delete("all")
+
     def resize_png(self, im):
         if im.size[0] == im.size[1]:
             resized_image = im.resize((150, 150))
@@ -581,7 +599,7 @@ class LineFrame(ttk.Frame):
             self.text.tag_remove(tag, '1.0', 'end')
 
         # ハイライトする
-        self._highlight('1.0', src)
+        self._highlight('1.0', src, 0, 'end')
 
     def line_highlight(self, event=None):
         """現在行だけハイライト"""
@@ -594,12 +612,13 @@ class LineFrame(ttk.Frame):
             self.text.tag_remove(tag, start, end)
 
         # ハイライトする
-        self._highlight(start, src)
+        self._highlight(start, src, 1, end)
 
-    def _highlight(self, start, src):
+    def _highlight(self, start, src, line, end):
         """ハイライトの共通処理"""
         self.create_tags()
         self.text.mark_set('range_start', start)
+        space_count = re.match(r"\u3000*", self.text.get(start, end)).end()
         # 形態素解析を行う
         for token in self.t.tokenize(src):
             content = token.surface
@@ -608,10 +627,22 @@ class LineFrame(ttk.Frame):
                 .format(len(content))
             )
             # 全角スペースの時は一つずらす
-            if src[0] == "\u3000":
-                self.text.tag_add(content, 'range_start+1c', 'range_end+1c')
+            if line == 0:
+                if src[0] == "\u3000":
+                    self.text.tag_add(content,
+                                      'range_start+1c',
+                                      'range_end+1c'
+                                      )
+                else:
+                    self.text.tag_add(content, 'range_start', 'range_end')
             else:
-                self.text.tag_add(content, 'range_start', 'range_end')
+                if space_count > 0:
+                    self.text.tag_add(content,
+                                      'range_start+{0}c'.format(space_count),
+                                      'range_end+{0}c'.format(space_count)
+                                      )
+                else:
+                    self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
 
     def font_dialog(self, event=None):
@@ -692,7 +723,7 @@ class LineFrame(ttk.Frame):
                           master=window
                           )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.3.0 BetaAM1", master=window)
+        label3 = tk.Label(text="Version 0.3.0 BetaAM2", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -1154,11 +1185,11 @@ class LineFrame(ttk.Frame):
         self.Frame()
         self.text.configure(state='disabled')
         # 条件によって分離
-        sub_text = self.tree.item(curItem)["text"]
+        self.select_list_item = self.tree.item(curItem)["text"]
         path = ""
         for val in tree_folder:
             if text == val[1]:
-                path = "./{0}/{1}.txt".format(val[0], sub_text)
+                path = "./{0}/{1}.txt".format(val[0], self.select_list_item)
                 self.now_path = path
                 if val[0] == tree_folder[0][0]:
                     self.Frame_character()
@@ -1166,8 +1197,8 @@ class LineFrame(ttk.Frame):
                     # テキストを読み取り専用を解除する
                     self.text.configure(state='normal')
                     self.text.focus()
-                self.path_read_text(text, sub_text)
-                self.now_path = ""
+                self.path_read_text(text, self.select_list_item)
+                self.now_path = path
                 return
 
         self.now_path = ""
