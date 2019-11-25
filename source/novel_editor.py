@@ -599,7 +599,7 @@ class LineFrame(ttk.Frame):
             self.text.tag_remove(tag, '1.0', 'end')
 
         # ハイライトする
-        self._highlight('1.0', src, 0, 'end')
+        self._highlight('1.0', src, 'end')
 
     def line_highlight(self, event=None):
         """現在行だけハイライト"""
@@ -612,9 +612,9 @@ class LineFrame(ttk.Frame):
             self.text.tag_remove(tag, start, end)
 
         # ハイライトする
-        self._highlight(start, src, 1, end)
+        self._highlight(start, src, end)
 
-    def _highlight(self, start, src, line, end):
+    def _highlight(self, start, src, end):
         """ハイライトの共通処理"""
         self.create_tags()
         self.text.mark_set('range_start', start)
@@ -626,23 +626,14 @@ class LineFrame(ttk.Frame):
                 'range_end', 'range_start+{0}c'
                 .format(len(content))
             )
-            # 全角スペースの時は一つずらす
-            if line == 0:
-                if src[0] == "\u3000":
-                    self.text.tag_add(content,
-                                      'range_start+1c',
-                                      'range_end+1c'
-                                      )
-                else:
-                    self.text.tag_add(content, 'range_start', 'range_end')
+            # 全角スペースの時はずらす
+            if space_count > 0:
+                self.text.tag_add(content,
+                                  'range_start+{0}c'.format(space_count),
+                                  'range_end+{0}c'.format(space_count)
+                                  )
             else:
-                if space_count > 0:
-                    self.text.tag_add(content,
-                                      'range_start+{0}c'.format(space_count),
-                                      'range_end+{0}c'.format(space_count)
-                                      )
-                else:
-                    self.text.tag_add(content, 'range_start', 'range_end')
+                self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
 
     def font_dialog(self, event=None):
