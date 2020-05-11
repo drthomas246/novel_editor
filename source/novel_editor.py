@@ -56,14 +56,15 @@ class Mydialog():
         title:タイトル、text:選択状態にするかどうか"""
         self.sub_name_win = tk.Toplevel(message)
         self.txt_name = ttk.Entry(self.sub_name_win, width=40)
-        self.txt_name.grid(row=0,
-                           column=0,
-                           columnspan=2,
-                           padx=5,
-                           pady=5,
-                           sticky=tk.W+tk.E,
-                           ipady=3
-                           )
+        self.txt_name.grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            padx=5,
+            pady=5,
+            sticky=tk.W+tk.E,
+            ipady=3
+        )
         button = ttk.Button(
             self.sub_name_win,
             text=button1,
@@ -156,138 +157,179 @@ class LineFrame(ttk.Frame):
         Processing_menu = tk.Menu(self.menu_bar, tearoff=0)
         Help_menu = tk.Menu(self.menu_bar, tearoff=0)
         # ファイルメニュー
-        File_menu.add_command(label=u'新規作成(N)',
-                              under=5,
-                              accelerator='Ctrl+N',
-                              command=self.new_open
-                              )
-        File_menu.add_command(label=u'開く(O)',
-                              under=3,
-                              accelerator='Ctrl+E',
-                              command=self.open_file
-                              )
+        File_menu.add_command(
+            label=u'新規作成(N)',
+            under=5,
+            accelerator='Ctrl+N',
+            command=self.new_open
+        )
+        File_menu.add_command(
+            label=u'開く(O)',
+            under=3,
+            accelerator='Ctrl+E',
+            command=self.open_file
+        )
         File_menu.add_separator()
-        File_menu.add_command(label=u'保存(S)',
-                              under=3,
-                              accelerator='Ctrl+S',
-                              command=self.overwrite_save_file
-                              )
-        File_menu.add_command(label=u'名前を付けて保存(W)',
-                              under=9,
-                              accelerator='Ctrl+W',
-                              command=self.save_file
-                              )
+        File_menu.add_command(
+            label=u'保存(S)',
+            under=3,
+            accelerator='Ctrl+S',
+            command=self.overwrite_save_file
+        )
+        File_menu.add_command(
+            label=u'名前を付けて保存(W)',
+            under=9,
+            accelerator='Ctrl+W',
+            command=self.save_file
+        )
         File_menu.add_separator()
-        File_menu.add_command(label=u'閉じる(C)',
-                              under=4,
-                              accelerator='Ctrl+C',
-                              command=on_closing
-                              )
-        self.menu_bar.add_cascade(label=u'ファイル(F)', under=5, menu=File_menu)
+        File_menu.add_command(
+            label=u'閉じる(C)',
+            under=4,
+            accelerator='Ctrl+C',
+            command=on_closing
+        )
+        self.menu_bar.add_cascade(
+            label=u'ファイル(F)',
+            under=5,
+            menu=File_menu
+        )
         # 編集メニュー
-        Edit_menu.add_command(label=u'やり直し(R)',
-                              under=5,
-                              accelerator='Ctrl+Z',
-                              command=self.redo
-                              )
-        Edit_menu.add_command(label=u'戻る(U)',
-                              under=3,
-                              accelerator='Ctrl+Shift+Z',
-                              command=self.undo
-                              )
+        Edit_menu.add_command(
+            label=u'やり直し(R)',
+            under=5,
+            accelerator='Ctrl+Z',
+            command=self.redo
+        )
+        Edit_menu.add_command(
+            label=u'戻る(U)',
+            under=3,
+            accelerator='Ctrl+Shift+Z',
+            command=self.undo
+        )
         Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'切り取り(X)',
-                              under=5,
-                              accelerator='Ctrl+X',
-                              command=self.cut
-                              )
-        Edit_menu.add_command(label=u'コピー(C)',
-                              under=4,
-                              accelerator='Ctrl+C',
-                              command=self.copy
-                              )
-        Edit_menu.add_command(label=u'貼り付け(V)',
-                              under=5,
-                              accelerator='Ctrl+V',
-                              command=self.paste
-                              )
+        Edit_menu.add_command(
+            label=u'切り取り(X)',
+            under=5,
+            accelerator='Ctrl+X',
+            command=self.cut
+        )
+        Edit_menu.add_command(
+            label=u'コピー(C)',
+            under=4,
+            accelerator='Ctrl+C',
+            command=self.copy
+        )
+        Edit_menu.add_command(
+            label=u'貼り付け(V)',
+            under=5,
+            accelerator='Ctrl+V',
+            command=self.paste
+        )
         Edit_menu.add_separator()
-        Edit_menu.add_command(label=u'検索(F)',
-                              under=3,
-                              accelerator='Ctrl+F',
-                              command=self.find_dialog
-                              )
-        self.menu_bar.add_cascade(label=u'編集(E)', under=3, menu=Edit_menu)
+        Edit_menu.add_command(
+            label=u'検索(F)',
+            under=3,
+            accelerator='Ctrl+F',
+            command=self.find_dialog
+        )
+        self.menu_bar.add_cascade(
+            label=u'編集(E)',
+            under=3,
+            menu=Edit_menu
+        )
         # 処理メニュー
-        Processing_menu.add_command(label=u'ルビをふる(R)',
-                                    under=6,
-                                    accelerator='Ctrl+R',
-                                    command=self.ruby
-                                    )
-        Processing_menu.add_command(label=u'文字数のカウント(C)',
-                                    under=9,
-                                    accelerator='Ctrl+Shift+C',
-                                    command=self.moji_count
-                                    )
-        Processing_menu.add_command(label=u'選択文字の意味(M)',
-                                    under=8,
-                                    accelerator='Ctrl+Shift+F',
-                                    command=self.find_dictionaly
-                                    )
-        Processing_menu.add_command(label=u'文章の読み上げ(B)',
-                                    under=8,
-                                    accelerator='Ctrl+Shift+R',
-                                    command=self.read_text
-                                    )
-        Processing_menu.add_command(label=u'文章校正(Y)',
-                                    under=5,
-                                    accelerator='Ctrl+Y',
-                                    command=self.yahoo
-                                    )
+        Processing_menu.add_command(
+            label=u'ルビをふる(R)',
+            under=6,
+            accelerator='Ctrl+R',
+            command=self.ruby
+        )
+        Processing_menu.add_command(
+            label=u'文字数のカウント(C)',
+            under=9,
+            accelerator='Ctrl+Shift+C',
+            command=self.moji_count
+        )
+        Processing_menu.add_command(
+            label=u'選択文字の意味(M)',
+            under=8,
+            accelerator='Ctrl+Shift+F',
+            command=self.find_dictionaly
+        )
+        Processing_menu.add_command(
+            label=u'文章の読み上げ(B)',
+            under=8,
+            accelerator='Ctrl+Shift+R',
+            command=self.read_text
+        )
+        Processing_menu.add_command(
+            label=u'文章校正(Y)',
+            under=5,
+            accelerator='Ctrl+Y',
+            command=self.yahoo
+        )
         Processing_menu.add_separator()
-        Processing_menu.add_command(label=u'フォントサイズの変更(F)',
-                                    under=11,
-                                    accelerator='Ctrl+Shift+F',
-                                    command=self.font_dialog
-                                    )
+        Processing_menu.add_command(
+            label=u'フォントサイズの変更(F)',
+            under=11,
+            accelerator='Ctrl+Shift+F',
+            command=self.font_dialog
+        )
         Processing_menu.add_separator()
-        Processing_menu.add_command(label=u'「小説家になろう」のページを開く(U)',
-                                    under=17,
-                                    accelerator='Ctrl+U',
-                                    command=self.open_url
-                                    )
-        self.menu_bar.add_cascade(label=u'処理(P)',
-                                  under=3,
-                                  menu=Processing_menu
-                                  )
+        Processing_menu.add_command(
+            label=u'「小説家になろう」のページを開く(U)',
+            under=17,
+            accelerator='Ctrl+U',
+            command=self.open_url
+        )
+        self.menu_bar.add_cascade(
+            label=u'処理(P)',
+            under=3,
+            menu=Processing_menu
+        )
         # リストメニュー
-        List_menu.add_command(label=u'項目を増やす(U)',
-                              under=7,
-                              accelerator='選択右クリック',
-                              command=self.message_window
-                              )
-        List_menu.add_command(label=u'項目を削除(D)',
-                              under=6,
-                              accelerator='選択右クリック',
-                              command=self.message_window
-                              )
-        List_menu.add_command(label=u'項目の名前を変更(C)',
-                              under=9,
-                              accelerator='Ctrl+G',
-                              command=self.On_name_Click
-                              )
-        self.menu_bar.add_cascade(label=u'リスト(L)', under=4, menu=List_menu)
+        List_menu.add_command(
+            label=u'項目を増やす(U)',
+            under=7,
+            accelerator='選択右クリック',
+            command=self.message_window
+        )
+        List_menu.add_command(
+            label=u'項目を削除(D)',
+            under=6,
+            accelerator='選択右クリック',
+            command=self.message_window
+        )
+        List_menu.add_command(
+            label=u'項目の名前を変更(C)',
+            under=9,
+            accelerator='Ctrl+G',
+            command=self.On_name_Click
+        )
+        self.menu_bar.add_cascade(
+            label=u'リスト(L)',
+            under=4,
+            menu=List_menu
+        )
         # ヘルプメニュー
-        Help_menu.add_command(label=u'ヘルプ(H)',
-                              under=4,
-                              accelerator='Ctrl+H',
-                              command=self.open_help
-                              )
-        Help_menu.add_command(label=u'バージョン情報(V)',
-                              under=8,
-                              accelerator='Ctrl+Shift+V',
-                              command=self.open_version)
-        self.menu_bar.add_cascade(label=u'ヘルプ(H)', under=4, menu=Help_menu)
+        Help_menu.add_command(
+            label=u'ヘルプ(H)',
+            under=4,
+            accelerator='Ctrl+H',
+            command=self.open_help
+        )
+        Help_menu.add_command(
+            label=u'バージョン情報(V)',
+            under=8,
+            accelerator='Ctrl+Shift+V',
+            command=self.open_version
+        )
+        self.menu_bar.add_cascade(
+            label=u'ヘルプ(H)',
+            under=4,
+            menu=Help_menu
+        )
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self, show="tree")
         self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
@@ -298,10 +340,11 @@ class LineFrame(ttk.Frame):
         """フレーム内の表示"""
         # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
-        self.text = CustomText(self.f1,
-                               font=(self.font, self.int_var),
-                               undo=True
-                               )
+        self.text = CustomText(
+            self.f1,
+            font=(self.font, self.int_var),
+            undo=True
+        )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
             self.f1, orient=tk.VERTICAL,
@@ -325,6 +368,29 @@ class LineFrame(ttk.Frame):
         self.text.focus()
         self.create_event_text()
 
+    def Frame_image(self):
+        self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
+        self.image_space = tk.Canvas(self.f1, bg="black", width=30)
+        self.ysb = ttk.Scrollbar(
+            self.f1, orient=tk.VERTICAL,
+            command=self.image_space.yview
+        )
+        self.image_space.configure(yscrollcommand=self.ysb.set)
+        self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
+        self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.f1.columnconfigure(1, weight=1)
+        self.f1.rowconfigure(0, weight=1)
+        self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        # デフォルトの画像を設定する
+        self.image_space.photo = tk.PhotoImage(data=original_image)
+        self.image_on_space = self.image_space.create_image(
+            0,
+            0,
+            anchor='nw',
+            image=self.image_space.photo
+        )
+
     def Frame_character(self):
         """キャラクターフレームの表示"""
         # チェック有無変数
@@ -333,59 +399,67 @@ class LineFrame(ttk.Frame):
         self.var.set(0)
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.label1 = tk.Label(self.f1, text=u"呼び名")
-        self.txt_yobi_name = ttk.Entry(self.f1, width=30,
-                                       font=(self.font, self.int_var)
-                                       )
+        self.txt_yobi_name = ttk.Entry(
+            self.f1, width=30,
+            font=(self.font, self.int_var)
+        )
         self.label2 = tk.Label(self.f1, text=u"名前")
-        self.txt_name = ttk.Entry(self.f1, width=40,
-                                  font=(self.font, self.int_var)
-                                  )
+        self.txt_name = ttk.Entry(
+            self.f1, width=40,
+            font=(self.font, self.int_var)
+        )
         self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
-        self.rdo1 = tk.Radiobutton(self.f2, value=0,
-                                   variable=self.var,
-                                   text=u'男'
-                                   )
-        self.rdo2 = tk.Radiobutton(self.f2, value=1,
-                                   variable=self.var,
-                                   text=u'女'
-                                   )
-        self.rdo3 = tk.Radiobutton(self.f2, value=2,
-                                   variable=self.var,
-                                   text=u'その他'
-                                   )
+        self.rdo1 = tk.Radiobutton(
+            self.f2, value=0,
+            variable=self.var,
+            text=u'男'
+        )
+        self.rdo2 = tk.Radiobutton(
+            self.f2, value=1,
+            variable=self.var,
+            text=u'女'
+        )
+        self.rdo3 = tk.Radiobutton(
+            self.f2, value=2,
+            variable=self.var,
+            text=u'その他'
+        )
         self.rdo1.grid(row=0, column=1)
         self.rdo2.grid(row=1, column=1)
         self.rdo3.grid(row=2, column=1)
         self.f3 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"似顔絵")
         self.cv = self.foto_canvas = tk.Canvas(
-                                               self.f3,
-                                               bg="black",
-                                               width=149,
-                                               height=199
-                                               )
+            self.f3,
+            bg="black",
+            width=149,
+            height=199
+        )
         self.foto_canvas.grid(row=0, column=0)
         self.label3 = tk.Label(self.f1, text=u"誕生日")
-        self.txt_birthday = ttk.Entry(self.f1, width=40,
-                                      font=(self.font, self.int_var))
+        self.txt_birthday = ttk.Entry(
+            self.f1, width=40,
+            font=(self.font, self.int_var)
+        )
         self.f4 = tk.Frame(self.f1)
         self.foto_button = ttk.Button(
-                                      self.f4,
-                                      width=5,
-                                      text=u'挿入',
-                                      command=self.btn_click
-                                      )
+            self.f4,
+            width=5,
+            text=u'挿入',
+            command=self.btn_click
+        )
         self.foto_button_calcel = ttk.Button(
-                                      self.f4,
-                                      width=5,
-                                      text=u'消去',
-                                      command=self.clear_btn_click
-                                      )
+            self.f4,
+            width=5,
+            text=u'消去',
+            command=self.clear_btn_click
+        )
         self.foto_button.grid(row=0, column=1)
         self.foto_button_calcel.grid(row=1, column=1)
         self.label4 = tk.Label(self.f1, text=u"略歴")
-        self.text_body = tk.Text(self.f1, width=80,
-                                 font=(self.font, self.int_var)
-                                 )
+        self.text_body = tk.Text(
+            self.f1, width=80,
+            font=(self.font, self.int_var)
+        )
         self.label1.grid(row=0, column=1, columnspa=2)
         self.txt_yobi_name.grid(row=1, column=1, columnspa=2)
         self.f2.grid(row=2, column=1, rowspan=2)
@@ -396,8 +470,12 @@ class LineFrame(ttk.Frame):
         self.label3.grid(row=2, column=4)
         self.txt_birthday.grid(row=3, column=4)
         self.label4.grid(row=4, column=1, columnspa=4)
-        self.text_body.grid(row=5, column=1, columnspa=4,
-                            sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.text_body.grid(
+            row=5,
+            column=1,
+            columnspa=4,
+            sticky=(tk.N, tk.S, tk.W, tk.E)
+        )
         self.f1.columnconfigure(1, weight=1)
         self.f1.columnconfigure(4, weight=1)
         self.f1.rowconfigure(5, weight=1)
@@ -405,6 +483,15 @@ class LineFrame(ttk.Frame):
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.columnconfigure(1, weight=1)
         self.rowconfigure(0, weight=1)
+        # デフォルトの画像を設定する
+        self.cv.photo = tk.PhotoImage(data=original_image)
+        self.image_on_canvas = self.cv.create_image(
+            0,
+            0,
+            anchor='nw',
+            image=self.cv.photo
+        )
+
         # キャラクターイベントを追加
         self.create_event_character()
 
@@ -519,30 +606,35 @@ class LineFrame(ttk.Frame):
 
     def btn_click(self, event=None):
         """似顔絵ボタンを押したとき"""
-        fTyp = [(u"png画像", ".png")]
+        fTyp = [(u"gif画像", ".gif")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        self.filepath = filedialog.askopenfilename(filetypes=fTyp,
-                                                   initialdir=iDir
-                                                   )
+        self.filepath = filedialog.askopenfilename(
+            filetypes=fTyp,
+            initialdir=iDir
+        )
         if not self.filepath == "":
             path, ___ = os.path.splitext(os.path.basename(self.now_path))
             ____, ext = os.path.splitext(os.path.basename(self.filepath))
-            title = shutil.copyfile(self.filepath,
-                                    "./{0}/{1}{2}".format(
-                                        tree_folder[0][0],
-                                        path,
-                                        ext))
-            self.print_png(title)
+            title = shutil.copyfile(
+                self.filepath,
+                "./{0}/{1}{2}".format(
+                    tree_folder[0][0],
+                    path,
+                    ext
+                )
+            )
+            self.print_gif(title)
 
     def clear_btn_click(self, event=None):
-        files = "./{0}/{1}.png".format(tree_folder[0][0],
-                                       self.select_list_item
-                                       )
+        files = "./{0}/{1}.gif".format(
+            tree_folder[0][0],
+            self.select_list_item
+        )
         if os.path.isfile(files):
             os.remove(files)
             self.cv.delete("all")
 
-    def resize_png(self, im):
+    def resize_gif(self, im):
         if im.size[0] == im.size[1]:
             resized_image = im.resize((150, 150))
         elif im.size[0] > im.size[1]:
@@ -553,13 +645,13 @@ class LineFrame(ttk.Frame):
             resized_image = im.resize((zoom, 200))
         return resized_image
 
-    def print_png(self, title):
-        """似顔絵ボタンを押されたとき"""
+    def print_gif(self, title):
+        """gifを表示する"""
         if not title == "":
-            pngfile = Image.open(title)
-            resize = ImageTk.PhotoImage(self.resize_png(pngfile))
-            self.cv.create_image(1, 1, image=resize, anchor=tk.NW)
-            self.f3.mainloop()
+            giffile = Image.open(title)
+            self.cv.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
+            giffile.close()
+            self.cv.itemconfig(self.image_on_canvas, image=self.cv.photo)
 
     def create_tags(self):
         """タグの作成"""
@@ -576,19 +668,20 @@ class LineFrame(ttk.Frame):
             system_dic += u"\n{0},固有名詞,{1}".format(childname, reading)
             # タグの作成
             self.text.tag_configure(
-                                    childname,
-                                    foreground=color[i % len(color)],
-                                    font=(self.font, self.int_var, "bold")
-                                    )
+                childname,
+                foreground=color[i % len(color)],
+                font=(self.font, self.int_var, "bold")
+            )
             i += 1
         f = open("./userdic.csv", 'w', encoding='utf-8')
         f.write(system_dic)
         f.close()
         # Janomeを使って日本語の形態素解析
-        self.t = Tokenizer("./userdic.csv",
-                           udic_type="simpledic",
-                           udic_enc="utf8"
-                           )
+        self.t = Tokenizer(
+            "./userdic.csv",
+            udic_type="simpledic",
+            udic_enc="utf8"
+        )
 
     def all_highlight(self, event=None):
         """全てハイライト"""
@@ -628,10 +721,11 @@ class LineFrame(ttk.Frame):
             )
             # 全角スペースの時はずらす
             if space_count > 0:
-                self.text.tag_add(content,
-                                  'range_start+{0}c'.format(space_count),
-                                  'range_end+{0}c'.format(space_count)
-                                  )
+                self.text.tag_add(
+                    content,
+                    'range_start+{0}c'.format(space_count),
+                    'range_end+{0}c'.format(space_count)
+                )
             else:
                 self.text.tag_add(content, 'range_start', 'range_end')
             self.text.mark_set('range_start', 'range_end')
@@ -640,14 +734,15 @@ class LineFrame(ttk.Frame):
         """フォントサイズダイアログを作成"""
         self.sub_wins = tk.Toplevel(self)
         self.intSpin = ttk.Spinbox(self.sub_wins, from_=12, to=72)
-        self.intSpin.grid(row=0,
-                          column=0,
-                          columnspan=2,
-                          padx=5,
-                          pady=5,
-                          sticky=tk.W+tk.E,
-                          ipady=3
-                          )
+        self.intSpin.grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            padx=5,
+            pady=5,
+            sticky=tk.W+tk.E,
+            ipady=3
+        )
         button = ttk.Button(
             self.sub_wins,
             text=u'サイズ変更',
@@ -686,33 +781,39 @@ class LineFrame(ttk.Frame):
         page_py = wiki_wiki.page(select_text)
         # ページがあるかどうか判断
         if page_py.exists():
-            messagebox.showinfo("「{0}」の意味".format(select_text),
-                                page_py.summary
-                                )
+            messagebox.showinfo(
+                "「{0}」の意味".format(select_text),
+                page_py.summary
+            )
         else:
-            messagebox.showwarning("「{0}」の意味".format(select_text),
-                                   u"見つけられませんでした。"
-                                   )
+            messagebox.showwarning(
+                "「{0}」の意味".format(select_text),
+                u"見つけられませんでした。"
+            )
 
     def open_help(self, event=None):
         """helpページを開く"""
-        webbrowser.open('file://' + os.path.dirname(
-                        os.path.abspath(os.path.dirname(__file__)))
-                        + "/README.html"
-                        )
+        webbrowser.open(
+            'file://' + os.path.dirname(
+                os.path.abspath(os.path.dirname(__file__))
+            )
+            + "/README.html"
+        )
 
     def open_version(self, event=None):
         """バージョン情報を表示"""
         window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
-        label = tk.Label(image=img2,
-                         text="Version title",
-                         master=window
-                         )
+        label = tk.Label(
+            image=img2,
+            text="Version title",
+            master=window
+        )
         label.pack()
-        label2 = tk.Label(text="Copyright (C) 2019 Yamahara Yoshihiro",
-                          master=window
-                          )
+        label2 = tk.Label(
+            text="Copyright (C) 2019 Yamahara Yoshihiro",
+            master=window
+        )
         label2.pack(fill='x', padx=20, side='left')
         label3 = tk.Label(text="Version 0.3.0 BetaAM2", master=window)
         label3.pack(fill='x', padx=20, side='right')
@@ -745,15 +846,17 @@ class LineFrame(ttk.Frame):
             self.text.tag_remove('sel', '1.0', 'end')
             # 現在読んでいる場所を選択する
             self.text.tag_add(
-                              'sel',
-                              "{0}.0".format(self.i),
-                              "{0}.0".format(self.i+1)
-                              )
+                'sel',
+                "{0}.0".format(self.i),
+                "{0}.0".format(self.i+1)
+            )
             # 次の行の長さをtextlenに入力する
             self.textlen += len(
-                                self.text.get('{0}.0'.format(self.i),
-                                              '{0}.0'.format(self.i+1))
-                                )
+                self.text.get(
+                    '{0}.0'.format(self.i),
+                    '{0}.0'.format(self.i+1)
+                )
+            )
             # カーソルを文章の一番後ろに持ってくる
             self.text.mark_set('insert', '{0}.0'.format(self.i+1))
             self.text.see('insert')
@@ -819,15 +922,15 @@ class LineFrame(ttk.Frame):
                 hira, ''
             ) == "" or token.part_of_speech.split(
                 ","
-            )[0
-              ] == u"記号":
+            )[0] == u"記号":
                 hon += token.surface
             else:
                 # ルビ振りを行う
-                hon += "|{0}≪{1}≫{2}".format(token.surface.replace(hira, ''),
-                                             ruby.replace(hira, ''),
-                                             hira
-                                             )
+                hon += "|{0}≪{1}≫{2}".format(
+                    token.surface.replace(hira, ''),
+                    ruby.replace(hira, ''),
+                    hira
+                )
 
         # テキストを表示する
         self.text.insert('insert', hon)
@@ -910,9 +1013,10 @@ class LineFrame(ttk.Frame):
             # zipファイルにまとめる
             shutil.make_archive(self.file_path, "zip", "./data")
             # 拡張子の変更を行う
-            shutil.move("{0}.zip".format(self.file_path),
-                        "{0}.ned".format(self.file_path)
-                        )
+            shutil.move(
+                "{0}.zip".format(self.file_path),
+                "{0}.ned".format(self.file_path)
+            )
         # ファイルパスが存在しないとき
         else:
             # 保存ダイアログを開く
@@ -923,9 +1027,10 @@ class LineFrame(ttk.Frame):
         # ファイル保存ダイアログを表示する
         fTyp = [(u"小説エディタ", ".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.asksaveasfilename(filetypes=fTyp,
-                                                initialdir=iDir
-                                                )
+        filepath = filedialog.asksaveasfilename(
+            filetypes=fTyp,
+            initialdir=iDir
+        )
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
@@ -936,11 +1041,12 @@ class LineFrame(ttk.Frame):
     def open_file(self, event=None):
         """ファイルを開く処理"""
         # ファイルを開くダイアログを開く
-        fTyp = [(u"小説エディタ", ".ned")]
+        fTyp = [(u'小説エディタ', '*.ned')]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.askopenfilename(filetypes=fTyp,
-                                              initialdir=iDir
-                                              )
+        filepath = filedialog.askopenfilename(
+            filetypes=fTyp,
+            initialdir=iDir
+        )
         # ファイル名があるとき
         if not filepath == "":
             # 初期化する
@@ -970,23 +1076,25 @@ class LineFrame(ttk.Frame):
             files = os.listdir(path)
             for filename in files:
                 if os.path.splitext(filename)[1] == ".txt":
-                    self.tree.insert(val[0],
-                                     'end',
-                                     text=os.path.splitext(filename)[0]
-                                     )
+                    self.tree.insert(
+                        val[0],
+                        'end',
+                        text=os.path.splitext(filename)[0]
+                    )
 
     def find_dialog(self, event=None):
         """検索ボックスを作成する"""
         sub_win = tk.Toplevel(self)
         self.text_var = ttk.Entry(sub_win, width=40)
-        self.text_var.grid(row=0,
-                           column=0,
-                           columnspan=2,
-                           padx=5,
-                           pady=5,
-                           sticky=tk.W+tk.E,
-                           ipady=3
-                           )
+        self.text_var.grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            padx=5,
+            pady=5,
+            sticky=tk.W+tk.E,
+            ipady=3
+        )
         button = ttk.Button(
             sub_win,
             text=u'検索',
@@ -1071,11 +1179,12 @@ class LineFrame(ttk.Frame):
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
-        if str(self.tree.item(curItem)["text"]
-               ) and (not str(
-                              self.tree.item(parentItem)["text"]
-                              )
-                      ):
+        if str(
+            self.tree.item(curItem)["text"]
+        ) and (not str(
+                self.tree.item(parentItem)["text"]
+            )
+        ):
             # サブダイヤログを表示する
             title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
             dialog = Mydialog(self, "挿入", True, title, False)
@@ -1093,6 +1202,8 @@ class LineFrame(ttk.Frame):
                         if val[0] == tree_folder[0][0]:
                             self.Frame_character()
                             self.txt_yobi_name.insert(tk.END, file_name)
+                        elif val[0] == tree_folder[4][0]:
+                            self.Frame_image()
                         else:
                             self.Frame()
 
@@ -1109,9 +1220,11 @@ class LineFrame(ttk.Frame):
                     # ツリービューを選択状態にする
                     self.tree.see(tree)
                     self.tree.selection_set(tree)
-                    self.winfo_toplevel().title(u"小説エディタ\\{0}\\{1}"
-                                                .format(text, file_name)
-                                                )
+                    self.select_list_item = file_name
+                    self.winfo_toplevel().title(
+                        u"小説エディタ\\{0}\\{1}"
+                        .format(text, file_name)
+                    )
                     self.text.focus()
                     # テキストを読み取り専用を解除する
                     self.text.configure(state='normal')
@@ -1123,16 +1236,25 @@ class LineFrame(ttk.Frame):
                 file_name = self.tree.item(curItem)["text"]
                 text = self.tree.item(parentItem)["text"]
                 # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
-                if messagebox.askokcancel(u"項目削除",
-                                          "{0}を削除しますか？".format(file_name)
-                                          ):
+                if messagebox.askokcancel(
+                    u"項目削除",
+                    "{0}を削除しますか？".format(file_name)
+                ):
                     # パスを取得する
                     for val in tree_folder:
                         if text == val[1]:
                             path = "./{0}/{1}.txt".format(val[0], file_name)
+                            image_path = "./{0}/{1}.gif".format(
+                                val[0],
+                                file_name
+                            )
                             self.tree.delete(curItem)
                             self.now_path = ""
                             break
+                    # imageパスが存在したとき
+                    if os.path.isfile(image_path):
+                        os.remove(image_path)
+
                     # パスが存在したとき
                     if not path == "":
                         os.remove(path)
@@ -1142,14 +1264,16 @@ class LineFrame(ttk.Frame):
     def save_charactor_file(self):
         return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\
         \n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\
-        \n\t<body>{4}</body>\n</data>'.format(self.txt_yobi_name.get(),
-                                              self.txt_name.get(),
-                                              self.var.get(),
-                                              self.txt_birthday.get(),
-                                              self.text_body.get('1.0',
-                                                                 'end -1c'
-                                                                 )
-                                              )
+        \n\t<body>{4}</body>\n</data>'.format(
+            self.txt_yobi_name.get(),
+            self.txt_name.get(),
+            self.var.get(),
+            self.txt_birthday.get(),
+            self.text_body.get(
+                '1.0',
+                'end -1c'
+            )
+        )
 
     def open_file_save(self, path):
         """開いてるファイルを保存する."""
@@ -1180,23 +1304,52 @@ class LineFrame(ttk.Frame):
         path = ""
         for val in tree_folder:
             if text == val[1]:
-                path = "./{0}/{1}.txt".format(val[0], self.select_list_item)
-                self.now_path = path
-                if val[0] == tree_folder[0][0]:
-                    self.Frame_character()
+                if val[0] == tree_folder[4][0]:
+                    path = "./{0}/{1}.gif".format(
+                        val[0],
+                        self.select_list_item
+                    )
+                    self.now_path = path
+                    self.Frame_image()
+                    self.path_read_image(text, self.select_list_item)
                 else:
-                    # テキストを読み取り専用を解除する
-                    self.text.configure(state='normal')
-                    self.text.focus()
-                self.path_read_text(text, self.select_list_item)
-                self.now_path = path
+                    path = "./{0}/{1}.txt".format(
+                        val[0],
+                        self.select_list_item
+                    )
+                    self.now_path = path
+                    if val[0] == tree_folder[0][0]:
+                        self.Frame_character()
+                    else:
+                        # テキストを読み取り専用を解除する
+                        self.text.configure(state='normal')
+                        self.text.focus()
+
+                    self.path_read_text(text, self.select_list_item)
+
                 return
 
         self.now_path = ""
         self.winfo_toplevel().title(u"小説エディタ")
 
+    def path_read_image(self, text, sub_text):
+        """パスが存在すればimageを読み込んで表示する"""
+        if not self.now_path == "":
+            title = "{0}/{1}.gif".format(
+                tree_folder[4][0],
+                sub_text
+            )
+            giffile = Image.open(title)
+            self.image_space.photo = ImageTk.PhotoImage(giffile)
+            giffile.close()
+            self.image_space.itemconfig(self.image_on_space,
+                                        image=self.image_space.photo)
+        self.winfo_toplevel().title(
+                u"小説エディタ\\{0}\\{1}".format(text, sub_text)
+            )
+
     def path_read_text(self, text, sub_text):
-        """パスが存在すれば読み込んで表示する"""
+        """パスが存在すればtextを読み込んで表示する"""
         if not self.now_path == "":
             if not self.now_path.find(tree_folder[0][0]) == -1:
                 self.txt_yobi_name.delete('0', tk.END)
@@ -1210,15 +1363,19 @@ class LineFrame(ttk.Frame):
                 self.var.set(elem.findtext("sex"))
                 self.txt_birthday.insert(tk.END, elem.findtext("birthday"))
                 self.text_body.insert(tk.END, elem.findtext("body"))
-                title = "{0}/{1}.png".format(tree_folder[0][0],
-                                             elem.findtext("call"))
-                self.print_png(title)
+                title = "{0}/{1}.gif".format(
+                    tree_folder[0][0],
+                    elem.findtext("call")
+                )
+                if os.path.isfile(title):
+                    self.print_gif(title)
             else:
                 self.text.delete('1.0', tk.END)
                 f = open(self.now_path, 'r', encoding='utf-8')
                 self.text_text = f.read()
                 self.text.insert(tk.END, self.text_text)
                 f.close()
+
             self.winfo_toplevel().title(
                 u"小説エディタ\\{0}\\{1}".format(text, sub_text)
             )
@@ -1271,12 +1428,13 @@ class LineFrame(ttk.Frame):
 
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             linenum = str(i).split(".")[0]
-            self.line_numbers.create_text(3,
-                                          y,
-                                          anchor=tk.NW,
-                                          text=linenum,
-                                          font=("", 12)
-                                          )
+            self.line_numbers.create_text(
+                3,
+                y,
+                anchor=tk.NW,
+                text=linenum,
+                font=("", 12)
+            )
             i = self.text.index("%s+1line" % i)
 
     def Change_setting(self, event=None):
@@ -1392,10 +1550,11 @@ class LineFrame(ttk.Frame):
     def yahoocall(self, appid="", sentence=""):
         """yahooの校正支援を呼び出す"""
         if appid == "":
-            messagebox.showerror("Yahoo! Client ID",
-                                 u"Yahoo! Client IDが見つかりません。\n"
-                                 "Readme.pdfを読んで、設定し直してください。"
-                                 )
+            messagebox.showerror(
+                "Yahoo! Client ID",
+                u"Yahoo! Client IDが見つかりません。\n"
+                "Readme.pdfを読んで、設定し直してください。"
+            )
             return
         url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
         data = {
@@ -1432,22 +1591,24 @@ class LineFrame(ttk.Frame):
             Surface = (child.findtext(self.KOUSEI+"Surface"))
             ShitekiWord = (child.findtext(self.KOUSEI+"ShitekiWord"))
             ShitekiInfo = (child.findtext(self.KOUSEI+"ShitekiInfo"))
-            self.yahoo_tree.insert("",
-                                   "end",
-                                   values=(StartPos,
-                                           Length,
-                                           Surface,
-                                           ShitekiWord,
-                                           ShitekiInfo
-                                           )
-                                   )
+            self.yahoo_tree.insert(
+                "",
+                "end",
+                values=(StartPos,
+                        Length,
+                        Surface,
+                        ShitekiWord,
+                        ShitekiInfo
+                        )
+                )
 
         self.yahoo_tree.grid(row=0, column=0, sticky=(tk.N, tk.S, tk.E, tk.W))
         # スクロールバーを表示する
-        SCRLBAR_Y = ttk.Scrollbar(sub_win,
-                                  orient=tk.VERTICAL,
-                                  command=self.yahoo_tree.yview
-                                  )
+        SCRLBAR_Y = ttk.Scrollbar(
+            sub_win,
+            orient=tk.VERTICAL,
+            command=self.yahoo_tree.yview
+        )
         self.yahoo_tree.configure(yscroll=SCRLBAR_Y.set)
         SCRLBAR_Y.grid(row=0, column=1, sticky=(tk.N, tk.S))
         # 最前面に表示し続ける
@@ -1456,9 +1617,10 @@ class LineFrame(ttk.Frame):
 
     def yahoo(self, event=None):
         """yahoo校正支援"""
-        html = self.yahoocall(self.APPID,
-                              self.text.get('1.0', 'end -1c')
-                              )
+        html = self.yahoocall(
+            self.APPID,
+            self.text.get('1.0', 'end -1c')
+        )
         if not self.APPID == "":
             self.yahooResult(html)
             self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
@@ -1480,9 +1642,11 @@ class LineFrame(ttk.Frame):
                 i += 1
                 textforlen = textlen
                 textlen += len(
-                                    self.text.get('{0}.0'.format(i),
-                                                  '{0}.0'.format(i+1))
-                                    )
+                    self.text.get(
+                        '{0}.0'.format(i),
+                        '{0}.0'.format(i+1)
+                    )
+                )
             else:
                 break
         if i == 0:
@@ -1491,10 +1655,10 @@ class LineFrame(ttk.Frame):
         self.text.tag_remove('sel', '1.0', 'end')
         # 選択状態にする
         self.text.tag_add(
-                          'sel',
-                          "{0}.{1}".format(i, val-textforlen),
-                          "{0}.{1}".format(i, val-textforlen+lenge)
-                          )
+            'sel',
+            "{0}.{1}".format(i, val-textforlen),
+            "{0}.{1}".format(i, val-textforlen+lenge)
+        )
         # カーソルの移動
         self.text.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
         self.text.see('insert')
@@ -2130,12 +2294,14 @@ if __name__ == "__main__":
     lw = root.winfo_width()
     wh = root.winfo_screenheight()
     lh = root.winfo_height()
-    root.geometry("{0}x{1}+{2}+{3}".format(str(lw),
-                                           str(lh),
-                                           str(int(ww/2-lw/2)),
-                                           str(int(wh/2-lh/2))
-                                           )
-                  )
+    root.geometry(
+        "{0}x{1}+{2}+{3}".format(
+            str(lw),
+            str(lh),
+            str(int(ww/2-lw/2)),
+            str(int(wh/2-lh/2))
+        )
+    )
     # windowsのみタイトルバーを削除
     # OS別判断
     if os.name == 'nt':
@@ -2150,33 +2316,55 @@ if __name__ == "__main__":
     # メイン画面を削除
     root.destroy()
     # 初期処理
-    tree_folder = [['data/character', u'キャラクター'],
-                   ['data/occupation', u'職種'],
-                   ['data/space', u'場所'],
-                   ['data/event', u'イベント'],
-                   ['data/nobel', u'小説']
-                   ]
-    color = ['sky blue',
-             'yellow green',
-             'gold',
-             'salmon',
-             'orange',
-             'red',
-             'hot pink',
-             'dark orchid',
-             'purple',
-             'midnight blue',
-             'light slate blue',
-             'dodger blue',
-             'dark turquoise',
-             'cadet blue',
-             'maroon',
-             'tan1',
-             'rosy brown',
-             'indian red',
-             'orange red',
-             'violet red'
-             ]
+    original_image = '''R0lGODlhHgAeAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz
+        /wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDM
+        mQDMzADM/wD/AAD/MwD/ZgD/mQD/zAD//zMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+        MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ
+        /zPMADPMMzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYA
+        mWYAzGYA/2YzAGYzM2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZ
+        M2aZZmaZmWaZzGaZ/2bMAGbMM2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb/
+        /5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkzM5kzZpkzmZkzzJkz/5lmAJlmM5lmZplm
+        mZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnMM5nMZpnMmZnMzJnM/5n/AJn/
+        M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwzM8wzZswzmcwzzMwz
+        /8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzMM8zMZszM
+        mczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+        M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z
+        ///MAP/MM//MZv/Mmf/MzP/M////AP//M///Zv//mf//zP///8DAwICAgIAAAACA
+        AAAAgICAAIAAgACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAACwAAAAAHgAeAAAIMgABCBxIsKDBgwgTKlzIsKHDhxAjSpxI
+        saLFixgzatzIsaPHjyBDihxJsqTJkyhTngwIADs=
+        '''
+    tree_folder = [
+        ['data/character', u'キャラクター'],
+        ['data/occupation', u'職種'],
+        ['data/space', u'場所'],
+        ['data/event', u'イベント'],
+        ['data/image', u'イメージ'],
+        ['data/nobel', u'小説']
+    ]
+    color = [
+        'sky blue',
+        'yellow green',
+        'gold',
+        'salmon',
+        'orange',
+        'red',
+        'hot pink',
+        'dark orchid',
+        'purple',
+        'midnight blue',
+        'light slate blue',
+        'dodger blue',
+        'dark turquoise',
+        'cadet blue',
+        'maroon',
+        'tan1',
+        'rosy brown',
+        'indian red',
+        'orange red',
+        'violet red'
+    ]
     # 再度メイン画面を作成
     root = tk.Tk()
     # アイコンを設定
@@ -2195,7 +2383,9 @@ if __name__ == "__main__":
         root.state('zoomed')
     else:
         root.attributes("-zoomed", "1")
-    messagebox.showwarning(u"セーブファイル変更の案内",
-                           u"セーブファイルがVer0.2.0bAMから変更になっています。"
-                           u"\n必ずReadmeを読んで対応をしてからお使いください。")
+    messagebox.showwarning(
+        u"セーブファイル変更の案内",
+        u"セーブファイルがVer0.2.0bAMから変更になっています。"
+        u"\n必ずReadmeを読んで対応をしてからお使いください。"
+    )
     root.mainloop()
