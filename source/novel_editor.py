@@ -105,10 +105,6 @@ class LineFrame(ttk.Frame):
         """初期設定"""
         super().__init__(master, **kwargs)
         self.initialize()
-
-        self.menu_bar = tk.Menu(self.master)
-        self.master.config(menu=self.menu_bar)
-
         self.create_widgets()
         self.create_event()
 
@@ -347,9 +343,10 @@ class LineFrame(ttk.Frame):
         )
         self.line_numbers = tk.Canvas(self.f1, width=30)
         self.ysb = ttk.Scrollbar(
-            self.f1, orient=tk.VERTICAL,
-            command=self.text.yview
-        )
+                                 self.f1,
+                                 orient=tk.VERTICAL,
+                                 command=self.text.yview
+                                 )
         # 入力欄にスクロールを紐付け
         self.text.configure(yscrollcommand=self.ysb.set)
         # 左から行番号、入力欄、スクロールウィジェット
@@ -456,10 +453,10 @@ class LineFrame(ttk.Frame):
         self.foto_button.grid(row=0, column=1)
         self.foto_button_calcel.grid(row=1, column=1)
         self.label4 = tk.Label(self.f1, text=u"略歴")
-        self.text_body = tk.Text(
-            self.f1, width=80,
-            font=(self.font, self.int_var)
-        )
+        self.text_body = tk.Text(self.f1,
+                                 width=80,
+                                 font=(self.font, self.int_var)
+                                 )
         self.label1.grid(row=0, column=1, columnspa=2)
         self.txt_yobi_name.grid(row=1, column=1, columnspa=2)
         self.f2.grid(row=2, column=1, rowspan=2)
@@ -815,7 +812,7 @@ class LineFrame(ttk.Frame):
             master=window
         )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.3.0 BetaAM2", master=window)
+        label3 = tk.Label(text="Version 0.3.0 Beta2", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -919,10 +916,12 @@ class LineFrame(ttk.Frame):
                     hira += i
             # ルビがないときと、記号の時の処理
             if ruby.replace(
-                hira, ''
-            ) == "" or token.part_of_speech.split(
-                ","
-            )[0] == u"記号":
+                            hira,
+                            ''
+                            ) == "" or token.part_of_speech.split(
+                                                                  ","
+                                                                  )[0
+                                                                    ] == u"記号":
                 hon += token.surface
             else:
                 # ルビ振りを行う
@@ -939,24 +938,6 @@ class LineFrame(ttk.Frame):
         """redo処理を行う"""
         self.text.edit_redo()
 
-    def undo(self, event=None):
-        """redo処理を行う"""
-        self.text.edit_undo()
-
-    def copy(self, event=None):
-        """cpoy処理を行う"""
-        self.clipboard_clear()
-        self.clipboard_append(self.text.selection_get())
-
-    def cut(self, event=None):
-        """cut処理を行う"""
-        self.copy()
-        self.text.delete("sel.first", "sel.last")
-
-    def paste(self, event=None):
-        """paste処理を行う"""
-        self.text.insert('insert', self.clipboard_get())
-
     def moji_count(self, event=None):
         """文字数と行数を表示する"""
         # 行数の取得
@@ -969,11 +950,13 @@ class LineFrame(ttk.Frame):
             gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
         messagebox.showinfo(
-            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
-            u"\n 原稿用紙 : {2}枚".format(
-                len(moji)-new_line,
-                new_line,
-                -(-gen_mai//20)))
+                            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
+                            u"\n 原稿用紙 : {2}枚".format(
+                                                         len(moji)-new_line,
+                                                         new_line,
+                                                         -(-gen_mai//20)
+                                                         )
+                            )
 
     def new_file(self):
         """新規作成をするための準備"""
@@ -2294,15 +2277,12 @@ if __name__ == "__main__":
     lw = root.winfo_width()
     wh = root.winfo_screenheight()
     lh = root.winfo_height()
-    root.geometry(
-        "{0}x{1}+{2}+{3}".format(
-            str(lw),
-            str(lh),
-            str(int(ww/2-lw/2)),
-            str(int(wh/2-lh/2))
-        )
-    )
-    # windowsのみタイトルバーを削除
+    root.geometry("{0}x{1}+{2}+{3}".format(str(lw),
+                                           str(lh),
+                                           str(int(ww/2-lw/2)),
+                                           str(int(wh/2-lh/2))
+                                           )
+                  )
     # OS別判断
     if os.name == 'nt':
         root.overrideredirect(True)

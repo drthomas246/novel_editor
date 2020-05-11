@@ -125,40 +125,40 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
-- Version 0.3.0bAM2  
+- Version 0.3.0b2  
 ハイライトのための形態素解析を見直す
-- Version 0.3.0bAM1  
+- Version 0.3.0b1  
 Yahoo！デベロッパーネットワークへの接続方法を変更
-- Version 0.3.0bAM  
-文章校正ができるようになる(要:Yahoo！デベロッパーネットワーク Client ID)
+- Version 0.3.0b  
+文章校正ができるようになる(要:Yahooデベロッパーネットワーク Client ID)
 - Version 0.2.4bAM2  
 似顔絵の画像処理を変更
-- Version 0.2.4bAM1  
+- Version 0.2.4b1  
 言葉の意味検索をgooからwikipediaへ変更
-- Version 0.2.4bAM  
+- Version 0.2.4b  
 文章の読み上げ処理を改善
-- Version 0.2.3bAM2  
+- Version 0.2.3b2  
 軽微な変更
-- Version 0.2.3bAM1  
+- Version 0.2.3b1  
 言葉の意味検索を向上
-- Version 0.2.3bAM  
+- Version 0.2.3b  
 似顔絵の機能を追加する
-- Version 0.2.2bAM  
+- Version 0.2.2b  
 文章の読み上げ機能を追加
-- Version 0.2.1bAM  
+- Version 0.2.1b  
 各OSに対応
-- Version 0.2.0bAM1  
+- Version 0.2.0b1  
 軽微な変更、PEP8に対応
-- Version 0.2.0bAM  
+- Version 0.2.0b  
 ファイル形式を変更。キャラクター欄を充実  
 今までのファイルと互換性がありません。
-- Version 0.1.2b2AM  
+- Version 0.1.2b2  
 バージョン情報の表示
-- Version 0.1.2bAM1  
+- Version 0.1.2b1  
 原稿用紙で何枚かか数えれるようになる
-- Version 0.1.2bAM  
+- Version 0.1.2b  
 タイトルを挿入
-- Version 0.1.1bAM1  
+- Version 0.1.1b1  
 ソースを見直し
 - Version 0.1.1b  
 ファイル名の変更を追加
@@ -191,7 +191,7 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.3.0bAM2
+- Version：0.3.0b2
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019
 - HP：https://www.hobofoto.net/
