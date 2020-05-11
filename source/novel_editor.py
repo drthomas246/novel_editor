@@ -995,9 +995,10 @@ class LineFrame(ttk.Frame):
     def new_open(self, event=None):
         """新規作成をする"""
         if not self.text.get('1.0', 'end - 1c') == self.text_text:
-            if messagebox.askokcancel(u"小説エディタ",
-                                      u"上書き保存しますか？"
-                                      ):
+            if messagebox.askokcancel(
+                u"小説エディタ",
+                u"上書き保存しますか？"
+            ):
                 self.overwrite_save_file()
                 self.new_file()
 
@@ -1532,9 +1533,10 @@ class LineFrame(ttk.Frame):
 
                 # 最終単語を取得する
                 pri = [token.surface for token in tokenizer.tokenize(text)]
-                hin = [token.part_of_speech.split(',')[0] for token
-                       in tokenizer.tokenize(text)
-                       ]
+                hin = [
+                    token.part_of_speech.split(',')[0] for token
+                    in tokenizer.tokenize(text)
+                ]
                 if len(pri) > 0:
                     if hin[len(pri)-1] == u'名詞':
                         text = pri[len(pri)-1]
