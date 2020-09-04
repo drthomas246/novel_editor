@@ -624,7 +624,7 @@ class LineFrame(ttk.Frame):
                     ext
                 )
             )
-            self._gif(title)
+            self.print_gif(title)
 
     def clear_btn_click(self, event=None):
         files = "./{0}/{1}.gif".format(
@@ -1213,7 +1213,6 @@ class LineFrame(ttk.Frame):
                 dialog = Mydialog(self, "挿入", True, title, False)
                 root.wait_window(dialog.sub_name_win)
                 file_name = dialog.txt
-                print(file_name)
                 del dialog
                 if not file_name == "":
                     self.open_file_save(self.now_path)
