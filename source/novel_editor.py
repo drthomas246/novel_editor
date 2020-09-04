@@ -54,6 +54,7 @@ class Mydialog():
     def __init__(self, message, button1, button2, title, text):
         """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、
         title:タイトル、text:選択状態にするかどうか"""
+        self.txt = ""
         self.sub_name_win = tk.Toplevel(message)
         self.txt_name = ttk.Entry(self.sub_name_win, width=40)
         self.txt_name.grid(
@@ -124,8 +125,6 @@ class LineFrame(ttk.Frame):
         self.text_text = ""
         # 文字の大きさ
         self.int_var = 16
-        # フォントをOSごとに変える
-        pf = platform.system()
         # yahooの校正支援
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
         self.APPID = ""
@@ -135,6 +134,8 @@ class LineFrame(ttk.Frame):
             f.close()
         if u"ここを消して、" in self.APPID:
             self.APPID = ""
+        # フォントをOSごとに変える
+        pf = platform.system()
         if pf == 'Windows':
             self.font = "メイリオ"
         elif pf == 'Darwin':  # MacOS
@@ -603,8 +604,6 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
-        # 名前の変更
-        self.tree.bind("<Control-Key-g>", self.On_name_Click)
 
     def btn_click(self, event=None):
         """似顔絵ボタンを押したとき"""
@@ -625,7 +624,7 @@ class LineFrame(ttk.Frame):
                     ext
                 )
             )
-            self.print_gif(title)
+            self._gif(title)
 
     def clear_btn_click(self, event=None):
         files = "./{0}/{1}.gif".format(
@@ -1182,87 +1181,107 @@ class LineFrame(ttk.Frame):
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
-        if str(
-            self.tree.item(curItem)["text"]
-        ) and (not str(
-                self.tree.item(parentItem)["text"]
+        if self.tree.item(curItem)["text"] == tree_folder[4][1]:
+            fTyp = [(u'小説エディタ', '*.gif')]
+            iDir = os.path.abspath(os.path.dirname(__file__))
+            filepath = filedialog.askopenfilename(
+                filetypes=fTyp,
+                initialdir=iDir
             )
-        ):
-            # サブダイヤログを表示する
-            title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
-            dialog = Mydialog(self, "挿入", True, title, False)
-            root.wait_window(dialog.sub_name_win)
-            file_name = dialog.txt
-            del dialog
-            if not file_name == "":
-                self.open_file_save(self.now_path)
-                curItem = self.tree.focus()              # 選択アイテムの認識番号取得
-                text = self.tree.item(curItem)["text"]
-                path = ""
-                # 選択されているフォルダを見つける
-                for val in tree_folder:
-                    if text == val[1]:
-                        if val[0] == tree_folder[0][0]:
-                            self.Frame_character()
-                            self.txt_yobi_name.insert(tk.END, file_name)
-                        elif val[0] == tree_folder[4][0]:
-                            self.Frame_image()
-                        else:
-                            self.Frame()
+            # ファイル名があるとき
+            if not filepath == "":
+                file_name = os.path.splitext(os.path.basename(filepath))[0]
+                path = "./{0}/{1}.gif".format(tree_folder[4][0], file_name)
+                shutil.copy2(filepath,path)
+                self.Frame_image()
+                path = "./{0}/{1}.txt".format(tree_folder[4][0], file_name)
+                tree = self.tree.insert(tree_folder[4][0], 'end', text=file_name)
+                self.now_path = path
+                f = open(path, 'w', encoding='utf-8')
+                f.write("")
+                f.close()
 
-                        path = "./{0}/{1}.txt".format(val[0], file_name)
-                        tree = self.tree.insert(val[0], 'end', text=file_name)
-                        self.now_path = path
-                        break
-
-                # パスが存在すれば新規作成する
-                if not path == "":
-                    f = open(path, 'w', encoding='utf-8')
-                    f.write("")
-                    f.close()
-                    # ツリービューを選択状態にする
-                    self.tree.see(tree)
-                    self.tree.selection_set(tree)
-                    self.select_list_item = file_name
-                    self.winfo_toplevel().title(
-                        u"小説エディタ\\{0}\\{1}"
-                        .format(text, file_name)
-                    )
-                    self.text.focus()
-                    # テキストを読み取り専用を解除する
-                    self.text.configure(state='normal')
-                    self.create_tags()
-        # 子アイテムを右クリックしたとき
         else:
-            if str(self.tree.item(curItem)["text"]):
-                # 項目を削除する
-                file_name = self.tree.item(curItem)["text"]
-                text = self.tree.item(parentItem)["text"]
-                # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
-                if messagebox.askokcancel(
-                    u"項目削除",
-                    "{0}を削除しますか？".format(file_name)
-                ):
-                    # パスを取得する
+            if str(
+                self.tree.item(curItem)["text"]
+            ) and (not str(
+                    self.tree.item(parentItem)["text"]
+                )
+            ):
+                # サブダイヤログを表示する
+                title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
+                dialog = Mydialog(self, "挿入", True, title, False)
+                root.wait_window(dialog.sub_name_win)
+                file_name = dialog.txt
+                print(file_name)
+                del dialog
+                if not file_name == "":
+                    self.open_file_save(self.now_path)
+                    curItem = self.tree.focus()              # 選択アイテムの認識番号取得
+                    text = self.tree.item(curItem)["text"]
+                    path = ""
+                    # 選択されているフォルダを見つける
                     for val in tree_folder:
                         if text == val[1]:
-                            path = "./{0}/{1}.txt".format(val[0], file_name)
-                            image_path = "./{0}/{1}.gif".format(
-                                val[0],
-                                file_name
-                            )
-                            self.tree.delete(curItem)
-                            self.now_path = ""
-                            break
-                    # imageパスが存在したとき
-                    if os.path.isfile(image_path):
-                        os.remove(image_path)
+                            if val[0] == tree_folder[0][0]:
+                                self.Frame_character()
+                                self.txt_yobi_name.insert(tk.END, file_name)
+                            else:
+                                self.Frame()
 
-                    # パスが存在したとき
+                            path = "./{0}/{1}.txt".format(val[0], file_name)
+                            tree = self.tree.insert(val[0], 'end', text=file_name)
+                            self.now_path = path
+                            break
+
+                    # パスが存在すれば新規作成する
                     if not path == "":
-                        os.remove(path)
-                        self.Frame()
+                        f = open(path, 'w', encoding='utf-8')
+                        f.write("")
+                        f.close()
+                        # ツリービューを選択状態にする
+                        self.tree.see(tree)
+                        self.tree.selection_set(tree)
+                        self.select_list_item = file_name
+                        self.winfo_toplevel().title(
+                            u"小説エディタ\\{0}\\{1}"
+                            .format(text, file_name)
+                        )
                         self.text.focus()
+                        # テキストを読み取り専用を解除する
+                        self.text.configure(state='normal')
+                        self.create_tags()
+            # 子アイテムを右クリックしたとき
+            else:
+                if str(self.tree.item(curItem)["text"]):
+                    # 項目を削除する
+                    file_name = self.tree.item(curItem)["text"]
+                    text = self.tree.item(parentItem)["text"]
+                    # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
+                    if messagebox.askokcancel(
+                        u"項目削除",
+                        "{0}を削除しますか？".format(file_name)
+                    ):
+                        # パスを取得する
+                        for val in tree_folder:
+                            if text == val[1]:
+                                path = "./{0}/{1}.txt".format(val[0], file_name)
+                                image_path = "./{0}/{1}.gif".format(
+                                    val[0],
+                                    file_name
+                                )
+                                self.tree.delete(curItem)
+                                self.now_path = ""
+                                break
+                        # imageパスが存在したとき
+                        if os.path.isfile(image_path):
+                            os.remove(image_path)
+
+                        # パスが存在したとき
+                        if not path == "":
+                            os.remove(path)
+                            self.Frame()
+                            self.text.focus()
 
     def save_charactor_file(self):
         return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\
@@ -1308,13 +1327,13 @@ class LineFrame(ttk.Frame):
         for val in tree_folder:
             if text == val[1]:
                 if val[0] == tree_folder[4][0]:
-                    path = "./{0}/{1}.gif".format(
+                    path = "./{0}/{1}.txt".format(
                         val[0],
                         self.select_list_item
                     )
                     self.now_path = path
                     self.Frame_image()
-                    self.path_read_image(text, self.select_list_item)
+                    self.path_read_image(tree_folder[4][0], self.select_list_item)
                 else:
                     path = "./{0}/{1}.txt".format(
                         val[0],
@@ -1339,14 +1358,16 @@ class LineFrame(ttk.Frame):
         """パスが存在すればimageを読み込んで表示する"""
         if not self.now_path == "":
             title = "{0}/{1}.gif".format(
-                tree_folder[4][0],
+                text,
                 sub_text
             )
             giffile = Image.open(title)
             self.image_space.photo = ImageTk.PhotoImage(giffile)
+            self.image_space.itemconfig(
+                self.image_on_space,
+                image=self.image_space.photo
+            )
             giffile.close()
-            self.image_space.itemconfig(self.image_on_space,
-                                        image=self.image_space.photo)
         self.winfo_toplevel().title(
                 u"小説エディタ\\{0}\\{1}".format(text, sub_text)
             )
