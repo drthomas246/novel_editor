@@ -125,9 +125,9 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
-- Version 0.4.0b
+- Version 0.4.0b  
 GIFファイルを取り込めるようにする
-- Version 0.3.0b2
+- Version 0.3.0b2  
 ハイライトのための形態素解析を見直す
 - Version 0.3.0b1  
 Yahoo！デベロッパーネットワークへの接続方法を変更
