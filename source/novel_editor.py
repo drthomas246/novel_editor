@@ -816,7 +816,7 @@ class LineFrame(ttk.Frame):
             master=window
         )
         label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.3.0 BetaAM2", master=window)
+        label3 = tk.Label(text="Version 0.4.0 Beta", master=window)
         label3.pack(fill='x', padx=20, side='right')
         window.resizable(width=0, height=0)
         window.mainloop()
@@ -1182,6 +1182,7 @@ class LineFrame(ttk.Frame):
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
         if self.tree.item(curItem)["text"] == tree_folder[4][1]:
+            # imageタグを選択したとき
             fTyp = [(u'小説エディタ', '*.gif')]
             iDir = os.path.abspath(os.path.dirname(__file__))
             filepath = filedialog.askopenfilename(
@@ -1192,14 +1193,25 @@ class LineFrame(ttk.Frame):
             if not filepath == "":
                 file_name = os.path.splitext(os.path.basename(filepath))[0]
                 path = "./{0}/{1}.gif".format(tree_folder[4][0], file_name)
-                shutil.copy2(filepath,path)
+                shutil.copy2(filepath, path)
                 self.Frame_image()
                 path = "./{0}/{1}.txt".format(tree_folder[4][0], file_name)
-                tree = self.tree.insert(tree_folder[4][0], 'end', text=file_name)
+                tree = self.tree.insert(
+                    tree_folder[4][0],
+                    'end',
+                    text=file_name
+                )
+                self.tree.see(tree)
+                self.tree.selection_set(tree)
                 self.now_path = path
                 f = open(path, 'w', encoding='utf-8')
                 f.write("")
                 f.close()
+                self.Frame_image()
+                self.path_read_image(
+                    tree_folder[4][0],
+                    file_name
+                )
 
         else:
             if str(
@@ -1229,7 +1241,11 @@ class LineFrame(ttk.Frame):
                                 self.Frame()
 
                             path = "./{0}/{1}.txt".format(val[0], file_name)
-                            tree = self.tree.insert(val[0], 'end', text=file_name)
+                            tree = self.tree.insert(
+                                val[0],
+                                'end',
+                                text=file_name
+                            )
                             self.now_path = path
                             break
 
@@ -1264,7 +1280,10 @@ class LineFrame(ttk.Frame):
                         # パスを取得する
                         for val in tree_folder:
                             if text == val[1]:
-                                path = "./{0}/{1}.txt".format(val[0], file_name)
+                                path = "./{0}/{1}.txt".format(
+                                    val[0],
+                                    file_name
+                                )
                                 image_path = "./{0}/{1}.gif".format(
                                     val[0],
                                     file_name
@@ -1332,7 +1351,10 @@ class LineFrame(ttk.Frame):
                     )
                     self.now_path = path
                     self.Frame_image()
-                    self.path_read_image(tree_folder[4][0], self.select_list_item)
+                    self.path_read_image(
+                        tree_folder[4][0],
+                        self.select_list_item
+                    )
                 else:
                     path = "./{0}/{1}.txt".format(
                         val[0],
@@ -2407,9 +2429,4 @@ if __name__ == "__main__":
         root.state('zoomed')
     else:
         root.attributes("-zoomed", "1")
-    messagebox.showwarning(
-        u"セーブファイル変更の案内",
-        u"セーブファイルがVer0.2.0bAMから変更になっています。"
-        u"\n必ずReadmeを読んで対応をしてからお使いください。"
-    )
     root.mainloop()

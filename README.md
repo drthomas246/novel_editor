@@ -2,9 +2,9 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
-[![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 [![coverage](https://img.shields.io/badge/coverage-95-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
-[![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
+[![ランゲージ](https://img.shields.io/badge/python-3.8.5-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/badge/license-MIT-green)](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE)
 [![PEP8](https://img.shields.io/badge/PEP8-Correspondence-green)](https://pep8-ja.readthedocs.io/ja/latest/)
@@ -30,11 +30,11 @@
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
-$ pip install 'Janome==0.3.9'
+$ pip install 'Janome==0.4.0'
 $ pip install 'pyttsx3==2.71'
-$ pip install 'wikipedia-api==0.5.3'
-$ pip install 'Pillow==6.2.1'
-$ pip install 'requests==2.22.0'
+$ pip install 'wikipedia-api==0.5.4'
+$ pip install 'Pillow==7.2.0'
+$ pip install 'requests==2.24.0'
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これが実行ファイルです。
@@ -125,7 +125,8 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
-- Version 0.3.0b2  
+GIFファイルを取り込めるようにする
+- Version 0.4.0b  
 ハイライトのための形態素解析を見直す
 - Version 0.3.0b1  
 Yahoo！デベロッパーネットワークへの接続方法を変更
