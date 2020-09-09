@@ -30,7 +30,7 @@
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
 $ pip install 'jaconv==0.2.4'
-$ pip install 'Janome==0.4.0'
+$ pip install 'Janome==0.3.9'
 $ pip install 'pyttsx3==2.71'
 $ pip install 'wikipedia-api==0.5.4'
 $ pip install 'Pillow==7.2.0'
@@ -98,7 +98,7 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 使用するためには、pyinstallerを使いますので、下記のコードをターミナルエディタに記入しインストールしてください。
 
 ```
-$ pip install pyinstaller
+$ pip install 'pyinstaller==3.4'
 ```
 
 ### 保存ファイルについて
