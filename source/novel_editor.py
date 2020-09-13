@@ -373,12 +373,12 @@ class LineFrame(ttk.Frame):
     def Frame_image(self):
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.image_space = tk.Canvas(self.f1, bg="black", width=30)
+        self.image_space.configure(yscrollcommand=self.ysb.set)
+        self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.ysb = ttk.Scrollbar(
             self.f1, orient=tk.VERTICAL,
             command=self.image_space.yview
         )
-        self.image_space.configure(yscrollcommand=self.ysb.set)
-        self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(1, weight=1)
@@ -1375,12 +1375,12 @@ class LineFrame(ttk.Frame):
         self.now_path = ""
         self.winfo_toplevel().title(u"小説エディタ")
 
-    def path_read_image(self, text, sub_text):
+    def path_read_image(self, image_path, image_name):
         """パスが存在すればimageを読み込んで表示する"""
         if not self.now_path == "":
             title = "{0}/{1}.gif".format(
-                text,
-                sub_text
+                image_path,
+                image_name
             )
             giffile = Image.open(title)
             self.image_space.photo = ImageTk.PhotoImage(giffile)
@@ -1388,9 +1388,19 @@ class LineFrame(ttk.Frame):
                 self.image_on_space,
                 image=self.image_space.photo
             )
+            # イメージサイズにキャンバスサイズを合わす
+            self.image_space.config(
+                scrollregion=(
+                    0,
+                    0,
+                    giffile.size[0],
+                    giffile.size[1]
+                )
+            )
             giffile.close()
+
         self.winfo_toplevel().title(
-                u"小説エディタ\\{0}\\{1}".format(text, sub_text)
+                u"小説エディタ\\{0}\\{1}".format(image_path, image_name)
             )
 
     def path_read_text(self, text, sub_text):
