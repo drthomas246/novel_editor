@@ -125,6 +125,8 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
+- Version 0.4.1b  
+imageをマウスで縦スクロールできるようにする
 - Version 0.4.0b2  
 imageをマウスで縦スクロールできるようにする
 - Version 0.4.0b  
@@ -195,7 +197,7 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.4.0b2
+- Version：0.4.1b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019-2020
 - HP：https://www.hobofoto.net/

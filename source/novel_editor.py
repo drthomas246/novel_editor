@@ -816,21 +816,24 @@ class LineFrame(ttk.Frame):
 
     def open_version(self, event=None):
         """バージョン情報を表示"""
-        window = tk.Toplevel(root)
         img2 = tk.PhotoImage(data=datas)
-        label = tk.Label(
-            image=img2,
-            text="Version title",
-            master=window
+        window = tk.Toplevel(root)
+        self.pack()
+        self.canvas = tk.Canvas(window, width=600, height=300)
+        self.canvas.create_image(300, 150, image=img2)
+        self.canvas.create_text(
+            400,
+            280,
+            text='Copyright (C) 2019-2020 Yamahara Yoshihiro',
+            font=('', 12)
         )
-        label.pack()
-        label2 = tk.Label(
-            text="Copyright (C) 2019 Yamahara Yoshihiro",
-            master=window
+        self.canvas.create_text(
+            480,
+            130,
+            text='Ver 0.4.1 Beta',
+            font=('', 12)
         )
-        label2.pack(fill='x', padx=20, side='left')
-        label3 = tk.Label(text="Version 0.4.0 Beta", master=window)
-        label3.pack(fill='x', padx=20, side='right')
+        self.canvas.pack()
         window.resizable(width=0, height=0)
         window.mainloop()
 
