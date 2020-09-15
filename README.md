@@ -126,7 +126,7 @@ $ coverage html
 
 ## 改変履歴
 - Version 0.4.1b  
-imageをマウスで縦スクロールできるようにする
+バージョン情報の描画方法を変える
 - Version 0.4.0b2  
 imageをマウスで縦スクロールできるようにする
 - Version 0.4.0b  
