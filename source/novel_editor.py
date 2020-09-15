@@ -373,13 +373,14 @@ class LineFrame(ttk.Frame):
     def Frame_image(self):
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.image_space = tk.Canvas(self.f1, bg="black", width=30)
-        self.image_space.configure(yscrollcommand=self.ysb.set)
-        self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
-        self.ysb = ttk.Scrollbar(
-            self.f1, orient=tk.VERTICAL,
+        self.image_ysb = ttk.Scrollbar(
+            self.f1,
+            orient=tk.VERTICAL,
             command=self.image_space.yview
         )
-        self.ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
+        self.image_space.configure(yscrollcommand=self.image_ysb.set)
+        self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
+        self.image_ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(1, weight=1)
         self.f1.rowconfigure(0, weight=1)
@@ -392,6 +393,7 @@ class LineFrame(ttk.Frame):
             anchor='nw',
             image=self.image_space.photo
         )
+        self.create_event_image()
 
     def Frame_character(self):
         """キャラクターフレームの表示"""
@@ -543,8 +545,12 @@ class LineFrame(ttk.Frame):
         # yahoo文字列解析
         self.text.bind('<Control-Key-y>', self.yahoo)
 
+    def create_event_image(self):
+        """イメージイベントの設定."""
+        self.image_space.bind('<MouseWheel>', self.mouse_y_scroll)
+
     def create_event_character(self):
-        """キャラクター欄のイベント設定"""
+        """キャラクター欄のイベント設定."""
         # 開くダイアロクを表示する
         self.txt_yobi_name.bind('<Control-Key-e>', self.open_file)
         self.txt_name.bind('<Control-Key-e>', self.open_file)
@@ -604,6 +610,13 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
+
+    def mouse_y_scroll(self, event):
+        """マウスホイール移動の設定."""
+        if event.delta > 0:
+            self.image_space.yview_scroll(-1, 'units')
+        elif event.delta < 0:
+            self.image_space.yview_scroll(1, 'units')
 
     def btn_click(self, event=None):
         """似顔絵ボタンを押したとき"""
