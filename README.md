@@ -226,7 +226,11 @@ Released under the MIT license
 [https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE](https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE)
 
 - Pillow(画像処理)ライブラリ  
-Copyright © 2010-2019 by Alex Clark and contributors  
+The Python Imaging Library (PIL) is  
+　　Copyright © 1997-2011 by Secret Labs AB  
+　　Copyright © 1995-2011 by Fredrik Lundh  
+Pillow is the friendly PIL fork. It is  
+　　Copyright © 2010-2020 by Alex Clark and contributors  
 Released under the PIL licens
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
 
@@ -238,12 +242,13 @@ This software includes the work that is distributed in the [Apache License 2.0](
 Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
 
 - pyinstaller  
-Copyright 2005–2019, PyInstaller Development Team.  
+Copyright (c) 2010-2020, PyInstaller Development Team  
+Copyright (c) 2005–2019, Giovanni Bajo  
 Distributed under the GPL license  
 [https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt](https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt)
 
 - Coveragepy  
-Copyright(C) 2009–2019, Ned Batchelder.  
+Copyright(C) 2009–2020, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
 
 ### 参考文献
@@ -255,7 +260,7 @@ Copyright Narito Takizawa All Rights Reserved.
 
 ### 使用フォント
 - 数式フォント　ver1.3  
-Copyright(C) 2016-2019 [キユマヤ園](http://sapphire.hacca.jp/font/fontabout.html)
+Copyright(C) 2016-2020 [キユマヤ園](http://sapphire.hacca.jp/font/fontabout.html)
 
 - あいでぃーぽっぷまる  
 Copyright(C) 2017 [Masaru Inoue](http://idfont.jp/infos_mb.htm) All Rights Reserved.
