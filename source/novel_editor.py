@@ -378,9 +378,16 @@ class LineFrame(ttk.Frame):
             orient=tk.VERTICAL,
             command=self.image_space.yview
         )
+        self.image_xsb = ttk.Scrollbar(
+            self.f1,
+            orient=tk.HORIZONTAL,
+            command=self.image_space.xview
+        )
+        self.image_space.configure(xscrollcommand=self.image_xsb.set)
         self.image_space.configure(yscrollcommand=self.image_ysb.set)
         self.image_space.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.image_ysb.grid(row=0, column=2, sticky=(tk.N, tk.S))
+        self.image_xsb.grid(row=1, column=1, sticky=(tk.W, tk.E))
         self.f1.grid(row=0, column=1, sticky=(tk.N, tk.S, tk.W, tk.E))
         self.f1.columnconfigure(1, weight=1)
         self.f1.rowconfigure(0, weight=1)
@@ -820,16 +827,18 @@ class LineFrame(ttk.Frame):
         window = tk.Toplevel(root)
         self.pack()
         self.canvas = tk.Canvas(window, width=600, height=300)
-        self.canvas.create_image(300, 150, image=img2)
+        self.canvas.create_image(0, 0, anchor='nw', image=img2)
         self.canvas.create_text(
-            400,
-            280,
+            550,
+            290,
+            anchor='se',
             text='Copyright (C) 2019-2020 Yamahara Yoshihiro',
             font=('', 12)
         )
         self.canvas.create_text(
-            480,
-            130,
+            420,
+            120,
+            anchor='nw',
             text='Ver 0.4.1 Beta',
             font=('', 12)
         )
