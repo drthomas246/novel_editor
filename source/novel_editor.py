@@ -839,7 +839,7 @@ class LineFrame(ttk.Frame):
             420,
             120,
             anchor='nw',
-            text='Ver 0.4.1 Beta',
+            text='Ver 0.4.2 Beta',
             font=('', 12)
         )
         self.canvas.pack()
