@@ -2,9 +2,9 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-[![coverage](https://img.shields.io/badge/coverage-95-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
-[![ランゲージ](https://img.shields.io/badge/python-3.8.5-orange)](https://www.python.org/)
+[![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
+[![coverage](https://img.shields.io/badge/coverage-90-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
+[![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/badge/license-MIT-green)](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE)
 [![PEP8](https://img.shields.io/badge/PEP8-Correspondence-green)](https://pep8-ja.readthedocs.io/ja/latest/)
