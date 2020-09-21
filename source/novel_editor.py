@@ -556,6 +556,7 @@ class LineFrame(ttk.Frame):
     def create_event_image(self):
         """イメージイベントの設定."""
         self.image_space.bind('<MouseWheel>', self.mouse_y_scroll)
+        self.image_space.bind('<Control-MouseWheel>', self.mouse_image_scroll)
 
     def create_event_character(self):
         """キャラクター欄のイベント設定."""
@@ -625,6 +626,23 @@ class LineFrame(ttk.Frame):
             self.image_space.yview_scroll(-1, 'units')
         elif event.delta < 0:
             self.image_space.yview_scroll(1, 'units')
+
+    def mouse_image_scroll(self, event):
+        """Ctrl+マウスホイールの拡大縮小設定."""
+        curItem = self.tree.focus()
+        self.select_list_item = self.tree.item(curItem)["text"]
+        if event.delta > 0:
+            self.zoom -= 5
+            if self.zoom <10:
+                self.zoom = 10
+        elif event.delta < 0:
+            self.zoom += 5
+
+        self.path_read_image(
+                    tree_folder[4][0],
+                    self.select_list_item,
+                    self.zoom
+                )
 
     def btn_click(self, event=None):
         """似顔絵ボタンを押したとき"""
@@ -840,7 +858,7 @@ class LineFrame(ttk.Frame):
             420,
             120,
             anchor='nw',
-            text='Ver 0.4.2 Beta',
+            text='Ver 0.4.3 Beta',
             font=('', 12)
         )
         self.canvas.pack()
@@ -1229,6 +1247,8 @@ class LineFrame(ttk.Frame):
                 )
                 self.tree.see(tree)
                 self.tree.selection_set(tree)
+                self.tree.focus(tree)
+                self.select_list_item = file_name
                 self.now_path = path
                 f = open(path, 'w', encoding='utf-8')
                 f.write("")
@@ -1236,8 +1256,10 @@ class LineFrame(ttk.Frame):
                 self.Frame_image()
                 self.path_read_image(
                     tree_folder[4][0],
-                    file_name
+                    file_name,
+                    0
                 )
+                self.zoom = 100
 
         else:
             if str(
@@ -1283,6 +1305,7 @@ class LineFrame(ttk.Frame):
                         # ツリービューを選択状態にする
                         self.tree.see(tree)
                         self.tree.selection_set(tree)
+                        self.tree.focus(tree)
                         self.select_list_item = file_name
                         self.winfo_toplevel().title(
                             u"小説エディタ\\{0}\\{1}"
@@ -1379,8 +1402,10 @@ class LineFrame(ttk.Frame):
                     self.Frame_image()
                     self.path_read_image(
                         tree_folder[4][0],
-                        self.select_list_item
+                        self.select_list_item,
+                        0
                     )
+                    self.zoom = 100
                 else:
                     path = "./{0}/{1}.txt".format(
                         val[0],
@@ -1401,7 +1426,7 @@ class LineFrame(ttk.Frame):
         self.now_path = ""
         self.winfo_toplevel().title(u"小説エディタ")
 
-    def path_read_image(self, image_path, image_name):
+    def path_read_image(self, image_path, image_name, scale):
         """パスが存在すればimageを読み込んで表示する"""
         if not self.now_path == "":
             title = "{0}/{1}.gif".format(
@@ -1409,6 +1434,15 @@ class LineFrame(ttk.Frame):
                 image_name
             )
             giffile = Image.open(title)
+            if scale > 0:
+                giffile = giffile.resize(
+                    (
+                        int(giffile.width / 100*scale),
+                        int(giffile.height / 100*scale)
+                    ),
+                    resample = Image.LANCZOS
+                )
+
             self.image_space.photo = ImageTk.PhotoImage(giffile)
             self.image_space.itemconfig(
                 self.image_on_space,
