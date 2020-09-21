@@ -633,7 +633,7 @@ class LineFrame(ttk.Frame):
         self.select_list_item = self.tree.item(curItem)["text"]
         if event.delta > 0:
             self.zoom -= 5
-            if self.zoom <10:
+            if self.zoom < 10:
                 self.zoom = 10
         elif event.delta < 0:
             self.zoom += 5
@@ -1440,7 +1440,7 @@ class LineFrame(ttk.Frame):
                         int(giffile.width / 100*scale),
                         int(giffile.height / 100*scale)
                     ),
-                    resample = Image.LANCZOS
+                    resample=Image.LANCZOS
                 )
 
             self.image_space.photo = ImageTk.PhotoImage(giffile)
