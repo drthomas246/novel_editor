@@ -631,6 +631,14 @@ class LineFrame(ttk.Frame):
         """Ctrl+マウスホイールの拡大縮小設定."""
         curItem = self.tree.focus()
         self.select_list_item = self.tree.item(curItem)["text"]
+        title = "./{0}/{1}.txt".format(
+            tree_folder[4][0],
+            self.select_list_item
+        )
+        f = open(title, 'r', encoding='utf-8')
+        zoom = f.read()
+        self.zoom = int(zoom)
+        f.close()
         if event.delta > 0:
             self.zoom -= 5
             if self.zoom < 10:
@@ -638,6 +646,9 @@ class LineFrame(ttk.Frame):
         elif event.delta < 0:
             self.zoom += 5
 
+        f = open(title, 'w', encoding='utf-8')
+        f.write(str(self.zoom))
+        f.close()
         self.path_read_image(
                     tree_folder[4][0],
                     self.select_list_item,
@@ -858,7 +869,7 @@ class LineFrame(ttk.Frame):
             420,
             120,
             anchor='nw',
-            text='Ver 0.4.3 Beta',
+            text='Ver 0.4.3 Beta2',
             font=('', 12)
         )
         self.canvas.pack()
@@ -1251,7 +1262,8 @@ class LineFrame(ttk.Frame):
                 self.select_list_item = file_name
                 self.now_path = path
                 f = open(path, 'w', encoding='utf-8')
-                f.write("")
+                self.zoom = 100
+                f.write(str(self.zoom))
                 f.close()
                 self.Frame_image()
                 self.path_read_image(
@@ -1259,7 +1271,6 @@ class LineFrame(ttk.Frame):
                     file_name,
                     0
                 )
-                self.zoom = 100
 
         else:
             if str(
@@ -1372,6 +1383,8 @@ class LineFrame(ttk.Frame):
             if not path.find(tree_folder[0][0]) == -1:
                 f.write(self.save_charactor_file())
                 self.charactor_file = ""
+            elif not path.find(tree_folder[4][0]) == -1:
+                f.write(str(self.zoom))
             else:
                 f.write(self.text.get("1.0", tk.END+'-1c'))
 
@@ -1398,14 +1411,16 @@ class LineFrame(ttk.Frame):
                         val[0],
                         self.select_list_item
                     )
+                    f = open(path, 'r', encoding='utf-8')
+                    zoom = f.read()
+                    self.zoom = int(zoom)
                     self.now_path = path
                     self.Frame_image()
                     self.path_read_image(
                         tree_folder[4][0],
                         self.select_list_item,
-                        0
+                        self.zoom
                     )
-                    self.zoom = 100
                 else:
                     path = "./{0}/{1}.txt".format(
                         val[0],
