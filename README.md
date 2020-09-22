@@ -132,6 +132,8 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
+- Version 0.4.3b2  
+imageの拡大縮小を保存できるようにする
 - Version 0.4.3b  
 imageを拡大縮小できるようにする
 - Version 0.4.2b  
