@@ -869,7 +869,7 @@ class LineFrame(ttk.Frame):
             420,
             120,
             anchor='nw',
-            text='Ver 0.4.3 Beta2',
+            text='Ver 0.5.0 Beta',
             font=('', 12)
         )
         self.canvas.pack()
@@ -1159,20 +1159,27 @@ class LineFrame(ttk.Frame):
             padding=(10, 5),
             command=self.search
         )
-        button.grid(row=1, column=1)
+        button.grid(row=1, column=0)
+        button2 = ttk.Button(
+            sub_win,
+            text=u'前検索',
+            width=str(u'前検索'),
+            padding=(10, 5),
+            command=self.search_forward
+        )
+        button2.grid(row=1, column=1)
         # 最前面に表示し続ける
         sub_win.attributes("-topmost", True)
         sub_win.title(u'検索')
         self.text_var.focus()
 
-    def search_start(self, texts):
+    def search_start(self, texts, case):
         """検索の初回処理."""
         # 各変数の初期化
-        self.next_pos_index = 0
         self.all_pos = []
 
         # はじめは1.0から検索し、見つかれば、それの最後+1文字の時点から再検索
-        # all_posには、['1.7', '3,1', '5.1'...]のような検索文字が見つかった地点の最初のインデックスが入っていく
+        # all_posには、['1.7', '3.1', '5.1'...]のような検索文字が見つかった地点の最初のインデックスが入っていく
         start_index = '1.0'
         while True:
             pos = self.text.search(texts, start_index, stopindex='end')
@@ -1181,20 +1188,36 @@ class LineFrame(ttk.Frame):
             self.all_pos.append(pos)
             start_index = '{0} + 1c'.format(pos)  # 最後から+1文字を起点に、再検索
 
-        # 最初のマッチ部分、all_pos[0]を選択させておく
-        self.search_next(texts)
+        # 最初のマッチ部分
+        if case == 1:
+            # 降順で検索
+            self.next_pos_index = -1
+            self.search_next(texts, 1)
+        else:
+            # 昇順で検索
+            self.next_pos_index = len(self.all_pos) + 1
+            self.search_next(texts, 0)
 
-    def search_next(self, texts):
+    def search_next(self, texts, case):
         """検索の続きの処理."""
+        if case == 1:
+            self.next_pos_index += 1
+        else:
+            self.next_pos_index -= 1
+
         try:
             # 今回のマッチ部分の取得を試みる
             pos = self.all_pos[self.next_pos_index]
         except IndexError:
             # all_posが空でなくIndexErrorならば、全てのマッチを見た、ということ
-            # なのでnext_post_indexを0にし、最初からまたマッチを見せる
             if self.all_pos:
-                self.next_pos_index = 0
-                self.search_next(texts)
+                if case == 1:
+                    self.next_pos_index = -1
+                    self.search_next(texts, 1)
+                else:
+                    self.next_pos_index = len(self.all_pos)
+                    self.search_next(texts, 0)
+
         else:
             # 次のマッチ部分を取得できればここ
             start = pos
@@ -1207,11 +1230,9 @@ class LineFrame(ttk.Frame):
             self.text.mark_set('insert', start)
             self.text.see('insert')
             self.text.focus()
-            # 次回取得分のために+1
-            self.next_pos_index += 1
 
     def search(self, event=None):
-        """文字の検索を行う."""
+        """ 降順の検索を行う."""
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
@@ -1223,10 +1244,31 @@ class LineFrame(ttk.Frame):
             pass
         elif now_text != self.last_text:
             # 前回の入力と違う文字なら、検索を最初から行う
-            self.search_start(now_text)
+            self.search_start(now_text, 1)
         else:
             # 前回の入力と同じなら、検索の続きを行う
-            self.search_next(now_text)
+            self.search_next(now_text, 1)
+
+        # 今回の入力を、「前回入力文字」にする
+        self.last_text = now_text
+
+    def search_forward(self, event=None):
+        """昇順の検索を行う."""
+        # 現在選択中の部分を解除
+        self.text.tag_remove('sel', '1.0', 'end')
+
+        # 現在検索ボックスに入力されてる文字
+        now_text = self.text_var.get()
+
+        if not now_text:
+            # 空欄だったら処理しない
+            pass
+        elif now_text != self.last_text:
+            # 前回の入力と違う文字なら、検索を最初から行う
+            self.search_start(now_text, 0)
+        else:
+            # 前回の入力と同じなら、検索の続きを行う
+            self.search_next(now_text, 0)
 
         # 今回の入力を、「前回入力文字」にする
         self.last_text = now_text
