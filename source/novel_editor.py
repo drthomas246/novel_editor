@@ -1162,8 +1162,8 @@ class LineFrame(ttk.Frame):
         button.grid(row=1, column=0)
         button2 = ttk.Button(
             sub_win,
-            text=u'前検索',
-            width=str(u'前検索'),
+            text=u'昇順検索',
+            width=str(u'昇順検索'),
             padding=(10, 5),
             command=self.search_forward
         )
@@ -1517,7 +1517,7 @@ class LineFrame(ttk.Frame):
             giffile.close()
 
         self.winfo_toplevel().title(
-                u"小説エディタ\\{0}\\{1}".format(image_path, image_name)
+                u"小説エディタ\\{0}\\{1}".format(tree_folder[4][1], image_name)
             )
 
     def path_read_text(self, text, sub_text):
