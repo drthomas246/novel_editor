@@ -133,7 +133,7 @@ $ coverage html
 
 ## 改変履歴
 - Version 0.5.0b  
-前検索をできるようにする
+昇順検索をできるようにする
 - Version 0.4.3b2  
 imageの拡大縮小を保存できるようにする
 - Version 0.4.3b  
