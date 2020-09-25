@@ -1141,8 +1141,8 @@ class LineFrame(ttk.Frame):
 
     def find_dialog(self, event=None):
         """検索ボックスを作成する"""
-        sub_win = tk.Toplevel(self)
-        self.text_var = ttk.Entry(sub_win, width=40)
+        search_win = tk.Toplevel(self)
+        self.text_var = ttk.Entry(search_win, width=40)
         self.text_var.grid(
             row=0,
             column=0,
@@ -1153,7 +1153,7 @@ class LineFrame(ttk.Frame):
             ipady=3
         )
         button = ttk.Button(
-            sub_win,
+            search_win,
             text=u'検索',
             width=str(u'検索'),
             padding=(10, 5),
@@ -1161,7 +1161,7 @@ class LineFrame(ttk.Frame):
         )
         button.grid(row=1, column=0)
         button2 = ttk.Button(
-            sub_win,
+            search_win,
             text=u'昇順検索',
             width=str(u'昇順検索'),
             padding=(10, 5),
@@ -1169,8 +1169,8 @@ class LineFrame(ttk.Frame):
         )
         button2.grid(row=1, column=1)
         # 最前面に表示し続ける
-        sub_win.attributes("-topmost", True)
-        sub_win.title(u'検索')
+        search_win.attributes("-topmost", True)
+        search_win.title(u'検索')
         self.text_var.focus()
 
     def search_start(self, texts, case):
@@ -1220,14 +1220,14 @@ class LineFrame(ttk.Frame):
 
         else:
             # 次のマッチ部分を取得できればここ
-            start = pos
+            mach_start = pos
             end = '{0} + {1}c'.format(pos, len(texts))
 
             # マッチ部分〜マッチ部分+文字数分 の範囲を選択する
-            self.text.tag_add('sel', start, end)
+            self.text.tag_add('sel', mach_start, end)
 
             # インサートカーソルをマッチした部分に入れ、スクロール、フォーカスも合わせておく
-            self.text.mark_set('insert', start)
+            self.text.mark_set('insert', mach_start)
             self.text.see('insert')
             self.text.focus()
 
@@ -1851,6 +1851,12 @@ def on_closing():
 
 
 if __name__ == "__main__":
+    root = tk.Tk()
+    root.withdraw()
+    if os.path.isdir("./data"):
+        messagebox.showerror(u"小説エディタ", u"二重起動はできません")
+        sys.exit()
+
     # タイトル横の画像ファイルのbase 64データ
     data = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
         GRoaGhwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoq
@@ -2082,8 +2088,8 @@ if __name__ == "__main__":
         FzjB62jQ6y/oa/kGcG/agFCYBVP4hEvgBGEIhTbo7AB3cKiVBEdAgx9o7we38AvH
         8AzX8A3n8A738A8H8RDP8IAAADs=
         '''
-    root = tk.Tk()
     # アイコンを設定
+    root.geometry('600x300')
     root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=data))
     root.title(u"小説エディタ")
     # タイトルの画像ファイルのbase 64データ
@@ -2475,6 +2481,8 @@ if __name__ == "__main__":
             str(int(wh/2-lh/2))
         )
     )
+    root.deiconify()
+
     # windowsのみタイトルバーを削除
     # OS別判断
     if os.name == 'nt':
