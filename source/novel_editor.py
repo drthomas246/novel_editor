@@ -1246,7 +1246,6 @@ class LineFrame(ttk.Frame):
         self.replacement_dialog = 0
         self.replacement_win.destroy()
 
-
     def search(self, event=None):
         """検索処理"""
         # 現在選択中の部分を解除
@@ -1267,19 +1266,6 @@ class LineFrame(ttk.Frame):
 
         # 今回の入力を、「前回入力文字」にする
         self.last_text = now_text
-
-        else:
-            # 次のマッチ部分を取得できればここ
-            mach_start = pos
-            end = '{0} + {1}c'.format(pos, len(texts))
-
-            # マッチ部分〜マッチ部分+文字数分 の範囲を選択する
-            self.text.tag_add('sel', mach_start, end)
-
-            # インサートカーソルをマッチした部分に入れ、スクロール、フォーカスも合わせておく
-            self.text.mark_set('insert', mach_start)
-            self.text.see('insert')
-            self.text.focus()
 
     def replacement(self, event=None):
         """置換処理"""
