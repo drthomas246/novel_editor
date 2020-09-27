@@ -69,6 +69,7 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 | Ctrl+V | ペースト |
 | Ctrl+A | すべて選択 |
 | Ctrl+F | 検索 |
+| Ctrl+L | 置換 |
 | Ctrl+Z | UNDO |
 | Ctrl+Shift+Z | REDO |
 | Tab | 名前の一覧表示 |
@@ -132,6 +133,8 @@ $ coverage html
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
 
 ## 改変履歴
+- Version 0.6.0b  
+置換をできるようにする
 - Version 0.5.0b  
 昇順検索をできるようにする
 - Version 0.4.3b2  

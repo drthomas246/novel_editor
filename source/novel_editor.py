@@ -235,6 +235,12 @@ class LineFrame(ttk.Frame):
             accelerator='Ctrl+F',
             command=self.find_dialog
         )
+        Edit_menu.add_command(
+            label=u'置換(L)',
+            under=3,
+            accelerator='Ctrl+L',
+            command=self.replacement_dialog
+        )
         self.menu_bar.add_cascade(
             label=u'編集(E)',
             under=3,
@@ -518,6 +524,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Right>', self.update_line_numbers)
         # テキストの変更時
         self.text.bind('<<Change>>', self.Change_setting)
+        # キー場押されたときの処理
+        self.text.bind("<Any-KeyPress>", self.push_keys)
         # ウィジェットのサイズが変わった際。行番号の描画を行う
         self.text.bind('<Configure>', self.update_line_numbers)
         # Tab押下時(インデント、又はコード補完)
@@ -532,6 +540,8 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-u>', self.open_url)
         # 検索ダイアログを開く
         self.text.bind('<Control-Key-f>', self.find_dialog)
+        # 置換ダイアログを開く
+        self.text.bind('<Control-Key-l>', self.replacement_dialog)
         # 上書き保存する
         self.text.bind('<Control-Key-s>', self.overwrite_save_file)
         # 新規作成する
@@ -619,6 +629,10 @@ class LineFrame(ttk.Frame):
         self.tree.bind("<Control-Key-g>", self.On_name_Click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
+
+    def push_keys(self, event):
+        # 検索処理を中断する
+        self.replacement_dialog = 0
 
     def mouse_y_scroll(self, event):
         """マウスホイール移動の設定."""
@@ -757,6 +771,11 @@ class LineFrame(ttk.Frame):
 
         # ハイライトする
         self._highlight(start, src, end)
+        # 置換処理時に選択する
+        if self.replacement_dialog == 1:
+            start = self.next_pos
+            end = '{0} + {1}c'.format(self.next_pos, len(self.last_text))
+            self.text.tag_add('sel', start, end)
 
     def _highlight(self, start, src, end):
         """ハイライトの共通処理"""
@@ -869,7 +888,7 @@ class LineFrame(ttk.Frame):
             420,
             120,
             anchor='nw',
-            text='Ver 0.5.0 Beta',
+            text='Ver 0.6.0 Beta',
             font=('', 12)
         )
         self.canvas.pack()
@@ -1173,105 +1192,177 @@ class LineFrame(ttk.Frame):
         sub_win.title(u'検索')
         self.text_var.focus()
 
-    def search_start(self, texts, case):
-        """検索の初回処理."""
-        # 各変数の初期化
-        self.all_pos = []
+    def replacement_dialog(self, event=None):
+        """置換ボックスを作成する"""
+        self.replacement_win = tk.Toplevel(self)
+        self.text_var = ttk.Entry(self.replacement_win, width=40)
+        self.text_var.grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            padx=5,
+            pady=5,
+            sticky=tk.W+tk.E,
+            ipady=3
+        )
+        self.replacement_var = ttk.Entry(self.replacement_win, width=40)
+        self.replacement_var.grid(
+            row=1,
+            column=0,
+            columnspan=2,
+            padx=5,
+            pady=5,
+            sticky=tk.W+tk.E,
+            ipady=3
+        )
+        button = ttk.Button(
+            self.replacement_win,
+            text=u'検索',
+            width=str(u'検索'),
+            padding=(10, 5),
+            command=self.search
+        )
+        button.grid(row=2, column=0)
+        button2 = ttk.Button(
+            self.replacement_win,
+            text=u'置換',
+            width=str(u'置換'),
+            padding=(10, 5),
+            command=self.replacement
+        )
+        button2.grid(row=2, column=1)
+        # 最前面に表示し続ける
+        self.replacement_win.attributes("-topmost", True)
+        self.replacement_win.title(u'置換')
+        self.text_var.focus()
+        # ウインドウが閉じられたときの処理
+        self.replacement_win.protocol(
+            "WM_DELETE_WINDOW",
+            self.replacement_dialog_on_closing
+            )
 
-        # はじめは1.0から検索し、見つかれば、それの最後+1文字の時点から再検索
-        # all_posには、['1.7', '3.1', '5.1'...]のような検索文字が見つかった地点の最初のインデックスが入っていく
-        start_index = '1.0'
-        while True:
-            pos = self.text.search(texts, start_index, stopindex='end')
-            if not pos:  # 検索文字がもう見つからければbreak
-                break
-            self.all_pos.append(pos)
-            start_index = '{0} + 1c'.format(pos)  # 最後から+1文字を起点に、再検索
-
-        # 最初のマッチ部分
-        if case == 1:
-            # 降順で検索
-            self.next_pos_index = -1
-            self.search_next(texts, 1)
-        else:
-            # 昇順で検索
-            self.next_pos_index = len(self.all_pos) + 1
-            self.search_next(texts, 0)
-
-    def search_next(self, texts, case):
-        """検索の続きの処理."""
-        if case == 1:
-            self.next_pos_index += 1
-        else:
-            self.next_pos_index -= 1
-
-        try:
-            # 今回のマッチ部分の取得を試みる
-            pos = self.all_pos[self.next_pos_index]
-        except IndexError:
-            # all_posが空でなくIndexErrorならば、全てのマッチを見た、ということ
-            if self.all_pos:
-                if case == 1:
-                    self.next_pos_index = -1
-                    self.search_next(texts, 1)
-                else:
-                    self.next_pos_index = len(self.all_pos)
-                    self.search_next(texts, 0)
-
-        else:
-            # 次のマッチ部分を取得できればここ
-            start = pos
-            end = '{0} + {1}c'.format(pos, len(texts))
-
-            # マッチ部分〜マッチ部分+文字数分 の範囲を選択する
-            self.text.tag_add('sel', start, end)
-
-            # インサートカーソルをマッチした部分に入れ、スクロール、フォーカスも合わせておく
-            self.text.mark_set('insert', start)
-            self.text.see('insert')
-            self.text.focus()
+    def replacement_dialog_on_closing(self):
+        """検索ウインドウが閉じられたときの処理"""
+        self.replacement_dialog = 0
+        self.replacement_win.destroy()
 
     def search(self, event=None):
-        """ 降順の検索を行う."""
+        """検索処理"""
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
         # 現在検索ボックスに入力されてる文字
         now_text = self.text_var.get()
-
         if not now_text:
             # 空欄だったら処理しない
             pass
         elif now_text != self.last_text:
             # 前回の入力と違う文字なら、検索を最初から行う
-            self.search_start(now_text, 1)
+            index = '0.0'
+            self.search_next(now_text, index, 0)
         else:
             # 前回の入力と同じなら、検索の続きを行う
-            self.search_next(now_text, 1)
+            self.search_next(now_text, self.next_pos, 1)
+
+        # 今回の入力を、「前回入力文字」にする
+        self.last_text = now_text
+
+    def replacement(self, event=None):
+        """置換処理"""
+        # 現在選択中の部分を解除
+        self.text.tag_remove('sel', '1.0', 'end')
+
+        # 現在検索ボックスに入力されてる文字
+        now_text = self.text_var.get()
+        replacement_text = self.replacement_var.get()
+        if not now_text or not replacement_text:
+            # 空欄だったら処理しない
+            pass
+        elif now_text != self.last_text:
+            # 前回の入力と違う文字なら、検索を最初から行う
+            self.replacement_dialog = 1
+            index = '0.0'
+            self.search_next(now_text, index, 0)
+        else:
+            # 前回の入力と同じなら、検索の続きを行う
+            self.replacement_dialog = 1
+            # 検索文字の置換を行なう
+            start = self.next_pos
+            end = '{0} + {1}c'.format(self.next_pos, len(now_text))
+            self.text.delete(start, end)
+            self.text.insert(start, replacement_text)
+            self.search_next(now_text, self.next_pos, 1)
 
         # 今回の入力を、「前回入力文字」にする
         self.last_text = now_text
 
     def search_forward(self, event=None):
-        """昇順の検索を行う."""
+        """昇順検索処理"""
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
         # 現在検索ボックスに入力されてる文字
         now_text = self.text_var.get()
-
         if not now_text:
             # 空欄だったら処理しない
             pass
         elif now_text != self.last_text:
             # 前回の入力と違う文字なら、検索を最初から行う
-            self.search_start(now_text, 0)
+            index = 'end'
+            self.search_next(now_text, index, 2)
         else:
             # 前回の入力と同じなら、検索の続きを行う
-            self.search_next(now_text, 0)
+            self.search_next(now_text, self.next_pos, 2)
 
         # 今回の入力を、「前回入力文字」にする
         self.last_text = now_text
+
+    def search_next(self, search, index, case):
+        """検索のメイン処理"""
+        if case == 2:
+            backwards = True
+            stopindex = '0.0'
+            index = '{0}'.format(index)
+        elif case == 0:
+            backwards = False
+            stopindex = 'end'
+            index = '{0}'.format(index)
+        else:
+            backwards = False
+            stopindex = 'end'
+            index = '{0} + 1c'.format(index)
+
+        pos = self.text.search(
+            search, index,
+            stopindex=stopindex,
+            backwards=backwards
+        )
+        if not pos:
+            if case == 2:
+                index = "end"
+            else:
+                index = "0.0"
+
+            pos = self.text.search(
+                search, index,
+                stopindex=stopindex,
+                backwards=backwards
+            )
+            if not pos:
+                messagebox.showinfo(
+                    "検索",
+                    "最後まで検索しましたが検索文字はありませんでした。"
+                )
+                self.replacement_dialog = 0
+                return
+
+        self.next_pos = pos
+        start = pos
+        end = '{0} + {1}c'.format(pos, len(search))
+        self.text.tag_add('sel', start, end)
+        self.text.mark_set('insert', start)
+        self.text.see('insert')
+        self.text.focus()
 
     def message_window(self, event=None):
         """ツリービューの選択ダイアログを表示する."""
