@@ -6,7 +6,7 @@
 [![coverage](https://img.shields.io/badge/coverage-90-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
 [![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
-[![ライセンス](https://img.shields.io/badge/license-MIT-green)](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE)
+[![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/LICENSE.md)
 [![PEP8](https://img.shields.io/badge/PEP8-Correspondence-green)](https://pep8-ja.readthedocs.io/ja/latest/)
 [![リリース](https://img.shields.io/github/v/release/drthomas246/novel_editor?include_prereleases)](https://github.com/drthomas246/novel_editor/releases)  
 ![ドキュメント](https://img.shields.io/badge/document-ja-green)
