@@ -221,7 +221,7 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 - 著作年：2019-2020
 - HP：https://www.hobofoto.net/
 - E-mail：yoshihiro@yamahara.email
-- ライセンス：[GNU GPL3 License](https://raw.githubusercontent.com/drthomas246/novel_editor/master/LICENSE.md)
+- ライセンス：[GNU GPL3 License](https://github.com/drthomas246/novel_editor/blob/master/LICENSE.md)
 
 ## Special thanks
 - jaconv (文字変換)ライブラリ  
