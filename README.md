@@ -1,4 +1,4 @@
-# novel_editor
+# Novel Editor
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 

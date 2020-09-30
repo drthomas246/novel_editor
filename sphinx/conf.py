@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../source'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'novel_editor'
+project = 'Novel Editor'
 copyright = '2020, Yamahara Yoshihiro'
 author = 'Yamahara Yoshihiro'
 
