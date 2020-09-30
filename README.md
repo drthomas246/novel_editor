@@ -108,7 +108,7 @@ import sys
 sys.path.insert(0, os.path.abspath('../source'))
 # ～～～～～～～～～～～～～～～～～～～～～～～～～～
 extensions = [
-	'recmmonmark',
+    'recmmonmark',
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode'
