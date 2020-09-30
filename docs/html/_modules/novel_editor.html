@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../novel_editor.html">Novel Editor モジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
 </ul>
 
             
@@ -160,7 +160,6 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">webbrowser</span>
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
@@ -175,6 +174,10 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
 <span class="kn">from</span> <span class="nn">janome.tokenizer</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+
+<span class="kn">import</span> <span class="nn">mydialog</span>
+<span class="kn">import</span> <span class="nn">helpmenu</span>
+<span class="kn">import</span> <span class="nn">processingmenu</span>
 
 
 <div class="viewcode-block" id="CustomText"><a class="viewcode-back" href="../novel_editor.html#novel_editor.CustomText">[ドキュメント]</a><span class="k">class</span> <span class="nc">CustomText</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">):</span>
@@ -206,84 +209,6 @@
 <span class="s1">            rename </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
 <span class="s1">            interp alias {{}} ::</span><span class="si">{widget}</span><span class="s1"> {{}} widget_proxy </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span></div>
-
-
-<div class="viewcode-block" id="Mydialog"><a class="viewcode-back" href="../novel_editor.html#novel_editor.Mydialog">[ドキュメント]</a><span class="k">class</span> <span class="nc">Mydialog</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;ダイアログ作成クラス</span>
-
-<span class="sd">    ・自作ダイアログを呼び出し表示する。</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        self.txt (str): インプットボックスの値</span>
-<span class="sd">        self.sub_name_win (instance): ダイアログウインドウインスタンス</span>
-<span class="sd">        self.txt_name (instance): インプットボックスインスタンス</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            message (instance): 親ウインドウインスタンス</span>
-<span class="sd">            button1 (str): ボタンのメッセージ</span>
-<span class="sd">            button2 (bool): キャンセルボタンを表示する(True)</span>
-<span class="sd">            title (str): タイトル</span>
-<span class="sd">            text (bool): 選択状態にする(True)</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
-            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
-            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
-        <span class="p">)</span>
-        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="n">button1</span><span class="p">,</span>
-            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">button1</span><span class="p">),</span>
-            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_ok</span>
-        <span class="p">)</span>
-        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">button2</span><span class="p">:</span>
-            <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
-                <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">,</span>
-                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">),</span>
-                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-                <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span>
-            <span class="p">)</span>
-
-            <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">select_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
-
-<div class="viewcode-block" id="Mydialog.sub_name_ok"><a class="viewcode-back" href="../novel_editor.html#novel_editor.Mydialog.sub_name_ok">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">sub_name_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ダイアログボタンクリック時の処理</span>
-
-<span class="sd">        ・自作ダイアログのボタンをクリックしたときにインプットボックスに</span>
-<span class="sd">        入力されている値を取得する。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            str: インプットボックスの値</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt</span></div></div>
 
 
 <div class="viewcode-block" id="LineFrame"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame">[ドキュメント]</a><span class="k">class</span> <span class="nc">LineFrame</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
@@ -1169,89 +1094,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LineFrame.open_url"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.open_url">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;小説家になろうのユーザーページを開く</span>
-
-<span class="sd">        ・インターネットブラウザで小説家になろうのユーザーページを開く。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;https://syosetu.com/user/top/&quot;</span><span class="p">)</span></div>
+        <span class="n">myclass</span> <span class="o">=</span> <span class="n">processingmenu</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">myclass</span><span class="o">.</span><span class="n">open_becoming_novelist_page</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LineFrame.find_dictionaly"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.find_dictionaly">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">find_dictionaly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;意味を検索</span>
-
-<span class="sd">        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を</span>
-<span class="sd">        検索する。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># wikipediaから</span>
-        <span class="n">select_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">selection_get</span><span class="p">()</span>
-        <span class="n">page_py</span> <span class="o">=</span> <span class="n">wiki_wiki</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">select_text</span><span class="p">)</span>
-        <span class="c1"># ページがあるかどうか判断</span>
-        <span class="k">if</span> <span class="n">page_py</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
-                <span class="s2">&quot;「</span><span class="si">{0}</span><span class="s2">」の意味&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
-                <span class="n">page_py</span><span class="o">.</span><span class="n">summary</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">messagebox</span><span class="o">.</span><span class="n">showwarning</span><span class="p">(</span>
-                <span class="s2">&quot;「</span><span class="si">{0}</span><span class="s2">」の意味&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
-                <span class="sa">u</span><span class="s2">&quot;見つけられませんでした。&quot;</span>
-            <span class="p">)</span></div>
+        <span class="n">myclass</span> <span class="o">=</span> <span class="n">processingmenu</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">myclass</span><span class="o">.</span><span class="n">find_wikipedia</span><span class="p">(</span><span class="n">wiki_wiki</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LineFrame.open_help"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.open_help">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;helpページを開く</span>
-
-<span class="sd">        ・ウエブブラウザを使ってREADME.htmlを表示する。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-            <span class="s1">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-            <span class="p">)</span>
-            <span class="o">+</span> <span class="s2">&quot;/README.html&quot;</span>
-        <span class="p">)</span></div>
+        <span class="n">myclass</span> <span class="o">=</span> <span class="n">helpmenu</span><span class="o">.</span><span class="n">HelpMenuClass</span><span class="p">()</span>
+        <span class="n">myclass</span><span class="o">.</span><span class="n">help</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LineFrame.open_version"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.open_version">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;バージョン情報を表示</span>
-
-<span class="sd">        ・バージョン情報表示ダイアログを表示する。</span>
-<span class="sd">        ×を押すまで消えないようにする。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">img2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datas</span><span class="p">)</span>
-        <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;nw&#39;</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">img2</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">create_text</span><span class="p">(</span>
-            <span class="mi">550</span><span class="p">,</span>
-            <span class="mi">290</span><span class="p">,</span>
-            <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;se&#39;</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Copyright (C) 2019-2020 Yamahara Yoshihiro&#39;</span><span class="p">,</span>
-            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">create_text</span><span class="p">(</span>
-            <span class="mi">420</span><span class="p">,</span>
-            <span class="mi">120</span><span class="p">,</span>
-            <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;nw&#39;</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Ver 0.6.0 Beta&#39;</span><span class="p">,</span>
-            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-        <span class="n">window</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span></div>
+        <span class="n">myclass</span> <span class="o">=</span> <span class="n">helpmenu</span><span class="o">.</span><span class="n">HelpMenuClass</span><span class="p">()</span>
+        <span class="n">myclass</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">datas</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LineFrame.read_text"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.read_text">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;テキストを読み上げる</span>
@@ -1961,7 +1817,7 @@
             <span class="p">):</span>
                 <span class="c1"># サブダイヤログを表示する</span>
                 <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">に挿入&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
-                <span class="n">dialog</span> <span class="o">=</span> <span class="n">Mydialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;挿入&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">dialog</span> <span class="o">=</span> <span class="n">mydialog</span><span class="o">.</span><span class="n">Mydialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;挿入&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
                 <span class="n">root</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
                 <span class="n">file_name</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">txt</span>
                 <span class="k">del</span> <span class="n">dialog</span>
@@ -2243,7 +2099,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">sub_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
             <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">の名前を変更&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sub_text</span><span class="p">)</span>
-            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">Mydialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;変更&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sub_text</span><span class="p">)</span>
+            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">mydialog</span><span class="o">.</span><span class="n">Mydialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;変更&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sub_text</span><span class="p">)</span>
             <span class="n">root</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog2</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
             <span class="c1"># テキストを読み取り専用を解除する</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>

@@ -5,7 +5,6 @@ import re
 import sys
 import zipfile
 import shutil
-import webbrowser
 import platform
 import textwrap
 import tkinter as tk
@@ -20,6 +19,10 @@ import wikipediaapi
 import requests
 from PIL import Image, ImageTk
 from janome.tokenizer import Tokenizer
+
+import mydialog
+import helpmenu
+import processingmenu
 
 
 class CustomText(tk.Text):
@@ -51,84 +54,6 @@ class CustomText(tk.Text):
             rename {widget} _{widget}
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
-
-
-class Mydialog():
-    """ダイアログ作成クラス
-
-    ・自作ダイアログを呼び出し表示する。
-
-    Attributes:
-        self.txt (str): インプットボックスの値
-        self.sub_name_win (instance): ダイアログウインドウインスタンス
-        self.txt_name (instance): インプットボックスインスタンス
-
-    """
-
-    def __init__(self, message, button1, button2, title, text):
-        """
-        Args:
-            message (instance): 親ウインドウインスタンス
-            button1 (str): ボタンのメッセージ
-            button2 (bool): キャンセルボタンを表示する(True)
-            title (str): タイトル
-            text (bool): 選択状態にする(True)
-
-        """
-        self.txt = ""
-        self.sub_name_win = tk.Toplevel(message)
-        self.txt_name = ttk.Entry(self.sub_name_win, width=40)
-        self.txt_name.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
-        )
-        button = ttk.Button(
-            self.sub_name_win,
-            text=button1,
-            width=str(button1),
-            padding=(10, 5),
-            command=self.sub_name_ok
-        )
-        button.grid(row=1, column=0)
-        if button2:
-            button = ttk.Button(
-                self.sub_name_win,
-                text=u'キャンセル',
-                width=str(u'キャンセル'),
-                padding=(10, 5),
-                command=self.sub_name_win.destroy
-            )
-
-            button.grid(row=1, column=1)
-            self.txt_name.focus()
-            if text is not False:
-                self.txt_name.insert(tk.END, text)
-                self.txt_name.select_range(0, 'end')
-
-        self.sub_name_win.title(title)
-        self.txt_name.focus()
-
-    def sub_name_ok(self, event=None):
-        """ダイアログボタンクリック時の処理
-
-        ・自作ダイアログのボタンをクリックしたときにインプットボックスに
-        入力されている値を取得する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        Returns:
-            str: インプットボックスの値
-
-        """
-        self.txt = self.txt_name.get()
-        self.sub_name_win.destroy()
-        return self.txt
 
 
 class LineFrame(ttk.Frame):
@@ -1014,89 +939,20 @@ class LineFrame(ttk.Frame):
         self.all_highlight()
 
     def open_url(self, event=None):
-        """小説家になろうのユーザーページを開く
-
-        ・インターネットブラウザで小説家になろうのユーザーページを開く。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        webbrowser.open("https://syosetu.com/user/top/")
+        myclass = processingmenu.ProcessingMenuClass(self)
+        myclass.open_becoming_novelist_page()
 
     def find_dictionaly(self, event=None):
-        """意味を検索
-
-        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
-        検索する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        # wikipediaから
-        select_text = self.text.selection_get()
-        page_py = wiki_wiki.page(select_text)
-        # ページがあるかどうか判断
-        if page_py.exists():
-            messagebox.showinfo(
-                "「{0}」の意味".format(select_text),
-                page_py.summary
-            )
-        else:
-            messagebox.showwarning(
-                "「{0}」の意味".format(select_text),
-                u"見つけられませんでした。"
-            )
+        myclass = processingmenu.ProcessingMenuClass(self)
+        myclass.find_wikipedia(wiki_wiki)
 
     def open_help(self, event=None):
-        """helpページを開く
-
-        ・ウエブブラウザを使ってREADME.htmlを表示する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        webbrowser.open(
-            'file://' + os.path.dirname(
-                os.path.abspath(os.path.dirname(__file__))
-            )
-            + "/README.html"
-        )
+        myclass = helpmenu.HelpMenuClass()
+        myclass.help()
 
     def open_version(self, event=None):
-        """バージョン情報を表示
-
-        ・バージョン情報表示ダイアログを表示する。
-        ×を押すまで消えないようにする。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        img2 = tk.PhotoImage(data=datas)
-        window = tk.Toplevel(root)
-        self.pack()
-        self.canvas = tk.Canvas(window, width=600, height=300)
-        self.canvas.create_image(0, 0, anchor='nw', image=img2)
-        self.canvas.create_text(
-            550,
-            290,
-            anchor='se',
-            text='Copyright (C) 2019-2020 Yamahara Yoshihiro',
-            font=('', 12)
-        )
-        self.canvas.create_text(
-            420,
-            120,
-            anchor='nw',
-            text='Ver 0.6.0 Beta',
-            font=('', 12)
-        )
-        self.canvas.pack()
-        window.resizable(width=0, height=0)
-        window.mainloop()
+        myclass = helpmenu.HelpMenuClass()
+        myclass.version(root, datas)
 
     def read_text(self, event=None):
         """テキストを読み上げる
@@ -1806,7 +1662,7 @@ class LineFrame(ttk.Frame):
             ):
                 # サブダイヤログを表示する
                 title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
-                dialog = Mydialog(self, "挿入", True, title, False)
+                dialog = mydialog.Mydialog(self, "挿入", True, title, False)
                 root.wait_window(dialog.sub_name_win)
                 file_name = dialog.txt
                 del dialog
@@ -2088,7 +1944,7 @@ class LineFrame(ttk.Frame):
         if not text == "":
             sub_text = self.tree.item(curItem)["text"]
             title = u'{0}の名前を変更'.format(sub_text)
-            dialog2 = Mydialog(self, u"変更", True, title, sub_text)
+            dialog2 = mydialog.Mydialog(self, u"変更", True, title, sub_text)
             root.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
             self.text.configure(state='normal')

@@ -1,5 +1,5 @@
-Novel Editor モジュール
-========================
+novel\_editor module
+====================
 
 .. automodule:: novel_editor
    :members:

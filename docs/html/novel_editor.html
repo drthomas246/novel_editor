@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Novel Editor モジュール &mdash; Novel Editor 0.6.0b ドキュメント</title>
+  <title>novel_editor module &mdash; Novel Editor 0.6.0b ドキュメント</title>
   
 
   
@@ -37,7 +37,8 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="prev" title="カバレッジの計測について" href="sub/coverage.html" /> 
+    <link rel="next" title="processingmenu module" href="processingmenu.html" />
+    <link rel="prev" title="mydialog module" href="mydialog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,7 +90,13 @@
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Novel Editor モジュール</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="helpmenu.html">helpmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mydialog.html">mydialog module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">novel_editor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processingmenu.html">processingmenu module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -136,7 +143,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Novel Editor モジュール</li>
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>novel_editor module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,7 +165,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-novel_editor">
-<span id="novel-editor"></span><h1>Novel Editor モジュール<a class="headerlink" href="#module-novel_editor" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<span id="novel-editor-module"></span><h1>novel_editor module<a class="headerlink" href="#module-novel_editor" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
 <dt id="novel_editor.CustomText">
 <em class="property">class </em><code class="sig-prename descclassname">novel_editor.</code><code class="sig-name descname">CustomText</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#CustomText"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.CustomText" title="この定義へのパーマリンク">¶</a></dt>
@@ -317,15 +326,7 @@
 <dl class="py method">
 <dt id="novel_editor.LineFrame.find_dictionaly">
 <code class="sig-name descname">find_dictionaly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.find_dictionaly"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.find_dictionaly" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>意味を検索</p>
-<p>・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
-検索する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="novel_editor.LineFrame.font_dialog">
@@ -554,39 +555,17 @@
 <dl class="py method">
 <dt id="novel_editor.LineFrame.open_help">
 <code class="sig-name descname">open_help</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_help"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_help" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>helpページを開く</p>
-<p>・ウエブブラウザを使ってREADME.htmlを表示する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="novel_editor.LineFrame.open_url">
 <code class="sig-name descname">open_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_url"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_url" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>小説家になろうのユーザーページを開く</p>
-<p>・インターネットブラウザで小説家になろうのユーザーページを開く。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="novel_editor.LineFrame.open_version">
 <code class="sig-name descname">open_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_version"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_version" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>バージョン情報を表示</p>
-<p>・バージョン情報表示ダイアログを表示する。
-×を押すまで消えないようにする。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="novel_editor.LineFrame.overwrite_save_file">
@@ -970,66 +949,6 @@
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="novel_editor.Mydialog">
-<em class="property">class </em><code class="sig-prename descclassname">novel_editor.</code><code class="sig-name descname">Mydialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">button1</span></em>, <em class="sig-param"><span class="n">button2</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#Mydialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.Mydialog" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ダイアログ作成クラス</p>
-<p>・自作ダイアログを呼び出し表示する。</p>
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.txt">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">txt</code><a class="headerlink" href="#novel_editor.Mydialog.self.txt" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>インプットボックスの値</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.sub_name_win">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">sub_name_win</code><a class="headerlink" href="#novel_editor.Mydialog.self.sub_name_win" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ダイアログウインドウインスタンス</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.txt_name">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">txt_name</code><a class="headerlink" href="#novel_editor.Mydialog.self.txt_name" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>インプットボックスインスタンス</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.Mydialog.sub_name_ok">
-<code class="sig-name descname">sub_name_ok</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#Mydialog.sub_name_ok"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.Mydialog.sub_name_ok" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ダイアログボタンクリック時の処理</p>
-<p>・自作ダイアログのボタンをクリックしたときにインプットボックスに
-入力されている値を取得する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-<dt class="field-even">戻り値</dt>
-<dd class="field-even"><p>インプットボックスの値</p>
-</dd>
-<dt class="field-odd">戻り値の型</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt id="novel_editor.on_closing">
 <code class="sig-prename descclassname">novel_editor.</code><code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#on_closing"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.on_closing" title="この定義へのパーマリンク">¶</a></dt>
@@ -1047,8 +966,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="processingmenu.html" class="btn btn-neutral float-right" title="processingmenu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="sub/coverage.html" class="btn btn-neutral float-left" title="カバレッジの計測について" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="mydialog.html" class="btn btn-neutral float-left" title="mydialog module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

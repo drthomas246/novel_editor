@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mydialog &mdash; Novel Editor 0.6.0b ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">モジュールコード</a> &raquo;</li>
+        
+      <li>mydialog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>mydialog のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
+
+
+<div class="viewcode-block" id="Mydialog"><a class="viewcode-back" href="../mydialog.html#mydialog.Mydialog">[ドキュメント]</a><span class="k">class</span> <span class="nc">Mydialog</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;ダイアログ作成クラス</span>
+
+<span class="sd">    ・自作ダイアログを呼び出し表示する。</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        self.txt (str): インプットボックスの値</span>
+<span class="sd">        self.sub_name_win (instance): ダイアログウインドウインスタンス</span>
+<span class="sd">        self.txt_name (instance): インプットボックスインスタンス</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            message (instance): 親ウインドウインスタンス</span>
+<span class="sd">            button1 (str): ボタンのメッセージ</span>
+<span class="sd">            button2 (bool): キャンセルボタンを表示する(True)</span>
+<span class="sd">            title (str): タイトル</span>
+<span class="sd">            text (bool): 選択状態にする(True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">button1</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">button1</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_ok</span>
+        <span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">button2</span><span class="p">:</span>
+            <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">),</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span>
+            <span class="p">)</span>
+
+            <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">select_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Mydialog.sub_name_ok"><a class="viewcode-back" href="../mydialog.html#mydialog.Mydialog.sub_name_ok">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">sub_name_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ダイアログボタンクリック時の処理</span>
+
+<span class="sd">        ・自作ダイアログのボタンをクリックしたときにインプットボックスに</span>
+<span class="sd">        入力されている値を取得する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: インプットボックスの値</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

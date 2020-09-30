@@ -15,7 +15,7 @@ Welcome to Novel Editor's documentation!
    /sub/save
    /sub/exe
    /sub/coverage
-   novel_editor
+   modules
 
 Indices and tables
 ==================
