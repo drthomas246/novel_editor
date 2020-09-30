@@ -2,9 +2,9 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
-[![Build Status](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
-[![coverage](https://img.shields.io/badge/coverage-90-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
-[![ランゲージ](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
+[![ビルドステータス](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
+[![カバレッジ](https://img.shields.io/badge/coverage-90-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
+[![Pythonバージョン](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/LICENSE.md)
 [![PEP8](https://img.shields.io/badge/PEP8-Correspondence-green)](https://pep8-ja.readthedocs.io/ja/latest/)
@@ -13,8 +13,8 @@
 ![コミットメッセージ](https://img.shields.io/badge/Commit_message-ja-green)
 ![コードコメント](https://img.shields.io/badge/code_comment-ja-green)
 
-- python で作った、「[小説家になろう](https://syosetu.com/)」の投稿用エディタです。
-- キャラクター、職種、場所、イベント、イメージ、小説、をわけて管理することで小説を少しでも楽にかけるようにしてあります。
+- Python で作った、「[小説家になろう](https://syosetu.com/)」の投稿用エディタです。
+- 「キャラクター」、「職種」、「場所」、「イベント」、「イメージ」、「小説」をわけて管理することで小説を少しでも楽にかけるようにしてあります。
 - TABキーでキャラクターに登録した、一覧を簡単に入力することができます。
 - Ctrl+Rで選択文字列の漢字部分にルビを振ることができます。
 - Ctrl+Shift+Rで文章を読み上げることができます。
@@ -22,25 +22,6 @@
 - 登場人物がシンタックスハイライトされます。
 
 ## 使用方法
-
-- 開発環境は、Windows 10 python Version 3.7.4 64bit版を使用しています。
-- Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げはできません。)
-- それ以外の環境でもpythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。
-
-- jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリ、requests(HTTP)ライブラリを使用しています。
-- インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
-```
-$ pip install 'jaconv==0.2.4'
-$ pip install 'Janome==0.3.9'
-$ pip install 'pyttsx3==2.71'
-$ pip install 'wikipedia-api==0.5.4'
-$ pip install 'Pillow==7.2.0'
-$ pip install 'requests==2.24.0'
-```
-
-- sourceフォルダにnovel_editor.pyファイルが入っています。これがメインソースファイルです。
-
-- 上記ライブラリ以外は標準ライブラリを使っていますので、上記をインストールすれば、実行できるはずです。
 
 - Windows用にコンパイルした物がReleasesにあります(64bit用)。ダブルクリックすれば起動します。  
 また、削除は、novel_editorフォルダを削除してください。レジストリは汚していません。
@@ -102,36 +83,52 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 | Ctrl+スクロール | 画像の拡大縮小 |
 
 ## その他
-### 実行ファイルに変換
-- py2exe.batファイルは、pyファイルをWindows等の実行ファイルに変換するためのバッチファイルです。  
-使用するためには、pyinstallerを使いますので、下記のコードをターミナルエディタに記入しインストールしてください。
-
-```
-$ pip install 'pyinstaller==3.4'
-```
-
-### 保存ファイルについて
-- 保存ファイルは.nedの拡張子をつけて保存されます。  
-.nedの実体はzipファイルの拡張子を変更してあるだけですので、.zipに戻すと解凍できます。(但し、解凍ソフトによっては文字化けする恐れがあります。)  
-解凍すると、dataフォルダの中に、大項目のcharacter (キャラクター)、occupation (職種)、space (場所)、event (イベント)、image（イメージ）、nobel (小説)フォルダができています。それぞれのフォルダの中に小項目のテキストフォルダができていますので、そこにデータがテキスト形式で保存されています。
-
-### カバレッジの計測について
-- Pythonコードのカバレッジを計測するためにCoveragepyを使用しています。  
-使用方法は、Coveragepyをインストールします。
-```
-$ pip install coverage
-```
-- つぎのコマンドを入力してカバレッジを計測します。
-```
-$ coverage run ./source/novel_editor.py
-```
-- その後以下のコマンドを実行して、htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力します。
-```
-$ coverage html
-```
 ### Yahoo! 校正支援
 - Yahoo! 校正支援を使って校正をしています。  
 そのためには、[https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398](https://www.yahoo-help.jp/app/answers/detail/p/537/a_id/43398)を参考にアプリケーションIDを作成し、Releaseフォルダにあるappid.txtのデータに、Client IDを記入してください。
+
+## 開発者向け
+### Documentationについて
+- 開発者用にDocumentationを置いてあります。
+- 作成はsphinxを使っています。sphinxをインストールしてフォルダとプロジェクトを作成します。 
+
+```
+pip install sphinx
+pip install sphinx-rtd-theme
+pip install recommonmark
+mkdir sphinx
+sphinx-quickstart sphinx
+```
+
+- ./sphinx/conf.pyを変更します。
+
+```python
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../source'))
+# ～～～～～～～～～～～～～～～～～～～～～～～～～～
+extensions = [
+	'recmmonmark',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode'
+]
+# ～～～～～～～～～～～～～～～～～～～～～～～～～～
+html_theme = 'sphinx_rtd_theme'
+```
+
+- 
+- ドキュメントを生成します。
+
+```
+sphinx-apidoc -f -o ./sphinx ./docs
+```
+
+- htmlファイルを生成します。
+
+```
+./sphinx/make.bat html
+```
 
 ## 改変履歴
 - Version 0.6.0b  
@@ -269,6 +266,10 @@ Distributed under the GPL license
 - Coveragepy  
 Copyright(C) 2009–2020, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
+
+- sphinx  
+Copyright(C) 2007-2020 by the Sphinx team (see AUTHOS file).  
+Released under the Sphinx licens
 
 ### 参考文献
 - naritoブログ  

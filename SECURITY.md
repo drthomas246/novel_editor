@@ -11,6 +11,7 @@
 - コードはPEP8(コーディング規約)に沿った形で書く。
 - 標準ライブラリ以外のライブラリを追加するときは、pyPI(Python Package Index)にあるもののみとし、一定数以上のバージョンアップ及び使用数があるもののみとする。
 - コメントは日本語または英語で記入する。
+- docstringは、Googleスタイルで書く。
 
 ### Branchについて
 - Branchは、master、feature、bugfixの３つとする。

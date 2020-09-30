@@ -23,7 +23,11 @@ from janome.tokenizer import Tokenizer
 
 
 class CustomText(tk.Text):
-    """Textの、イベントを拡張したウィジェット."""
+    """Textのイベントを拡張したウィジェット
+
+    ・textに<<Scroll>>イベントと、<<Change>>イベントを追加する。
+
+    """
 
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -50,11 +54,27 @@ class CustomText(tk.Text):
 
 
 class Mydialog():
-    """ダイアログ作成クラス"""
+    """ダイアログ作成クラス
+
+    ・自作ダイアログを呼び出し表示する。
+
+    Attributes:
+        self.txt (str): インプットボックスの値
+        self.sub_name_win (instance): ダイアログウインドウインスタンス
+        self.txt_name (instance): インプットボックスインスタンス
+
+    """
 
     def __init__(self, message, button1, button2, title, text):
-        """message:親ウインドウ、button1:ボタンのメッセージ、button2:キャンセルボタンを表示するか、
-        title:タイトル、text:選択状態にするかどうか"""
+        """
+        Args:
+            message (instance): 親ウインドウインスタンス
+            button1 (str): ボタンのメッセージ
+            button2 (bool): キャンセルボタンを表示する(True)
+            title (str): タイトル
+            text (bool): 選択状態にする(True)
+
+        """
         self.txt = ""
         self.sub_name_win = tk.Toplevel(message)
         self.txt_name = ttk.Entry(self.sub_name_win, width=40)
@@ -72,7 +92,7 @@ class Mydialog():
             text=button1,
             width=str(button1),
             padding=(10, 5),
-            command=self.sub_name_OK
+            command=self.sub_name_ok
         )
         button.grid(row=1, column=0)
         if button2:
@@ -93,18 +113,37 @@ class Mydialog():
         self.sub_name_win.title(title)
         self.txt_name.focus()
 
-    def sub_name_OK(self, event=None):
-        """ダイアログボタンクリック時の処理"""
+    def sub_name_ok(self, event=None):
+        """ダイアログボタンクリック時の処理
+
+        ・自作ダイアログのボタンをクリックしたときにインプットボックスに
+        入力されている値を取得する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        Returns:
+            str: インプットボックスの値
+
+        """
         self.txt = self.txt_name.get()
         self.sub_name_win.destroy()
         return self.txt
 
 
 class LineFrame(ttk.Frame):
-    """メインフレーム処理."""
+    """メインフレーム処理
+
+    ・メインに表示される画面の処理をする。
+
+    """
 
     def __init__(self, master=None, **kwargs):
-        """初期設定"""
+        """初期設定
+
+        ・初期化、メニューバーの作成、画面の描画、イベントの追加をする。
+
+        """
         super().__init__(master, **kwargs)
         self.initialize()
 
@@ -115,7 +154,11 @@ class LineFrame(ttk.Frame):
         self.create_event()
 
     def initialize(self):
-        """初期化処理"""
+        """初期化処理
+
+        ・変数の初期化及び起動準備をする。
+
+        """
         # 今の処理ししているファイルのパス
         self.now_path = ""
         # 現在開いているファイル
@@ -151,7 +194,11 @@ class LineFrame(ttk.Frame):
             os.makedirs('./{0}'.format(val[0]))
 
     def create_widgets(self):
-        """ウェジット配置"""
+        """画面の描画
+
+        ・メインウインドウにウェジットを配置する。
+
+        """
         # メニューの配置
         File_menu = tk.Menu(self.menu_bar, tearoff=0)
         Edit_menu = tk.Menu(self.menu_bar, tearoff=0)
@@ -313,7 +360,7 @@ class LineFrame(ttk.Frame):
             label=u'項目の名前を変更(C)',
             under=9,
             accelerator='Ctrl+G',
-            command=self.On_name_Click
+            command=self.on_name_click
         )
         self.menu_bar.add_cascade(
             label=u'リスト(L)',
@@ -341,11 +388,16 @@ class LineFrame(ttk.Frame):
         # ツリーコントロール、入力欄、行番号欄、スクロール部分を作成
         self.tree = ttk.Treeview(self, show="tree")
         self.tree.grid(row=0, column=0, sticky=(tk.N, tk.S))
-        self.Frame()
-        self.TreeGetLoop()
+        self.frame()
+        self.tree_get_loop()
 
-    def Frame(self):
-        """フレーム内の表示"""
+    def frame(self):
+        """フレーム内にテキストボックスを表示
+
+        ・メインウインドウの右側に行番号、テキストボックス、スクロールバー
+        を表示する。
+
+        """
         # f1フレームにテキストエディタを表示
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.text = CustomText(
@@ -377,7 +429,12 @@ class LineFrame(ttk.Frame):
         self.text.focus()
         self.create_event_text()
 
-    def Frame_image(self):
+    def frame_image(self):
+        """フレーム内にイメージフレーム表示
+
+        ・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。
+
+        """
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.image_space = tk.Canvas(self.f1, bg="black", width=30)
         self.image_ysb = ttk.Scrollbar(
@@ -409,8 +466,12 @@ class LineFrame(ttk.Frame):
         )
         self.create_event_image()
 
-    def Frame_character(self):
-        """キャラクターフレームの表示"""
+    def frame_character(self):
+        """フレーム内にイメージフレーム表示
+
+        ・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。
+
+        """
         # チェック有無変数
         self.var = tk.IntVar()
         # value=0のラジオボタンにチェックを入れる
@@ -515,7 +576,11 @@ class LineFrame(ttk.Frame):
         self.create_event_character()
 
     def create_event_text(self):
-        """テキストイベントの設定."""
+        """テキストイベントの設定
+
+        ・テキストボックスにイベントを追加する。
+
+        """
         # テキスト内でのスクロール時
         self.text.bind('<<Scroll>>', self.update_line_numbers)
         self.text.bind('<Up>', self.update_line_numbers)
@@ -523,7 +588,7 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Left>', self.update_line_numbers)
         self.text.bind('<Right>', self.update_line_numbers)
         # テキストの変更時
-        self.text.bind('<<Change>>', self.Change_setting)
+        self.text.bind('<<Change>>', self.change_setting)
         # キー場押されたときの処理
         self.text.bind("<Any-KeyPress>", self.push_keys)
         # ウィジェットのサイズが変わった際。行番号の描画を行う
@@ -564,12 +629,20 @@ class LineFrame(ttk.Frame):
         self.text.bind('<Control-Key-y>', self.yahoo)
 
     def create_event_image(self):
-        """イメージイベントの設定."""
+        """イメージイベントの設定
+
+        ・イメージキャンバスにイベントを追加する。
+
+        """
         self.image_space.bind('<MouseWheel>', self.mouse_y_scroll)
         self.image_space.bind('<Control-MouseWheel>', self.mouse_image_scroll)
 
     def create_event_character(self):
-        """キャラクター欄のイベント設定."""
+        """キャラクター欄のイベント設定
+
+        ・キャラクター関係のボックスにイベントを追加する。
+
+        """
         # 開くダイアロクを表示する
         self.txt_yobi_name.bind('<Control-Key-e>', self.open_file)
         self.txt_name.bind('<Control-Key-e>', self.open_file)
@@ -622,27 +695,55 @@ class LineFrame(ttk.Frame):
         self.text_body.bind('<Control-Shift-Key-F>', self.font_dialog)
 
     def create_event(self):
-        """ツリービューイベントの設定"""
+        """ツリービューイベントの設定
+
+        ・ツリービューにイベントを追加する。
+
+        """
         # ツリービューをダブルクリックしたときにその項目を表示する
-        self.tree.bind("<Double-1>", self.OnDoubleClick)
+        self.tree.bind("<Double-1>", self.on_double_click)
         # ツリービューの名前を変更する
-        self.tree.bind("<Control-Key-g>", self.On_name_Click)
+        self.tree.bind("<Control-Key-g>", self.on_name_click)
         # ツリービューで右クリックしたときにダイアログを表示する
         self.tree.bind("<Button-3>", self.message_window)
 
-    def push_keys(self, event):
+    def push_keys(self, event=None):
+        """キーが押されたときの処理
+
+        ・何かキーが押されたときに検索処理を中断する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 検索処理を中断する
         self.replacement_dialog = 0
 
-    def mouse_y_scroll(self, event):
-        """マウスホイール移動の設定."""
+    def mouse_y_scroll(self, event=None):
+        """マウスホイール移動の設定
+
+        ・イメージキャンバスでマウスホイールを回したときにイメージキャンバス
+        をスクロールする。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         if event.delta > 0:
             self.image_space.yview_scroll(-1, 'units')
         elif event.delta < 0:
             self.image_space.yview_scroll(1, 'units')
 
-    def mouse_image_scroll(self, event):
-        """Ctrl+マウスホイールの拡大縮小設定."""
+    def mouse_image_scroll(self, event=None):
+        """Ctrl+マウスホイールの拡大縮小設定
+
+        ・イメージキャンバスでCtrl+マウスホイールを回したときに画像を
+        拡大縮小する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         curItem = self.tree.focus()
         self.select_list_item = self.tree.item(curItem)["text"]
         title = "./{0}/{1}.txt".format(
@@ -670,7 +771,15 @@ class LineFrame(ttk.Frame):
                 )
 
     def btn_click(self, event=None):
-        """似顔絵ボタンを押したとき"""
+        """似顔絵ボタンを押したとき
+
+        ・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに
+        貼り付ける。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         fTyp = [(u"gif画像", ".gif")]
         iDir = os.path.abspath(os.path.dirname(__file__))
         self.filepath = filedialog.askopenfilename(
@@ -691,6 +800,15 @@ class LineFrame(ttk.Frame):
             self.print_gif(title)
 
     def clear_btn_click(self, event=None):
+        """消去ボタンをクリックしたとき
+
+        ・消去ボタンをクリックしたときに画像イメージから画像を
+        削除する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         files = "./{0}/{1}.gif".format(
             tree_folder[0][0],
             self.select_list_item
@@ -700,6 +818,18 @@ class LineFrame(ttk.Frame):
             self.cv.delete("all")
 
     def resize_gif(self, im):
+        """画像をリサイズする
+
+        ・イメージファイルを縦が長いときは縦を、横が長いときは横を、
+        同じときは両方を150pxに設定する。
+
+        Args:
+            im (instance): イメージインスタンス
+
+        Returns:
+            instance: イメージインスタンス
+
+        """
         if im.size[0] == im.size[1]:
             resized_image = im.resize((150, 150))
         elif im.size[0] > im.size[1]:
@@ -711,7 +841,14 @@ class LineFrame(ttk.Frame):
         return resized_image
 
     def print_gif(self, title):
-        """gifを表示する"""
+        """gifを表示する
+
+        ・似顔絵キャンバスに画像を張り付ける。
+
+        Args:
+            title (str): タイトル
+
+        """
         if not title == "":
             giffile = Image.open(title)
             self.cv.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
@@ -719,7 +856,12 @@ class LineFrame(ttk.Frame):
             self.cv.itemconfig(self.image_on_canvas, image=self.cv.photo)
 
     def create_tags(self):
-        """タグの作成"""
+        """タグの作成
+
+        ・キャラクターの名前をJanomeの形態素解析にかかるようにする。
+        キャラクターの名前を色付きにする。
+
+        """
         i = 0
         system_dic = u"喜寛,固有名詞,ヨシヒロ"
         # キャラクターから一覧を作る。
@@ -749,7 +891,14 @@ class LineFrame(ttk.Frame):
         )
 
     def all_highlight(self, event=None):
-        """全てハイライト"""
+        """全てハイライト
+
+        ・開く処理等の時にすべての行をハイライトする。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 全てのテキストを取得
         src = self.text.get('1.0', 'end - 1c')
         # 全てのハイライトを一度解除する
@@ -760,7 +909,14 @@ class LineFrame(ttk.Frame):
         self._highlight('1.0', src, 'end')
 
     def line_highlight(self, event=None):
-        """現在行だけハイライト"""
+        """現在行だけハイライト
+
+        ・入力等の変更時に現在の行のみをハイライトする。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         start = 'insert linestart'
         end = 'insert lineend'
         # 現在行のテキストを取得
@@ -778,7 +934,12 @@ class LineFrame(ttk.Frame):
             self.text.tag_add('sel', start, end)
 
     def _highlight(self, start, src, end):
-        """ハイライトの共通処理"""
+        """ハイライトの共通処理
+
+        ・ハイライトする文字が見つかったらハイライト処理をする。
+        先頭の文字が全角スペースならば、一文字ずらしてハイライトする。
+
+        """
         self.create_tags()
         self.text.mark_set('range_start', start)
         space_count = re.match(r"\u3000*", self.text.get(start, end)).end()
@@ -801,7 +962,14 @@ class LineFrame(ttk.Frame):
             self.text.mark_set('range_start', 'range_end')
 
     def font_dialog(self, event=None):
-        """フォントサイズダイアログを作成"""
+        """フォントサイズダイアログを作成
+
+        ・フォントサイズダイアログを作成し表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.sub_wins = tk.Toplevel(self)
         self.intSpin = ttk.Spinbox(self.sub_wins, from_=12, to=72)
         self.intSpin.grid(
@@ -818,14 +986,19 @@ class LineFrame(ttk.Frame):
             text=u'サイズ変更',
             width=str(u'サイズ変更'),
             padding=(10, 5),
-            command=self.size_Change
+            command=self.font_size_Change
         )
         button.grid(row=1, column=1)
         self.intSpin.set(self.int_var)
         self.sub_wins.title(u'フォントサイズの変更')
 
-    def size_Change(self):
-        """フォントのサイズを変える"""
+    def font_size_Change(self):
+        """フォントのサイズを変える
+
+        ・サイズ変更を押されたときにサイズを変更する。
+        上は72ptまで下は12ptまでにする。
+
+        """
         # 比較のため数値列に変更
         self.int_var = int(self.intSpin.get())
         if self.int_var < 12:  # 12より下の値を入力した時、12にする
@@ -841,11 +1014,26 @@ class LineFrame(ttk.Frame):
         self.all_highlight()
 
     def open_url(self, event=None):
-        """小説家になろうのユーザーページを開く"""
+        """小説家になろうのユーザーページを開く
+
+        ・インターネットブラウザで小説家になろうのユーザーページを開く。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         webbrowser.open("https://syosetu.com/user/top/")
 
     def find_dictionaly(self, event=None):
-        """意味を検索"""
+        """意味を検索
+
+        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
+        検索する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # wikipediaから
         select_text = self.text.selection_get()
         page_py = wiki_wiki.page(select_text)
@@ -862,7 +1050,14 @@ class LineFrame(ttk.Frame):
             )
 
     def open_help(self, event=None):
-        """helpページを開く"""
+        """helpページを開く
+
+        ・ウエブブラウザを使ってREADME.htmlを表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         webbrowser.open(
             'file://' + os.path.dirname(
                 os.path.abspath(os.path.dirname(__file__))
@@ -871,7 +1066,15 @@ class LineFrame(ttk.Frame):
         )
 
     def open_version(self, event=None):
-        """バージョン情報を表示"""
+        """バージョン情報を表示
+
+        ・バージョン情報表示ダイアログを表示する。
+        ×を押すまで消えないようにする。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         img2 = tk.PhotoImage(data=datas)
         window = tk.Toplevel(root)
         self.pack()
@@ -896,12 +1099,19 @@ class LineFrame(ttk.Frame):
         window.mainloop()
 
     def read_text(self, event=None):
-        """テキストを読み上げる"""
+        """テキストを読み上げる
+
+        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.text.focus()
         self.read_texts = True
         self.engine = pyttsx3.init()
-        self.engine.connect('started-word', self.onWord)
-        self.engine.connect('finished-utterance', self.onEnd)
+        self.engine.connect('started-word', self.pyttsx3_onword)
+        self.engine.connect('finished-utterance', self.pyttsx3_onend)
         self.engine.setProperty('rate', 150)
         self.engine.say(self.text.get('1.0', 'end - 1c'))
         self.i = 0
@@ -910,11 +1120,25 @@ class LineFrame(ttk.Frame):
         self.externalLoop()
 
     def externalLoop(self):
-        """文章読み上げ繰り返し処理"""
+        """文章読み上げ繰り返し処理
+
+        ・文章読み上げを繰り返し続ける。
+
+        """
         self.engine.iterate()
 
-    def onWord(self, name, location, length):
-        """文章を読み上げstop"""
+    def pyttsx3_onword(self, name, location, length):
+        """文章を読み上げ中の処理
+
+        ・文章読み始めるときに止めるダイアログを出してから読み上げる。
+        読み上げている最中は読み上げている行を選択状態にする。
+
+        Args:
+            name (str): 読み上げに関連付けられた名前
+            location (int): 現在の場所
+            length (int): 不明
+
+        """
         # 今読んでいる場所と選択位置を比較する
         if location > self.textlen:
             # すべての選択一度解除する
@@ -947,7 +1171,7 @@ class LineFrame(ttk.Frame):
                 text=u'中止する',
                 width=str(u'中止する'),
                 padding=(100, 5),
-                command=self.onreadEnd
+                command=self.pyttsx3_onreadend
             )
             button.grid(row=1, column=1)
             # 最前面に表示し続ける
@@ -957,26 +1181,56 @@ class LineFrame(ttk.Frame):
             self.sub_read_win.title(u'読み上げ')
             self.read_texts = False
 
-    def onreadEnd(self):
-        """中止するボタンを押したときの処理"""
+    def pyttsx3_onreadend(self):
+        """中止するボタンを押したときの処理
+
+        ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
+        を削除する。
+
+        """
         self.engine.stop()
         self.engine.endLoop()
         self.sub_read_win.destroy()
         self.text.tag_remove('sel', '1.0', 'end')
 
-    def onEnd(self, name, completed):
-        """文章を読み終えたら"""
+    def pyttsx3_onend(self, name, completed):
+        """文章を読み終えた時の処理
+
+        ・文章を読み終えたら中止ウインドウを削除する。
+
+        Args:
+            name (str): 読み上げに関連付けられた名前
+            completed (bool): 文章が読み上げ終わった(True)
+
+        """
         self.engine.stop()
         self.engine.endLoop()
         self.sub_read_win.destroy()
         self.text.tag_remove('sel', '1.0', 'end')
 
-    def isHiragana(self, char):
-        """引数がひらがなならTrue、さもなければFalseを返す"""
+    def is_hiragana(self, char):
+        """文字がひらがなか判断
+
+        ・与えられた文字がひらがなかどうか判断する。
+
+        Args:
+            char (str): 判断する文字
+
+        Returns:
+            bool: ひらがなならTrue、違うならFalse
+
+        """
         return (0x3040 < ord(char) < 0x3097)
 
     def ruby(self, event=None):
-        """ルビをふる"""
+        """ルビをふる
+
+        ・選択文字列に小説家になろうのルビを振る。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         hon = ""
         # 選択文字列を切り取る
         set_ruby = self.text.get('sel.first', 'sel.last')
@@ -990,7 +1244,7 @@ class LineFrame(ttk.Frame):
             # 解析している文字のひらがなの部分を取得
             hira = ""
             for i in token.surface:
-                if self.isHiragana(i):
+                if self.is_hiragana(i):
                     hira += i
             # ルビがないときと、記号の時の処理
             if ruby.replace(
@@ -1011,29 +1265,71 @@ class LineFrame(ttk.Frame):
         self.text.insert('insert', hon)
 
     def redo(self, event=None):
-        """redo処理を行う"""
+        """Redo
+
+        ・Redo処理を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.text.edit_redo()
 
     def undo(self, event=None):
-        """redo処理を行う"""
+        """Undo
+
+        ・Uedo処理を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.text.edit_undo()
 
     def copy(self, event=None):
-        """cpoy処理を行う"""
+        """Copy
+
+        ・Copy処理を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.clipboard_clear()
         self.clipboard_append(self.text.selection_get())
 
     def cut(self, event=None):
-        """cut処理を行う"""
+        """Cut
+
+        ・Cut処理を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.copy()
         self.text.delete("sel.first", "sel.last")
 
     def paste(self, event=None):
-        """paste処理を行う"""
+        """Paste
+
+        ・Paste処理を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.text.insert('insert', self.clipboard_get())
 
     def moji_count(self, event=None):
-        """文字数と行数を表示する"""
+        """文字数と行数を表示する
+
+        ・文字数と行数をカウントして表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 行数の取得
         new_line = int(self.text.index('end-1c').split('.')[0])
         # 文字列の取得
@@ -1051,14 +1347,18 @@ class LineFrame(ttk.Frame):
                 -(-gen_mai//20)))
 
     def new_file(self):
-        """新規作成をするための準備"""
+        """新規作成をするための準備
+
+        ・ファイルの新規作成をするための準備処理をおこなう。
+
+        """
         self.initialize()
         for val in tree_folder:
             self.tree.delete(val[0])
 
         # ツリービューを表示する
-        self.TreeGetLoop()
-        self.Frame()
+        self.tree_get_loop()
+        self.frame()
         self.winfo_toplevel().title(u"小説エディタ")
         # テキストを読み取り専用にする
         self.text.configure(state='disabled')
@@ -1066,7 +1366,14 @@ class LineFrame(ttk.Frame):
         self.text.focus()
 
     def new_open(self, event=None):
-        """新規作成をする"""
+        """新規作成
+
+        ・変更があれば、ファイル保存するか尋ねて、新規作成する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         if not self.text.get('1.0', 'end - 1c') == self.text_text:
             if messagebox.askokcancel(
                 u"小説エディタ",
@@ -1081,7 +1388,15 @@ class LineFrame(ttk.Frame):
             self.new_file()
 
     def overwrite_save_file(self, event=None):
-        """上書き保存処理"""
+        """上書き保存処理
+
+        ・上書き保存するための処理。ファイルがあれば保存して、
+        なければ保存ダイアログを出す。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # ファイルパスが存在するとき
         if not self.file_path == "":
             # 編集中のファイルを保存する
@@ -1099,7 +1414,14 @@ class LineFrame(ttk.Frame):
             self.save_file()
 
     def save_file(self, event=None):
-        """ファイルを保存処理"""
+        """ファイルを保存処理
+
+        ・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # ファイル保存ダイアログを表示する
         fTyp = [(u"小説エディタ", ".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
@@ -1115,7 +1437,14 @@ class LineFrame(ttk.Frame):
             self.overwrite_save_file()
 
     def open_file(self, event=None):
-        """ファイルを開く処理"""
+        """ファイルを開く処理
+
+        ・ファイルを開くダイアログを作成しファイルを開く。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # ファイルを開くダイアログを開く
         fTyp = [(u'小説エディタ', '*.ned')]
         iDir = os.path.abspath(os.path.dirname(__file__))
@@ -1135,16 +1464,20 @@ class LineFrame(ttk.Frame):
                 self.tree.delete(val[0])
 
             # ツリービューを表示する
-            self.TreeGetLoop()
+            self.tree_get_loop()
             # ファイルパスを拡張子抜きで表示する
             filepath, ___ = os.path.splitext(filepath)
             self.file_path = filepath
             self.now_path = ""
             # テキストビューを新にする
-            self.Frame()
+            self.frame()
 
-    def TreeGetLoop(self):
-        """フォルダにあるファイルを取得してツリービューに挿入."""
+    def tree_get_loop(self):
+        """ツリービューに挿入
+
+        ・保存データからファイルを取得してツリービューに挿入する。
+
+        """
         for val in tree_folder:
             self.tree.insert('', 'end', val[0], text=val[1])
             # フォルダのファイルを取得
@@ -1159,7 +1492,14 @@ class LineFrame(ttk.Frame):
                     )
 
     def find_dialog(self, event=None):
-        """検索ボックスを作成する"""
+        """検索ダイアログを作成
+
+        ・検索ダイアログを作成する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         search_win = tk.Toplevel(self)
         self.text_var = ttk.Entry(search_win, width=40)
         self.text_var.grid(
@@ -1193,7 +1533,14 @@ class LineFrame(ttk.Frame):
         self.text_var.focus()
 
     def replacement_dialog(self, event=None):
-        """置換ボックスを作成する"""
+        """置換ダイアログを作成
+
+        ・置換ダイアログを作成する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.replacement_win = tk.Toplevel(self)
         self.text_var = ttk.Entry(self.replacement_win, width=40)
         self.text_var.grid(
@@ -1242,12 +1589,24 @@ class LineFrame(ttk.Frame):
             )
 
     def replacement_dialog_on_closing(self):
-        """検索ウインドウが閉じられたときの処理"""
+        """検索ウインドウが閉じられたときの処理
+
+        ・検索ダイアログが閉じられたことがわかるようにする。
+
+        """
         self.replacement_dialog = 0
         self.replacement_win.destroy()
 
     def search(self, event=None):
-        """検索処理"""
+        """検索処理
+
+        ・検索処理をする。空欄なら処理しない、違うなら最初から、
+        同じなら次のを検索する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
@@ -1268,7 +1627,15 @@ class LineFrame(ttk.Frame):
         self.last_text = now_text
 
     def replacement(self, event=None):
-        """置換処理"""
+        """置換処理
+
+        ・置換処理をする。空欄なら処理しない、違うなら初めから、
+        同じなら次を検索する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
@@ -1297,7 +1664,15 @@ class LineFrame(ttk.Frame):
         self.last_text = now_text
 
     def search_forward(self, event=None):
-        """昇順検索処理"""
+        """昇順検索処理
+
+        ・昇順検索をする。空欄なら処理しない、違うなら初めから、
+        同じなら次を検索する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 現在選択中の部分を解除
         self.text.tag_remove('sel', '1.0', 'end')
 
@@ -1318,7 +1693,16 @@ class LineFrame(ttk.Frame):
         self.last_text = now_text
 
     def search_next(self, search, index, case):
-        """検索のメイン処理"""
+        """検索のメイン処理
+
+        ・検索できれば選択をする。できなければ、ダイアログを出して終了。
+
+        Args:
+            search (str): 検索文字列
+            index (str): 検索位置 ex. (1.0)
+            case (int): 0.初めから検索 1.次に検索 2.昇順検索
+
+        """
         if case == 2:
             backwards = True
             stopindex = '0.0'
@@ -1365,7 +1749,15 @@ class LineFrame(ttk.Frame):
         self.text.focus()
 
     def message_window(self, event=None):
-        """ツリービューの選択ダイアログを表示する."""
+        """ツリービューを右クリックしたときの処理
+
+        ・子アイテムならば削除ダイアログを表示する。
+        親アイテムならば追加を行う。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         # 親アイテムをクリックしたとき
@@ -1382,7 +1774,7 @@ class LineFrame(ttk.Frame):
                 file_name = os.path.splitext(os.path.basename(filepath))[0]
                 path = "./{0}/{1}.gif".format(tree_folder[4][0], file_name)
                 shutil.copy2(filepath, path)
-                self.Frame_image()
+                self.frame_image()
                 path = "./{0}/{1}.txt".format(tree_folder[4][0], file_name)
                 tree = self.tree.insert(
                     tree_folder[4][0],
@@ -1398,7 +1790,7 @@ class LineFrame(ttk.Frame):
                 self.zoom = 100
                 f.write(str(self.zoom))
                 f.close()
-                self.Frame_image()
+                self.frame_image()
                 self.path_read_image(
                     tree_folder[4][0],
                     file_name,
@@ -1427,10 +1819,10 @@ class LineFrame(ttk.Frame):
                     for val in tree_folder:
                         if text == val[1]:
                             if val[0] == tree_folder[0][0]:
-                                self.Frame_character()
+                                self.frame_character()
                                 self.txt_yobi_name.insert(tk.END, file_name)
                             else:
-                                self.Frame()
+                                self.frame()
 
                             path = "./{0}/{1}.txt".format(val[0], file_name)
                             tree = self.tree.insert(
@@ -1491,10 +1883,15 @@ class LineFrame(ttk.Frame):
                         # パスが存在したとき
                         if not path == "":
                             os.remove(path)
-                            self.Frame()
+                            self.frame()
                             self.text.focus()
 
     def save_charactor_file(self):
+        """キャラクターファイルの保存準備
+
+        ・それぞれの項目をxml形式で保存する。
+
+        """
         return '<?xml version="1.0"?>\n<data>\n\t<call>{0}</call>\
         \n\t<name>{1}</name>\n\t<sex>{2}</sex>\n\t<birthday>{3}</birthday>\
         \n\t<body>{4}</body>\n</data>'.format(
@@ -1509,7 +1906,14 @@ class LineFrame(ttk.Frame):
         )
 
     def open_file_save(self, path):
-        """開いてるファイルを保存する."""
+        """開いてるファイルを保存する
+
+        ・開いてるファイルをそれぞれの保存形式で保存する。
+
+        Args:
+            path (str): 保存ファイルのパス
+
+        """
         # 編集ファイルを保存する
         if not path == "":
             f = open(path, 'w', encoding='utf-8')
@@ -1524,15 +1928,22 @@ class LineFrame(ttk.Frame):
             f.close()
             self.now_path = path
 
-    def OnDoubleClick(self, event=None):
-        """ツリービューをダブルクリックしたとき."""
+    def on_double_click(self, event=None):
+        """ツリービューをダブルクリック
+
+        ・ファイルを保存して閉じて、選択されたアイテムを表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
         # 開いているファイルを保存
         self.open_file_save(self.now_path)
         # テキストを読み取り専用を解除する
-        self.Frame()
+        self.frame()
         self.text.configure(state='disabled')
         # 条件によって分離
         self.select_list_item = self.tree.item(curItem)["text"]
@@ -1548,7 +1959,7 @@ class LineFrame(ttk.Frame):
                     zoom = f.read()
                     self.zoom = int(zoom)
                     self.now_path = path
-                    self.Frame_image()
+                    self.frame_image()
                     self.path_read_image(
                         tree_folder[4][0],
                         self.select_list_item,
@@ -1561,7 +1972,7 @@ class LineFrame(ttk.Frame):
                     )
                     self.now_path = path
                     if val[0] == tree_folder[0][0]:
-                        self.Frame_character()
+                        self.frame_character()
                     else:
                         # テキストを読み取り専用を解除する
                         self.text.configure(state='normal')
@@ -1575,7 +1986,16 @@ class LineFrame(ttk.Frame):
         self.winfo_toplevel().title(u"小説エディタ")
 
     def path_read_image(self, image_path, image_name, scale):
-        """パスが存在すればimageを読み込んで表示する"""
+        """イメージを読み込んで表示
+
+        ・パスが存在すればイメージファイルを読み込んで表示する。
+
+        Args:
+            image_path (str): イメージファイルの相対パス
+            image_name (str): イメージファイルの名前
+            scale (int): 拡大率(%)
+
+        """
         if not self.now_path == "":
             title = "{0}/{1}.gif".format(
                 image_path,
@@ -1611,8 +2031,16 @@ class LineFrame(ttk.Frame):
                 u"小説エディタ\\{0}\\{1}".format(tree_folder[4][1], image_name)
             )
 
-    def path_read_text(self, text, sub_text):
-        """パスが存在すればtextを読み込んで表示する"""
+    def path_read_text(self, text_path, text_name):
+        """テキストを読み込んで表示
+
+        ・パスが存在すればテキストを読み込んで表示する。
+
+        Args:
+            text_path (str): テキストファイルの相対パス
+            text_name (str): テキストファイルの名前
+
+        """
         if not self.now_path == "":
             if not self.now_path.find(tree_folder[0][0]) == -1:
                 self.txt_yobi_name.delete('0', tk.END)
@@ -1640,13 +2068,20 @@ class LineFrame(ttk.Frame):
                 f.close()
 
             self.winfo_toplevel().title(
-                u"小説エディタ\\{0}\\{1}".format(text, sub_text)
+                u"小説エディタ\\{0}\\{1}".format(text_path, text_name)
             )
             # シンタックスハイライトをする
             self.all_highlight()
 
-    def On_name_Click(self, event=None):
-        """名前の変更"""
+    def on_name_click(self, event=None):
+        """名前の変更
+
+        ・リストボックスの名前を変更する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         curItem = self.tree.focus()              # 選択アイテムの認識番号取得
         parentItem = self.tree.parent(curItem)   # 親アイテムの認識番号取得
         text = self.tree.item(parentItem)["text"]
@@ -1673,7 +2108,14 @@ class LineFrame(ttk.Frame):
                     return
 
     def update_line_numbers(self, event=None):
-        """行番号の描画."""
+        """行番号の描画
+
+        ・行番号をつけて表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 現在の行番号を全て消す
         self.line_numbers.delete(tk.ALL)
 
@@ -1700,14 +2142,28 @@ class LineFrame(ttk.Frame):
             )
             i = self.text.index("%s+1line" % i)
 
-    def Change_setting(self, event=None):
-        """テキストの変更時"""
+    def change_setting(self, event=None):
+        """テキストの変更時
+
+        ・テキストを変更したときに行番号とハイライトを変更する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.update_line_numbers()
         # その行のハイライトを行う
         self.line_highlight()
 
     def tab(self, event=None):
-        """タブ押下時の処理"""
+        """タブ押下時の処理
+
+        ・タブキーを押したときに補完リストを出す。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # 文字を選択していないとき
         sel_range = self.text.tag_ranges('sel')
         if not sel_range:
@@ -1716,7 +2172,11 @@ class LineFrame(ttk.Frame):
             return
 
     def auto_complete(self):
-        """補完リストの作成"""
+        """補完リストの設定
+
+        ・補完リストの設定をする。
+
+        """
         auto_complete_list = tk.Listbox(self.text)
         # エンターでそのキーワードを選択
         auto_complete_list.bind('<Return>', self.selection)
@@ -1742,7 +2202,11 @@ class LineFrame(ttk.Frame):
         return 'break'
 
     def get_keywords(self):
-        """コード補完リストの候補キーワードを作成する."""
+        """補完リストの候補キーワードを作成
+
+        ・補完リストに表示するキーワードを得る。
+
+        """
         text = ''
         text, _, _ = self.get_current_insert_word()
         my_func_and_class = set()
@@ -1760,12 +2224,26 @@ class LineFrame(ttk.Frame):
         return result
 
     def remove_list(self, event=None):
-        """コード補完リストの削除処理."""
+        """補完リストの削除処理
+
+        ・補完リストを削除し、テキストボックスにフォーカスを戻す。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         self.auto_complete_list.destroy()
         self.text.focus()  # テキストウィジェットにフォーカスを戻す
 
     def selection(self, event=None):
-        """コード補完リストでの選択後の処理."""
+        """補完リストでの選択後の処理
+
+        ・補完リストを選択したときにその文字を入力する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         # リストの選択位置を取得
         select_index = self.auto_complete_list.curselection()
         if select_index:
@@ -1779,7 +2257,11 @@ class LineFrame(ttk.Frame):
             self.remove_list()
 
     def get_current_insert_word(self):
-        """現在入力中の単語と位置を取得する."""
+        """現在入力中の単語と位置を取得
+
+        ・現在入力している単語とその位置を取得する。
+
+        """
         text = ''
         start_i = 1
         end_i = 0
@@ -1812,7 +2294,18 @@ class LineFrame(ttk.Frame):
             end_i += 1
 
     def yahoocall(self, appid="", sentence=""):
-        """yahooの校正支援を呼び出す"""
+        """yahooの校正支援を呼び出す
+
+        ・Yahoo! 校正支援をClient IDを使って呼び出す。
+
+        Args:
+            appid (str): Yahoo! Client ID
+            sentence (str): 校正をしたい文字列
+
+        Returns:
+            str: 校正結果
+
+        """
         if appid == "":
             messagebox.showerror(
                 "Yahoo! Client ID",
@@ -1828,8 +2321,15 @@ class LineFrame(ttk.Frame):
         html = requests.post(url, data)
         return html.text
 
-    def yahooResult(self, html):
-        """校正支援を表示する画面を制作"""
+    def yahooresult(self, html):
+        """校正支援を表示する画面を制作
+
+        ・校正結果を表示するダイアログを作成する。
+
+        Args:
+            html (str): 校正結果
+
+        """
         xml = ET.fromstring(html)
         # サブウインドウの表示
         sub_win = tk.Toplevel(self)
@@ -1880,17 +2380,32 @@ class LineFrame(ttk.Frame):
         sub_win.title(u'文章校正')
 
     def yahoo(self, event=None):
-        """yahoo校正支援"""
+        """Yahoo! 校正支援
+
+        ・Yahoo! 校正支援を呼び出し表示する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         html = self.yahoocall(
             self.APPID,
             self.text.get('1.0', 'end -1c')
         )
         if not self.APPID == "":
-            self.yahooResult(html)
-            self.yahoo_tree.bind("<Double-1>", self.OnDoubleClick_yahoo)
+            self.yahooresult(html)
+            self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
 
-    def OnDoubleClick_yahoo(self, event=None):
-        """yahoo校正支援リストをダブルクリックしたとき"""
+    def on_double_click_yahoo(self, event=None):
+        """Yahoo! 校正支援リストをダブルクリック
+
+        ・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
+        その該当箇所を選択する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+
+        """
         curItem = self.yahoo_tree.focus()
         value = self.yahoo_tree.item(curItem)
         i = 0
@@ -1932,7 +2447,11 @@ class LineFrame(ttk.Frame):
 
 
 def on_closing():
-    """終了時の処理"""
+    """終了時の処理
+
+    ・ソフトを閉じるか確認してから閉じる。
+
+    """
     if messagebox.askokcancel(u"小説エディタ", u"終了してもいいですか？"):
         shutil.rmtree("./data")
         if os.path.isfile("./userdic.csv"):
