@@ -247,7 +247,7 @@ The Python Imaging Library (PIL) is
 　　Copyright © 1995-2011 by Fredrik Lundh  
 Pillow is the friendly PIL fork. It is  
 　　Copyright © 2010-2020 by Alex Clark and contributors  
-Released under the PIL licens
+Released under the PIL licens  
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
 
 - requests(HTTP)ライブラリ  
@@ -267,9 +267,10 @@ Distributed under the GPL license
 Copyright(C) 2009–2020, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
 
-- sphinx  
+- Sphinx  
 Copyright(C) 2007-2020 by the Sphinx team (see AUTHOS file).  
-Released under the Sphinx licens
+Released under the Sphinx licens  
+[https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE](https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE)
 
 ### 参考文献
 - naritoブログ  
