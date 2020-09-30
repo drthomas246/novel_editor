@@ -89,7 +89,7 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 
 ## 開発者向け
 ### Documentationについて
-- 開発者用にDocumentationを置いてあります。
+- 開発者用に[Documentation](https://drthomas246.github.io/novel_editor/html/)を置いてあります。
 - 作成はsphinxを使っています。sphinxをインストールしてフォルダとプロジェクトを作成します。 
 
 ```
