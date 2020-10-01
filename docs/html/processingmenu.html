@@ -37,6 +37,7 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="subfunction module" href="subfunction.html" />
     <link rel="prev" title="novel_editor module" href="novel_editor.html" /> 
 </head>
 
@@ -91,9 +92,11 @@
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="helpmenu.html">helpmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="highlight.html">highlight module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mydialog.html">mydialog module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="novel_editor.html">novel_editor module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">processingmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subfunction.html">subfunction module</a></li>
 </ul>
 </li>
 </ul>
@@ -167,17 +170,59 @@
 <span id="processingmenu-module"></span><h1>processingmenu module<a class="headerlink" href="#module-processingmenu" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
 <dt id="processingmenu.ProcessingMenuClass">
-<em class="property">class </em><code class="sig-prename descclassname">processingmenu.</code><code class="sig-name descname">ProcessingMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">processingmenu.</code><code class="sig-name descname">ProcessingMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">wiki_wiki</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>処理メニューバーのクラス</p>
+<p>・処理メニューバーにあるプログラム群</p>
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.count_moji">
+<code class="sig-name descname">count_moji</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.count_moji"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.count_moji" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>文字数と行数を表示する</p>
+<p>・文字数と行数をカウントして表示する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.externalLoop">
+<code class="sig-name descname">externalLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.externalLoop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.externalLoop" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>文章読み上げ繰り返し処理</p>
+<p>・文章読み上げを繰り返し続ける。</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="processingmenu.ProcessingMenuClass.find_wikipedia">
-<code class="sig-name descname">find_wikipedia</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wiki_wiki</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.find_wikipedia"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.find_wikipedia" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">find_wikipedia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.find_wikipedia"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.find_wikipedia" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>意味を検索</p>
 <p>・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
 検索する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.is_hiragana">
+<code class="sig-name descname">is_hiragana</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.is_hiragana"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.is_hiragana" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>文字がひらがなか判断</p>
+<p>・与えられた文字がひらがなかどうか判断する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>wiki_wiki</strong> (<em>instance</em>) -- Wikipedia-APIのインスタンス</p>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) -- 判断する文字</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>ひらがなならTrue、違うならFalse</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.on_double_click_yahoo">
+<code class="sig-name descname">on_double_click_yahoo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.on_double_click_yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.on_double_click_yahoo" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Yahoo! 校正支援リストをダブルクリック</p>
+<p>・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
+その該当箇所を選択する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
 </dd></dl>
@@ -187,6 +232,105 @@
 <code class="sig-name descname">open_becoming_novelist_page</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.open_becoming_novelist_page"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.open_becoming_novelist_page" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>小説家になろうのユーザーページを開く</p>
 <p>・インターネットブラウザで小説家になろうのユーザーページを開く。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.pyttsx3_onend">
+<code class="sig-name descname">pyttsx3_onend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">completed</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.pyttsx3_onend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.pyttsx3_onend" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>文章を読み終えた時の処理</p>
+<p>・文章を読み終えたら中止ウインドウを削除する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) -- 読み上げに関連付けられた名前</p></li>
+<li><p><strong>completed</strong> (<em>bool</em>) -- 文章が読み上げ終わった(True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.pyttsx3_onreadend">
+<code class="sig-name descname">pyttsx3_onreadend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.pyttsx3_onreadend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.pyttsx3_onreadend" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>中止するボタンを押したときの処理</p>
+<p>・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
+を削除する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.pyttsx3_onword">
+<code class="sig-name descname">pyttsx3_onword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.pyttsx3_onword"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.pyttsx3_onword" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>文章を読み上げ中の処理</p>
+<p>・文章読み始めるときに止めるダイアログを出してから読み上げる。
+読み上げている最中は読み上げている行を選択状態にする。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) -- 読み上げに関連付けられた名前</p></li>
+<li><p><strong>location</strong> (<em>int</em>) -- 現在の場所</p></li>
+<li><p><strong>length</strong> (<em>int</em>) -- 不明</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.read_text">
+<code class="sig-name descname">read_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.read_text"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.read_text" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>テキストを読み上げる</p>
+<p>・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.ruby_huri">
+<code class="sig-name descname">ruby_huri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.ruby_huri"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.ruby_huri" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ルビをふる</p>
+<p>・選択文字列に小説家になろうのルビを振る。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.yahoo">
+<code class="sig-name descname">yahoo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.yahoo" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Yahoo! 校正支援</p>
+<p>・Yahoo! 校正支援を呼び出し表示する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.yahoocall">
+<code class="sig-name descname">yahoocall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">appid</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">sentence</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>yahooの校正支援を呼び出す</p>
+<p>・Yahoo! 校正支援をClient IDを使って呼び出す。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>appid</strong> (<em>str</em>) -- Yahoo! Client ID</p></li>
+<li><p><strong>sentence</strong> (<em>str</em>) -- 校正をしたい文字列</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>校正結果</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="processingmenu.ProcessingMenuClass.yahooresult">
+<code class="sig-name descname">yahooresult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">html</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/processingmenu.html#ProcessingMenuClass.yahooresult"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#processingmenu.ProcessingMenuClass.yahooresult" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>校正支援を表示する画面を制作</p>
+<p>・校正結果を表示するダイアログを作成する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>html</strong> (<em>str</em>) -- 校正結果</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -200,6 +344,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="subfunction.html" class="btn btn-neutral float-right" title="subfunction module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="novel_editor.html" class="btn btn-neutral float-left" title="novel_editor module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

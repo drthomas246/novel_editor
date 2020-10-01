@@ -4,22 +4,32 @@ import tkinter as tk
 
 
 class HelpMenuClass():
-    def __init__(self):
-        self.VERSION = 'Ver 0.6.0 Beta'
+    """ヘルプメニューバーのクラス
 
-    def version(self, root, image_data):
+    ・ヘルプメニューバーにあるプログラム群
+
+    """
+    def __init__(self, app, image_data):
+        """
+        Args:
+            app (instance): lineframeインスタンス
+            image_data (str): イメージファイル
+
+        """
+        # バージョン情報
+        self.VERSION = 'Ver 0.6.0 Beta'
+        self.APP = app
+        self.IMAGE_DATA = image_data
+
+    def version(self):
         """バージョン情報を表示
 
         ・バージョン情報表示ダイアログを表示する。
         ×を押すまで消えないようにする。
 
-        Args:
-            root (instance): トップレベルのウインドウインスタンス
-            image_data (str): イメージファイル
-
         """
-        img2 = tk.PhotoImage(data=image_data)
-        window = tk.Toplevel(root)
+        img2 = tk.PhotoImage(data=self.IMAGE_DATA)
+        window = tk.Toplevel(self.APP)
         canvas = tk.Canvas(window, width=600, height=300)
         canvas.create_image(0, 0, anchor='nw', image=img2)
         canvas.create_text(

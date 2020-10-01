@@ -7,11 +7,6 @@ class Mydialog():
 
     ・自作ダイアログを呼び出し表示する。
 
-    Attributes:
-        self.txt (str): インプットボックスの値
-        self.sub_name_win (instance): ダイアログウインドウインスタンス
-        self.txt_name (instance): インプットボックスインスタンス
-
     """
 
     def __init__(self, message, button1, button2, title, text):
