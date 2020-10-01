@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 import os
-import re
 import sys
 import zipfile
 import shutil
-import webbrowser
 import platform
-import textwrap
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 import xml.etree.ElementTree as ET
 
-import jaconv
-import pyttsx3
 import wikipediaapi
-import requests
 from PIL import Image, ImageTk
 from janome.tokenizer import Tokenizer
+
+import subfunction
+import mydialog
+import highlight
+import editmenu
+import helpmenu
+import processingmenu
 
 
 class CustomText(tk.Text):
@@ -51,84 +52,6 @@ class CustomText(tk.Text):
             rename {widget} _{widget}
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
-
-
-class Mydialog():
-    """ダイアログ作成クラス
-
-    ・自作ダイアログを呼び出し表示する。
-
-    Attributes:
-        self.txt (str): インプットボックスの値
-        self.sub_name_win (instance): ダイアログウインドウインスタンス
-        self.txt_name (instance): インプットボックスインスタンス
-
-    """
-
-    def __init__(self, message, button1, button2, title, text):
-        """
-        Args:
-            message (instance): 親ウインドウインスタンス
-            button1 (str): ボタンのメッセージ
-            button2 (bool): キャンセルボタンを表示する(True)
-            title (str): タイトル
-            text (bool): 選択状態にする(True)
-
-        """
-        self.txt = ""
-        self.sub_name_win = tk.Toplevel(message)
-        self.txt_name = ttk.Entry(self.sub_name_win, width=40)
-        self.txt_name.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
-        )
-        button = ttk.Button(
-            self.sub_name_win,
-            text=button1,
-            width=str(button1),
-            padding=(10, 5),
-            command=self.sub_name_ok
-        )
-        button.grid(row=1, column=0)
-        if button2:
-            button = ttk.Button(
-                self.sub_name_win,
-                text=u'キャンセル',
-                width=str(u'キャンセル'),
-                padding=(10, 5),
-                command=self.sub_name_win.destroy
-            )
-
-            button.grid(row=1, column=1)
-            self.txt_name.focus()
-            if text is not False:
-                self.txt_name.insert(tk.END, text)
-                self.txt_name.select_range(0, 'end')
-
-        self.sub_name_win.title(title)
-        self.txt_name.focus()
-
-    def sub_name_ok(self, event=None):
-        """ダイアログボタンクリック時の処理
-
-        ・自作ダイアログのボタンをクリックしたときにインプットボックスに
-        入力されている値を取得する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        Returns:
-            str: インプットボックスの値
-
-        """
-        self.txt = self.txt_name.get()
-        self.sub_name_win.destroy()
-        return self.txt
 
 
 class LineFrame(ttk.Frame):
@@ -168,9 +91,7 @@ class LineFrame(ttk.Frame):
         # 現在入力中の初期テキスト
         self.text_text = ""
         # 文字の大きさ
-        self.int_var = 16
-        # yahooの校正支援
-        self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
+        self.font_size = 16
         self.APPID = ""
         if os.path.isfile("./appid.txt"):
             f = open("./appid.txt", "r", encoding="utf-8")
@@ -192,6 +113,17 @@ class LineFrame(ttk.Frame):
         # 新しくdataフォルダを作成する
         for val in tree_folder:
             os.makedirs('./{0}'.format(val[0]))
+
+        # メニューバーのクラスを割り当てる
+        self.sfc = subfunction.SubFunctionClass(self)
+        self.hlc = highlight.HighLightClass(self, tokenizer)
+        self.emc = editmenu.EditMenuClass(self)
+        self.pmc = processingmenu.ProcessingMenuClass(
+            self,
+            wiki_wiki,
+            tokenizer
+        )
+        self.hmc = helpmenu.HelpMenuClass(self, datas)
 
     def create_widgets(self):
         """画面の描画
@@ -247,33 +179,33 @@ class LineFrame(ttk.Frame):
         Edit_menu.add_command(
             label=u'やり直し(R)',
             under=5,
-            accelerator='Ctrl+Z',
-            command=self.redo
+            accelerator='Ctrl+Shift+Z',
+            command=self.emc.redo
         )
         Edit_menu.add_command(
             label=u'戻る(U)',
             under=3,
-            accelerator='Ctrl+Shift+Z',
-            command=self.undo
+            accelerator='Ctrl+Z',
+            command=self.emc.undo
         )
         Edit_menu.add_separator()
         Edit_menu.add_command(
             label=u'切り取り(X)',
             under=5,
             accelerator='Ctrl+X',
-            command=self.cut
+            command=self.emc.cut
         )
         Edit_menu.add_command(
             label=u'コピー(C)',
             under=4,
             accelerator='Ctrl+C',
-            command=self.copy
+            command=self.emc.copy
         )
         Edit_menu.add_command(
             label=u'貼り付け(V)',
             under=5,
             accelerator='Ctrl+V',
-            command=self.paste
+            command=self.emc.paste
         )
         Edit_menu.add_separator()
         Edit_menu.add_command(
@@ -298,31 +230,31 @@ class LineFrame(ttk.Frame):
             label=u'ルビをふる(R)',
             under=6,
             accelerator='Ctrl+R',
-            command=self.ruby
+            command=self.pmc.ruby_huri
         )
         Processing_menu.add_command(
             label=u'文字数のカウント(C)',
             under=9,
             accelerator='Ctrl+Shift+C',
-            command=self.moji_count
+            command=self.pmc.count_moji
         )
         Processing_menu.add_command(
             label=u'選択文字の意味(M)',
             under=8,
             accelerator='Ctrl+Shift+F',
-            command=self.find_dictionaly
+            command=self.pmc.find_wikipedia
         )
         Processing_menu.add_command(
             label=u'文章の読み上げ(B)',
             under=8,
             accelerator='Ctrl+Shift+R',
-            command=self.read_text
+            command=self.pmc.read_text
         )
         Processing_menu.add_command(
             label=u'文章校正(Y)',
             under=5,
             accelerator='Ctrl+Y',
-            command=self.yahoo
+            command=self.pmc.yahoo
         )
         Processing_menu.add_separator()
         Processing_menu.add_command(
@@ -336,7 +268,7 @@ class LineFrame(ttk.Frame):
             label=u'「小説家になろう」のページを開く(U)',
             under=17,
             accelerator='Ctrl+U',
-            command=self.open_url
+            command=self.pmc.open_becoming_novelist_page
         )
         self.menu_bar.add_cascade(
             label=u'処理(P)',
@@ -372,13 +304,13 @@ class LineFrame(ttk.Frame):
             label=u'ヘルプ(H)',
             under=4,
             accelerator='Ctrl+H',
-            command=self.open_help
+            command=self.hmc.help
         )
         Help_menu.add_command(
             label=u'バージョン情報(V)',
             under=8,
             accelerator='Ctrl+Shift+V',
-            command=self.open_version
+            command=self.hmc.version
         )
         self.menu_bar.add_cascade(
             label=u'ヘルプ(H)',
@@ -402,7 +334,7 @@ class LineFrame(ttk.Frame):
         self.f1 = tk.Frame(self, relief=tk.RIDGE, bd=2)
         self.text = CustomText(
             self.f1,
-            font=(self.font, self.int_var),
+            font=(self.font, self.font_size),
             undo=True
         )
         self.line_numbers = tk.Canvas(self.f1, width=30)
@@ -480,12 +412,12 @@ class LineFrame(ttk.Frame):
         self.label1 = tk.Label(self.f1, text=u"呼び名")
         self.txt_yobi_name = ttk.Entry(
             self.f1, width=30,
-            font=(self.font, self.int_var)
+            font=(self.font, self.font_size)
         )
         self.label2 = tk.Label(self.f1, text=u"名前")
         self.txt_name = ttk.Entry(
             self.f1, width=40,
-            font=(self.font, self.int_var)
+            font=(self.font, self.font_size)
         )
         self.f2 = tk.LabelFrame(self.f1, relief=tk.RIDGE, bd=2, text=u"性別")
         self.rdo1 = tk.Radiobutton(
@@ -517,20 +449,20 @@ class LineFrame(ttk.Frame):
         self.label3 = tk.Label(self.f1, text=u"誕生日")
         self.txt_birthday = ttk.Entry(
             self.f1, width=40,
-            font=(self.font, self.int_var)
+            font=(self.font, self.font_size)
         )
         self.f4 = tk.Frame(self.f1)
         self.foto_button = ttk.Button(
             self.f4,
             width=5,
             text=u'挿入',
-            command=self.btn_click
+            command=self.sfc.btn_click
         )
         self.foto_button_calcel = ttk.Button(
             self.f4,
             width=5,
             text=u'消去',
-            command=self.clear_btn_click
+            command=self.sfc.clear_btn_click
         )
         self.foto_button.grid(row=0, column=1)
         self.foto_button_calcel.grid(row=1, column=1)
@@ -538,7 +470,7 @@ class LineFrame(ttk.Frame):
         self.text_body = tk.Text(
             self.f1,
             width=80,
-            font=(self.font, self.int_var)
+            font=(self.font, self.font_size)
         )
         self.label1.grid(row=0, column=1, columnspa=2)
         self.txt_yobi_name.grid(row=1, column=1, columnspa=2)
@@ -596,13 +528,13 @@ class LineFrame(ttk.Frame):
         # Tab押下時(インデント、又はコード補完)
         self.text.bind('<Tab>', self.tab)
         # ルビを振る
-        self.text.bind('<Control-Key-r>', self.ruby)
+        self.text.bind('<Control-Key-r>', self.pmc.ruby_huri)
         # 開くダイアロクを表示する
         self.text.bind('<Control-Key-e>', self.open_file)
         # 保存ダイアロクを表示する
         self.text.bind('<Control-Key-w>', self.save_file)
         # 小説家になろうを開く
-        self.text.bind('<Control-Key-u>', self.open_url)
+        self.text.bind('<Control-Key-u>', self.pmc.open_becoming_novelist_page)
         # 検索ダイアログを開く
         self.text.bind('<Control-Key-f>', self.find_dialog)
         # 置換ダイアログを開く
@@ -612,21 +544,23 @@ class LineFrame(ttk.Frame):
         # 新規作成する
         self.text.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.text.bind('<Control-Key-h>', self.open_help)  # helpページを開く
+        self.text.bind('<Control-Key-h>', self.hmc.help)  # helpページを開く
         # Versionページを開く
-        self.text.bind('<Control-Shift-Key-V>', self.open_version)
+        self.text.bind('<Control-Shift-Key-V>', self.hmc.version)
         # 文字数と行数をカウントすShift-る
-        self.text.bind('<Control-Shift-Key-C>', self.moji_count)
+        self.text.bind('<Control-Shift-Key-C>', self.pmc.count_moji)
         # redo処理
-        self.text.bind('<Control-Shift-Key-Z>', self.redo)
+        self.text.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        # uedo処理
+        self.text.bind('<Control-Key-z>', self.emc.undo)
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
         # 意味を検索
-        self.text.bind('<Control-Shift-Key-D>', self.find_dictionaly)
+        self.text.bind('<Control-Shift-Key-D>', self.pmc.find_wikipedia)
         # 文章を読み上げ
-        self.text.bind('<Control-Shift-Key-R>', self.read_text)
+        self.text.bind('<Control-Shift-Key-R>', self.pmc.read_text)
         # yahoo文字列解析
-        self.text.bind('<Control-Key-y>', self.yahoo)
+        self.text.bind('<Control-Key-y>', self.pmc.yahoo)
 
     def create_event_image(self):
         """イメージイベントの設定
@@ -634,7 +568,7 @@ class LineFrame(ttk.Frame):
         ・イメージキャンバスにイベントを追加する。
 
         """
-        self.image_space.bind('<MouseWheel>', self.mouse_y_scroll)
+        self.image_space.bind('<MouseWheel>', self.sfc.mouse_y_scroll)
         self.image_space.bind('<Control-MouseWheel>', self.mouse_image_scroll)
 
     def create_event_character(self):
@@ -654,10 +588,22 @@ class LineFrame(ttk.Frame):
         self.txt_birthday.bind('<Control-Key-w>', self.save_file)
         self.text_body.bind('<Control-Key-w>', self.save_file)
         # 小説家になろうを開く
-        self.txt_yobi_name.bind('<Control-Key-u>', self.open_url)
-        self.txt_name.bind('<Control-Key-u>', self.open_url)
-        self.txt_birthday.bind('<Control-Key-u>', self.open_url)
-        self.text_body.bind('<Control-Key-u>', self.open_url)
+        self.txt_yobi_name.bind(
+            '<Control-Key-u>',
+            self.pmc.open_becoming_novelist_page
+        )
+        self.txt_name.bind(
+            '<Control-Key-u>',
+            self.pmc.open_becoming_novelist_page
+        )
+        self.txt_birthday.bind(
+            '<Control-Key-u>',
+            self.pmc.open_becoming_novelist_page
+        )
+        self.text_body.bind(
+            '<Control-Key-u>',
+            self.pmc.open_becoming_novelist_page
+        )
         # 検索ダイアログを開く
         self.txt_yobi_name.bind('<Control-Key-f>', self.find_dialog)
         self.txt_name.bind('<Control-Key-f>', self.find_dialog)
@@ -674,20 +620,20 @@ class LineFrame(ttk.Frame):
         self.txt_yobi_name.bind('<Control-Key-n>', self.new_open)
         self.text_body.bind('<Control-Key-n>', self.new_open)
         # helpページを開く
-        self.txt_yobi_name.bind('<Control-Key-h>', self.open_help)
-        self.txt_name.bind('<Control-Key-h>', self.open_help)
-        self.txt_birthday.bind('<Control-Key-h>', self.open_help)
-        self.text_body.bind('<Control-Key-h>', self.open_help)
+        self.txt_yobi_name.bind('<Control-Key-h>', self.hmc.help)
+        self.txt_name.bind('<Control-Key-h>', self.hmc.help)
+        self.txt_birthday.bind('<Control-Key-h>', self.hmc.help)
+        self.text_body.bind('<Control-Key-h>', self.hmc.help)
         # Versionページを開く
-        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.open_version)
-        self.txt_name.bind('<Control-Shift-Key-V>', self.open_version)
-        self.txt_birthday.bind('<Control-Shift-Key-V>', self.open_version)
-        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.open_version)
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.hmc.version)
+        self.txt_name.bind('<Control-Shift-Key-V>', self.hmc.version)
+        self.txt_birthday.bind('<Control-Shift-Key-V>', self.hmc.version)
+        self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.hmc.version)
         # redo処理
-        self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.redo)
-        self.txt_name.bind('<Control-Shift-Key-Z>', self.redo)
-        self.txt_birthday.bind('<Control-Shift-Key-Z>', self.redo)
-        self.text_body.bind('<Control-Shift-Key-Z>', self.redo)
+        self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.txt_name.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.txt_birthday.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.text_body.bind('<Control-Shift-Key-Z>', self.emc.redo)
         # フォントサイズの変更
         self.txt_yobi_name.bind('<Control-Shift-Key-F>', self.font_dialog)
         self.txt_name.bind('<Control-Shift-Key-F>', self.font_dialog)
@@ -718,21 +664,6 @@ class LineFrame(ttk.Frame):
         """
         # 検索処理を中断する
         self.replacement_dialog = 0
-
-    def mouse_y_scroll(self, event=None):
-        """マウスホイール移動の設定
-
-        ・イメージキャンバスでマウスホイールを回したときにイメージキャンバス
-        をスクロールする。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        if event.delta > 0:
-            self.image_space.yview_scroll(-1, 'units')
-        elif event.delta < 0:
-            self.image_space.yview_scroll(1, 'units')
 
     def mouse_image_scroll(self, event=None):
         """Ctrl+マウスホイールの拡大縮小設定
@@ -770,197 +701,6 @@ class LineFrame(ttk.Frame):
                     self.zoom
                 )
 
-    def btn_click(self, event=None):
-        """似顔絵ボタンを押したとき
-
-        ・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに
-        貼り付ける。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        fTyp = [(u"gif画像", ".gif")]
-        iDir = os.path.abspath(os.path.dirname(__file__))
-        self.filepath = filedialog.askopenfilename(
-            filetypes=fTyp,
-            initialdir=iDir
-        )
-        if not self.filepath == "":
-            path, ___ = os.path.splitext(os.path.basename(self.now_path))
-            ____, ext = os.path.splitext(os.path.basename(self.filepath))
-            title = shutil.copyfile(
-                self.filepath,
-                "./{0}/{1}{2}".format(
-                    tree_folder[0][0],
-                    path,
-                    ext
-                )
-            )
-            self.print_gif(title)
-
-    def clear_btn_click(self, event=None):
-        """消去ボタンをクリックしたとき
-
-        ・消去ボタンをクリックしたときに画像イメージから画像を
-        削除する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        files = "./{0}/{1}.gif".format(
-            tree_folder[0][0],
-            self.select_list_item
-        )
-        if os.path.isfile(files):
-            os.remove(files)
-            self.cv.delete("all")
-
-    def resize_gif(self, im):
-        """画像をリサイズする
-
-        ・イメージファイルを縦が長いときは縦を、横が長いときは横を、
-        同じときは両方を150pxに設定する。
-
-        Args:
-            im (instance): イメージインスタンス
-
-        Returns:
-            instance: イメージインスタンス
-
-        """
-        if im.size[0] == im.size[1]:
-            resized_image = im.resize((150, 150))
-        elif im.size[0] > im.size[1]:
-            zoom = int(im.size[1] * 150 / im.size[0])
-            resized_image = im.resize((150, zoom))
-        elif im.size[0] < im.size[1]:
-            zoom = int(im.size[0] * 200 / im.size[1])
-            resized_image = im.resize((zoom, 200))
-        return resized_image
-
-    def print_gif(self, title):
-        """gifを表示する
-
-        ・似顔絵キャンバスに画像を張り付ける。
-
-        Args:
-            title (str): タイトル
-
-        """
-        if not title == "":
-            giffile = Image.open(title)
-            self.cv.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
-            giffile.close()
-            self.cv.itemconfig(self.image_on_canvas, image=self.cv.photo)
-
-    def create_tags(self):
-        """タグの作成
-
-        ・キャラクターの名前をJanomeの形態素解析にかかるようにする。
-        キャラクターの名前を色付きにする。
-
-        """
-        i = 0
-        system_dic = u"喜寛,固有名詞,ヨシヒロ"
-        # キャラクターから一覧を作る。
-        children = self.tree.get_children('data/character')
-        for child in children:
-            # ユーザー定義辞書の設定
-            reading = ""
-            childname = self.tree.item(child, "text")
-            for token in tokenizer.tokenize(childname):
-                reading += token.phonetic
-            system_dic += u"\n{0},固有名詞,{1}".format(childname, reading)
-            # タグの作成
-            self.text.tag_configure(
-                childname,
-                foreground=color[i % len(color)],
-                font=(self.font, self.int_var, "bold")
-            )
-            i += 1
-        f = open("./userdic.csv", 'w', encoding='utf-8')
-        f.write(system_dic)
-        f.close()
-        # Janomeを使って日本語の形態素解析
-        self.t = Tokenizer(
-            "./userdic.csv",
-            udic_type="simpledic",
-            udic_enc="utf8"
-        )
-
-    def all_highlight(self, event=None):
-        """全てハイライト
-
-        ・開く処理等の時にすべての行をハイライトする。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        # 全てのテキストを取得
-        src = self.text.get('1.0', 'end - 1c')
-        # 全てのハイライトを一度解除する
-        for tag in self.text.tag_names():
-            self.text.tag_remove(tag, '1.0', 'end')
-
-        # ハイライトする
-        self._highlight('1.0', src, 'end')
-
-    def line_highlight(self, event=None):
-        """現在行だけハイライト
-
-        ・入力等の変更時に現在の行のみをハイライトする。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        start = 'insert linestart'
-        end = 'insert lineend'
-        # 現在行のテキストを取得
-        src = self.text.get(start, end)
-        # その行のハイライトを一度解除する
-        for tag in self.text.tag_names():
-            self.text.tag_remove(tag, start, end)
-
-        # ハイライトする
-        self._highlight(start, src, end)
-        # 置換処理時に選択する
-        if self.replacement_dialog == 1:
-            start = self.next_pos
-            end = '{0} + {1}c'.format(self.next_pos, len(self.last_text))
-            self.text.tag_add('sel', start, end)
-
-    def _highlight(self, start, src, end):
-        """ハイライトの共通処理
-
-        ・ハイライトする文字が見つかったらハイライト処理をする。
-        先頭の文字が全角スペースならば、一文字ずらしてハイライトする。
-
-        """
-        self.create_tags()
-        self.text.mark_set('range_start', start)
-        space_count = re.match(r"\u3000*", self.text.get(start, end)).end()
-        # 形態素解析を行う
-        for token in self.t.tokenize(src):
-            content = token.surface
-            self.text.mark_set(
-                'range_end', 'range_start+{0}c'
-                .format(len(content))
-            )
-            # 全角スペースの時はずらす
-            if space_count > 0:
-                self.text.tag_add(
-                    content,
-                    'range_start+{0}c'.format(space_count),
-                    'range_end+{0}c'.format(space_count)
-                )
-            else:
-                self.text.tag_add(content, 'range_start', 'range_end')
-            self.text.mark_set('range_start', 'range_end')
-
     def font_dialog(self, event=None):
         """フォントサイズダイアログを作成
 
@@ -989,7 +729,7 @@ class LineFrame(ttk.Frame):
             command=self.font_size_Change
         )
         button.grid(row=1, column=1)
-        self.intSpin.set(self.int_var)
+        self.intSpin.set(self.font_size)
         self.sub_wins.title(u'フォントサイズの変更')
 
     def font_size_Change(self):
@@ -1000,351 +740,18 @@ class LineFrame(ttk.Frame):
 
         """
         # 比較のため数値列に変更
-        self.int_var = int(self.intSpin.get())
-        if self.int_var < 12:  # 12より下の値を入力した時、12にする
-            self.int_var = 12
-        elif 72 < self.int_var:  # 72より上の値を入力した時、72にする
-            self.int_var = 72
+        self.font_size = int(self.intSpin.get())
+        if self.font_size < 12:  # 12より下の値を入力した時、12にする
+            self.font_size = 12
+        elif 72 < self.font_size:  # 72より上の値を入力した時、72にする
+            self.font_size = 72
         # 文字列にもどす
-        self.int_var = str(self.int_var)
+        self.font_size = str(self.font_size)
         self.sub_wins.destroy()
         # フォントサイズの変更
-        self.text.configure(font=(self.font, self.int_var))
+        self.text.configure(font=(self.font, self.font_size))
         # ハイライトのやり直し
-        self.all_highlight()
-
-    def open_url(self, event=None):
-        """小説家になろうのユーザーページを開く
-
-        ・インターネットブラウザで小説家になろうのユーザーページを開く。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        webbrowser.open("https://syosetu.com/user/top/")
-
-    def find_dictionaly(self, event=None):
-        """意味を検索
-
-        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
-        検索する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        # wikipediaから
-        select_text = self.text.selection_get()
-        page_py = wiki_wiki.page(select_text)
-        # ページがあるかどうか判断
-        if page_py.exists():
-            messagebox.showinfo(
-                "「{0}」の意味".format(select_text),
-                page_py.summary
-            )
-        else:
-            messagebox.showwarning(
-                "「{0}」の意味".format(select_text),
-                u"見つけられませんでした。"
-            )
-
-    def open_help(self, event=None):
-        """helpページを開く
-
-        ・ウエブブラウザを使ってREADME.htmlを表示する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        webbrowser.open(
-            'file://' + os.path.dirname(
-                os.path.abspath(os.path.dirname(__file__))
-            )
-            + "/README.html"
-        )
-
-    def open_version(self, event=None):
-        """バージョン情報を表示
-
-        ・バージョン情報表示ダイアログを表示する。
-        ×を押すまで消えないようにする。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        img2 = tk.PhotoImage(data=datas)
-        window = tk.Toplevel(root)
-        self.pack()
-        self.canvas = tk.Canvas(window, width=600, height=300)
-        self.canvas.create_image(0, 0, anchor='nw', image=img2)
-        self.canvas.create_text(
-            550,
-            290,
-            anchor='se',
-            text='Copyright (C) 2019-2020 Yamahara Yoshihiro',
-            font=('', 12)
-        )
-        self.canvas.create_text(
-            420,
-            120,
-            anchor='nw',
-            text='Ver 0.6.0 Beta',
-            font=('', 12)
-        )
-        self.canvas.pack()
-        window.resizable(width=0, height=0)
-        window.mainloop()
-
-    def read_text(self, event=None):
-        """テキストを読み上げる
-
-        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.focus()
-        self.read_texts = True
-        self.engine = pyttsx3.init()
-        self.engine.connect('started-word', self.pyttsx3_onword)
-        self.engine.connect('finished-utterance', self.pyttsx3_onend)
-        self.engine.setProperty('rate', 150)
-        self.engine.say(self.text.get('1.0', 'end - 1c'))
-        self.i = 0
-        self.textlen = 0
-        self.engine.startLoop(False)
-        self.externalLoop()
-
-    def externalLoop(self):
-        """文章読み上げ繰り返し処理
-
-        ・文章読み上げを繰り返し続ける。
-
-        """
-        self.engine.iterate()
-
-    def pyttsx3_onword(self, name, location, length):
-        """文章を読み上げ中の処理
-
-        ・文章読み始めるときに止めるダイアログを出してから読み上げる。
-        読み上げている最中は読み上げている行を選択状態にする。
-
-        Args:
-            name (str): 読み上げに関連付けられた名前
-            location (int): 現在の場所
-            length (int): 不明
-
-        """
-        # 今読んでいる場所と選択位置を比較する
-        if location > self.textlen:
-            # すべての選択一度解除する
-            self.text.tag_remove('sel', '1.0', 'end')
-            # 現在読んでいる場所を選択する
-            self.text.tag_add(
-                'sel',
-                "{0}.0".format(self.i),
-                "{0}.0".format(self.i+1)
-            )
-            # 次の行の長さをtextlenに入力する
-            self.textlen += len(
-                self.text.get(
-                    '{0}.0'.format(self.i),
-                    '{0}.0'.format(self.i+1)
-                )
-            )
-            # カーソルを文章の一番後ろに持ってくる
-            self.text.mark_set('insert', '{0}.0'.format(self.i+1))
-            self.text.see('insert')
-            self.text.focus()
-            # 行を１行増やす
-            self.i += 1
-        # 読み初めての処理
-        if self.read_texts:
-            # 読むのを中止するウインドウを作成する
-            self.sub_read_win = tk.Toplevel(self)
-            button = ttk.Button(
-                self.sub_read_win,
-                text=u'中止する',
-                width=str(u'中止する'),
-                padding=(100, 5),
-                command=self.pyttsx3_onreadend
-            )
-            button.grid(row=1, column=1)
-            # 最前面に表示し続ける
-            self.sub_read_win.attributes("-topmost", True)
-            # サイズ変更禁止
-            self.sub_read_win.resizable(width=0, height=0)
-            self.sub_read_win.title(u'読み上げ')
-            self.read_texts = False
-
-    def pyttsx3_onreadend(self):
-        """中止するボタンを押したときの処理
-
-        ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
-        を削除する。
-
-        """
-        self.engine.stop()
-        self.engine.endLoop()
-        self.sub_read_win.destroy()
-        self.text.tag_remove('sel', '1.0', 'end')
-
-    def pyttsx3_onend(self, name, completed):
-        """文章を読み終えた時の処理
-
-        ・文章を読み終えたら中止ウインドウを削除する。
-
-        Args:
-            name (str): 読み上げに関連付けられた名前
-            completed (bool): 文章が読み上げ終わった(True)
-
-        """
-        self.engine.stop()
-        self.engine.endLoop()
-        self.sub_read_win.destroy()
-        self.text.tag_remove('sel', '1.0', 'end')
-
-    def is_hiragana(self, char):
-        """文字がひらがなか判断
-
-        ・与えられた文字がひらがなかどうか判断する。
-
-        Args:
-            char (str): 判断する文字
-
-        Returns:
-            bool: ひらがなならTrue、違うならFalse
-
-        """
-        return (0x3040 < ord(char) < 0x3097)
-
-    def ruby(self, event=None):
-        """ルビをふる
-
-        ・選択文字列に小説家になろうのルビを振る。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        hon = ""
-        # 選択文字列を切り取る
-        set_ruby = self.text.get('sel.first', 'sel.last')
-        # 選択文字列を削除する
-        self.text.delete('sel.first', 'sel.last')
-        # 形態素解析を行う
-        for token in tokenizer.tokenize(set_ruby):
-            # ルビの取得
-            ruby = ""
-            ruby = jaconv.kata2hira(token.reading)
-            # 解析している文字のひらがなの部分を取得
-            hira = ""
-            for i in token.surface:
-                if self.is_hiragana(i):
-                    hira += i
-            # ルビがないときと、記号の時の処理
-            if ruby.replace(
-                hira, ''
-            ) == "" or token.part_of_speech.split(
-                ","
-            )[0] == u"記号":
-                hon += token.surface
-            else:
-                # ルビ振りを行う
-                hon += "|{0}≪{1}≫{2}".format(
-                    token.surface.replace(hira, ''),
-                    ruby.replace(hira, ''),
-                    hira
-                )
-
-        # テキストを表示する
-        self.text.insert('insert', hon)
-
-    def redo(self, event=None):
-        """Redo
-
-        ・Redo処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.edit_redo()
-
-    def undo(self, event=None):
-        """Undo
-
-        ・Uedo処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.edit_undo()
-
-    def copy(self, event=None):
-        """Copy
-
-        ・Copy処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.clipboard_clear()
-        self.clipboard_append(self.text.selection_get())
-
-    def cut(self, event=None):
-        """Cut
-
-        ・Cut処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.copy()
-        self.text.delete("sel.first", "sel.last")
-
-    def paste(self, event=None):
-        """Paste
-
-        ・Paste処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.insert('insert', self.clipboard_get())
-
-    def moji_count(self, event=None):
-        """文字数と行数を表示する
-
-        ・文字数と行数をカウントして表示する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        # 行数の取得
-        new_line = int(self.text.index('end-1c').split('.')[0])
-        # 文字列の取得
-        moji = self.text.get('1.0', 'end')
-        # ２０文字で区切ったときの行数を数える
-        gen_mai = 0
-        for val in moji.splitlines():
-            gen_mai += len(textwrap.wrap(val, 20))
-        # メッセージボックスの表示
-        messagebox.showinfo(
-            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
-            u"\n 原稿用紙 : {2}枚".format(
-                len(moji)-new_line,
-                new_line,
-                -(-gen_mai//20)))
+        self.hlc.all_highlight()
 
     def new_file(self):
         """新規作成をするための準備
@@ -1806,7 +1213,7 @@ class LineFrame(ttk.Frame):
             ):
                 # サブダイヤログを表示する
                 title = u'{0}に挿入'.format(self.tree.item(curItem)["text"])
-                dialog = Mydialog(self, "挿入", True, title, False)
+                dialog = mydialog.Mydialog(self, "挿入", True, title, False)
                 root.wait_window(dialog.sub_name_win)
                 file_name = dialog.txt
                 del dialog
@@ -1850,7 +1257,7 @@ class LineFrame(ttk.Frame):
                         self.text.focus()
                         # テキストを読み取り専用を解除する
                         self.text.configure(state='normal')
-                        self.create_tags()
+                        self.hlc.create_tags()
             # 子アイテムを右クリックしたとき
             else:
                 if str(self.tree.item(curItem)["text"]):
@@ -2071,7 +1478,7 @@ class LineFrame(ttk.Frame):
                 u"小説エディタ\\{0}\\{1}".format(text_path, text_name)
             )
             # シンタックスハイライトをする
-            self.all_highlight()
+            self.hlc.all_highlight()
 
     def on_name_click(self, event=None):
         """名前の変更
@@ -2088,7 +1495,7 @@ class LineFrame(ttk.Frame):
         if not text == "":
             sub_text = self.tree.item(curItem)["text"]
             title = u'{0}の名前を変更'.format(sub_text)
-            dialog2 = Mydialog(self, u"変更", True, title, sub_text)
+            dialog2 = mydialog.Mydialog(self, u"変更", True, title, sub_text)
             root.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
             self.text.configure(state='normal')
@@ -2153,7 +1560,7 @@ class LineFrame(ttk.Frame):
         """
         self.update_line_numbers()
         # その行のハイライトを行う
-        self.line_highlight()
+        self.hlc.line_highlight()
 
     def tab(self, event=None):
         """タブ押下時の処理
@@ -2292,158 +1699,6 @@ class LineFrame(ttk.Frame):
 
             start_i += 1
             end_i += 1
-
-    def yahoocall(self, appid="", sentence=""):
-        """yahooの校正支援を呼び出す
-
-        ・Yahoo! 校正支援をClient IDを使って呼び出す。
-
-        Args:
-            appid (str): Yahoo! Client ID
-            sentence (str): 校正をしたい文字列
-
-        Returns:
-            str: 校正結果
-
-        """
-        if appid == "":
-            messagebox.showerror(
-                "Yahoo! Client ID",
-                u"Yahoo! Client IDが見つかりません。\n"
-                "Readme.pdfを読んで、設定し直してください。"
-            )
-            return
-        url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
-        data = {
-            "appid": appid.rstrip('\n'),
-            "sentence": sentence,
-        }
-        html = requests.post(url, data)
-        return html.text
-
-    def yahooresult(self, html):
-        """校正支援を表示する画面を制作
-
-        ・校正結果を表示するダイアログを作成する。
-
-        Args:
-            html (str): 校正結果
-
-        """
-        xml = ET.fromstring(html)
-        # サブウインドウの表示
-        sub_win = tk.Toplevel(self)
-        # ツリービューの表示
-        self.yahoo_tree = ttk.Treeview(sub_win)
-        self.yahoo_tree["columns"] = (1, 2, 3, 4, 5)
-        # 表スタイルの設定(headingsはツリー形式ではない、通常の表形式)
-        self.yahoo_tree["show"] = "headings"
-        self.yahoo_tree.column(1, width=100)
-        self.yahoo_tree.column(2, width=80)
-        self.yahoo_tree.column(3, width=75)
-        self.yahoo_tree.column(4, width=150)
-        self.yahoo_tree.column(5, width=120)
-        self.yahoo_tree.heading(1, text="先頭からの文字数")
-        self.yahoo_tree.heading(2, text="対象文字数")
-        self.yahoo_tree.heading(3, text="対象表記")
-        self.yahoo_tree.heading(4, text="言い換え候補文字列")
-        self.yahoo_tree.heading(5, text="指摘の詳細情報")
-        # 情報を取り出す
-        for child in list(xml):
-            StartPos = (child.findtext(self.KOUSEI+"StartPos"))
-            Length = (child.findtext(self.KOUSEI+"Length"))
-            Surface = (child.findtext(self.KOUSEI+"Surface"))
-            ShitekiWord = (child.findtext(self.KOUSEI+"ShitekiWord"))
-            ShitekiInfo = (child.findtext(self.KOUSEI+"ShitekiInfo"))
-            self.yahoo_tree.insert(
-                "",
-                "end",
-                values=(StartPos,
-                        Length,
-                        Surface,
-                        ShitekiWord,
-                        ShitekiInfo
-                        )
-                )
-
-        self.yahoo_tree.grid(row=0, column=0, sticky=(tk.N, tk.S, tk.E, tk.W))
-        # スクロールバーを表示する
-        SCRLBAR_Y = ttk.Scrollbar(
-            sub_win,
-            orient=tk.VERTICAL,
-            command=self.yahoo_tree.yview
-        )
-        self.yahoo_tree.configure(yscroll=SCRLBAR_Y.set)
-        SCRLBAR_Y.grid(row=0, column=1, sticky=(tk.N, tk.S))
-        # 最前面に表示し続ける
-        sub_win.attributes("-topmost", True)
-        sub_win.title(u'文章校正')
-
-    def yahoo(self, event=None):
-        """Yahoo! 校正支援
-
-        ・Yahoo! 校正支援を呼び出し表示する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        html = self.yahoocall(
-            self.APPID,
-            self.text.get('1.0', 'end -1c')
-        )
-        if not self.APPID == "":
-            self.yahooresult(html)
-            self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
-
-    def on_double_click_yahoo(self, event=None):
-        """Yahoo! 校正支援リストをダブルクリック
-
-        ・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
-        その該当箇所を選択する。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        curItem = self.yahoo_tree.focus()
-        value = self.yahoo_tree.item(curItem)
-        i = 0
-        textlen = 0
-        textforlen = 0
-        # 出てくる場所を取得
-        val = int(value.get("values")[0])
-        # 出てくる文字数を取得
-        lenge = value.get("values")[1]
-        # 何行目になるか確認する
-        while True:
-            if val > textlen:
-                i += 1
-                textforlen = textlen
-                textlen += len(
-                    self.text.get(
-                        '{0}.0'.format(i),
-                        '{0}.0'.format(i+1)
-                    )
-                )
-            else:
-                break
-        if i == 0:
-            i = 1
-        # 選択状態を一旦削除
-        self.text.tag_remove('sel', '1.0', 'end')
-        # 選択状態にする
-        self.text.tag_add(
-            'sel',
-            "{0}.{1}".format(i, val-textforlen),
-            "{0}.{1}".format(i, val-textforlen+lenge)
-        )
-        # カーソルの移動
-        self.text.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
-        self.text.see('insert')
-        # フォーカスを合わせる
-        self.text.focus()
-        return
 
 
 def on_closing():
@@ -3133,28 +2388,6 @@ if __name__ == "__main__":
         ['data/event', u'イベント'],
         ['data/image', u'イメージ'],
         ['data/nobel', u'小説']
-    ]
-    color = [
-        'sky blue',
-        'yellow green',
-        'gold',
-        'salmon',
-        'orange',
-        'red',
-        'hot pink',
-        'dark orchid',
-        'purple',
-        'midnight blue',
-        'light slate blue',
-        'dodger blue',
-        'dark turquoise',
-        'cadet blue',
-        'maroon',
-        'tan1',
-        'rosy brown',
-        'indian red',
-        'orange red',
-        'violet red'
     ]
     # 再度メイン画面を作成
     root = tk.Tk()

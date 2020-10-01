@@ -15,9 +15,16 @@ Welcome to Novel Editor's documentation!
    /sub/save
    /sub/exe
    /sub/coverage
-   novel_editor
+   modules
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
+
+
+Link
+==================
+
+* `https://github.com/drthomas246/novel_editor <https://github.com/drthomas246/novel_editor>`_
+* `https://www.hobofoto.work <https://www.hobofoto.work>`_

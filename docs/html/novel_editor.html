@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Novel Editor モジュール &mdash; Novel Editor 0.6.0b ドキュメント</title>
+  <title>novel_editor module &mdash; Novel Editor 0.6.0b ドキュメント</title>
   
 
   
@@ -37,7 +37,8 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="prev" title="カバレッジの計測について" href="sub/coverage.html" /> 
+    <link rel="next" title="processingmenu module" href="processingmenu.html" />
+    <link rel="prev" title="mydialog module" href="mydialog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,7 +90,16 @@
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Novel Editor モジュール</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="editmenu.html">editmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpmenu.html">helpmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="highlight.html">highlight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mydialog.html">mydialog module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">novel_editor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processingmenu.html">processingmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subfunction.html">subfunction module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -136,7 +146,9 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Novel Editor モジュール</li>
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>novel_editor module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,7 +168,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-novel_editor">
-<span id="novel-editor"></span><h1>Novel Editor モジュール<a class="headerlink" href="#module-novel_editor" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<span id="novel-editor-module"></span><h1>novel_editor module<a class="headerlink" href="#module-novel_editor" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
 <dt id="novel_editor.CustomText">
 <em class="property">class </em><code class="sig-prename descclassname">novel_editor.</code><code class="sig-name descname">CustomText</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#CustomText"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.CustomText" title="この定義へのパーマリンク">¶</a></dt>
@@ -172,18 +184,6 @@
 <p>メインフレーム処理</p>
 <p>・メインに表示される画面の処理をする。</p>
 <dl class="py method">
-<dt id="novel_editor.LineFrame.all_highlight">
-<code class="sig-name descname">all_highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.all_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.all_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>全てハイライト</p>
-<p>・開く処理等の時にすべての行をハイライトする。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.auto_complete">
 <code class="sig-name descname">auto_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.auto_complete"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.auto_complete" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>補完リストの設定</p>
@@ -191,48 +191,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.btn_click">
-<code class="sig-name descname">btn_click</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.btn_click"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.btn_click" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>似顔絵ボタンを押したとき</p>
-<p>・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに
-貼り付ける。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.change_setting">
 <code class="sig-name descname">change_setting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.change_setting"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.change_setting" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>テキストの変更時</p>
 <p>・テキストを変更したときに行番号とハイライトを変更する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.clear_btn_click">
-<code class="sig-name descname">clear_btn_click</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.clear_btn_click"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.clear_btn_click" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>消去ボタンをクリックしたとき</p>
-<p>・消去ボタンをクリックしたときに画像イメージから画像を
-削除する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.copy">
-<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.copy"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.copy" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Copy</p>
-<p>・Copy処理を行う。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -269,14 +231,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.create_tags">
-<code class="sig-name descname">create_tags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.create_tags"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.create_tags" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>タグの作成</p>
-<p>・キャラクターの名前をJanomeの形態素解析にかかるようにする。
-キャラクターの名前を色付きにする。</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.create_widgets">
 <code class="sig-name descname">create_widgets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.create_widgets"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.create_widgets" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>画面の描画</p>
@@ -284,42 +238,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.cut">
-<code class="sig-name descname">cut</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.cut"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.cut" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Cut</p>
-<p>・Cut処理を行う。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.externalLoop">
-<code class="sig-name descname">externalLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.externalLoop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.externalLoop" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章読み上げ繰り返し処理</p>
-<p>・文章読み上げを繰り返し続ける。</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.find_dialog">
 <code class="sig-name descname">find_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.find_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.find_dialog" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>検索ダイアログを作成</p>
 <p>・検索ダイアログを作成する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.find_dictionaly">
-<code class="sig-name descname">find_dictionaly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.find_dictionaly"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.find_dictionaly" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>意味を検索</p>
-<p>・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
-検索する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -391,36 +313,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.is_hiragana">
-<code class="sig-name descname">is_hiragana</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.is_hiragana"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.is_hiragana" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文字がひらがなか判断</p>
-<p>・与えられた文字がひらがなかどうか判断する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) -- 判断する文字</p>
-</dd>
-<dt class="field-even">戻り値</dt>
-<dd class="field-even"><p>ひらがなならTrue、違うならFalse</p>
-</dd>
-<dt class="field-odd">戻り値の型</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.line_highlight">
-<code class="sig-name descname">line_highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.line_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.line_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>現在行だけハイライト</p>
-<p>・入力等の変更時に現在の行のみをハイライトする。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.message_window">
 <code class="sig-name descname">message_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.message_window"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.message_window" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ツリービューを右クリックしたときの処理</p>
@@ -434,36 +326,11 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.moji_count">
-<code class="sig-name descname">moji_count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.moji_count"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.moji_count" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文字数と行数を表示する</p>
-<p>・文字数と行数をカウントして表示する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.mouse_image_scroll">
 <code class="sig-name descname">mouse_image_scroll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.mouse_image_scroll"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.mouse_image_scroll" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>Ctrl+マウスホイールの拡大縮小設定</p>
 <p>・イメージキャンバスでCtrl+マウスホイールを回したときに画像を
 拡大縮小する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.mouse_y_scroll">
-<code class="sig-name descname">mouse_y_scroll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.mouse_y_scroll"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.mouse_y_scroll" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>マウスホイール移動の設定</p>
-<p>・イメージキャンバスでマウスホイールを回したときにイメージキャンバス
-をスクロールする。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -495,19 +362,6 @@
 <code class="sig-name descname">on_double_click</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.on_double_click"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.on_double_click" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ツリービューをダブルクリック</p>
 <p>・ファイルを保存して閉じて、選択されたアイテムを表示する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.on_double_click_yahoo">
-<code class="sig-name descname">on_double_click_yahoo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.on_double_click_yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.on_double_click_yahoo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Yahoo! 校正支援リストをダブルクリック</p>
-<p>・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
-その該当箇所を選択する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -552,60 +406,11 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.open_help">
-<code class="sig-name descname">open_help</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_help"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_help" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>helpページを開く</p>
-<p>・ウエブブラウザを使ってREADME.htmlを表示する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.open_url">
-<code class="sig-name descname">open_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_url"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_url" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>小説家になろうのユーザーページを開く</p>
-<p>・インターネットブラウザで小説家になろうのユーザーページを開く。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.open_version">
-<code class="sig-name descname">open_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.open_version"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.open_version" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>バージョン情報を表示</p>
-<p>・バージョン情報表示ダイアログを表示する。
-×を押すまで消えないようにする。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.overwrite_save_file">
 <code class="sig-name descname">overwrite_save_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.overwrite_save_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.overwrite_save_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>上書き保存処理</p>
 <p>・上書き保存するための処理。ファイルがあれば保存して、
 なければ保存ダイアログを出す。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.paste">
-<code class="sig-name descname">paste</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.paste"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.paste" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Paste</p>
-<p>・Paste処理を行う。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -645,86 +450,10 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.print_gif">
-<code class="sig-name descname">print_gif</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.print_gif"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.print_gif" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>gifを表示する</p>
-<p>・似顔絵キャンバスに画像を張り付ける。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>title</strong> (<em>str</em>) -- タイトル</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.push_keys">
 <code class="sig-name descname">push_keys</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.push_keys"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.push_keys" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>キーが押されたときの処理</p>
 <p>・何かキーが押されたときに検索処理を中断する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.pyttsx3_onend">
-<code class="sig-name descname">pyttsx3_onend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">completed</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.pyttsx3_onend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.pyttsx3_onend" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章を読み終えた時の処理</p>
-<p>・文章を読み終えたら中止ウインドウを削除する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) -- 読み上げに関連付けられた名前</p></li>
-<li><p><strong>completed</strong> (<em>bool</em>) -- 文章が読み上げ終わった(True)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.pyttsx3_onreadend">
-<code class="sig-name descname">pyttsx3_onreadend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.pyttsx3_onreadend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.pyttsx3_onreadend" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>中止するボタンを押したときの処理</p>
-<p>・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
-を削除する。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.pyttsx3_onword">
-<code class="sig-name descname">pyttsx3_onword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.pyttsx3_onword"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.pyttsx3_onword" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章を読み上げ中の処理</p>
-<p>・文章読み始めるときに止めるダイアログを出してから読み上げる。
-読み上げている最中は読み上げている行を選択状態にする。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) -- 読み上げに関連付けられた名前</p></li>
-<li><p><strong>location</strong> (<em>int</em>) -- 現在の場所</p></li>
-<li><p><strong>length</strong> (<em>int</em>) -- 不明</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.read_text">
-<code class="sig-name descname">read_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.read_text"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.read_text" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>テキストを読み上げる</p>
-<p>・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.redo">
-<code class="sig-name descname">redo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.redo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.redo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Redo</p>
-<p>・Redo処理を行う。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
@@ -774,37 +503,6 @@
 <code class="sig-name descname">replacement_dialog_on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.replacement_dialog_on_closing"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.replacement_dialog_on_closing" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>検索ウインドウが閉じられたときの処理</p>
 <p>・検索ダイアログが閉じられたことがわかるようにする。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.resize_gif">
-<code class="sig-name descname">resize_gif</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">im</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.resize_gif"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.resize_gif" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>画像をリサイズする</p>
-<p>・イメージファイルを縦が長いときは縦を、横が長いときは横を、
-同じときは両方を150pxに設定する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>im</strong> (<em>instance</em>) -- イメージインスタンス</p>
-</dd>
-<dt class="field-even">戻り値</dt>
-<dd class="field-even"><p>イメージインスタンス</p>
-</dd>
-<dt class="field-odd">戻り値の型</dt>
-<dd class="field-odd"><p>instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.ruby">
-<code class="sig-name descname">ruby</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.ruby"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.ruby" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ルビをふる</p>
-<p>・選択文字列に小説家になろうのルビを振る。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -900,18 +598,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="novel_editor.LineFrame.undo">
-<code class="sig-name descname">undo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.undo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.undo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Undo</p>
-<p>・Uedo処理を行う。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="novel_editor.LineFrame.update_line_numbers">
 <code class="sig-name descname">update_line_numbers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.update_line_numbers"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.update_line_numbers" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>行番号の描画</p>
@@ -919,111 +605,6 @@
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.yahoo">
-<code class="sig-name descname">yahoo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.yahoo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Yahoo! 校正支援</p>
-<p>・Yahoo! 校正支援を呼び出し表示する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.yahoocall">
-<code class="sig-name descname">yahoocall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">appid</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">sentence</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.yahoocall"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>yahooの校正支援を呼び出す</p>
-<p>・Yahoo! 校正支援をClient IDを使って呼び出す。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>appid</strong> (<em>str</em>) -- Yahoo! Client ID</p></li>
-<li><p><strong>sentence</strong> (<em>str</em>) -- 校正をしたい文字列</p></li>
-</ul>
-</dd>
-<dt class="field-even">戻り値</dt>
-<dd class="field-even"><p>校正結果</p>
-</dd>
-<dt class="field-odd">戻り値の型</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.LineFrame.yahooresult">
-<code class="sig-name descname">yahooresult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">html</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#LineFrame.yahooresult"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.LineFrame.yahooresult" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>校正支援を表示する画面を制作</p>
-<p>・校正結果を表示するダイアログを作成する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>html</strong> (<em>str</em>) -- 校正結果</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="novel_editor.Mydialog">
-<em class="property">class </em><code class="sig-prename descclassname">novel_editor.</code><code class="sig-name descname">Mydialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">button1</span></em>, <em class="sig-param"><span class="n">button2</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#Mydialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.Mydialog" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ダイアログ作成クラス</p>
-<p>・自作ダイアログを呼び出し表示する。</p>
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.txt">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">txt</code><a class="headerlink" href="#novel_editor.Mydialog.self.txt" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>インプットボックスの値</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.sub_name_win">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">sub_name_win</code><a class="headerlink" href="#novel_editor.Mydialog.self.sub_name_win" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ダイアログウインドウインスタンス</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="novel_editor.Mydialog.self.txt_name">
-<code class="sig-prename descclassname">self.</code><code class="sig-name descname">txt_name</code><a class="headerlink" href="#novel_editor.Mydialog.self.txt_name" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>インプットボックスインスタンス</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="novel_editor.Mydialog.sub_name_ok">
-<code class="sig-name descname">sub_name_ok</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/novel_editor.html#Mydialog.sub_name_ok"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#novel_editor.Mydialog.sub_name_ok" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ダイアログボタンクリック時の処理</p>
-<p>・自作ダイアログのボタンをクリックしたときにインプットボックスに
-入力されている値を取得する。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
-</dd>
-<dt class="field-even">戻り値</dt>
-<dd class="field-even"><p>インプットボックスの値</p>
-</dd>
-<dt class="field-odd">戻り値の型</dt>
-<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1047,8 +628,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="processingmenu.html" class="btn btn-neutral float-right" title="processingmenu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="sub/coverage.html" class="btn btn-neutral float-left" title="カバレッジの計測について" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="mydialog.html" class="btn btn-neutral float-left" title="mydialog module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

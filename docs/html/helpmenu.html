@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>使用方法 &mdash; Novel Editor 0.6.0b ドキュメント</title>
+  <title>helpmenu module &mdash; Novel Editor 0.6.0b ドキュメント</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="next" title="キャラクターファイルについて" href="sub/charactor.html" />
-    <link rel="prev" title="Welcome to Novel Editor&#39;s documentation!" href="index.html" /> 
+    <link rel="next" title="highlight module" href="highlight.html" />
+    <link rel="prev" title="editmenu module" href="editmenu.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,12 +85,21 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">source</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="editmenu.html">editmenu module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">helpmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="highlight.html">highlight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mydialog.html">mydialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="novel_editor.html">novel_editor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processingmenu.html">processingmenu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subfunction.html">subfunction module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -137,13 +146,15 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>使用方法</li>
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>helpmenu module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/use.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/helpmenu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -156,27 +167,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1>使用方法<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<ul class="simple">
-<li><p>開発環境は、Windows 10 Python Version 3.7.4 64bit版を使用しています。</p></li>
-<li><p>Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げはできません。)</p></li>
-<li><p>それ以外の環境でもPythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。</p></li>
-<li><p>jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリ、requests(HTTP)ライブラリを使用しています。</p></li>
-<li><p>インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;jaconv==0.2.4&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;Janome==0.3.9&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;pyttsx3==2.71&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;wikipedia-api==0.5.4&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;Pillow==7.2.0&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;requests==2.24.0&#39;</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>sourceフォルダにnovel_editor.pyファイルが入っています。これがメインソースファイルです。</p></li>
-<li><p>上記ライブラリ以外は標準ライブラリを使っていますので、上記をインストールすれば、実行できるはずです。</p></li>
-</ul>
+  <div class="section" id="module-helpmenu">
+<span id="helpmenu-module"></span><h1>helpmenu module<a class="headerlink" href="#module-helpmenu" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="py class">
+<dt id="helpmenu.HelpMenuClass">
+<em class="property">class </em><code class="sig-prename descclassname">helpmenu.</code><code class="sig-name descname">HelpMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">image_data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/helpmenu.html#HelpMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#helpmenu.HelpMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ヘルプメニューバーのクラス</p>
+<p>・ヘルプメニューバーにあるプログラム群</p>
+<dl class="py method">
+<dt id="helpmenu.HelpMenuClass.help">
+<code class="sig-name descname">help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/helpmenu.html#HelpMenuClass.help"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#helpmenu.HelpMenuClass.help" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>helpページを開く</p>
+<p>・ウエブブラウザを使ってREADME.htmlを表示する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="helpmenu.HelpMenuClass.version">
+<code class="sig-name descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/helpmenu.html#HelpMenuClass.version"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#helpmenu.HelpMenuClass.version" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>バージョン情報を表示</p>
+<p>・バージョン情報表示ダイアログを表示する。
+×を押すまで消えないようにする。</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -187,10 +202,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sub/charactor.html" class="btn btn-neutral float-right" title="キャラクターファイルについて" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="highlight.html" class="btn btn-neutral float-right" title="highlight module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Novel Editor&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="editmenu.html" class="btn btn-neutral float-left" title="editmenu module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
