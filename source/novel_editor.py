@@ -18,6 +18,7 @@ from janome.tokenizer import Tokenizer
 import subfunction
 import mydialog
 import highlight
+import editmenu
 import helpmenu
 import processingmenu
 
@@ -116,6 +117,7 @@ class LineFrame(ttk.Frame):
         # メニューバーのクラスを割り当てる
         self.sfc = subfunction.SubFunctionClass(self)
         self.hlc = highlight.HighLightClass(self, tokenizer)
+        self.emc = editmenu.EditMenuClass(self)
         self.pmc = processingmenu.ProcessingMenuClass(
             self,
             wiki_wiki,
@@ -177,33 +179,33 @@ class LineFrame(ttk.Frame):
         Edit_menu.add_command(
             label=u'やり直し(R)',
             under=5,
-            accelerator='Ctrl+Z',
-            command=self.redo
+            accelerator='Ctrl+Shift+Z',
+            command=self.emc.redo
         )
         Edit_menu.add_command(
             label=u'戻る(U)',
             under=3,
-            accelerator='Ctrl+Shift+Z',
-            command=self.undo
+            accelerator='Ctrl+Z',
+            command=self.emc.undo
         )
         Edit_menu.add_separator()
         Edit_menu.add_command(
             label=u'切り取り(X)',
             under=5,
             accelerator='Ctrl+X',
-            command=self.cut
+            command=self.emc.cut
         )
         Edit_menu.add_command(
             label=u'コピー(C)',
             under=4,
             accelerator='Ctrl+C',
-            command=self.copy
+            command=self.emc.copy
         )
         Edit_menu.add_command(
             label=u'貼り付け(V)',
             under=5,
             accelerator='Ctrl+V',
-            command=self.paste
+            command=self.emc.paste
         )
         Edit_menu.add_separator()
         Edit_menu.add_command(
@@ -548,7 +550,9 @@ class LineFrame(ttk.Frame):
         # 文字数と行数をカウントすShift-る
         self.text.bind('<Control-Shift-Key-C>', self.pmc.count_moji)
         # redo処理
-        self.text.bind('<Control-Shift-Key-Z>', self.redo)
+        self.text.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        # uedo処理
+        self.text.bind('<Control-Key-z>', self.emc.undo)
         # フォントサイズの変更
         self.text.bind('<Control-Shift-Key-F>', self.font_dialog)
         # 意味を検索
@@ -626,10 +630,10 @@ class LineFrame(ttk.Frame):
         self.txt_birthday.bind('<Control-Shift-Key-V>', self.hmc.version)
         self.txt_yobi_name.bind('<Control-Shift-Key-V>', self.hmc.version)
         # redo処理
-        self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.redo)
-        self.txt_name.bind('<Control-Shift-Key-Z>', self.redo)
-        self.txt_birthday.bind('<Control-Shift-Key-Z>', self.redo)
-        self.text_body.bind('<Control-Shift-Key-Z>', self.redo)
+        self.txt_yobi_name.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.txt_name.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.txt_birthday.bind('<Control-Shift-Key-Z>', self.emc.redo)
+        self.text_body.bind('<Control-Shift-Key-Z>', self.emc.redo)
         # フォントサイズの変更
         self.txt_yobi_name.bind('<Control-Shift-Key-F>', self.font_dialog)
         self.txt_name.bind('<Control-Shift-Key-F>', self.font_dialog)
@@ -748,63 +752,6 @@ class LineFrame(ttk.Frame):
         self.text.configure(font=(self.font, self.font_size))
         # ハイライトのやり直し
         self.hlc.all_highlight()
-
-    def redo(self, event=None):
-        """Redo
-
-        ・Redo処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.edit_redo()
-
-    def undo(self, event=None):
-        """Undo
-
-        ・Uedo処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.edit_undo()
-
-    def copy(self, event=None):
-        """Copy
-
-        ・Copy処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.clipboard_clear()
-        self.clipboard_append(self.text.selection_get())
-
-    def cut(self, event=None):
-        """Cut
-
-        ・Cut処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.copy()
-        self.text.delete("sel.first", "sel.last")
-
-    def paste(self, event=None):
-        """Paste
-
-        ・Paste処理を行う。
-
-        Args:
-            event (instance): tkinter.Event のインスタンス
-
-        """
-        self.text.insert('insert', self.clipboard_get())
 
     def new_file(self):
         """新規作成をするための準備
