@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>highlight module &mdash; Novel Editor 0.6.0b ドキュメント</title>
+  <title>editmenu module &mdash; Novel Editor 0.6.0b ドキュメント</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="next" title="mydialog module" href="mydialog.html" />
-    <link rel="prev" title="helpmenu module" href="helpmenu.html" /> 
+    <link rel="next" title="helpmenu module" href="helpmenu.html" />
+    <link rel="prev" title="source" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,9 +91,9 @@
 <li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="editmenu.html">editmenu module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">editmenu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="helpmenu.html">helpmenu module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">highlight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="highlight.html">highlight module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mydialog.html">mydialog module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="novel_editor.html">novel_editor module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="processingmenu.html">processingmenu module</a></li>
@@ -148,13 +148,13 @@
         
           <li><a href="modules.html">source</a> &raquo;</li>
         
-      <li>highlight module</li>
+      <li>editmenu module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/highlight.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/editmenu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -167,51 +167,72 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-highlight">
-<span id="highlight-module"></span><h1>highlight module<a class="headerlink" href="#module-highlight" title="このヘッドラインへのパーマリンク">¶</a></h1>
+  <div class="section" id="module-editmenu">
+<span id="editmenu-module"></span><h1>editmenu module<a class="headerlink" href="#module-editmenu" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
-<dt id="highlight.HighLightClass">
-<em class="property">class </em><code class="sig-prename descclassname">highlight.</code><code class="sig-name descname">HighLightClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/highlight.html#HighLightClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#highlight.HighLightClass" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="editmenu.EditMenuClass">
+<em class="property">class </em><code class="sig-prename descclassname">editmenu.</code><code class="sig-name descname">EditMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ハイライトのクラス</p>
-<p>・ハイライトするためのプログラム群</p>
+<p>編集メニューバーのクラス</p>
+<p>・編集メニューバーにあるプログラム群</p>
 <dl class="py method">
-<dt id="highlight.HighLightClass.all_highlight">
-<code class="sig-name descname">all_highlight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/highlight.html#HighLightClass.all_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#highlight.HighLightClass.all_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>全てハイライト</p>
-<p>・開く処理等の時にすべての行をハイライトする。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="highlight.HighLightClass.create_tags">
-<code class="sig-name descname">create_tags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/highlight.html#HighLightClass.create_tags"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#highlight.HighLightClass.create_tags" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>タグの作成</p>
-<p>・キャラクターの名前をJanomeの形態素解析にかかるようにする。
-キャラクターの名前を色付きにする。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="highlight.HighLightClass.highlight">
-<code class="sig-name descname">highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">end</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/highlight.html#HighLightClass.highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#highlight.HighLightClass.highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ハイライトの共通処理</p>
-<p>・ハイライトする文字が見つかったらハイライト処理をする。
-先頭の文字が全角スペースならば、一文字ずらしてハイライトする。</p>
+<dt id="editmenu.EditMenuClass.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass.copy"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass.copy" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Copy</p>
+<p>・Copy処理を行う。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>start</strong> (<em>str</em>) -- はじめの位置 例.(1.0)</p></li>
-<li><p><strong>src</strong> (<em>str</em>) -- ハイライトする文章</p></li>
-<li><p><strong>end</strong> (<em>str</em>) -- 終わりの位置</p></li>
-</ul>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="highlight.HighLightClass.line_highlight">
-<code class="sig-name descname">line_highlight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/highlight.html#HighLightClass.line_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#highlight.HighLightClass.line_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>現在行だけハイライト</p>
-<p>・入力等の変更時に現在の行のみをハイライトする。</p>
+<dt id="editmenu.EditMenuClass.cut">
+<code class="sig-name descname">cut</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass.cut"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass.cut" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Cut</p>
+<p>・Cut処理を行う。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="editmenu.EditMenuClass.paste">
+<code class="sig-name descname">paste</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass.paste"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass.paste" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Paste</p>
+<p>・Paste処理を行う。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="editmenu.EditMenuClass.redo">
+<code class="sig-name descname">redo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass.redo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass.redo" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Redo</p>
+<p>・Redo処理を行う。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="editmenu.EditMenuClass.undo">
+<code class="sig-name descname">undo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/editmenu.html#EditMenuClass.undo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#editmenu.EditMenuClass.undo" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Undo</p>
+<p>・Uedo処理を行う。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -226,10 +247,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mydialog.html" class="btn btn-neutral float-right" title="mydialog module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="helpmenu.html" class="btn btn-neutral float-right" title="helpmenu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="helpmenu.html" class="btn btn-neutral float-left" title="helpmenu module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="source" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

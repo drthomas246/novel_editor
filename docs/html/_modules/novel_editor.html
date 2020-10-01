@@ -173,6 +173,7 @@
 <span class="kn">import</span> <span class="nn">subfunction</span>
 <span class="kn">import</span> <span class="nn">mydialog</span>
 <span class="kn">import</span> <span class="nn">highlight</span>
+<span class="kn">import</span> <span class="nn">editmenu</span>
 <span class="kn">import</span> <span class="nn">helpmenu</span>
 <span class="kn">import</span> <span class="nn">processingmenu</span>
 
@@ -271,6 +272,7 @@
         <span class="c1"># メニューバーのクラスを割り当てる</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sfc</span> <span class="o">=</span> <span class="n">subfunction</span><span class="o">.</span><span class="n">SubFunctionClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hlc</span> <span class="o">=</span> <span class="n">highlight</span><span class="o">.</span><span class="n">HighLightClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emc</span> <span class="o">=</span> <span class="n">editmenu</span><span class="o">.</span><span class="n">EditMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span> <span class="o">=</span> <span class="n">processingmenu</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">wiki_wiki</span><span class="p">,</span>
@@ -332,33 +334,33 @@
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;やり直し(R)&#39;</span><span class="p">,</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Z&#39;</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">redo</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+Z&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span>
         <span class="p">)</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;戻る(U)&#39;</span><span class="p">,</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+Z&#39;</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">undo</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Z&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">undo</span>
         <span class="p">)</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;切り取り(X)&#39;</span><span class="p">,</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
             <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+X&#39;</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cut</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">cut</span>
         <span class="p">)</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;コピー(C)&#39;</span><span class="p">,</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
             <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+C&#39;</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">copy</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">copy</span>
         <span class="p">)</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;貼り付け(V)&#39;</span><span class="p">,</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
             <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+V&#39;</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">paste</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">paste</span>
         <span class="p">)</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
         <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
@@ -703,7 +705,9 @@
         <span class="c1"># 文字数と行数をカウントすShift-る</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-C&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">count_moji</span><span class="p">)</span>
         <span class="c1"># redo処理</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="c1"># uedo処理</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Key-z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">undo</span><span class="p">)</span>
         <span class="c1"># フォントサイズの変更</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-F&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_dialog</span><span class="p">)</span>
         <span class="c1"># 意味を検索</span>
@@ -781,10 +785,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-V&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-V&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
         <span class="c1"># redo処理</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-Z&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span><span class="p">)</span>
         <span class="c1"># フォントサイズの変更</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-F&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_dialog</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-F&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_dialog</span><span class="p">)</span>
@@ -903,63 +907,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span><span class="p">))</span>
         <span class="c1"># ハイライトのやり直し</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hlc</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="LineFrame.redo"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.redo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">redo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Redo</span>
-
-<span class="sd">        ・Redo処理を行う。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">edit_redo</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="LineFrame.undo"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.undo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">undo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Undo</span>
-
-<span class="sd">        ・Uedo処理を行う。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">edit_undo</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="LineFrame.copy"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.copy">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Copy</span>
-
-<span class="sd">        ・Copy処理を行う。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clipboard_clear</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clipboard_append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">selection_get</span><span class="p">())</span></div>
-
-<div class="viewcode-block" id="LineFrame.cut"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.cut">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">cut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cut</span>
-
-<span class="sd">        ・Cut処理を行う。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;sel.first&quot;</span><span class="p">,</span> <span class="s2">&quot;sel.last&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="LineFrame.paste"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.paste">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">paste</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Paste</span>
-
-<span class="sd">        ・Paste処理を行う。</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clipboard_get</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="LineFrame.new_file"><a class="viewcode-back" href="../novel_editor.html#novel_editor.LineFrame.new_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;新規作成をするための準備</span>
