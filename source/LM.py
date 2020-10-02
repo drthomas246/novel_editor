@@ -107,6 +107,7 @@ class ListMenuClass():
                     curItem = self.APP.tree.focus()
                     text = self.APP.tree.item(curItem)["text"]
                     path = ""
+                    tree = ""
                     # 選択されているフォルダを見つける
                     for val in self.tree_folder:
                         if text == val[1]:
@@ -157,6 +158,8 @@ class ListMenuClass():
                         u"項目削除",
                         "{0}を削除しますか？".format(file_name)
                     ):
+                        image_path = ""
+                        path = ""
                         # パスを取得する
                         for val in self.tree_folder:
                             if text == val[1]:
