@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create Window module &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Edit Menu module" href="EM.html" />
+    <link rel="prev" title="Complement Processing module" href="CP.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CP.html">Complement Processing module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Create Window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EM.html">Edit Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EP.html">Event Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FM.html">File Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FP.html">Find Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SF.html">Sub Function module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="novel_editor.html">Novel Editor module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>Create Window module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/CW.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-CW">
+<span id="create-window-module"></span><h1>Create Window module<a class="headerlink" href="#module-CW" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="py class">
+<dt id="CW.CreateWindowClass">
+<em class="property">class </em><code class="sig-prename descclassname">CW.</code><code class="sig-name descname">CreateWindowClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>画面の描画のクラス</p>
+<p>・画面描画にあるプログラム群</p>
+<dl class="py method">
+<dt id="CW.CreateWindowClass.create_widgets">
+<code class="sig-name descname">create_widgets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.create_widgets"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.create_widgets" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>画面の描画</p>
+<p>・メインウインドウにウェジットを配置する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CW.CreateWindowClass.frame">
+<code class="sig-name descname">frame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>フレーム内にテキストボックスを表示</p>
+<p>・メインウインドウの右側に行番号、テキストボックス、スクロールバー
+を表示する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CW.CreateWindowClass.frame_character">
+<code class="sig-name descname">frame_character</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame_character"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame_character" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>フレーム内にイメージフレーム表示</p>
+<p>・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CW.CreateWindowClass.frame_image">
+<code class="sig-name descname">frame_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame_image"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame_image" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>フレーム内にイメージフレーム表示</p>
+<p>・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="CW.CustomText">
+<em class="property">class </em><code class="sig-prename descclassname">CW.</code><code class="sig-name descname">CustomText</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CustomText"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CustomText" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Text</span></code></p>
+<p>Textのイベントを拡張したウィジェット</p>
+<p>・textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="EM.html" class="btn btn-neutral float-right" title="Edit Menu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CP.html" class="btn btn-neutral float-left" title="Complement Processing module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

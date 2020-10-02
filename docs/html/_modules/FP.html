@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FP &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">モジュールコード</a> &raquo;</li>
+        
+      <li>FP</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>FP のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
+<span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
+
+
+<div class="viewcode-block" id="FindProcessingClass"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">FindProcessingClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;検索置換のクラス</span>
+
+<span class="sd">    ・検索置換するためのプログラム群</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        replacement_check (bool): 検索ダイアログが表示されているTrue</span>
+<span class="sd">        next_pos (str): 次の検索位置 例.(1.0)</span>
+<span class="sd">        find_text (str): 検索文字列</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            app (instance): lineframeインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
+
+<div class="viewcode-block" id="FindProcessingClass.push_keys"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.push_keys">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">push_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;キーが押されたときの処理</span>
+
+<span class="sd">        ・何かキーが押されたときに検索処理を中断する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 検索処理を中断する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.find_dialog"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.find_dialog">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">find_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;検索ダイアログを作成</span>
+
+<span class="sd">        ・検索ダイアログを作成する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">search_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">search_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="n">search_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;検索&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;検索&#39;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span>
+        <span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="n">search_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;昇順検索&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;昇順検索&#39;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_forward</span>
+        <span class="p">)</span>
+        <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 最前面に表示し続ける</span>
+        <span class="n">search_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">search_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;検索&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.replacement_dialog"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.replacement_dialog">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">replacement_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;置換ダイアログを作成</span>
+
+<span class="sd">        ・置換ダイアログを作成する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;検索&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;検索&#39;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span>
+        <span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;置換&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;置換&#39;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement</span>
+        <span class="p">)</span>
+        <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 最前面に表示し続ける</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;置換&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="c1"># ウインドウが閉じられたときの処理</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span>
+            <span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_dialog_on_closing</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.replacement_dialog_on_closing"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.replacement_dialog_on_closing">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">replacement_dialog_on_closing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;検索ウインドウが閉じられたときの処理</span>
+
+<span class="sd">        ・検索ダイアログが閉じられたことがわかるようにする。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.search"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.search">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;検索処理</span>
+
+<span class="sd">        ・検索処理をする。空欄なら処理しない、違うなら最初から、</span>
+<span class="sd">        同じなら次のを検索する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 現在選択中の部分を解除</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 現在検索ボックスに入力されてる文字</span>
+        <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">now_text</span><span class="p">:</span>
+            <span class="c1"># 空欄だったら処理しない</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 今回の入力を、「前回入力文字」にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="n">now_text</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.replacement"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.replacement">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">replacement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;置換処理</span>
+
+<span class="sd">        ・置換処理をする。空欄なら処理しない、違うなら初めから、</span>
+<span class="sd">        同じなら次を検索する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 現在選択中の部分を解除</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 現在検索ボックスに入力されてる文字</span>
+        <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">replacement_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">replacement_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">now_text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">replacement_text</span><span class="p">:</span>
+            <span class="c1"># 空欄だったら処理しない</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="c1"># 検索文字の置換を行なう</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + </span><span class="si">{1}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">now_text</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">replacement_text</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 今回の入力を、「前回入力文字」にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="n">now_text</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.search_forward"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.search_forward">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">search_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;昇順検索処理</span>
+
+<span class="sd">        ・昇順検索をする。空欄なら処理しない、違うなら初めから、</span>
+<span class="sd">        同じなら次を検索する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 現在選択中の部分を解除</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 現在検索ボックスに入力されてる文字</span>
+        <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">now_text</span><span class="p">:</span>
+            <span class="c1"># 空欄だったら処理しない</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># 今回の入力を、「前回入力文字」にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="n">now_text</span></div>
+
+<div class="viewcode-block" id="FindProcessingClass.search_next"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.search_next">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">search_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">case</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;検索のメイン処理</span>
+
+<span class="sd">        ・検索できれば選択をする。できなければ、ダイアログを出して終了。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search (str): 検索文字列</span>
+<span class="sd">            index (str): 検索位置 ex. (1.0)</span>
+<span class="sd">            case (int): 0.初めから検索 1.次に検索 2.昇順検索</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">backwards</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">backwards</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">backwards</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + 1c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
+            <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span>
+            <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pos</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;end&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
+
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+                <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
+                <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span>
+                <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pos</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="s2">&quot;検索&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;最後まで検索しましたが検索文字はありませんでした。&quot;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + </span><span class="si">{1}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">search</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
