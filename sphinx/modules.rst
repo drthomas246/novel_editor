@@ -4,10 +4,16 @@ source
 .. toctree::
    :maxdepth: 4
 
-   editmenu
-   helpmenu
-   highlight
-   mydialog
+   CP
+   CW
+   EM
+   EP
+   FM
+   FP
+   HM
+   HP
+   LM
+   MD
+   PM
+   SF
    novel_editor
-   processingmenu
-   subfunction

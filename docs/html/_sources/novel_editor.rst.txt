@@ -1,4 +1,4 @@
-novel\_editor module
+Novel Editor module
 ====================
 
 .. automodule:: novel_editor
