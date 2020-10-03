@@ -2,101 +2,14 @@
 # -*- coding: utf8 -*-
 import os
 import sys
-import shutil
 import platform
 import tkinter as tk
-import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 
 import wikipediaapi
 from janome.tokenizer import Tokenizer
 
-import CW
-import EP
-import SF
-import HP
-import FP
-import CP
-import FM
-import EM
-import HM
-import PM
-import LM
-
-
-class MainProcessingClass(ttk.Frame):
-    """メインフレーム処理
-
-    ・メインに表示される画面の処理をする。
-
-    """
-
-    def __init__(self, master=None, **kwargs):
-        """初期設定
-
-        ・初期化、メニューバーの作成、画面の描画、イベントの追加をする。
-
-        """
-        super().__init__(master, **kwargs)
-        # メニューバーの作成
-        self.menu_bar = tk.Menu(self.master)
-        self.master.config(menu=self.menu_bar)
-        # 自作クラスの読み込み
-        self.cwc = CW.CreateWindowClass(self)
-        self.epc = EP.EventProcessingClass(self)
-        self.sfc = SF.SubFunctionClass(self, tree_folder)
-        self.hpc = HP.HighlightProcessingClass(self, tokenizer)
-        self.fpc = FP.FindProcessingClass(self)
-        self.cpc = CP.ComplementProcessingClass(self, tokenizer)
-        self.fmc = FM.FileMenuClass(self, root, tree_folder)
-        self.emc = EM.EditMenuClass(self)
-        self.pmc = PM.ProcessingMenuClass(self, wiki_wiki, tokenizer)
-        self.lmc = LM.ListMenuClass(self, root, tree_folder)
-        self.hmc = HM.HelpMenuClass(self, datas)
-        # 初期化処理
-        self.initialize()
-        self.cwc.create_widgets()
-        self.epc.create_event()
-
-    def initialize(self):
-        """初期化処理
-
-        ・変数の初期化及び起動準備をする。
-
-        """
-        # 今の処理ししているファイルのパス
-        self.fmc.now_path = ""
-        # 現在開いているファイル
-        self.fmc.file_path = ""
-        # 検索文字列
-        self.fpc.find_text = ""
-        # 現在入力中の初期テキスト
-        self.lmc.text_text = ""
-        self.lmc.select_list_item = ""
-        # 文字の大きさ
-        self.pmc.font_size = 16
-        self.APPID = ""
-        if os.path.isfile("./appid.txt"):
-            f = open("./appid.txt", "r", encoding="utf-8")
-            self.APPID = f.read()
-            f.close()
-        if u"ここを消して、" in self.APPID:
-            self.APPID = ""
-        # フォントをOSごとに変える
-        pf = platform.system()
-        if pf == 'Windows':
-            self.font = "メイリオ"
-        elif pf == 'Darwin':  # MacOS
-            self.font = "Osaka-等幅"
-        elif pf == 'Linux':
-            self.font = "IPAゴシック"
-        # dataフォルダがあるときは、削除する
-        if os.path.isdir('./data'):
-            shutil.rmtree('./data')
-        # 新しくdataフォルダを作成する
-        for val in tree_folder:
-            os.makedirs('./{0}'.format(val[0]))
-
+import MC
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -106,7 +19,7 @@ if __name__ == "__main__":
         sys.exit()
 
     # タイトル横の画像ファイルのbase 64データ
-    data = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
+    image_binary = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
         GRoaGhwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoq
         KisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0NDU1NTc3Nzg4ODo6Ojs7Ozw8
         PD4+Pj8/P0BAQEFBQUJCQkNDQ0REREVFRUZGRkdHR0hISElJSUpKSktLS0xMTE1N
@@ -338,10 +251,10 @@ if __name__ == "__main__":
         '''
     # アイコンを設定
     root.geometry('600x300')
-    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=data))
+    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=image_binary))
     root.title(u"小説エディタ")
     # タイトルの画像ファイルのbase 64データ
-    datas = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT
+    title_binary = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT
         IAAAISQBJgBuJwBuKSUkKgAAKzEbK3hBLTwYLh0bMWAyMYZZMRcAMwEMMw0SM2s/
         M1c5NEooNZdlNYNJNyESODQyOHlIOhcYOxwoO5FTOzw7PTovQQAGQh4NQkwvQqt4
         QwAQRCEgRKJnRC0oSUk/SQAYTHNRTD9DTQcbTj88TpJuUV1KUiIzU1FQU0ZGVDY1
@@ -711,7 +624,7 @@ if __name__ == "__main__":
         1VcJXHW+VmGt1Vb6ZH2P1lt57ZW8XNfb1ddhiZUOWPWEOC1W2WWROza9ZJmNVlrf
         nEUP2mmxzbba867N1ltmtzWv22/JHTbc8sYtV11bzyUv3XXhTbVd2gICADs=
         '''
-    img = tk.PhotoImage(data=datas)
+    img = tk.PhotoImage(data=title_binary)
     label = tk.Label(image=img)
     # タイトルを表示する
     label.pack()
@@ -756,11 +669,16 @@ if __name__ == "__main__":
     # 再度メイン画面を作成
     root = tk.Tk()
     # アイコンを設定
-    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=data))
+    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=image_binary))
     # タイトルの表示
     root.title(u"小説エディタ")
     # フレームを表示する
-    app = MainProcessingClass(root)
+    app = MC.MainProcessingClass(
+        tree_folder,
+        tokenizer,
+        wiki_wiki,
+        title_binary,
+        root)
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
     # 終了時にon_closingを行う
     root.protocol("WM_DELETE_WINDOW", app.fmc.on_closing)

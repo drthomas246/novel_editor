@@ -15,18 +15,16 @@ class ProcessingMenuClass():
 
     ・処理メニューバーにあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        wiki_wiki (instance): wikipediaapi.Wikipediaインスタンス
+        tokenizer (instance): Tokenizerインスタンス
+
     Attributes:
         font_size (int): フォントのサイズ
 
     """
     def __init__(self, app, wiki_wiki, tokenizer):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            wiki_wiki (instance): wikipediaapi.Wikipediaインスタンス
-            tokenizer (instance): Tokenizerインスタンス
-
-        """
         self.font_size = 0
         # yahooの校正支援
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"

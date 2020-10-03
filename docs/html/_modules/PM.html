@@ -170,18 +170,16 @@
 
 <span class="sd">    ・処理メニューバーにあるプログラム群</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClassインスタンス</span>
+<span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipediaインスタンス</span>
+<span class="sd">        tokenizer (instance): Tokenizerインスタンス</span>
+
 <span class="sd">    Attributes:</span>
 <span class="sd">        font_size (int): フォントのサイズ</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            app (instance): lineframeインスタンス</span>
-<span class="sd">            wiki_wiki (instance): wikipediaapi.Wikipediaインスタンス</span>
-<span class="sd">            tokenizer (instance): Tokenizerインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># yahooの校正支援</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span> <span class="o">=</span> <span class="s2">&quot;{urn:yahoo:jp:jlp:KouseiService}&quot;</span>

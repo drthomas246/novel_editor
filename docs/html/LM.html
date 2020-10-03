@@ -37,7 +37,7 @@
     
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
-    <link rel="next" title="My Dialog module" href="MD.html" />
+    <link rel="next" title="Main Processing module" href="MC.html" />
     <link rel="prev" title="Highlight Processing module" href="HP.html" /> 
 </head>
 
@@ -100,10 +100,10 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">List Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SF.html">Sub Function module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="novel_editor.html">Novel Editor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
 </li>
 </ul>
@@ -177,10 +177,19 @@
 <span id="list-menu-module"></span><h1>List Menu module<a class="headerlink" href="#module-LM" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
 <dt id="LM.ListMenuClass">
-<em class="property">class </em><code class="sig-prename descclassname">LM.</code><code class="sig-name descname">ListMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">tree_folder</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LM.html#ListMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#LM.ListMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">LM.</code><code class="sig-name descname">ListMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">tree_folder</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LM.html#ListMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#LM.ListMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>リストメニューバーのクラス</p>
 <p>・リストメニューバーにあるプログラム群</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClassインスタンス</p></li>
+<li><p><strong>master</strong> (<em>instance</em>) -- toplevelインスタンス</p></li>
+<li><p><strong>tree_folder</strong> (<em>str</em>) -- ツリーフォルダの配列</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="LM.ListMenuClass.text_text">
 <code class="sig-name descname">text_text</code><a class="headerlink" href="#LM.ListMenuClass.text_text" title="この定義へのパーマリンク">¶</a></dt>
@@ -283,7 +292,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="MD.html" class="btn btn-neutral float-right" title="My Dialog module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="MC.html" class="btn btn-neutral float-right" title="Main Processing module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="HP.html" class="btn btn-neutral float-left" title="Highlight Processing module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

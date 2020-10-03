@@ -8,14 +8,12 @@ class HighlightProcessingClass():
 
     ・ハイライトするためのプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        tokenizer (instance): Tokenizerインスタンス
+
     """
     def __init__(self, app, tokenizer):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            tokenizer (instance): Tokenizerインスタンス
-
-        """
         self.COLOR = [
             'sky blue',
             'yellow green',

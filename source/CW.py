@@ -37,13 +37,11 @@ class CreateWindowClass():
 
     ・画面描画にあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+
     """
     def __init__(self, app):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-
-        """
         self.APP = app
         self.BLANK_IMAGE = '''R0lGODlhHgAeAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz
             /wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDM

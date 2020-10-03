@@ -8,18 +8,16 @@ class HelpMenuClass():
 
     ・ヘルプメニューバーにあるプログラム群
 
-    """
-    def __init__(self, app, image_data):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            image_data (str): イメージファイル
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        title_binary (str): タイトルイメージファイルバイナリ
 
-        """
+    """
+    def __init__(self, app, title_binary):
         # バージョン情報
         self.VERSION = 'Ver 0.6.0 Beta'
         self.APP = app
-        self.IMAGE_DATA = image_data
+        self.TITLE_BINARY = title_binary
 
     def version(self):
         """バージョン情報を表示
@@ -28,7 +26,7 @@ class HelpMenuClass():
         ×を押すまで消えないようにする。
 
         """
-        img2 = tk.PhotoImage(data=self.IMAGE_DATA)
+        img2 = tk.PhotoImage(data=self.TITLE_BINARY)
         window = tk.Toplevel(self.APP)
         canvas = tk.Canvas(window, width=600, height=300)
         canvas.create_image(0, 0, anchor='nw', image=img2)

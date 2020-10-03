@@ -8,6 +8,9 @@ class FindProcessingClass():
 
     ・検索置換するためのプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+
     Attributes:
         replacement_check (bool): 検索ダイアログが表示されているTrue
         next_pos (str): 次の検索位置 例.(1.0)
@@ -15,11 +18,6 @@ class FindProcessingClass():
 
     """
     def __init__(self, app):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-
-        """
         self.replacement_check = 0
         self.next_pos = ""
         self.find_text = ""

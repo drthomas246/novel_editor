@@ -3,13 +3,11 @@ class EventProcessingClass():
 
     ・ウインドウイベントにあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+
     """
     def __init__(self, app):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-
-        """
         self.APP = app
 
     def create_event_text(self):

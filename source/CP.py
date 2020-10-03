@@ -6,14 +6,12 @@ class ComplementProcessingClass():
 
     ・補完処理にあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        tokenizer (instance): Tokenizerインスタンス
+
     """
     def __init__(self, app, tokenizer):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            tokenizer (instance): Tokenizerインスタンス
-
-        """
         self.APP = app
         self.TOKENIZER = tokenizer
 

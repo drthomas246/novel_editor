@@ -157,22 +157,20 @@
 <span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 
 
-<div class="viewcode-block" id="MyDialog"><a class="viewcode-back" href="../MD.html#MD.MyDialog">[ドキュメント]</a><span class="k">class</span> <span class="nc">MyDialog</span><span class="p">():</span>
+<div class="viewcode-block" id="MyDialogClass"><a class="viewcode-back" href="../MD.html#MD.MyDialogClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MyDialogClass</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;ダイアログ作成クラス</span>
 
 <span class="sd">    ・自作ダイアログを呼び出し表示する。</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            message (instance): 親ウインドウインスタンス</span>
-<span class="sd">            button1 (str): ボタンのメッセージ</span>
-<span class="sd">            button2 (bool): キャンセルボタンを表示する(True)</span>
-<span class="sd">            title (str): タイトル</span>
-<span class="sd">            text (bool): 選択状態にする(True)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        message (instance): 親ウインドウインスタンス</span>
+<span class="sd">        caption (str): ボタンのメッセージ</span>
+<span class="sd">        cancel (bool): キャンセルボタンを表示する(True)</span>
+<span class="sd">        title (str): タイトル</span>
+<span class="sd">        text (bool): 選択状態にする(True)</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">caption</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
@@ -187,14 +185,14 @@
         <span class="p">)</span>
         <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="n">button1</span><span class="p">,</span>
-            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">button1</span><span class="p">),</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">caption</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">caption</span><span class="p">),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
             <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_ok</span>
         <span class="p">)</span>
         <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">button2</span><span class="p">:</span>
-            <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="k">if</span> <span class="n">cancel</span><span class="p">:</span>
+            <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
                 <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">,</span>
                 <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">),</span>
@@ -202,7 +200,7 @@
                 <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span>
             <span class="p">)</span>
 
-            <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
@@ -211,7 +209,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
 
-<div class="viewcode-block" id="MyDialog.sub_name_ok"><a class="viewcode-back" href="../MD.html#MD.MyDialog.sub_name_ok">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">sub_name_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MyDialogClass.sub_name_ok"><a class="viewcode-back" href="../MD.html#MD.MyDialogClass.sub_name_ok">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">sub_name_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ダイアログボタンクリック時の処理</span>
 
 <span class="sd">        ・自作ダイアログのボタンをクリックしたときにインプットボックスに</span>
