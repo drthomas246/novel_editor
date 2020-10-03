@@ -689,12 +689,4 @@ if __name__ == "__main__":
     else:
         root.attributes("-zoomed", "1")
 
-# テスト環境ではループを抜ける
-    value = sys.argv
-    if len(value) > 1:
-        for arg in value:
-            if arg == "test":
-                root.update_idletasks()
-
-    else:
-        root.mainloop()
+    root.mainloop()
