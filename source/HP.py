@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
 import re
 
 from janome.tokenizer import Tokenizer
 
 
 class HighlightProcessingClass():
-    """ハイライトのクラス
+    """ハイライトのクラス.
 
     ・ハイライトするためのプログラム群
 
@@ -40,7 +41,7 @@ class HighlightProcessingClass():
         self.TOKENIZER = tokenizer
 
     def all_highlight(self):
-        """全てハイライト
+        """全てハイライト.
 
         ・開く処理等の時にすべての行をハイライトする。
 
@@ -55,7 +56,7 @@ class HighlightProcessingClass():
         self.highlight('1.0', src, 'end')
 
     def line_highlight(self, replacement_check, find_text, next_pos):
-        """現在行だけハイライト
+        """現在行だけハイライト.
 
         ・入力等の変更時に現在の行のみをハイライトする。
 
@@ -82,7 +83,7 @@ class HighlightProcessingClass():
             self.APP.text.tag_add('sel', start, end)
 
     def highlight(self, start, src, end):
-        """ハイライトの共通処理
+        """ハイライトの共通処理.
 
         ・ハイライトする文字が見つかったらハイライト処理をする。
         先頭の文字が全角スペースならば、一文字ずらしてハイライトする。
@@ -115,7 +116,7 @@ class HighlightProcessingClass():
             self.APP.text.mark_set('range_start', 'range_end')
 
     def create_tags(self):
-        """タグの作成
+        """タグの作成.
 
         ・キャラクターの名前をJanomeの形態素解析にかかるようにする。
         キャラクターの名前を色付きにする。

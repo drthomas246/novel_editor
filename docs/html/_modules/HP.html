@@ -159,7 +159,7 @@
 
 
 <div class="viewcode-block" id="HighlightProcessingClass"><a class="viewcode-back" href="../HP.html#HP.HighlightProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">HighlightProcessingClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;ハイライトのクラス</span>
+    <span class="sd">&quot;&quot;&quot;ハイライトのクラス.</span>
 
 <span class="sd">    ・ハイライトするためのプログラム群</span>
 
@@ -195,7 +195,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
 
 <div class="viewcode-block" id="HighlightProcessingClass.all_highlight"><a class="viewcode-back" href="../HP.html#HP.HighlightProcessingClass.all_highlight">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">all_highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;全てハイライト</span>
+        <span class="sd">&quot;&quot;&quot;全てハイライト.</span>
 
 <span class="sd">        ・開く処理等の時にすべての行をハイライトする。</span>
 
@@ -210,7 +210,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HighlightProcessingClass.line_highlight"><a class="viewcode-back" href="../HP.html#HP.HighlightProcessingClass.line_highlight">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">line_highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">replacement_check</span><span class="p">,</span> <span class="n">find_text</span><span class="p">,</span> <span class="n">next_pos</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;現在行だけハイライト</span>
+        <span class="sd">&quot;&quot;&quot;現在行だけハイライト.</span>
 
 <span class="sd">        ・入力等の変更時に現在の行のみをハイライトする。</span>
 
@@ -237,7 +237,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HighlightProcessingClass.highlight"><a class="viewcode-back" href="../HP.html#HP.HighlightProcessingClass.highlight">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ハイライトの共通処理</span>
+        <span class="sd">&quot;&quot;&quot;ハイライトの共通処理.</span>
 
 <span class="sd">        ・ハイライトする文字が見つかったらハイライト処理をする。</span>
 <span class="sd">        先頭の文字が全角スペースならば、一文字ずらしてハイライトする。</span>
@@ -270,7 +270,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="s1">&#39;range_end&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HighlightProcessingClass.create_tags"><a class="viewcode-back" href="../HP.html#HP.HighlightProcessingClass.create_tags">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;タグの作成</span>
+        <span class="sd">&quot;&quot;&quot;タグの作成.</span>
 
 <span class="sd">        ・キャラクターの名前をJanomeの形態素解析にかかるようにする。</span>
 <span class="sd">        キャラクターの名前を色付きにする。</span>

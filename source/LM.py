@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import tkinter as tk
@@ -11,7 +12,7 @@ import MD
 
 
 class ListMenuClass():
-    """リストメニューバーのクラス
+    """リストメニューバーのクラス.
 
     ・リストメニューバーにあるプログラム群
 
@@ -33,7 +34,7 @@ class ListMenuClass():
         self.tree_folder = tree_folder
 
     def message_window(self, event=None):
-        """ツリービューを右クリックしたときの処理
+        """ツリービューを右クリックしたときの処理.
 
         ・子アイテムならば削除ダイアログを表示する。
         親アイテムならば追加を行う。
@@ -42,8 +43,10 @@ class ListMenuClass():
             event (instance): tkinter.Event のインスタンス
 
         """
-        curItem = self.APP.tree.focus()              # 選択アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)   # 親アイテムの認識番号取得
+        # 選択アイテムの認識番号取得
+        curItem = self.APP.tree.focus()
+        # 親アイテムの認識番号取得
+        parentItem = self.APP.tree.parent(curItem)
         # 親アイテムをクリックしたとき
         if self.APP.tree.item(curItem)["text"] == self.tree_folder[4][1]:
             # imageタグを選択したとき
@@ -183,7 +186,7 @@ class ListMenuClass():
                             self.APP.text.focus()
 
     def on_name_click(self, event=None):
-        """名前の変更
+        """名前の変更.
 
         ・リストボックスの名前を変更する。
 
@@ -191,8 +194,10 @@ class ListMenuClass():
             event (instance): tkinter.Event のインスタンス
 
         """
-        curItem = self.APP.tree.focus()              # 選択アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)   # 親アイテムの認識番号取得
+        # 選択アイテムの認識番号取得
+        curItem = self.APP.tree.focus()
+        # 親アイテムの認識番号取得
+        parentItem = self.APP.tree.parent(curItem)
         text = self.APP.tree.item(parentItem)["text"]
         if not text == "":
             sub_text = self.APP.tree.item(curItem)["text"]
@@ -221,7 +226,7 @@ class ListMenuClass():
                     return
 
     def path_read_image(self, image_path, image_name, scale):
-        """イメージを読み込んで表示
+        """イメージを読み込んで表示.
 
         ・パスが存在すればイメージファイルを読み込んで表示する。
 
@@ -267,7 +272,7 @@ class ListMenuClass():
             )
 
     def path_read_text(self, text_path, text_name):
-        """テキストを読み込んで表示
+        """テキストを読み込んで表示.
 
         ・パスが存在すればテキストを読み込んで表示する。
 
@@ -309,7 +314,7 @@ class ListMenuClass():
             self.APP.hpc.all_highlight()
 
     def on_double_click(self, event=None):
-        """ツリービューをダブルクリック
+        """ツリービューをダブルクリック.
 
         ・ファイルを保存して閉じて、選択されたアイテムを表示する。
 
@@ -317,8 +322,10 @@ class ListMenuClass():
             event (instance): tkinter.Event のインスタンス
 
         """
-        curItem = self.APP.tree.focus()              # 選択アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)   # 親アイテムの認識番号取得
+        # 選択アイテムの認識番号取得
+        curItem = self.APP.tree.focus()
+        # 親アイテムの認識番号取得
+        parentItem = self.APP.tree.parent(curItem)
         text = self.APP.tree.item(parentItem)["text"]
         # 開いているファイルを保存
         self.APP.fmc.open_file_save(self.APP.fmc.now_path)

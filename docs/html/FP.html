@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="FP.FindProcessingClass">
 <em class="property">class </em><code class="sig-prename descclassname">FP.</code><code class="sig-name descname">FindProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>検索置換のクラス</p>
+<p>検索置換のクラス.</p>
 <p>・検索置換するためのプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -222,7 +222,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.find_dialog">
 <code class="sig-name descname">find_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.find_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.find_dialog" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>検索ダイアログを作成</p>
+<dd><p>検索ダイアログを作成.</p>
 <p>・検索ダイアログを作成する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -234,7 +234,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.push_keys">
 <code class="sig-name descname">push_keys</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.push_keys"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.push_keys" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>キーが押されたときの処理</p>
+<dd><p>キーが押されたときの処理.</p>
 <p>・何かキーが押されたときに検索処理を中断する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -246,7 +246,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.replacement">
 <code class="sig-name descname">replacement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>置換処理</p>
+<dd><p>置換処理.</p>
 <p>・置換処理をする。空欄なら処理しない、違うなら初めから、
 同じなら次を検索する。</p>
 <dl class="field-list simple">
@@ -259,7 +259,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.replacement_dialog">
 <code class="sig-name descname">replacement_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement_dialog" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>置換ダイアログを作成</p>
+<dd><p>置換ダイアログを作成.</p>
 <p>・置換ダイアログを作成する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -271,14 +271,14 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.replacement_dialog_on_closing">
 <code class="sig-name descname">replacement_dialog_on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement_dialog_on_closing"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement_dialog_on_closing" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>検索ウインドウが閉じられたときの処理</p>
+<dd><p>検索ウインドウが閉じられたときの処理.</p>
 <p>・検索ダイアログが閉じられたことがわかるようにする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="FP.FindProcessingClass.search">
 <code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>検索処理</p>
+<dd><p>検索処理.</p>
 <p>・検索処理をする。空欄なら処理しない、違うなら最初から、
 同じなら次のを検索する。</p>
 <dl class="field-list simple">
@@ -291,7 +291,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.search_forward">
 <code class="sig-name descname">search_forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search_forward"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search_forward" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>昇順検索処理</p>
+<dd><p>昇順検索処理.</p>
 <p>・昇順検索をする。空欄なら処理しない、違うなら初めから、
 同じなら次を検索する。</p>
 <dl class="field-list simple">
@@ -304,7 +304,7 @@
 <dl class="py method">
 <dt id="FP.FindProcessingClass.search_next">
 <code class="sig-name descname">search_next</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">search</span></em>, <em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">case</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search_next"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search_next" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>検索のメイン処理</p>
+<dd><p>検索のメイン処理.</p>
 <p>・検索できれば選択をする。できなければ、ダイアログを出して終了。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>

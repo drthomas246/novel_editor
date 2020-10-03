@@ -162,7 +162,7 @@
 
 
 <div class="viewcode-block" id="SubfunctionProcessingClass"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">SubfunctionProcessingClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;補助機能のクラス</span>
+    <span class="sd">&quot;&quot;&quot;補助機能のクラス.</span>
 
 <span class="sd">    ・補助機能があるプログラム群</span>
 
@@ -176,7 +176,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.mouse_y_scroll"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.mouse_y_scroll">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">mouse_y_scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;マウスホイール移動の設定</span>
+        <span class="sd">&quot;&quot;&quot;マウスホイール移動の設定.</span>
 
 <span class="sd">        ・イメージキャンバスでマウスホイールを回したときにイメージキャンバス</span>
 <span class="sd">        をスクロールする。</span>
@@ -191,7 +191,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">yview_scroll</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.mouse_image_scroll"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.mouse_image_scroll">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">mouse_image_scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ctrl+マウスホイールの拡大縮小設定</span>
+        <span class="sd">&quot;&quot;&quot;Ctrl+マウスホイールの拡大縮小設定.</span>
 
 <span class="sd">        ・イメージキャンバスでCtrl+マウスホイールを回したときに画像を</span>
 <span class="sd">        拡大縮小する。</span>
@@ -226,7 +226,7 @@
                 <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.btn_click"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.btn_click">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">btn_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;似顔絵ボタンを押したとき</span>
+        <span class="sd">&quot;&quot;&quot;似顔絵ボタンを押したとき.</span>
 
 <span class="sd">        ・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに</span>
 <span class="sd">        貼り付ける。</span>
@@ -256,7 +256,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">print_gif</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.clear_btn_click"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.clear_btn_click">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">clear_btn_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;消去ボタンをクリックしたとき</span>
+        <span class="sd">&quot;&quot;&quot;消去ボタンをクリックしたとき.</span>
 
 <span class="sd">        ・消去ボタンをクリックしたときに画像イメージから画像を</span>
 <span class="sd">        削除する。</span>
@@ -273,7 +273,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.resize_gif"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.resize_gif">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">resize_gif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;画像をリサイズする</span>
+        <span class="sd">&quot;&quot;&quot;画像をリサイズ.</span>
 
 <span class="sd">        ・イメージファイルを縦が長いときは縦を、横が長いときは横を、</span>
 <span class="sd">        同じときは両方を150pxに設定する。</span>
@@ -296,7 +296,7 @@
         <span class="k">return</span> <span class="n">resized_image</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.print_gif"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.print_gif">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">print_gif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;gifを表示する</span>
+        <span class="sd">&quot;&quot;&quot;gifを表示.</span>
 
 <span class="sd">        ・似顔絵キャンバスに画像を張り付ける。</span>
 
@@ -315,7 +315,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.change_setting"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.change_setting">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">change_setting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;テキストの変更時</span>
+        <span class="sd">&quot;&quot;&quot;テキストの変更時.</span>
 
 <span class="sd">        ・テキストを変更したときに行番号とハイライトを変更する。</span>
 
@@ -332,7 +332,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SubfunctionProcessingClass.update_line_numbers"><a class="viewcode-back" href="../SP.html#SP.SubfunctionProcessingClass.update_line_numbers">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">update_line_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;行番号の描画</span>
+        <span class="sd">&quot;&quot;&quot;行番号の描画.</span>
 
 <span class="sd">        ・行番号をつけて表示する。</span>
 

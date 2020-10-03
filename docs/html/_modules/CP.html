@@ -157,7 +157,7 @@
 
 
 <div class="viewcode-block" id="ComplementProcessingClass"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ComplementProcessingClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot; 補完処理のクラス</span>
+    <span class="sd">&quot;&quot;&quot; 補完処理のクラス.</span>
 
 <span class="sd">    ・補完処理にあるプログラム群</span>
 
@@ -171,7 +171,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
 
 <div class="viewcode-block" id="ComplementProcessingClass.tab"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.tab">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;タブ押下時の処理</span>
+        <span class="sd">&quot;&quot;&quot;タブ押下時の処理.</span>
 
 <span class="sd">        ・タブキーを押したときに補完リストを出す。</span>
 
@@ -187,7 +187,7 @@
             <span class="k">return</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.auto_complete"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.auto_complete">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">auto_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;補完リストの設定</span>
+        <span class="sd">&quot;&quot;&quot;補完リストの設定.</span>
 
 <span class="sd">        ・補完リストの設定をする。</span>
 
@@ -216,7 +216,7 @@
         <span class="k">return</span> <span class="s1">&#39;break&#39;</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.get_keywords"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.get_keywords">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;補完リストの候補キーワードを作成</span>
+        <span class="sd">&quot;&quot;&quot;補完リストの候補キーワードを作成.</span>
 
 <span class="sd">        ・補完リストに表示するキーワードを得る。</span>
 
@@ -241,7 +241,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.remove_list"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.remove_list">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">remove_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;補完リストの削除処理</span>
+        <span class="sd">&quot;&quot;&quot;補完リストの削除処理.</span>
 
 <span class="sd">        ・補完リストを削除し、テキストボックスにフォーカスを戻す。</span>
 
@@ -253,7 +253,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>  <span class="c1"># テキストウィジェットにフォーカスを戻す</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.selection"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.selection">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;補完リストでの選択後の処理</span>
+        <span class="sd">&quot;&quot;&quot;補完リストでの選択後の処理.</span>
 
 <span class="sd">        ・補完リストを選択したときにその文字を入力する。</span>
 
@@ -274,7 +274,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">remove_list</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.get_current_insert_word"><a class="viewcode-back" href="../CP.html#CP.ComplementProcessingClass.get_current_insert_word">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_current_insert_word</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;現在入力中の単語と位置を取得</span>
+        <span class="sd">&quot;&quot;&quot;現在入力中の単語と位置を取得.</span>
 
 <span class="sd">        ・現在入力している単語とその位置を取得する。</span>
 

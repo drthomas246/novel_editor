@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf8 -*-
 import os
 import sys
 import platform
@@ -9,7 +8,7 @@ import tkinter.messagebox as messagebox
 import wikipediaapi
 from janome.tokenizer import Tokenizer
 
-import MC
+import MP
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -673,7 +672,7 @@ if __name__ == "__main__":
     # タイトルの表示
     root.title(u"小説エディタ")
     # フレームを表示する
-    app = MC.MainProcessingClass(
+    app = MP.MainProcessingClass(
         tree_folder,
         tokenizer,
         wiki_wiki,

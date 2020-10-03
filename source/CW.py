@@ -1,11 +1,15 @@
+#!/usr/bin/env python3
 import tkinter as tk
 import tkinter.ttk as ttk
 
 
 class CustomText(tk.Text):
-    """Textのイベントを拡張したウィジェット
+    """Textのイベントを拡張したウィジェット.
 
     ・textに<<Scroll>>イベントと、<<Change>>イベントを追加する。
+
+    Args:
+        master (instance): toplevelインスタンス
 
     """
     def __init__(self, master, **kwargs):
@@ -22,7 +26,6 @@ class CustomText(tk.Text):
                 if {([lindex $args 0] in {insert replace delete})} {
                     event generate  $widget <<Change>> -when tail
                 }
-                # return the result from the real widget command
                 return $result
             }
             ''')
@@ -33,7 +36,7 @@ class CustomText(tk.Text):
 
 
 class CreateWindowClass():
-    """画面の描画のクラス
+    """画面の描画のクラス.
 
     ・画面描画にあるプログラム群
 
@@ -64,7 +67,7 @@ class CreateWindowClass():
             '''
 
     def create_widgets(self):
-        """画面の描画
+        """画面の描画.
 
         ・メインウインドウにウェジットを配置する。
 
@@ -262,7 +265,7 @@ class CreateWindowClass():
         self.APP.fmc.tree_get_loop()
 
     def frame(self):
-        """フレーム内にテキストボックスを表示
+        """フレーム内にテキストボックスを表示.
 
         ・メインウインドウの右側に行番号、テキストボックス、スクロールバー
         を表示する。
@@ -300,7 +303,7 @@ class CreateWindowClass():
         self.APP.epc.create_event_text()
 
     def frame_image(self):
-        """フレーム内にイメージフレーム表示
+        """フレーム内にイメージフレーム表示.
 
         ・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。
 
@@ -341,7 +344,7 @@ class CreateWindowClass():
         self.APP.epc.create_event_image()
 
     def frame_character(self):
-        """フレーム内にイメージフレーム表示
+        """フレーム内にイメージフレーム表示.
 
         ・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。
 

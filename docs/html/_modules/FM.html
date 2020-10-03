@@ -162,7 +162,7 @@
 
 
 <div class="viewcode-block" id="FileMenuClass"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">FileMenuClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;ファイルメニューバーのクラス</span>
+    <span class="sd">&quot;&quot;&quot;ファイルメニューバーのクラス.</span>
 
 <span class="sd">    ・ファイルメニューバーにあるプログラム群</span>
 
@@ -184,7 +184,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">tree_folder</span>
 
 <div class="viewcode-block" id="FileMenuClass.new_open"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_open">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;新規作成</span>
+        <span class="sd">&quot;&quot;&quot;新規作成.</span>
 
 <span class="sd">        ・変更があれば、ファイル保存するか尋ねて、新規作成する。</span>
 
@@ -206,7 +206,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.open_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.open_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ファイルを開く処理</span>
+        <span class="sd">&quot;&quot;&quot;ファイルを開く処理.</span>
 
 <span class="sd">        ・ファイルを開くダイアログを作成しファイルを開く。</span>
 
@@ -242,7 +242,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.overwrite_save_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.overwrite_save_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">overwrite_save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;上書き保存処理</span>
+        <span class="sd">&quot;&quot;&quot;上書き保存処理.</span>
 
 <span class="sd">        ・上書き保存するための処理。ファイルがあれば保存して、</span>
 <span class="sd">        なければ保存ダイアログを出す。</span>
@@ -268,7 +268,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.save_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.save_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ファイルを保存処理</span>
+        <span class="sd">&quot;&quot;&quot;ファイルを保存処理.</span>
 
 <span class="sd">        ・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。</span>
 
@@ -291,7 +291,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">overwrite_save_file</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.on_closing"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.on_closing">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_closing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;終了時の処理</span>
+        <span class="sd">&quot;&quot;&quot;終了時の処理.</span>
 
 <span class="sd">        ・ソフトを閉じるか確認してから閉じる。</span>
 
@@ -304,7 +304,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.new_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;新規作成をするための準備</span>
+        <span class="sd">&quot;&quot;&quot;新規作成をするための準備.</span>
 
 <span class="sd">        ・ファイルの新規作成をするための準備処理をおこなう。</span>
 
@@ -323,7 +323,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.open_file_save"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.open_file_save">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_file_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;開いてるファイルを保存する</span>
+        <span class="sd">&quot;&quot;&quot;開いてるファイルを保存.</span>
 
 <span class="sd">        ・開いてるファイルをそれぞれの保存形式で保存する。</span>
 
@@ -346,7 +346,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.save_charactor_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.save_charactor_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_charactor_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;キャラクターファイルの保存準備</span>
+        <span class="sd">&quot;&quot;&quot;キャラクターファイルの保存準備.</span>
 
 <span class="sd">        ・それぞれの項目をxml形式で保存する。</span>
 
@@ -365,7 +365,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.tree_get_loop"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.tree_get_loop">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tree_get_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ツリービューに挿入</span>
+        <span class="sd">&quot;&quot;&quot;ツリービューに挿入.</span>
 
 <span class="sd">        ・保存データからファイルを取得してツリービューに挿入する。</span>
 

@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="CP.ComplementProcessingClass">
 <em class="property">class </em><code class="sig-prename descclassname">CP.</code><code class="sig-name descname">ComplementProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>補完処理のクラス</p>
+<p>補完処理のクラス.</p>
 <p>・補完処理にあるプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -192,21 +192,21 @@
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.auto_complete">
 <code class="sig-name descname">auto_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.auto_complete"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.auto_complete" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>補完リストの設定</p>
+<dd><p>補完リストの設定.</p>
 <p>・補完リストの設定をする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.get_current_insert_word">
 <code class="sig-name descname">get_current_insert_word</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.get_current_insert_word"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.get_current_insert_word" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>現在入力中の単語と位置を取得</p>
+<dd><p>現在入力中の単語と位置を取得.</p>
 <p>・現在入力している単語とその位置を取得する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.get_keywords">
 <code class="sig-name descname">get_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.get_keywords"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.get_keywords" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>補完リストの候補キーワードを作成</p>
+<dd><p>補完リストの候補キーワードを作成.</p>
 <p>・補完リストに表示するキーワードを得る。</p>
 <dl class="field-list simple">
 <dt class="field-odd">戻り値</dt>
@@ -221,7 +221,7 @@
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.remove_list">
 <code class="sig-name descname">remove_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.remove_list"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.remove_list" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>補完リストの削除処理</p>
+<dd><p>補完リストの削除処理.</p>
 <p>・補完リストを削除し、テキストボックスにフォーカスを戻す。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -233,7 +233,7 @@
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.selection">
 <code class="sig-name descname">selection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.selection"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.selection" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>補完リストでの選択後の処理</p>
+<dd><p>補完リストでの選択後の処理.</p>
 <p>・補完リストを選択したときにその文字を入力する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -245,7 +245,7 @@
 <dl class="py method">
 <dt id="CP.ComplementProcessingClass.tab">
 <code class="sig-name descname">tab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.tab"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.tab" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>タブ押下時の処理</p>
+<dd><p>タブ押下時の処理.</p>
 <p>・タブキーを押したときに補完リストを出す。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>

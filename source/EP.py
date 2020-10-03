@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 class EventProcessingClass():
-    """ウインドウイベントのクラス
+    """ウインドウイベントのクラス.
 
     ・ウインドウイベントにあるプログラム群
 
@@ -11,7 +12,7 @@ class EventProcessingClass():
         self.APP = app
 
     def create_event_text(self):
-        """テキストイベントの設定
+        """テキストイベントの設定.
 
         ・テキストボックスにイベントを追加する。
 
@@ -50,7 +51,7 @@ class EventProcessingClass():
         # 新規作成する
         self.APP.text.bind('<Control-Key-n>', self.APP.fmc.new_open)
         # helpページを開く
-        self.APP.text.bind('<Control-Key-h>', self.APP.hmc.help)  # helpページを開く
+        self.APP.text.bind('<Control-Key-h>', self.APP.hmc.help)
         # Versionページを開く
         self.APP.text.bind('<Control-Shift-Key-V>', self.APP.hmc.version)
         # 文字数と行数をカウントすShift-る
@@ -72,7 +73,7 @@ class EventProcessingClass():
         self.APP.text.bind('<Control-Key-y>', self.APP.pmc.yahoo)
 
     def create_event_character(self):
-        """キャラクター欄のイベント設定
+        """キャラクター欄のイベント設定.
 
         ・キャラクター関係のボックスにイベントを追加する。
 
@@ -185,7 +186,7 @@ class EventProcessingClass():
         )
 
     def create_event_image(self):
-        """イメージイベントの設定
+        """イメージイベントの設定.
 
         ・イメージキャンバスにイベントを追加する。
 
@@ -197,7 +198,7 @@ class EventProcessingClass():
         )
 
     def create_event(self):
-        """ツリービューイベントの設定
+        """ツリービューイベントの設定.
 
         ・ツリービューにイベントを追加する。
 

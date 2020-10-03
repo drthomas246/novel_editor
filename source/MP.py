@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import platform
@@ -18,7 +19,7 @@ import LM
 
 
 class MainProcessingClass(ttk.Frame):
-    """メインフレーム処理のクラス
+    """メインフレーム処理のクラス.
 
     ・初期設定をするプログラム群
 
@@ -37,10 +38,9 @@ class MainProcessingClass(ttk.Frame):
         tokenizer,
         wiki_wiki,
         title_binary,
-        master=None,
-        **kwargs
+        master=None
     ):
-        super().__init__(master, **kwargs)
+        super().__init__(master)
         self.TREE_FOLDER = tree_folder
         # 自作クラスの読み込み
         self.cwc = CW.CreateWindowClass(self)
@@ -63,7 +63,7 @@ class MainProcessingClass(ttk.Frame):
         self.epc.create_event()
 
     def initialize(self):
-        """初期化処理
+        """初期化処理.
 
         ・変数の初期化及び起動準備をする。
 

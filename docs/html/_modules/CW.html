@@ -158,9 +158,12 @@
 
 
 <div class="viewcode-block" id="CustomText"><a class="viewcode-back" href="../CW.html#CW.CustomText">[ドキュメント]</a><span class="k">class</span> <span class="nc">CustomText</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Textのイベントを拡張したウィジェット</span>
+    <span class="sd">&quot;&quot;&quot;Textのイベントを拡張したウィジェット.</span>
 
 <span class="sd">    ・textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        master (instance): toplevelインスタンス</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -177,7 +180,6 @@
 <span class="s1">                if {([lindex $args 0] in {insert replace delete})} {</span>
 <span class="s1">                    event generate  $widget &lt;&lt;Change&gt;&gt; -when tail</span>
 <span class="s1">                }</span>
-<span class="s1">                # return the result from the real widget command</span>
 <span class="s1">                return $result</span>
 <span class="s1">            }</span>
 <span class="s1">            &#39;&#39;&#39;</span><span class="p">)</span>
@@ -188,7 +190,7 @@
 
 
 <div class="viewcode-block" id="CreateWindowClass"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">CreateWindowClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;画面の描画のクラス</span>
+    <span class="sd">&quot;&quot;&quot;画面の描画のクラス.</span>
 
 <span class="sd">    ・画面描画にあるプログラム群</span>
 
@@ -219,7 +221,7 @@
 <span class="s1">            &#39;&#39;&#39;</span>
 
 <div class="viewcode-block" id="CreateWindowClass.create_widgets"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.create_widgets">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;画面の描画</span>
+        <span class="sd">&quot;&quot;&quot;画面の描画.</span>
 
 <span class="sd">        ・メインウインドウにウェジットを配置する。</span>
 
@@ -417,7 +419,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">tree_get_loop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CreateWindowClass.frame"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;フレーム内にテキストボックスを表示</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にテキストボックスを表示.</span>
 
 <span class="sd">        ・メインウインドウの右側に行番号、テキストボックス、スクロールバー</span>
 <span class="sd">        を表示する。</span>
@@ -455,7 +457,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event_text</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CreateWindowClass.frame_image"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame_image">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示.</span>
 
 <span class="sd">        ・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。</span>
 
@@ -496,7 +498,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event_image</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CreateWindowClass.frame_character"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame_character">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame_character</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示.</span>
 
 <span class="sd">        ・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。</span>
 

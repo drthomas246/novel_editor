@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
 import os
 import webbrowser
 import tkinter as tk
 
 
 class HelpMenuClass():
-    """ヘルプメニューバーのクラス
+    """ヘルプメニューバーのクラス.
 
     ・ヘルプメニューバーにあるプログラム群
 
@@ -20,7 +21,7 @@ class HelpMenuClass():
         self.TITLE_BINARY = title_binary
 
     def version(self):
-        """バージョン情報を表示
+        """バージョン情報を表示.
 
         ・バージョン情報表示ダイアログを表示する。
         ×を押すまで消えないようにする。
@@ -49,7 +50,7 @@ class HelpMenuClass():
         window.mainloop()
 
     def help(self):
-        """helpページを開く
+        """helpページを開く.
 
         ・ウエブブラウザを使ってREADME.htmlを表示する。
 

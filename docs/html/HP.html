@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="HP.HighlightProcessingClass">
 <em class="property">class </em><code class="sig-prename descclassname">HP.</code><code class="sig-name descname">HighlightProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HP.html#HighlightProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#HP.HighlightProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ハイライトのクラス</p>
+<p>ハイライトのクラス.</p>
 <p>・ハイライトするためのプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -192,14 +192,14 @@
 <dl class="py method">
 <dt id="HP.HighlightProcessingClass.all_highlight">
 <code class="sig-name descname">all_highlight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HP.html#HighlightProcessingClass.all_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#HP.HighlightProcessingClass.all_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>全てハイライト</p>
+<dd><p>全てハイライト.</p>
 <p>・開く処理等の時にすべての行をハイライトする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="HP.HighlightProcessingClass.create_tags">
 <code class="sig-name descname">create_tags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HP.html#HighlightProcessingClass.create_tags"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#HP.HighlightProcessingClass.create_tags" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>タグの作成</p>
+<dd><p>タグの作成.</p>
 <p>・キャラクターの名前をJanomeの形態素解析にかかるようにする。
 キャラクターの名前を色付きにする。</p>
 </dd></dl>
@@ -207,7 +207,7 @@
 <dl class="py method">
 <dt id="HP.HighlightProcessingClass.highlight">
 <code class="sig-name descname">highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">end</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HP.html#HighlightProcessingClass.highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#HP.HighlightProcessingClass.highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ハイライトの共通処理</p>
+<dd><p>ハイライトの共通処理.</p>
 <p>・ハイライトする文字が見つかったらハイライト処理をする。
 先頭の文字が全角スペースならば、一文字ずらしてハイライトする。</p>
 <dl class="field-list simple">
@@ -224,7 +224,7 @@
 <dl class="py method">
 <dt id="HP.HighlightProcessingClass.line_highlight">
 <code class="sig-name descname">line_highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">replacement_check</span></em>, <em class="sig-param"><span class="n">find_text</span></em>, <em class="sig-param"><span class="n">next_pos</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HP.html#HighlightProcessingClass.line_highlight"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#HP.HighlightProcessingClass.line_highlight" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>現在行だけハイライト</p>
+<dd><p>現在行だけハイライト.</p>
 <p>・入力等の変更時に現在の行のみをハイライトする。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>

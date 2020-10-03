@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 import tkinter as tk
 
 
 class ComplementProcessingClass():
-    """ 補完処理のクラス
+    """ 補完処理のクラス.
 
     ・補完処理にあるプログラム群
 
@@ -16,7 +17,7 @@ class ComplementProcessingClass():
         self.TOKENIZER = tokenizer
 
     def tab(self, event=None):
-        """タブ押下時の処理
+        """タブ押下時の処理.
 
         ・タブキーを押したときに補完リストを出す。
 
@@ -32,7 +33,7 @@ class ComplementProcessingClass():
             return
 
     def auto_complete(self):
-        """補完リストの設定
+        """補完リストの設定.
 
         ・補完リストの設定をする。
 
@@ -61,7 +62,7 @@ class ComplementProcessingClass():
         return 'break'
 
     def get_keywords(self):
-        """補完リストの候補キーワードを作成
+        """補完リストの候補キーワードを作成.
 
         ・補完リストに表示するキーワードを得る。
 
@@ -86,7 +87,7 @@ class ComplementProcessingClass():
         return result
 
     def remove_list(self, event=None):
-        """補完リストの削除処理
+        """補完リストの削除処理.
 
         ・補完リストを削除し、テキストボックスにフォーカスを戻す。
 
@@ -98,7 +99,7 @@ class ComplementProcessingClass():
         self.APP.text.focus()  # テキストウィジェットにフォーカスを戻す
 
     def selection(self, event=None):
-        """補完リストでの選択後の処理
+        """補完リストでの選択後の処理.
 
         ・補完リストを選択したときにその文字を入力する。
 
@@ -119,7 +120,7 @@ class ComplementProcessingClass():
             self.remove_list()
 
     def get_current_insert_word(self):
-        """現在入力中の単語と位置を取得
+        """現在入力中の単語と位置を取得.
 
         ・現在入力している単語とその位置を取得する。
 

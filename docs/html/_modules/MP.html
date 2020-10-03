@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MC &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  <title>MP &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
   
 
   
@@ -137,7 +137,7 @@
         
           <li><a href="index.html">モジュールコード</a> &raquo;</li>
         
-      <li>MC</li>
+      <li>MP</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -152,7 +152,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>MC のソースコード</h1><div class="highlight"><pre>
+  <h1>MP のソースコード</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">platform</span>
@@ -172,8 +172,8 @@
 <span class="kn">import</span> <span class="nn">LM</span>
 
 
-<div class="viewcode-block" id="MainProcessingClass"><a class="viewcode-back" href="../MC.html#MC.MainProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MainProcessingClass</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;メインフレーム処理のクラス</span>
+<div class="viewcode-block" id="MainProcessingClass"><a class="viewcode-back" href="../MP.html#MP.MainProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MainProcessingClass</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;メインフレーム処理のクラス.</span>
 
 <span class="sd">    ・初期設定をするプログラム群</span>
 
@@ -192,10 +192,9 @@
         <span class="n">tokenizer</span><span class="p">,</span>
         <span class="n">wiki_wiki</span><span class="p">,</span>
         <span class="n">title_binary</span><span class="p">,</span>
-        <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span>
+        <span class="n">master</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">tree_folder</span>
         <span class="c1"># 自作クラスの読み込み</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span> <span class="o">=</span> <span class="n">CW</span><span class="o">.</span><span class="n">CreateWindowClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -217,8 +216,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">create_widgets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event</span><span class="p">()</span>
 
-<div class="viewcode-block" id="MainProcessingClass.initialize"><a class="viewcode-back" href="../MC.html#MC.MainProcessingClass.initialize">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;初期化処理</span>
+<div class="viewcode-block" id="MainProcessingClass.initialize"><a class="viewcode-back" href="../MP.html#MP.MainProcessingClass.initialize">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;初期化処理.</span>
 
 <span class="sd">        ・変数の初期化及び起動準備をする。</span>
 

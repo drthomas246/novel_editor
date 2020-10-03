@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="FM.FileMenuClass">
 <em class="property">class </em><code class="sig-prename descclassname">FM.</code><code class="sig-name descname">FileMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">tree_folder</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ファイルメニューバーのクラス</p>
+<p>ファイルメニューバーのクラス.</p>
 <p>・ファイルメニューバーにあるプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -215,14 +215,14 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.new_file">
 <code class="sig-name descname">new_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.new_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.new_file" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>新規作成をするための準備</p>
+<dd><p>新規作成をするための準備.</p>
 <p>・ファイルの新規作成をするための準備処理をおこなう。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="FM.FileMenuClass.new_open">
 <code class="sig-name descname">new_open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.new_open"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.new_open" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>新規作成</p>
+<dd><p>新規作成.</p>
 <p>・変更があれば、ファイル保存するか尋ねて、新規作成する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -234,14 +234,14 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.on_closing">
 <code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.on_closing"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.on_closing" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>終了時の処理</p>
+<dd><p>終了時の処理.</p>
 <p>・ソフトを閉じるか確認してから閉じる。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="FM.FileMenuClass.open_file">
 <code class="sig-name descname">open_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.open_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.open_file" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ファイルを開く処理</p>
+<dd><p>ファイルを開く処理.</p>
 <p>・ファイルを開くダイアログを作成しファイルを開く。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -253,7 +253,7 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.open_file_save">
 <code class="sig-name descname">open_file_save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.open_file_save"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.open_file_save" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>開いてるファイルを保存する</p>
+<dd><p>開いてるファイルを保存.</p>
 <p>・開いてるファイルをそれぞれの保存形式で保存する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -265,7 +265,7 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.overwrite_save_file">
 <code class="sig-name descname">overwrite_save_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.overwrite_save_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.overwrite_save_file" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>上書き保存処理</p>
+<dd><p>上書き保存処理.</p>
 <p>・上書き保存するための処理。ファイルがあれば保存して、
 なければ保存ダイアログを出す。</p>
 <dl class="field-list simple">
@@ -278,14 +278,14 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.save_charactor_file">
 <code class="sig-name descname">save_charactor_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.save_charactor_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.save_charactor_file" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>キャラクターファイルの保存準備</p>
+<dd><p>キャラクターファイルの保存準備.</p>
 <p>・それぞれの項目をxml形式で保存する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="FM.FileMenuClass.save_file">
 <code class="sig-name descname">save_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.save_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.save_file" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ファイルを保存処理</p>
+<dd><p>ファイルを保存処理.</p>
 <p>・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -297,7 +297,7 @@
 <dl class="py method">
 <dt id="FM.FileMenuClass.tree_get_loop">
 <code class="sig-name descname">tree_get_loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FM.html#FileMenuClass.tree_get_loop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FM.FileMenuClass.tree_get_loop" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ツリービューに挿入</p>
+<dd><p>ツリービューに挿入.</p>
 <p>・保存データからファイルを取得してツリービューに挿入する。</p>
 </dd></dl>
 

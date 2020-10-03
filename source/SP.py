@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import tkinter as tk
@@ -7,7 +8,7 @@ from PIL import Image, ImageTk
 
 
 class SubfunctionProcessingClass():
-    """補助機能のクラス
+    """補助機能のクラス.
 
     ・補助機能があるプログラム群
 
@@ -21,7 +22,7 @@ class SubfunctionProcessingClass():
         self.APP = app
 
     def mouse_y_scroll(self, event=None):
-        """マウスホイール移動の設定
+        """マウスホイール移動の設定.
 
         ・イメージキャンバスでマウスホイールを回したときにイメージキャンバス
         をスクロールする。
@@ -36,7 +37,7 @@ class SubfunctionProcessingClass():
             self.APP.image_space.yview_scroll(1, 'units')
 
     def mouse_image_scroll(self, event=None):
-        """Ctrl+マウスホイールの拡大縮小設定
+        """Ctrl+マウスホイールの拡大縮小設定.
 
         ・イメージキャンバスでCtrl+マウスホイールを回したときに画像を
         拡大縮小する。
@@ -71,7 +72,7 @@ class SubfunctionProcessingClass():
                 )
 
     def btn_click(self, event=None):
-        """似顔絵ボタンを押したとき
+        """似顔絵ボタンを押したとき.
 
         ・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに
         貼り付ける。
@@ -101,7 +102,7 @@ class SubfunctionProcessingClass():
             self.print_gif(title)
 
     def clear_btn_click(self, event=None):
-        """消去ボタンをクリックしたとき
+        """消去ボタンをクリックしたとき.
 
         ・消去ボタンをクリックしたときに画像イメージから画像を
         削除する。
@@ -118,7 +119,7 @@ class SubfunctionProcessingClass():
             self.APP.cv.delete("all")
 
     def resize_gif(self, im):
-        """画像をリサイズする
+        """画像をリサイズ.
 
         ・イメージファイルを縦が長いときは縦を、横が長いときは横を、
         同じときは両方を150pxに設定する。
@@ -141,7 +142,7 @@ class SubfunctionProcessingClass():
         return resized_image
 
     def print_gif(self, title):
-        """gifを表示する
+        """gifを表示.
 
         ・似顔絵キャンバスに画像を張り付ける。
 
@@ -160,7 +161,7 @@ class SubfunctionProcessingClass():
             )
 
     def change_setting(self, event=None):
-        """テキストの変更時
+        """テキストの変更時.
 
         ・テキストを変更したときに行番号とハイライトを変更する。
 
@@ -177,7 +178,7 @@ class SubfunctionProcessingClass():
         )
 
     def update_line_numbers(self, event=None):
-        """行番号の描画
+        """行番号の描画.
 
         ・行番号をつけて表示する。
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import zipfile
 import shutil
@@ -7,7 +8,7 @@ import tkinter.filedialog as filedialog
 
 
 class FileMenuClass():
-    """ファイルメニューバーのクラス
+    """ファイルメニューバーのクラス.
 
     ・ファイルメニューバーにあるプログラム群
 
@@ -29,7 +30,7 @@ class FileMenuClass():
         self.TREE_FOLDER = tree_folder
 
     def new_open(self, event=None):
-        """新規作成
+        """新規作成.
 
         ・変更があれば、ファイル保存するか尋ねて、新規作成する。
 
@@ -51,7 +52,7 @@ class FileMenuClass():
             self.new_file()
 
     def open_file(self, event=None):
-        """ファイルを開く処理
+        """ファイルを開く処理.
 
         ・ファイルを開くダイアログを作成しファイルを開く。
 
@@ -87,7 +88,7 @@ class FileMenuClass():
             self.APP.cwc.frame()
 
     def overwrite_save_file(self, event=None):
-        """上書き保存処理
+        """上書き保存処理.
 
         ・上書き保存するための処理。ファイルがあれば保存して、
         なければ保存ダイアログを出す。
@@ -113,7 +114,7 @@ class FileMenuClass():
             self.save_file()
 
     def save_file(self, event=None):
-        """ファイルを保存処理
+        """ファイルを保存処理.
 
         ・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。
 
@@ -136,7 +137,7 @@ class FileMenuClass():
             self.overwrite_save_file()
 
     def on_closing(self, event=None):
-        """終了時の処理
+        """終了時の処理.
 
         ・ソフトを閉じるか確認してから閉じる。
 
@@ -149,7 +150,7 @@ class FileMenuClass():
             self.MASTER.destroy()
 
     def new_file(self):
-        """新規作成をするための準備
+        """新規作成をするための準備.
 
         ・ファイルの新規作成をするための準備処理をおこなう。
 
@@ -168,7 +169,7 @@ class FileMenuClass():
         self.APP.text.focus()
 
     def open_file_save(self, path):
-        """開いてるファイルを保存する
+        """開いてるファイルを保存.
 
         ・開いてるファイルをそれぞれの保存形式で保存する。
 
@@ -191,7 +192,7 @@ class FileMenuClass():
             self.now_path = path
 
     def save_charactor_file(self):
-        """キャラクターファイルの保存準備
+        """キャラクターファイルの保存準備.
 
         ・それぞれの項目をxml形式で保存する。
 
@@ -210,7 +211,7 @@ class FileMenuClass():
         )
 
     def tree_get_loop(self):
-        """ツリービューに挿入
+        """ツリービューに挿入.
 
         ・保存データからファイルを取得してツリービューに挿入する。
 

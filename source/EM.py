@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 class EditMenuClass():
-    """編集メニューバーのクラス
+    """編集メニューバーのクラス.
 
     ・編集メニューバーにあるプログラム群
 
@@ -11,7 +12,7 @@ class EditMenuClass():
         self.APP = app
 
     def redo(self, event=None):
-        """Redo
+        """Redo.
 
         ・Redo処理を行う。
 
@@ -22,7 +23,7 @@ class EditMenuClass():
         self.APP.text.edit_redo()
 
     def undo(self, event=None):
-        """Undo
+        """Undo.
 
         ・Uedo処理を行う。
 
@@ -33,7 +34,7 @@ class EditMenuClass():
         self.APP.text.edit_undo()
 
     def copy(self, event=None):
-        """Copy
+        """Copy.
 
         ・Copy処理を行う。
 
@@ -45,7 +46,7 @@ class EditMenuClass():
         self.APP.clipboard_append(self.APP.text.selection_get())
 
     def cut(self, event=None):
-        """Cut
+        """Cut.
 
         ・Cut処理を行う。
 
@@ -57,7 +58,7 @@ class EditMenuClass():
         self.APP.text.delete("sel.first", "sel.last")
 
     def paste(self, event=None):
-        """Paste
+        """Paste.
 
         ・Paste処理を行う。
 

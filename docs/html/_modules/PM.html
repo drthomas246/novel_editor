@@ -166,7 +166,7 @@
 
 
 <div class="viewcode-block" id="ProcessingMenuClass"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ProcessingMenuClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;処理メニューバーのクラス</span>
+    <span class="sd">&quot;&quot;&quot;処理メニューバーのクラス.</span>
 
 <span class="sd">    ・処理メニューバーにあるプログラム群</span>
 
@@ -188,7 +188,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
 
 <div class="viewcode-block" id="ProcessingMenuClass.ruby_huri"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.ruby_huri">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">ruby_huri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;ルビをふる</span>
+        <span class="sd">&quot;&quot;&quot;ルビをふり.</span>
 
 <span class="sd">        ・選択文字列に小説家になろうのルビを振る。</span>
 
@@ -227,7 +227,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">hon</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.is_hiragana"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.is_hiragana">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_hiragana</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;文字がひらがなか判断</span>
+        <span class="sd">&quot;&quot;&quot;文字がひらがなか判断.</span>
 
 <span class="sd">        ・与えられた文字がひらがなかどうか判断する。</span>
 
@@ -241,7 +241,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="mh">0x3040</span> <span class="o">&lt;</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mh">0x3097</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.count_moji"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.count_moji">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">count_moji</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;文字数と行数を表示する</span>
+        <span class="sd">&quot;&quot;&quot;文字数と行数を表示.</span>
 
 <span class="sd">        ・文字数と行数をカウントして表示する。</span>
 
@@ -263,7 +263,7 @@
                 <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">gen_mai</span><span class="o">//</span><span class="mi">20</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.find_wikipedia"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.find_wikipedia">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">find_wikipedia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;意味を検索</span>
+        <span class="sd">&quot;&quot;&quot;意味を検索.</span>
 
 <span class="sd">        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を</span>
 <span class="sd">        検索する。</span>
@@ -285,7 +285,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.open_becoming_novelist_page"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.open_becoming_novelist_page">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_becoming_novelist_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;小説家になろうのユーザーページを開く</span>
+        <span class="sd">&quot;&quot;&quot;小説家になろうのユーザーページを開く.</span>
 
 <span class="sd">        ・インターネットブラウザで小説家になろうのユーザーページを開く。</span>
 
@@ -293,7 +293,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;https://syosetu.com/user/top/&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.read_text"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.read_text">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;テキストを読み上げる</span>
+        <span class="sd">&quot;&quot;&quot;テキストを読み上げる.</span>
 
 <span class="sd">        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</span>
 
@@ -311,7 +311,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">externalLoop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.externalLoop"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.externalLoop">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">externalLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;文章読み上げ繰り返し処理</span>
+        <span class="sd">&quot;&quot;&quot;文章読み上げ繰り返し処理.</span>
 
 <span class="sd">        ・文章読み上げを繰り返し続ける。</span>
 
@@ -319,7 +319,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">iterate</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onword"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.pyttsx3_onword">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;文章を読み上げ中の処理</span>
+        <span class="sd">&quot;&quot;&quot;文章を読み上げ中の処理.</span>
 
 <span class="sd">        ・文章読み始めるときに止めるダイアログを出してから読み上げる。</span>
 <span class="sd">        読み上げている最中は読み上げている行を選択状態にする。</span>
@@ -373,7 +373,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">read_texts</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onreadend"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.pyttsx3_onreadend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onreadend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;中止するボタンを押したときの処理</span>
+        <span class="sd">&quot;&quot;&quot;中止するボタンを押したときの処理.</span>
 
 <span class="sd">        ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ</span>
 <span class="sd">        を削除する。</span>
@@ -385,7 +385,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onend"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.pyttsx3_onend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">completed</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;文章を読み終えた時の処理</span>
+        <span class="sd">&quot;&quot;&quot;文章を読み終えた時の処理.</span>
 
 <span class="sd">        ・文章を読み終えたら中止ウインドウを削除する。</span>
 
@@ -400,7 +400,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.yahoo"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.yahoo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援</span>
+        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援.</span>
 
 <span class="sd">        ・Yahoo! 校正支援を呼び出し表示する。</span>
 
@@ -417,7 +417,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Double-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_double_click_yahoo</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.yahoocall"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.yahoocall">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoocall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appid</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;yahooの校正支援を呼び出す</span>
+        <span class="sd">&quot;&quot;&quot;yahooの校正支援を呼び出し.</span>
 
 <span class="sd">        ・Yahoo! 校正支援をClient IDを使って呼び出す。</span>
 
@@ -445,7 +445,7 @@
         <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">text</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.yahooresult"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.yahooresult">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahooresult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;校正支援を表示する画面を制作</span>
+        <span class="sd">&quot;&quot;&quot;校正支援を表示する画面を制作.</span>
 
 <span class="sd">        ・校正結果を表示するダイアログを作成する。</span>
 
@@ -503,7 +503,7 @@
         <span class="n">sub_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;文章校正&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.on_double_click_yahoo"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.on_double_click_yahoo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_double_click_yahoo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援リストをダブルクリック</span>
+        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援リストをダブルクリック.</span>
 
 <span class="sd">        ・Yahoo! 校正支援ダイアログのリストをダブルクリックすると</span>
 <span class="sd">        その該当箇所を選択する。</span>
@@ -552,7 +552,7 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.font_dialog"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.font_dialog">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">font_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;フォントサイズダイアログを作成</span>
+        <span class="sd">&quot;&quot;&quot;フォントサイズダイアログを作成.</span>
 
 <span class="sd">        ・フォントサイズダイアログを作成し表示する。</span>
 
@@ -583,7 +583,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;フォントサイズの変更&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ProcessingMenuClass.font_size_Change"><a class="viewcode-back" href="../PM.html#PM.ProcessingMenuClass.font_size_Change">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">font_size_Change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;フォントのサイズを変える</span>
+        <span class="sd">&quot;&quot;&quot;フォントのサイズの変更.</span>
 
 <span class="sd">        ・サイズ変更を押されたときにサイズを変更する。</span>
 <span class="sd">        上は72ptまで下は12ptまでにする。</span>

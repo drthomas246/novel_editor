@@ -1,7 +1,7 @@
 Main Processing module
 ===========================
 
-.. automodule:: MC
+.. automodule:: MP
    :members:
    :undoc-members:
    :show-inheritance:

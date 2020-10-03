@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import textwrap
 import webbrowser
 import tkinter as tk
@@ -11,7 +12,7 @@ import requests
 
 
 class ProcessingMenuClass():
-    """処理メニューバーのクラス
+    """処理メニューバーのクラス.
 
     ・処理メニューバーにあるプログラム群
 
@@ -33,7 +34,7 @@ class ProcessingMenuClass():
         self.TOKENIZER = tokenizer
 
     def ruby_huri(self):
-        """ルビをふる
+        """ルビをふり.
 
         ・選択文字列に小説家になろうのルビを振る。
 
@@ -72,7 +73,7 @@ class ProcessingMenuClass():
         self.APP.text.insert('insert', hon)
 
     def is_hiragana(self, char):
-        """文字がひらがなか判断
+        """文字がひらがなか判断.
 
         ・与えられた文字がひらがなかどうか判断する。
 
@@ -86,7 +87,7 @@ class ProcessingMenuClass():
         return (0x3040 < ord(char) < 0x3097)
 
     def count_moji(self):
-        """文字数と行数を表示する
+        """文字数と行数を表示.
 
         ・文字数と行数をカウントして表示する。
 
@@ -108,7 +109,7 @@ class ProcessingMenuClass():
                 -(-gen_mai//20)))
 
     def find_wikipedia(self):
-        """意味を検索
+        """意味を検索.
 
         ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
         検索する。
@@ -130,7 +131,7 @@ class ProcessingMenuClass():
             )
 
     def open_becoming_novelist_page(self):
-        """小説家になろうのユーザーページを開く
+        """小説家になろうのユーザーページを開く.
 
         ・インターネットブラウザで小説家になろうのユーザーページを開く。
 
@@ -138,7 +139,7 @@ class ProcessingMenuClass():
         webbrowser.open("https://syosetu.com/user/top/")
 
     def read_text(self):
-        """テキストを読み上げる
+        """テキストを読み上げる.
 
         ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
 
@@ -156,7 +157,7 @@ class ProcessingMenuClass():
         self.externalLoop()
 
     def externalLoop(self):
-        """文章読み上げ繰り返し処理
+        """文章読み上げ繰り返し処理.
 
         ・文章読み上げを繰り返し続ける。
 
@@ -164,7 +165,7 @@ class ProcessingMenuClass():
         self.engine.iterate()
 
     def pyttsx3_onword(self, name, location, length):
-        """文章を読み上げ中の処理
+        """文章を読み上げ中の処理.
 
         ・文章読み始めるときに止めるダイアログを出してから読み上げる。
         読み上げている最中は読み上げている行を選択状態にする。
@@ -218,7 +219,7 @@ class ProcessingMenuClass():
             self.read_texts = False
 
     def pyttsx3_onreadend(self):
-        """中止するボタンを押したときの処理
+        """中止するボタンを押したときの処理.
 
         ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
         を削除する。
@@ -230,7 +231,7 @@ class ProcessingMenuClass():
         self.APP.text.tag_remove('sel', '1.0', 'end')
 
     def pyttsx3_onend(self, name, completed):
-        """文章を読み終えた時の処理
+        """文章を読み終えた時の処理.
 
         ・文章を読み終えたら中止ウインドウを削除する。
 
@@ -245,7 +246,7 @@ class ProcessingMenuClass():
         self.APP.text.tag_remove('sel', '1.0', 'end')
 
     def yahoo(self):
-        """Yahoo! 校正支援
+        """Yahoo! 校正支援.
 
         ・Yahoo! 校正支援を呼び出し表示する。
 
@@ -262,7 +263,7 @@ class ProcessingMenuClass():
             self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
 
     def yahoocall(self, appid="", sentence=""):
-        """yahooの校正支援を呼び出す
+        """yahooの校正支援を呼び出し.
 
         ・Yahoo! 校正支援をClient IDを使って呼び出す。
 
@@ -290,7 +291,7 @@ class ProcessingMenuClass():
         return html.text
 
     def yahooresult(self, html):
-        """校正支援を表示する画面を制作
+        """校正支援を表示する画面を制作.
 
         ・校正結果を表示するダイアログを作成する。
 
@@ -348,7 +349,7 @@ class ProcessingMenuClass():
         sub_win.title(u'文章校正')
 
     def on_double_click_yahoo(self, event=None):
-        """Yahoo! 校正支援リストをダブルクリック
+        """Yahoo! 校正支援リストをダブルクリック.
 
         ・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
         その該当箇所を選択する。
@@ -397,7 +398,7 @@ class ProcessingMenuClass():
         return
 
     def font_dialog(self, event=None):
-        """フォントサイズダイアログを作成
+        """フォントサイズダイアログを作成.
 
         ・フォントサイズダイアログを作成し表示する。
 
@@ -428,7 +429,7 @@ class ProcessingMenuClass():
         self.APP.sub_wins.title(u'フォントサイズの変更')
 
     def font_size_Change(self):
-        """フォントのサイズを変える
+        """フォントのサイズの変更.
 
         ・サイズ変更を押されたときにサイズを変更する。
         上は72ptまで下は12ptまでにする。

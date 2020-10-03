@@ -154,7 +154,7 @@
             
   <h1>EM のソースコード</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="EditMenuClass"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass">[ドキュメント]</a><span></span><span class="k">class</span> <span class="nc">EditMenuClass</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;編集メニューバーのクラス</span>
+    <span class="sd">&quot;&quot;&quot;編集メニューバーのクラス.</span>
 
 <span class="sd">    ・編集メニューバーにあるプログラム群</span>
 
@@ -166,7 +166,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
 
 <div class="viewcode-block" id="EditMenuClass.redo"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass.redo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">redo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Redo</span>
+        <span class="sd">&quot;&quot;&quot;Redo.</span>
 
 <span class="sd">        ・Redo処理を行う。</span>
 
@@ -177,7 +177,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">edit_redo</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="EditMenuClass.undo"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass.undo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">undo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Undo</span>
+        <span class="sd">&quot;&quot;&quot;Undo.</span>
 
 <span class="sd">        ・Uedo処理を行う。</span>
 
@@ -188,7 +188,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">edit_undo</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="EditMenuClass.copy"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass.copy">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Copy</span>
+        <span class="sd">&quot;&quot;&quot;Copy.</span>
 
 <span class="sd">        ・Copy処理を行う。</span>
 
@@ -200,7 +200,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">clipboard_append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">selection_get</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="EditMenuClass.cut"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass.cut">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">cut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cut</span>
+        <span class="sd">&quot;&quot;&quot;Cut.</span>
 
 <span class="sd">        ・Cut処理を行う。</span>
 
@@ -212,7 +212,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;sel.first&quot;</span><span class="p">,</span> <span class="s2">&quot;sel.last&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="EditMenuClass.paste"><a class="viewcode-back" href="../EM.html#EM.EditMenuClass.paste">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">paste</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Paste</span>
+        <span class="sd">&quot;&quot;&quot;Paste.</span>
 
 <span class="sd">        ・Paste処理を行う。</span>
 

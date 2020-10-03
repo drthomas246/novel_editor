@@ -1,9 +1,10 @@
+#!/usr/bin/env python3
 import tkinter as tk
 import tkinter.ttk as ttk
 
 
 class MyDialogClass():
-    """ダイアログ作成クラス
+    """ダイアログ作成クラス.
 
     ・自作ダイアログを呼び出し表示する。
 
@@ -55,7 +56,7 @@ class MyDialogClass():
         self.txt_name.focus()
 
     def sub_name_ok(self, event=None):
-        """ダイアログボタンクリック時の処理
+        """ダイアログボタンクリック時の処理.
 
         ・自作ダイアログのボタンをクリックしたときにインプットボックスに
         入力されている値を取得する。

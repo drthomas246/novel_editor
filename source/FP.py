@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 
 
 class FindProcessingClass():
-    """検索置換のクラス
+    """検索置換のクラス.
 
     ・検索置換するためのプログラム群
 
@@ -24,7 +25,7 @@ class FindProcessingClass():
         self.APP = app
 
     def push_keys(self, event=None):
-        """キーが押されたときの処理
+        """キーが押されたときの処理.
 
         ・何かキーが押されたときに検索処理を中断する。
 
@@ -36,7 +37,7 @@ class FindProcessingClass():
         self.replacement_check = 0
 
     def find_dialog(self, event=None):
-        """検索ダイアログを作成
+        """検索ダイアログを作成.
 
         ・検索ダイアログを作成する。
 
@@ -77,7 +78,7 @@ class FindProcessingClass():
         self.text_var.focus()
 
     def replacement_dialog(self, event=None):
-        """置換ダイアログを作成
+        """置換ダイアログを作成.
 
         ・置換ダイアログを作成する。
 
@@ -133,7 +134,7 @@ class FindProcessingClass():
             )
 
     def replacement_dialog_on_closing(self):
-        """検索ウインドウが閉じられたときの処理
+        """検索ウインドウが閉じられたときの処理.
 
         ・検索ダイアログが閉じられたことがわかるようにする。
 
@@ -142,7 +143,7 @@ class FindProcessingClass():
         self.replacement_win.destroy()
 
     def search(self, event=None):
-        """検索処理
+        """検索処理.
 
         ・検索処理をする。空欄なら処理しない、違うなら最初から、
         同じなら次のを検索する。
@@ -171,7 +172,7 @@ class FindProcessingClass():
         self.find_text = now_text
 
     def replacement(self, event=None):
-        """置換処理
+        """置換処理.
 
         ・置換処理をする。空欄なら処理しない、違うなら初めから、
         同じなら次を検索する。
@@ -208,7 +209,7 @@ class FindProcessingClass():
         self.find_text = now_text
 
     def search_forward(self, event=None):
-        """昇順検索処理
+        """昇順検索処理.
 
         ・昇順検索をする。空欄なら処理しない、違うなら初めから、
         同じなら次を検索する。
@@ -237,7 +238,7 @@ class FindProcessingClass():
         self.find_text = now_text
 
     def search_next(self, search, index, case):
-        """検索のメイン処理
+        """検索のメイン処理.
 
         ・検索できれば選択をする。できなければ、ダイアログを出して終了。
 

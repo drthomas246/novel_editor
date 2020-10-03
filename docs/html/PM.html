@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
     <link rel="next" title="Subfunction Processing module" href="SP.html" />
-    <link rel="prev" title="My Dialog module" href="MD.html" /> 
+    <link rel="prev" title="Main Processing module" href="MP.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="PM.ProcessingMenuClass">
 <em class="property">class </em><code class="sig-prename descclassname">PM.</code><code class="sig-name descname">ProcessingMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">wiki_wiki</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>処理メニューバーのクラス</p>
+<p>処理メニューバーのクラス.</p>
 <p>・処理メニューバーにあるプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -204,21 +204,21 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.count_moji">
 <code class="sig-name descname">count_moji</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.count_moji"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.count_moji" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文字数と行数を表示する</p>
+<dd><p>文字数と行数を表示.</p>
 <p>・文字数と行数をカウントして表示する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.externalLoop">
 <code class="sig-name descname">externalLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.externalLoop"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.externalLoop" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章読み上げ繰り返し処理</p>
+<dd><p>文章読み上げ繰り返し処理.</p>
 <p>・文章読み上げを繰り返し続ける。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.find_wikipedia">
 <code class="sig-name descname">find_wikipedia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.find_wikipedia"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.find_wikipedia" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>意味を検索</p>
+<dd><p>意味を検索.</p>
 <p>・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
 検索する。</p>
 </dd></dl>
@@ -226,7 +226,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.font_dialog">
 <code class="sig-name descname">font_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.font_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.font_dialog" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>フォントサイズダイアログを作成</p>
+<dd><p>フォントサイズダイアログを作成.</p>
 <p>・フォントサイズダイアログを作成し表示する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -238,7 +238,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.font_size_Change">
 <code class="sig-name descname">font_size_Change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.font_size_Change"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.font_size_Change" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>フォントのサイズを変える</p>
+<dd><p>フォントのサイズの変更.</p>
 <p>・サイズ変更を押されたときにサイズを変更する。
 上は72ptまで下は12ptまでにする。</p>
 </dd></dl>
@@ -246,7 +246,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.is_hiragana">
 <code class="sig-name descname">is_hiragana</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">char</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.is_hiragana"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.is_hiragana" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文字がひらがなか判断</p>
+<dd><p>文字がひらがなか判断.</p>
 <p>・与えられた文字がひらがなかどうか判断する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -264,7 +264,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.on_double_click_yahoo">
 <code class="sig-name descname">on_double_click_yahoo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.on_double_click_yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.on_double_click_yahoo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Yahoo! 校正支援リストをダブルクリック</p>
+<dd><p>Yahoo! 校正支援リストをダブルクリック.</p>
 <p>・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
 その該当箇所を選択する。</p>
 <dl class="field-list simple">
@@ -277,14 +277,14 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.open_becoming_novelist_page">
 <code class="sig-name descname">open_becoming_novelist_page</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.open_becoming_novelist_page"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.open_becoming_novelist_page" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>小説家になろうのユーザーページを開く</p>
+<dd><p>小説家になろうのユーザーページを開く.</p>
 <p>・インターネットブラウザで小説家になろうのユーザーページを開く。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.pyttsx3_onend">
 <code class="sig-name descname">pyttsx3_onend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">completed</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.pyttsx3_onend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.pyttsx3_onend" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章を読み終えた時の処理</p>
+<dd><p>文章を読み終えた時の処理.</p>
 <p>・文章を読み終えたら中止ウインドウを削除する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -299,7 +299,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.pyttsx3_onreadend">
 <code class="sig-name descname">pyttsx3_onreadend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.pyttsx3_onreadend"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.pyttsx3_onreadend" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>中止するボタンを押したときの処理</p>
+<dd><p>中止するボタンを押したときの処理.</p>
 <p>・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
 を削除する。</p>
 </dd></dl>
@@ -307,7 +307,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.pyttsx3_onword">
 <code class="sig-name descname">pyttsx3_onword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">location</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.pyttsx3_onword"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.pyttsx3_onword" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>文章を読み上げ中の処理</p>
+<dd><p>文章を読み上げ中の処理.</p>
 <p>・文章読み始めるときに止めるダイアログを出してから読み上げる。
 読み上げている最中は読み上げている行を選択状態にする。</p>
 <dl class="field-list simple">
@@ -324,21 +324,21 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.read_text">
 <code class="sig-name descname">read_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.read_text"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.read_text" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>テキストを読み上げる</p>
+<dd><p>テキストを読み上げる.</p>
 <p>・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.ruby_huri">
 <code class="sig-name descname">ruby_huri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.ruby_huri"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.ruby_huri" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ルビをふる</p>
+<dd><p>ルビをふり.</p>
 <p>・選択文字列に小説家になろうのルビを振る。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.yahoo">
 <code class="sig-name descname">yahoo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.yahoo"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.yahoo" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>Yahoo! 校正支援</p>
+<dd><p>Yahoo! 校正支援.</p>
 <p>・Yahoo! 校正支援を呼び出し表示する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -350,7 +350,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.yahoocall">
 <code class="sig-name descname">yahoocall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">appid</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">sentence</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>yahooの校正支援を呼び出す</p>
+<dd><p>yahooの校正支援を呼び出し.</p>
 <p>・Yahoo! 校正支援をClient IDを使って呼び出す。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -371,7 +371,7 @@
 <dl class="py method">
 <dt id="PM.ProcessingMenuClass.yahooresult">
 <code class="sig-name descname">yahooresult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">html</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM.html#ProcessingMenuClass.yahooresult"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#PM.ProcessingMenuClass.yahooresult" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>校正支援を表示する画面を制作</p>
+<dd><p>校正支援を表示する画面を制作.</p>
 <p>・校正結果を表示するダイアログを作成する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -395,7 +395,7 @@
         <a href="SP.html" class="btn btn-neutral float-right" title="Subfunction Processing module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="MD.html" class="btn btn-neutral float-left" title="My Dialog module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="MP.html" class="btn btn-neutral float-left" title="Main Processing module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

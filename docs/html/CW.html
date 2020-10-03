@@ -100,8 +100,8 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MP.html">Main Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
@@ -179,7 +179,7 @@
 <dt id="CW.CreateWindowClass">
 <em class="property">class </em><code class="sig-prename descclassname">CW.</code><code class="sig-name descname">CreateWindowClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>画面の描画のクラス</p>
+<p>画面の描画のクラス.</p>
 <p>・画面描画にあるプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
@@ -189,14 +189,14 @@
 <dl class="py method">
 <dt id="CW.CreateWindowClass.create_widgets">
 <code class="sig-name descname">create_widgets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.create_widgets"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.create_widgets" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>画面の描画</p>
+<dd><p>画面の描画.</p>
 <p>・メインウインドウにウェジットを配置する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="CW.CreateWindowClass.frame">
 <code class="sig-name descname">frame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>フレーム内にテキストボックスを表示</p>
+<dd><p>フレーム内にテキストボックスを表示.</p>
 <p>・メインウインドウの右側に行番号、テキストボックス、スクロールバー
 を表示する。</p>
 </dd></dl>
@@ -204,14 +204,14 @@
 <dl class="py method">
 <dt id="CW.CreateWindowClass.frame_character">
 <code class="sig-name descname">frame_character</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame_character"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame_character" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>フレーム内にイメージフレーム表示</p>
+<dd><p>フレーム内にイメージフレーム表示.</p>
 <p>・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="CW.CreateWindowClass.frame_image">
 <code class="sig-name descname">frame_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CreateWindowClass.frame_image"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CreateWindowClass.frame_image" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>フレーム内にイメージフレーム表示</p>
+<dd><p>フレーム内にイメージフレーム表示.</p>
 <p>・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。</p>
 </dd></dl>
 
@@ -221,8 +221,13 @@
 <dt id="CW.CustomText">
 <em class="property">class </em><code class="sig-prename descclassname">CW.</code><code class="sig-name descname">CustomText</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CW.html#CustomText"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CW.CustomText" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Text</span></code></p>
-<p>Textのイベントを拡張したウィジェット</p>
+<p>Textのイベントを拡張したウィジェット.</p>
 <p>・textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>master</strong> (<em>instance</em>) -- toplevelインスタンス</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
