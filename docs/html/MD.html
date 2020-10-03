@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
     <link rel="next" title="Processing Menu module" href="PM.html" />
-    <link rel="prev" title="List Menu module" href="LM.html" /> 
+    <link rel="prev" title="Main Processing module" href="MC.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,10 +100,10 @@
 <li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">My Dialog module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SF.html">Sub Function module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="novel_editor.html">Novel Editor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
 </ul>
 </li>
 </ul>
@@ -176,14 +176,25 @@
   <div class="section" id="module-MD">
 <span id="my-dialog-module"></span><h1>My Dialog module<a class="headerlink" href="#module-MD" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <dl class="py class">
-<dt id="MD.MyDialog">
-<em class="property">class </em><code class="sig-prename descclassname">MD.</code><code class="sig-name descname">MyDialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">button1</span></em>, <em class="sig-param"><span class="n">button2</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MD.html#MyDialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#MD.MyDialog" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="MD.MyDialogClass">
+<em class="property">class </em><code class="sig-prename descclassname">MD.</code><code class="sig-name descname">MyDialogClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">caption</span></em>, <em class="sig-param"><span class="n">cancel</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MD.html#MyDialogClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#MD.MyDialogClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ダイアログ作成クラス</p>
 <p>・自作ダイアログを呼び出し表示する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>instance</em>) -- 親ウインドウインスタンス</p></li>
+<li><p><strong>caption</strong> (<em>str</em>) -- ボタンのメッセージ</p></li>
+<li><p><strong>cancel</strong> (<em>bool</em>) -- キャンセルボタンを表示する(True)</p></li>
+<li><p><strong>title</strong> (<em>str</em>) -- タイトル</p></li>
+<li><p><strong>text</strong> (<em>bool</em>) -- 選択状態にする(True)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
-<dt id="MD.MyDialog.sub_name_ok">
-<code class="sig-name descname">sub_name_ok</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MD.html#MyDialog.sub_name_ok"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#MD.MyDialog.sub_name_ok" title="この定義へのパーマリンク">¶</a></dt>
+<dt id="MD.MyDialogClass.sub_name_ok">
+<code class="sig-name descname">sub_name_ok</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MD.html#MyDialogClass.sub_name_ok"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#MD.MyDialogClass.sub_name_ok" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ダイアログボタンクリック時の処理</p>
 <p>・自作ダイアログのボタンをクリックしたときにインプットボックスに
 入力されている値を取得する。</p>
@@ -215,7 +226,7 @@
         <a href="PM.html" class="btn btn-neutral float-right" title="Processing Menu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="LM.html" class="btn btn-neutral float-left" title="List Menu module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="MC.html" class="btn btn-neutral float-left" title="Main Processing module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

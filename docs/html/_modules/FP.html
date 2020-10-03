@@ -163,6 +163,9 @@
 
 <span class="sd">    ・検索置換するためのプログラム群</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClassインスタンス</span>
+
 <span class="sd">    Attributes:</span>
 <span class="sd">        replacement_check (bool): 検索ダイアログが表示されているTrue</span>
 <span class="sd">        next_pos (str): 次の検索位置 例.(1.0)</span>
@@ -170,11 +173,6 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            app (instance): lineframeインスタンス</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>

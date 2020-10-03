@@ -13,7 +13,7 @@ source
    HM
    HP
    LM
+   MC
    MD
    PM
-   SF
-   novel_editor
+   SP

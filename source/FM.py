@@ -11,23 +11,21 @@ class FileMenuClass():
 
     ・ファイルメニューバーにあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        master (instance): toplevelインスタンス
+        tree_folder (str): ツリーフォルダの配列
+
     Attributes:
         now_path (str): 今の処理ししているファイルのパス
         file_path (str): 現在開いているファイル
 
     """
-    def __init__(self, app, root, tree_folder):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            root (instance): toplevelインスタンス
-            tree_folder (str): ツリーフォルダの配列
-
-        """
+    def __init__(self, app, master, tree_folder):
         self.now_path = ""
         self.file_path = ""
         self.APP = app
-        self.ROOT = root
+        self.MASTER = master
         self.TREE_FOLDER = tree_folder
 
     def new_open(self, event=None):
@@ -148,7 +146,7 @@ class FileMenuClass():
             if os.path.isfile("./userdic.csv"):
                 os.remove("./userdic.csv")
 
-            self.ROOT.destroy()
+            self.MASTER.destroy()
 
     def new_file(self):
         """新規作成をするための準備

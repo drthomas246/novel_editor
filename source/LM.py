@@ -15,23 +15,21 @@ class ListMenuClass():
 
     ・リストメニューバーにあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        master (instance): toplevelインスタンス
+        tree_folder (str): ツリーフォルダの配列
+
     Attributes:
         text_text (str): 現在入力中の初期テキスト
         self.select_list_item (str): 選択中のリストボックスアイテム名
 
     """
-    def __init__(self, app, root, tree_folder):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-            root (instance): toplevelインスタンス
-            tree_folder (str): ツリーフォルダの配列
-
-        """
+    def __init__(self, app, master, tree_folder):
         self.text_text = ""
         self.select_list_item = ""
         self.APP = app
-        self.ROOT = root
+        self.MASTER = master
         self.tree_folder = tree_folder
 
     def message_window(self, event=None):
@@ -98,8 +96,8 @@ class ListMenuClass():
             ):
                 # サブダイヤログを表示する
                 title = u'{0}に挿入'.format(self.APP.tree.item(curItem)["text"])
-                dialog = MD.MyDialog(self.APP, "挿入", True, title, False)
-                self.ROOT.wait_window(dialog.sub_name_win)
+                dialog = MD.MyDialogClass(self.APP, "挿入", True, title, False)
+                self.MASTER.wait_window(dialog.sub_name_win)
                 file_name = dialog.txt
                 del dialog
                 if not file_name == "":
@@ -199,8 +197,8 @@ class ListMenuClass():
         if not text == "":
             sub_text = self.APP.tree.item(curItem)["text"]
             title = u'{0}の名前を変更'.format(sub_text)
-            dialog2 = MD.MyDialog(self.APP, u"変更", True, title, sub_text)
-            self.ROOT.wait_window(dialog2.sub_name_win)
+            dialog2 = MD.MyDialogClass(self.APP, u"変更", True, title, sub_text)
+            self.MASTER.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
             self.APP.text.configure(state='normal')
             co_text = dialog2.txt

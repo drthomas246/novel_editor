@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MC &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">モジュールコード</a> &raquo;</li>
+        
+      <li>MC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>MC のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
+
+<span class="kn">import</span> <span class="nn">CW</span>
+<span class="kn">import</span> <span class="nn">EP</span>
+<span class="kn">import</span> <span class="nn">SP</span>
+<span class="kn">import</span> <span class="nn">HP</span>
+<span class="kn">import</span> <span class="nn">FP</span>
+<span class="kn">import</span> <span class="nn">CP</span>
+<span class="kn">import</span> <span class="nn">FM</span>
+<span class="kn">import</span> <span class="nn">EM</span>
+<span class="kn">import</span> <span class="nn">HM</span>
+<span class="kn">import</span> <span class="nn">PM</span>
+<span class="kn">import</span> <span class="nn">LM</span>
+
+
+<div class="viewcode-block" id="MainProcessingClass"><a class="viewcode-back" href="../MC.html#MC.MainProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MainProcessingClass</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;メインフレーム処理のクラス</span>
+
+<span class="sd">    ・初期設定をするプログラム群</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tree_folder (str): ツリーフォルダの配列</span>
+<span class="sd">        tokenizer (instance): Tokenizerインスタンス</span>
+<span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipediaインスタンス</span>
+<span class="sd">        title_binary (str): タイトルイメージファイルバイナリ</span>
+<span class="sd">        master (instance): toplevelインスタンス</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tree_folder</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">wiki_wiki</span><span class="p">,</span>
+        <span class="n">title_binary</span><span class="p">,</span>
+        <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">tree_folder</span>
+        <span class="c1"># 自作クラスの読み込み</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span> <span class="o">=</span> <span class="n">CW</span><span class="o">.</span><span class="n">CreateWindowClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epc</span> <span class="o">=</span> <span class="n">EP</span><span class="o">.</span><span class="n">EventProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sfc</span> <span class="o">=</span> <span class="n">SP</span><span class="o">.</span><span class="n">SubfunctionProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hpc</span> <span class="o">=</span> <span class="n">HP</span><span class="o">.</span><span class="n">HighlightProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpc</span> <span class="o">=</span> <span class="n">FP</span><span class="o">.</span><span class="n">FindProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpc</span> <span class="o">=</span> <span class="n">CP</span><span class="o">.</span><span class="n">ComplementProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fmc</span> <span class="o">=</span> <span class="n">FM</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emc</span> <span class="o">=</span> <span class="n">EM</span><span class="o">.</span><span class="n">EditMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span> <span class="o">=</span> <span class="n">PM</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lmc</span> <span class="o">=</span> <span class="n">LM</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hmc</span> <span class="o">=</span> <span class="n">HM</span><span class="o">.</span><span class="n">HelpMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title_binary</span><span class="p">)</span>
+        <span class="c1"># メニューバーの作成</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_bar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">)</span>
+        <span class="c1"># 初期化処理</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">create_widgets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MainProcessingClass.initialize"><a class="viewcode-back" href="../MC.html#MC.MainProcessingClass.initialize">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;初期化処理</span>
+
+<span class="sd">        ・変数の初期化及び起動準備をする。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 今の処理ししているファイルのパス</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># 現在開いているファイル</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># 検索文字列</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpc</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># 現在入力中の初期テキスト</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">text_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">select_list_item</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># 文字の大きさ</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">16</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;./appid.txt&quot;</span><span class="p">):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./appid.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="sa">u</span><span class="s2">&quot;ここを消して、&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># フォントをOSごとに変える</span>
+        <span class="n">pf</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;メイリオ&quot;</span>
+        <span class="k">elif</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>  <span class="c1"># MacOS</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;Osaka-等幅&quot;</span>
+        <span class="k">elif</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Linux&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;IPAゴシック&quot;</span>
+        <span class="c1"># dataフォルダがあるときは、削除する</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">)</span>
+        <span class="c1"># 新しくdataフォルダを作成する</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;./</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

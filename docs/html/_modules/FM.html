@@ -166,23 +166,21 @@
 
 <span class="sd">    ・ファイルメニューバーにあるプログラム群</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClassインスタンス</span>
+<span class="sd">        master (instance): toplevelインスタンス</span>
+<span class="sd">        tree_folder (str): ツリーフォルダの配列</span>
+
 <span class="sd">    Attributes:</span>
 <span class="sd">        now_path (str): 今の処理ししているファイルのパス</span>
 <span class="sd">        file_path (str): 現在開いているファイル</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">tree_folder</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            app (instance): lineframeインスタンス</span>
-<span class="sd">            root (instance): toplevelインスタンス</span>
-<span class="sd">            tree_folder (str): ツリーフォルダの配列</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">tree_folder</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ROOT</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span> <span class="o">=</span> <span class="n">master</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">tree_folder</span>
 
 <div class="viewcode-block" id="FileMenuClass.new_open"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_open">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -303,7 +301,7 @@
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;./userdic.csv&quot;</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;./userdic.csv&quot;</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">ROOT</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FileMenuClass.new_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;新規作成をするための準備</span>

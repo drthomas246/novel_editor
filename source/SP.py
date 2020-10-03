@@ -6,13 +6,17 @@ import tkinter.filedialog as filedialog
 from PIL import Image, ImageTk
 
 
-class SubFunctionClass():
-    def __init__(self, app, tree_folder):
-        """
-        Args:
-            app (instance): lineframeインスタンス
+class SubfunctionProcessingClass():
+    """補助機能のクラス
 
-        """
+    ・補助機能があるプログラム群
+
+    Args:
+        app (instance): MainProcessingClassインスタンス
+        tree_folder (str): ツリーフォルダの配列
+
+    """
+    def __init__(self, app, tree_folder):
         self.zoom = 0
         self.APP = app
 

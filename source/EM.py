@@ -3,13 +3,11 @@ class EditMenuClass():
 
     ・編集メニューバーにあるプログラム群
 
+    Args:
+        app (instance): MainProcessingClassインスタンス
+
     """
     def __init__(self, app):
-        """
-        Args:
-            app (instance): lineframeインスタンス
-
-        """
         self.APP = app
 
     def redo(self, event=None):
