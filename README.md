@@ -2,7 +2,8 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
-[![ビルドステータス](https://travis-ci.org/drthomas246/novel_editor.svg?branch=master)](https://travis-ci.org/drthomas246/novel_editor)
+[![Build Status](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/?branch=master)
 [![カバレッジ](https://img.shields.io/badge/coverage-90-brightgreen)](https://www.hobofoto.net/htmlcov/index.html)
 [![Pythonバージョン](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
