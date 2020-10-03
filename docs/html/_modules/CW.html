@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CW &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">モジュールコード</a> &raquo;</li>
+        
+      <li>CW</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>CW のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
+
+
+<div class="viewcode-block" id="CustomText"><a class="viewcode-back" href="../CW.html#CW.CustomText">[ドキュメント]</a><span class="k">class</span> <span class="nc">CustomText</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Textのイベントを拡張したウィジェット</span>
+
+<span class="sd">    ・textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            proc widget_proxy {widget widget_command args} {</span>
+<span class="s1">                set result [uplevel [linsert $args 0 $widget_command]]</span>
+<span class="s1">                if {([lrange $args 0 1] == {xview moveto}) ||</span>
+<span class="s1">                    ([lrange $args 0 1] == {xview scroll}) ||</span>
+<span class="s1">                    ([lrange $args 0 1] == {yview moveto}) ||</span>
+<span class="s1">                    ([lrange $args 0 1] == {yview scroll})} {</span>
+<span class="s1">                    event generate  $widget &lt;&lt;Scroll&gt;&gt; -when tail</span>
+<span class="s1">                }</span>
+<span class="s1">                if {([lindex $args 0] in {insert replace delete})} {</span>
+<span class="s1">                    event generate  $widget &lt;&lt;Change&gt;&gt; -when tail</span>
+<span class="s1">                }</span>
+<span class="s1">                # return the result from the real widget command</span>
+<span class="s1">                return $result</span>
+<span class="s1">            }</span>
+<span class="s1">            &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            rename </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
+<span class="s1">            interp alias {{}} ::</span><span class="si">{widget}</span><span class="s1"> {{}} widget_proxy </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="CreateWindowClass"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">CreateWindowClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;画面の描画のクラス</span>
+
+<span class="sd">    ・画面描画にあるプログラム群</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClassインスタンス</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BLANK_IMAGE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhHgAeAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz</span>
+<span class="s1">            /wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDM</span>
+<span class="s1">            mQDMzADM/wD/AAD/MwD/ZgD/mQD/zAD//zMAADMAMzMAZjMAmTMAzDMA/zMzADMz</span>
+<span class="s1">            MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ</span>
+<span class="s1">            /zPMADPMMzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYA</span>
+<span class="s1">            mWYAzGYA/2YzAGYzM2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZ</span>
+<span class="s1">            M2aZZmaZmWaZzGaZ/2bMAGbMM2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb/</span>
+<span class="s1">            /5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkzM5kzZpkzmZkzzJkz/5lmAJlmM5lmZplm</span>
+<span class="s1">            mZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnMM5nMZpnMmZnMzJnM/5n/AJn/</span>
+<span class="s1">            M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwzM8wzZswzmcwzzMwz</span>
+<span class="s1">            /8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzMM8zMZszM</span>
+<span class="s1">            mczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z</span>
+<span class="s1">            M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z</span>
+<span class="s1">            ///MAP/MM//MZv/Mmf/MzP/M////AP//M///Zv//mf//zP///8DAwICAgIAAAACA</span>
+<span class="s1">            AAAAgICAAIAAgACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
+<span class="s1">            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
+<span class="s1">            AAAAAAAAAAAAAAAAACwAAAAAHgAeAAAIMgABCBxIsKDBgwgTKlzIsKHDhxAjSpxI</span>
+<span class="s1">            saLFixgzatzIsaPHjyBDihxJsqTJkyhTngwIADs=</span>
+<span class="s1">            &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="CreateWindowClass.create_widgets"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.create_widgets">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;画面の描画</span>
+
+<span class="sd">        ・メインウインドウにウェジットを配置する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># メニューの配置</span>
+        <span class="n">File_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">Edit_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">List_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">Processing_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">Help_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># ファイルメニュー</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;新規作成(N)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+N&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">new_open</span>
+        <span class="p">)</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;開く(O)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+E&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file</span>
+        <span class="p">)</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;保存(S)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+S&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">overwrite_save_file</span>
+        <span class="p">)</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;名前を付けて保存(W)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+W&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">save_file</span>
+        <span class="p">)</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">File_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;閉じる(C)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+C&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">on_closing</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;ファイル(F)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">menu</span><span class="o">=</span><span class="n">File_menu</span>
+        <span class="p">)</span>
+        <span class="c1"># 編集メニュー</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;やり直し(R)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+Z&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">redo</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;戻る(U)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Z&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">undo</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;切り取り(X)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+X&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">cut</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;コピー(C)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+C&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">copy</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;貼り付け(V)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+V&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">emc</span><span class="o">.</span><span class="n">paste</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;検索(F)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+F&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fpc</span><span class="o">.</span><span class="n">find_dialog</span>
+        <span class="p">)</span>
+        <span class="n">Edit_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;置換(L)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+L&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fpc</span><span class="o">.</span><span class="n">replacement_dialog</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;編集(E)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">menu</span><span class="o">=</span><span class="n">Edit_menu</span>
+        <span class="p">)</span>
+        <span class="c1"># 処理メニュー</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;ルビをふる(R)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+R&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">ruby_huri</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;文字数のカウント(C)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+C&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">count_moji</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;選択文字の意味(M)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+F&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">find_wikipedia</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;文章の読み上げ(B)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+R&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">read_text</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;文章校正(Y)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Y&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">yahoo</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;フォントサイズの変更(F)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+F&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_dialog</span>
+        <span class="p">)</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
+        <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;「小説家になろう」のページを開く(U)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+U&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">open_becoming_novelist_page</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;処理(P)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">menu</span><span class="o">=</span><span class="n">Processing_menu</span>
+        <span class="p">)</span>
+        <span class="c1"># リストメニュー</span>
+        <span class="n">List_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;項目を増やす(U)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;選択右クリック&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">message_window</span>
+        <span class="p">)</span>
+        <span class="n">List_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;項目を削除(D)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;選択右クリック&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">message_window</span>
+        <span class="p">)</span>
+        <span class="n">List_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;項目の名前を変更(C)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+G&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">on_name_click</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;リスト(L)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">menu</span><span class="o">=</span><span class="n">List_menu</span>
+        <span class="p">)</span>
+        <span class="c1"># ヘルプメニュー</span>
+        <span class="n">Help_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;ヘルプ(H)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+H&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">help</span>
+        <span class="p">)</span>
+        <span class="n">Help_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;バージョン情報(V)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+V&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">version</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">menu_bar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;ヘルプ(H)&#39;</span><span class="p">,</span>
+            <span class="n">under</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">menu</span><span class="o">=</span><span class="n">Help_menu</span>
+        <span class="p">)</span>
+        <span class="c1"># ツリーコントロール、入力欄、行番号欄、スクロール部分を作成</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="s2">&quot;tree&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">tree_get_loop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CreateWindowClass.frame"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にテキストボックスを表示</span>
+
+<span class="sd">        ・メインウインドウの右側に行番号、テキストボックス、スクロールバー</span>
+<span class="sd">        を表示する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># f1フレームにテキストエディタを表示</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">RIDGE</span><span class="p">,</span> <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">CustomText</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span><span class="p">),</span>
+            <span class="n">undo</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">line_numbers</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">ysb</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">yview</span>
+        <span class="p">)</span>
+        <span class="c1"># 入力欄にスクロールを紐付け</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">ysb</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+        <span class="c1"># 左から行番号、入力欄、スクロールウィジェット</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">line_numbers</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">ysb</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="c1"># テキスト入力欄のみ拡大されるように</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># テキストを読み取り専用にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span>
+        <span class="c1"># テキストにフォーカスを当てる</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event_text</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CreateWindowClass.frame_image"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame_image">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示</span>
+
+<span class="sd">        ・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">RIDGE</span><span class="p">,</span> <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_ysb</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">yview</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_xsb</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">xview</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">xscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_xsb</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_ysb</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_ysb</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_xsb</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="c1"># デフォルトの画像を設定する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">BLANK_IMAGE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_on_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;nw&#39;</span><span class="p">,</span>
+            <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event_image</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CreateWindowClass.frame_character"><a class="viewcode-back" href="../CW.html#CW.CreateWindowClass.frame_character">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">frame_character</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;フレーム内にイメージフレーム表示</span>
+
+<span class="sd">        ・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># チェック有無変数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">IntVar</span><span class="p">()</span>
+        <span class="c1"># value=0のラジオボタンにチェックを入れる</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">RIDGE</span><span class="p">,</span> <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;呼び名&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;名前&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">RIDGE</span><span class="p">,</span>
+            <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;性別&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo1</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Radiobutton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">variable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;男&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo2</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Radiobutton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">variable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;女&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo3</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Radiobutton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f2</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">variable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;その他&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rdo3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f3</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">relief</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">RIDGE</span><span class="p">,</span>
+            <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;似顔絵&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f3</span><span class="p">,</span>
+            <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">149</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="mi">199</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_canvas</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label3</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;誕生日&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_birthday</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f4</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f4</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;挿入&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sfc</span><span class="o">.</span><span class="n">btn_click</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_button_calcel</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f4</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;消去&#39;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sfc</span><span class="o">.</span><span class="n">clear_btn_click</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">foto_button_calcel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label4</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;略歴&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text_body</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspa</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspa</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">label4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspa</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">columnspa</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">f1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># デフォルトの画像を設定する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">photo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">BLANK_IMAGE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_on_canvas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;nw&#39;</span><span class="p">,</span>
+            <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">photo</span>
+        <span class="p">)</span>
+
+        <span class="c1"># キャラクターイベントを追加</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">epc</span><span class="o">.</span><span class="n">create_event_character</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

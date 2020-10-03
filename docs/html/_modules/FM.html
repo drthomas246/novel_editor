@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FM &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">モジュールコード</a> &raquo;</li>
+        
+      <li>FM</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>FM のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
+<span class="kn">import</span> <span class="nn">tkinter.filedialog</span> <span class="k">as</span> <span class="nn">filedialog</span>
+
+
+<div class="viewcode-block" id="FileMenuClass"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">FileMenuClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;ファイルメニューバーのクラス</span>
+
+<span class="sd">    ・ファイルメニューバーにあるプログラム群</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClassインスタンス</span>
+<span class="sd">        master (instance): toplevelインスタンス</span>
+<span class="sd">        tree_folder (str): ツリーフォルダの配列</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        now_path (str): 今の処理ししているファイルのパス</span>
+<span class="sd">        file_path (str): 現在開いているファイル</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">tree_folder</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span> <span class="o">=</span> <span class="n">master</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">tree_folder</span>
+
+<div class="viewcode-block" id="FileMenuClass.new_open"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_open">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;新規作成</span>
+
+<span class="sd">        ・変更があれば、ファイル保存するか尋ねて、新規作成する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end - 1c&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">text_text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askokcancel</span><span class="p">(</span>
+                <span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s2">&quot;上書き保存しますか？&quot;</span>
+            <span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">overwrite_save_file</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+
+            <span class="k">elif</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askokcancel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;今の編集を破棄して新規作成しますか？&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.open_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.open_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ファイルを開く処理</span>
+
+<span class="sd">        ・ファイルを開くダイアログを作成しファイルを開く。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ファイルを開くダイアログを開く</span>
+        <span class="n">fTyp</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">u</span><span class="s1">&#39;小説エディタ&#39;</span><span class="p">,</span> <span class="s1">&#39;*.ned&#39;</span><span class="p">)]</span>
+        <span class="n">iDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
+            <span class="n">filetypes</span><span class="o">=</span><span class="n">fTyp</span><span class="p">,</span>
+            <span class="n">initialdir</span><span class="o">=</span><span class="n">iDir</span>
+        <span class="p">)</span>
+        <span class="c1"># ファイル名があるとき</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># 初期化する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+            <span class="c1"># ファイルを開いてdataフォルダに入れる</span>
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">existing_zip</span><span class="p">:</span>
+                <span class="n">existing_zip</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">)</span>
+            <span class="c1"># ツリービューを削除する</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="c1"># ツリービューを表示する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree_get_loop</span><span class="p">()</span>
+            <span class="c1"># ファイルパスを拡張子抜きで表示する</span>
+            <span class="n">filepath</span><span class="p">,</span> <span class="n">___</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">filepath</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="c1"># テキストビューを新にする</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.overwrite_save_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.overwrite_save_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">overwrite_save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;上書き保存処理</span>
+
+<span class="sd">        ・上書き保存するための処理。ファイルがあれば保存して、</span>
+<span class="sd">        なければ保存ダイアログを出す。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ファイルパスが存在するとき</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># 編集中のファイルを保存する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
+            <span class="c1"># zipファイルにまとめる</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;zip&quot;</span><span class="p">,</span> <span class="s2">&quot;./data&quot;</span><span class="p">)</span>
+            <span class="c1"># 拡張子の変更を行う</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.zip&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">),</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.ned&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="c1"># ファイルパスが存在しないとき</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 保存ダイアログを開く</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.save_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.save_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ファイルを保存処理</span>
+
+<span class="sd">        ・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ファイル保存ダイアログを表示する</span>
+        <span class="n">fTyp</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">,</span> <span class="s2">&quot;.ned&quot;</span><span class="p">)]</span>
+        <span class="n">iDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">asksaveasfilename</span><span class="p">(</span>
+            <span class="n">filetypes</span><span class="o">=</span><span class="n">fTyp</span><span class="p">,</span>
+            <span class="n">initialdir</span><span class="o">=</span><span class="n">iDir</span>
+        <span class="p">)</span>
+        <span class="c1"># ファイルパスが決まったとき</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># 拡張子を除いて保存する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span><span class="p">,</span> <span class="n">___</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="c1"># 上書き保存処理</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">overwrite_save_file</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.on_closing"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.on_closing">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_closing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;終了時の処理</span>
+
+<span class="sd">        ・ソフトを閉じるか確認してから閉じる。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askokcancel</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;終了してもいいですか？&quot;</span><span class="p">):</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;./userdic.csv&quot;</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;./userdic.csv&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.new_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.new_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">new_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;新規作成をするための準備</span>
+
+<span class="sd">        ・ファイルの新規作成をするための準備処理をおこなう。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># ツリービューを表示する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree_get_loop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">)</span>
+        <span class="c1"># テキストを読み取り専用にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span>
+        <span class="c1"># テキストにフォーカスを当てる</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.open_file_save"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.open_file_save">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_file_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;開いてるファイルを保存する</span>
+
+<span class="sd">        ・開いてるファイルをそれぞれの保存形式で保存する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): 保存ファイルのパス</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 編集ファイルを保存する</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_charactor_file</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">charactor_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sfc</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="o">+</span><span class="s1">&#39;-1c&#39;</span><span class="p">))</span>
+
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.save_charactor_file"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.save_charactor_file">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">save_charactor_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;キャラクターファイルの保存準備</span>
+
+<span class="sd">        ・それぞれの項目をxml形式で保存する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;</span><span class="se">\n</span><span class="s1">&lt;data&gt;</span><span class="se">\n\t</span><span class="s1">&lt;call&gt;</span><span class="si">{0}</span><span class="s1">&lt;/call&gt;</span><span class="se">\</span>
+<span class="s1">        </span><span class="se">\n\t</span><span class="s1">&lt;name&gt;</span><span class="si">{1}</span><span class="s1">&lt;/name&gt;</span><span class="se">\n\t</span><span class="s1">&lt;sex&gt;</span><span class="si">{2}</span><span class="s1">&lt;/sex&gt;</span><span class="se">\n\t</span><span class="s1">&lt;birthday&gt;</span><span class="si">{3}</span><span class="s1">&lt;/birthday&gt;</span><span class="se">\</span>
+<span class="s1">        </span><span class="se">\n\t</span><span class="s1">&lt;body&gt;</span><span class="si">{4}</span><span class="s1">&lt;/body&gt;</span><span class="se">\n</span><span class="s1">&lt;/data&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;end -1c&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileMenuClass.tree_get_loop"><a class="viewcode-back" href="../FM.html#FM.FileMenuClass.tree_get_loop">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tree_get_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ツリービューに挿入</span>
+
+<span class="sd">        ・保存データからファイルを取得してツリービューに挿入する。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="c1"># フォルダのファイルを取得</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;.txt&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                        <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s1">&#39;end&#39;</span><span class="p">,</span>
+                        <span class="n">text</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

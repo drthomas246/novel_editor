@@ -122,7 +122,7 @@ html_theme = 'sphinx_rtd_theme'
 - ドキュメントを生成します。
 
 ```
-sphinx-apidoc -f -o ./sphinx ./docs
+sphinx-apidoc -o ./sphinx ./docs
 ```
 
 - htmlファイルを生成します。

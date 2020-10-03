@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Complement Processing module &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Create Window module" href="CW.html" />
+    <link rel="prev" title="source" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Complement Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CW.html">Create Window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EM.html">Edit Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EP.html">Event Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FM.html">File Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FP.html">Find Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>Complement Processing module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/CP.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-CP">
+<span id="complement-processing-module"></span><h1>Complement Processing module<a class="headerlink" href="#module-CP" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="py class">
+<dt id="CP.ComplementProcessingClass">
+<em class="property">class </em><code class="sig-prename descclassname">CP.</code><code class="sig-name descname">ComplementProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>補完処理のクラス</p>
+<p>・補完処理にあるプログラム群</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClassインスタンス</p></li>
+<li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizerインスタンス</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.auto_complete">
+<code class="sig-name descname">auto_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.auto_complete"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.auto_complete" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>補完リストの設定</p>
+<p>・補完リストの設定をする。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.get_current_insert_word">
+<code class="sig-name descname">get_current_insert_word</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.get_current_insert_word"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.get_current_insert_word" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>現在入力中の単語と位置を取得</p>
+<p>・現在入力している単語とその位置を取得する。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.get_keywords">
+<code class="sig-name descname">get_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.get_keywords"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.get_keywords" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>補完リストの候補キーワードを作成</p>
+<p>・補完リストに表示するキーワードを得る。</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>補完リスト配列</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.remove_list">
+<code class="sig-name descname">remove_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.remove_list"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.remove_list" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>補完リストの削除処理</p>
+<p>・補完リストを削除し、テキストボックスにフォーカスを戻す。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.selection">
+<code class="sig-name descname">selection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.selection"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.selection" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>補完リストでの選択後の処理</p>
+<p>・補完リストを選択したときにその文字を入力する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="CP.ComplementProcessingClass.tab">
+<code class="sig-name descname">tab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CP.html#ComplementProcessingClass.tab"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#CP.ComplementProcessingClass.tab" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>タブ押下時の処理</p>
+<p>・タブキーを押したときに補完リストを出す。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CW.html" class="btn btn-neutral float-right" title="Create Window module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="source" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

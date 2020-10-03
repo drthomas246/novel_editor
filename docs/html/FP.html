@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Find Processing module &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Help Menu module" href="HM.html" />
+    <link rel="prev" title="File Menu module" href="FM.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CP.html">Complement Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CW.html">Create Window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EM.html">Edit Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EP.html">Event Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FM.html">File Menu module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Find Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HM.html">Help Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HP.html">Highlight Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LM.html">List Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MC.html">Main Processing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MD.html">My Dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PM.html">Processing Menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SP.html">Subfunction Processing module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">source</a> &raquo;</li>
+        
+      <li>Find Processing module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/FP.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-FP">
+<span id="find-processing-module"></span><h1>Find Processing module<a class="headerlink" href="#module-FP" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<dl class="py class">
+<dt id="FP.FindProcessingClass">
+<em class="property">class </em><code class="sig-prename descclassname">FP.</code><code class="sig-name descname">FindProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>検索置換のクラス</p>
+<p>・検索置換するためのプログラム群</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClassインスタンス</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="FP.FindProcessingClass.replacement_check">
+<code class="sig-name descname">replacement_check</code><a class="headerlink" href="#FP.FindProcessingClass.replacement_check" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索ダイアログが表示されているTrue</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="FP.FindProcessingClass.next_pos">
+<code class="sig-name descname">next_pos</code><a class="headerlink" href="#FP.FindProcessingClass.next_pos" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>次の検索位置 例.(1.0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="FP.FindProcessingClass.find_text">
+<code class="sig-name descname">find_text</code><a class="headerlink" href="#FP.FindProcessingClass.find_text" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索文字列</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.find_dialog">
+<code class="sig-name descname">find_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.find_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.find_dialog" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索ダイアログを作成</p>
+<p>・検索ダイアログを作成する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.push_keys">
+<code class="sig-name descname">push_keys</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.push_keys"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.push_keys" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>キーが押されたときの処理</p>
+<p>・何かキーが押されたときに検索処理を中断する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.replacement">
+<code class="sig-name descname">replacement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>置換処理</p>
+<p>・置換処理をする。空欄なら処理しない、違うなら初めから、
+同じなら次を検索する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.replacement_dialog">
+<code class="sig-name descname">replacement_dialog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement_dialog"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement_dialog" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>置換ダイアログを作成</p>
+<p>・置換ダイアログを作成する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.replacement_dialog_on_closing">
+<code class="sig-name descname">replacement_dialog_on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.replacement_dialog_on_closing"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.replacement_dialog_on_closing" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索ウインドウが閉じられたときの処理</p>
+<p>・検索ダイアログが閉じられたことがわかるようにする。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索処理</p>
+<p>・検索処理をする。空欄なら処理しない、違うなら最初から、
+同じなら次のを検索する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.search_forward">
+<code class="sig-name descname">search_forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search_forward"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search_forward" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>昇順検索処理</p>
+<p>・昇順検索をする。空欄なら処理しない、違うなら初めから、
+同じなら次を検索する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="FP.FindProcessingClass.search_next">
+<code class="sig-name descname">search_next</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">search</span></em>, <em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">case</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FP.html#FindProcessingClass.search_next"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#FP.FindProcessingClass.search_next" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>検索のメイン処理</p>
+<p>・検索できれば選択をする。できなければ、ダイアログを出して終了。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search</strong> (<em>str</em>) -- 検索文字列</p></li>
+<li><p><strong>index</strong> (<em>str</em>) -- 検索位置 ex. (1.0)</p></li>
+<li><p><strong>case</strong> (<em>int</em>) -- 0.初めから検索 1.次に検索 2.昇順検索</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="HM.html" class="btn btn-neutral float-right" title="Help Menu module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FM.html" class="btn btn-neutral float-left" title="File Menu module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
