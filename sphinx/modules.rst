@@ -1,5 +1,5 @@
-source
-======
+packages
+========
 
 .. toctree::
    :maxdepth: 4
@@ -13,7 +13,6 @@ source
    HM
    HP
    LM
-   MD
    MP
    PM
    SP

@@ -5,18 +5,6 @@ import platform
 import tkinter as tk
 import tkinter.ttk as ttk
 
-import CW
-import EP
-import SP
-import HP
-import FP
-import CP
-import FM
-import EM
-import HM
-import PM
-import LM
-
 
 class MainProcessingClass(ttk.Frame):
     """メインフレーム処理のクラス.
@@ -38,22 +26,23 @@ class MainProcessingClass(ttk.Frame):
         tokenizer,
         wiki_wiki,
         title_binary,
+        class_instance,
         master=None
     ):
         super().__init__(master)
         self.TREE_FOLDER = tree_folder
         # 自作クラスの読み込み
-        self.cwc = CW.CreateWindowClass(self)
-        self.epc = EP.EventProcessingClass(self)
-        self.sfc = SP.SubfunctionProcessingClass(self, self.TREE_FOLDER)
-        self.hpc = HP.HighlightProcessingClass(self, tokenizer)
-        self.fpc = FP.FindProcessingClass(self)
-        self.cpc = CP.ComplementProcessingClass(self, tokenizer)
-        self.fmc = FM.FileMenuClass(self, master, self.TREE_FOLDER)
-        self.emc = EM.EditMenuClass(self)
-        self.pmc = PM.ProcessingMenuClass(self, wiki_wiki, tokenizer)
-        self.lmc = LM.ListMenuClass(self, master, self.TREE_FOLDER)
-        self.hmc = HM.HelpMenuClass(self, title_binary)
+        self.cwc = class_instance[0].CreateWindowClass(self)
+        self.epc = class_instance[1].EventProcessingClass(self)
+        self.sfc = class_instance[2].SubfunctionProcessingClass(self, self.TREE_FOLDER)
+        self.hpc = class_instance[3].HighlightProcessingClass(self, tokenizer)
+        self.fpc = class_instance[4].FindProcessingClass(self)
+        self.cpc = class_instance[5].ComplementProcessingClass(self, tokenizer)
+        self.fmc = class_instance[6].FileMenuClass(self, master, self.TREE_FOLDER)
+        self.emc = class_instance[7].EditMenuClass(self)
+        self.pmc = class_instance[8].ProcessingMenuClass(self, wiki_wiki, tokenizer)
+        self.lmc = class_instance[9].ListMenuClass(self, master, self.TREE_FOLDER)
+        self.hmc = class_instance[10].HelpMenuClass(self, title_binary)
         # メニューバーの作成
         self.menu_bar = tk.Menu(self.master)
         self.master.config(menu=self.menu_bar)

@@ -1,5 +1,5 @@
-Main Processing module
-===========================
+MP.py
+=========
 
 .. automodule:: MP
    :members:

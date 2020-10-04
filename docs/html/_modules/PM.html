@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">packages</a></li>
 </ul>
 
             
@@ -410,10 +410,10 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoocall</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">APPID</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end -1c&#39;</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">APPID</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahooresult</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Double-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_double_click_yahoo</span><span class="p">)</span></div>
 

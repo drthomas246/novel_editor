@@ -1,5 +1,5 @@
-Subfunction Processing module
-====================================
+SP.py
+=========
 
 .. automodule:: SP
    :members:

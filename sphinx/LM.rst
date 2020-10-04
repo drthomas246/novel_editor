@@ -1,5 +1,5 @@
-List Menu module
-==================
+LM.py
+=========
 
 .. automodule:: LM
    :members:

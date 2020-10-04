@@ -1,5 +1,5 @@
-File Menu module
-==================
+FM.py
+=========
 
 .. automodule:: FM
    :members:

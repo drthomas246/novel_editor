@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">packages</a></li>
 </ul>
 
             
@@ -157,13 +157,82 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 <span class="kn">import</span> <span class="nn">tkinter.filedialog</span> <span class="k">as</span> <span class="nn">filedialog</span>
 <span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
 
-<span class="kn">import</span> <span class="nn">MD</span>
+
+<div class="viewcode-block" id="MyDialogClass"><a class="viewcode-back" href="../LM.html#LM.MyDialogClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MyDialogClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;ダイアログ作成クラス.</span>
+
+<span class="sd">    ・自作ダイアログを呼び出し表示する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        message (instance): 親ウインドウインスタンス</span>
+<span class="sd">        caption (str): ボタンのメッセージ</span>
+<span class="sd">        cancel (bool): キャンセルボタンを表示する(True)</span>
+<span class="sd">        title (str): タイトル</span>
+<span class="sd">        text (bool): 選択状態にする(True)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">caption</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">caption</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">caption</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_ok</span>
+        <span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cancel</span><span class="p">:</span>
+            <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">),</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span>
+            <span class="p">)</span>
+
+            <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">select_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MyDialogClass.sub_name_ok"><a class="viewcode-back" href="../LM.html#LM.MyDialogClass.sub_name_ok">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">sub_name_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ダイアログボタンクリック時の処理.</span>
+
+<span class="sd">        ・自作ダイアログのボタンをクリックしたときにインプットボックスに</span>
+<span class="sd">        入力されている値を取得する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: インプットボックスの値</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt</span></div></div>
 
 
 <div class="viewcode-block" id="ListMenuClass"><a class="viewcode-back" href="../LM.html#LM.ListMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ListMenuClass</span><span class="p">():</span>
@@ -254,7 +323,7 @@
             <span class="p">):</span>
                 <span class="c1"># サブダイヤログを表示する</span>
                 <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">に挿入&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
-                <span class="n">dialog</span> <span class="o">=</span> <span class="n">MD</span><span class="o">.</span><span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="s2">&quot;挿入&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">dialog</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="s2">&quot;挿入&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
                 <span class="n">file_name</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">txt</span>
                 <span class="k">del</span> <span class="n">dialog</span>
@@ -357,7 +426,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">sub_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
             <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">の名前を変更&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sub_text</span><span class="p">)</span>
-            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">MD</span><span class="o">.</span><span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;変更&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sub_text</span><span class="p">)</span>
+            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;変更&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sub_text</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog2</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
             <span class="c1"># テキストを読み取り専用を解除する</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>

@@ -1,5 +1,5 @@
-Complement Processing module
-==================================
+CP.py
+=========
 
 .. automodule:: CP
    :members:

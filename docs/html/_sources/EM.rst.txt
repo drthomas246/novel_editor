@@ -1,5 +1,5 @@
-Edit Menu module
-==================
+EM.py
+=========
 
 .. automodule:: EM
    :members:

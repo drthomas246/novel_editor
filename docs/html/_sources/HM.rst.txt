@@ -1,5 +1,5 @@
-Help Menu module
-==================
+HM.py
+=========
 
 .. automodule:: HM
    :members:

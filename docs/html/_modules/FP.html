@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">packages</a></li>
 </ul>
 
             
@@ -377,20 +377,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
 
         <span class="c1"># 現在検索ボックスに入力されてる文字</span>
-        <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">now_text</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
             <span class="c1"># 空欄だったら処理しない</span>
             <span class="k">pass</span>
-        <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
             <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
             <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
         <span class="c1"># 今回の入力を、「前回入力文字」にする</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="n">now_text</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span> <span class="o">=</span> <span class="n">text</span></div>
 
 <div class="viewcode-block" id="FindProcessingClass.search_next"><a class="viewcode-back" href="../FP.html#FP.FindProcessingClass.search_next">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">search_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">case</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;検索のメイン処理.</span>

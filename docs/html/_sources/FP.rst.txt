@@ -1,5 +1,5 @@
-Find Processing module
-===========================
+FP.py
+=========
 
 .. automodule:: FP
    :members:

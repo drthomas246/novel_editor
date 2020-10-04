@@ -1,5 +1,5 @@
-Processing Menu module
-===========================
+PM.py
+=========
 
 .. automodule:: PM
    :members:

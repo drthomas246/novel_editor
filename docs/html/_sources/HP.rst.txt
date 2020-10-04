@@ -1,5 +1,5 @@
-Highlight Processing module
-===========================
+HP.py
+=========
 
 .. automodule:: HP
    :members:

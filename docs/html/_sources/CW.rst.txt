@@ -1,5 +1,5 @@
-Create Window module
-===========================
+CW.py
+=========
 
 .. automodule:: CW
    :members:

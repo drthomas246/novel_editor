@@ -1,5 +1,5 @@
-Event Processing module
-===========================
+EP.py
+=========
 
 .. automodule:: EP
    :members:

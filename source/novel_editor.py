@@ -8,9 +8,23 @@ import tkinter.messagebox as messagebox
 import wikipediaapi
 from janome.tokenizer import Tokenizer
 
-import MP
+import packages.MP as MP
+import packages.CW as CW
+import packages.EP as EP
+import packages.SP as SP
+import packages.HP as HP
+import packages.FP as FP
+import packages.CP as CP
+import packages.FM as FM
+import packages.EM as EM
+import packages.HM as HM
+import packages.PM as PM
+import packages.LM as LM
+
 
 if __name__ == "__main__":
+    # クラスのインスタンスを配列に入れる
+    class_instance = [CW, EP, SP, HP, FP, CP, FM, EM, PM, LM, HM]
     root = tk.Tk()
     root.withdraw()
     if os.path.isdir("./data"):
@@ -677,6 +691,7 @@ if __name__ == "__main__":
         tokenizer,
         wiki_wiki,
         title_binary,
+        class_instance,
         root)
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
     # 終了時にon_closingを行う
