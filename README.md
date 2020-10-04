@@ -2,9 +2,9 @@
 
 　[Explanation in English](https://github.com/drthomas246/novel_editor/wiki)
 
-[![Build Status](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/?branch=master)
-[![カバレッジ](https://img.shields.io/badge/coverage-85-brightgreen)](https://drthomas246.github.io/novel_editor/htmlcov/index.html)
+[![ビルドステータス](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/build-status/master)
+[![scrutinizerコード品質](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drthomas246/novel_editor/?branch=master)
+[![カバレッジ](https://scrutinizer-ci.com/g/drthomas246/novel_editor/badges/coverage.png?b=master)](https://drthomas246.github.io/novel_editor/htmlcov/index.html)
 [![Pythonバージョン](https://img.shields.io/badge/python-3.7.4-orange)](https://www.python.org/)
 [![ソースコードサイズ](https://img.shields.io/github/languages/code-size/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/source/novel_editor.py)
 [![ライセンス](https://img.shields.io/github/license/drthomas246/novel_editor)](https://github.com/drthomas246/novel_editor/blob/master/LICENSE.md)
