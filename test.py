@@ -1,8 +1,7 @@
-import os
-
-
-print(os.path.realpath(__file__))
-print(os.path.abspath(__file__))
-
-# with open('.coverage') as f:
-#     print(f.read())
+with open('.coverage', mode='w') as f:
+    t = f.read()
+    s = t.replace(
+        'C:\\\\Users\\\\drtho\\\\github\\\\novel_editor\\\\source\\\\',
+        "/home/scrutinizer/build/source/"
+    )
+    f.write(s)
