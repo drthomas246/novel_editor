@@ -16,20 +16,25 @@ class CustomText(tk.Text):
         super().__init__(master, **kwargs)
         self.tk.eval('''
             proc widget_proxy {widget widget_command args} {
+                # 引数を使用してtkウィジェットコマンドを呼び出す
                 set result [uplevel [linsert $args 0 $widget_command]]
+                # ビューが移動した場合、バインドできるイベントを生成する
                 if {([lrange $args 0 1] == {xview moveto}) ||
                     ([lrange $args 0 1] == {xview scroll}) ||
                     ([lrange $args 0 1] == {yview moveto}) ||
                     ([lrange $args 0 1] == {yview scroll})} {
                     event generate  $widget <<Scroll>> -when tail
                 }
+                # 内容が変更された場合、バインドできるイベントを生成する
                 if {([lindex $args 0] in {insert replace delete})} {
                     event generate  $widget <<Change>> -when tail
                 }
+                # ウィジェットコマンドから結果を返す
                 return $result
             }
             ''')
         self.tk.eval('''
+            # これにより、基になるウィジェットがプロキシに置き換えられます
             rename {widget} _{widget}
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
