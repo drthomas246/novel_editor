@@ -255,10 +255,10 @@ class ProcessingMenuClass():
 
         """
         html = self.yahoocall(
-            self.APP.APPID,
+            self.APPID,
             self.APP.text.get('1.0', 'end -1c')
         )
-        if not self.APP.APPID == "":
+        if not self.APPID == "":
             self.yahooresult(html)
             self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
 

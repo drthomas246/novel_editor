@@ -8,7 +8,7 @@
     
     
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for source\MP.py: 87%</title>
+    <title>Coverage for source\MP.py: 92%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -24,15 +24,15 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>source\MP.py</b> :
-            <span class="pc_cov">87%</span>
+            <span class="pc_cov">92%</span>
         </h1>
 
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
 
         <h2 class="stats">
             61 statements &nbsp;
-            <span class="run hide_run shortkey_r button_toggle_run">53 run</span>
-            <span class="mis shortkey_m button_toggle_mis">8 missing</span>
+            <span class="run hide_run shortkey_r button_toggle_run">56 run</span>
+            <span class="mis shortkey_m button_toggle_mis">5 missing</span>
             <span class="exc shortkey_x button_toggle_exc">0 excluded</span>
 
             
@@ -150,9 +150,9 @@
 <p id="n81" class="stm run hide_run"><a href="#n81">81</a></p>
 <p id="n82" class="stm run hide_run"><a href="#n82">82</a></p>
 <p id="n83" class="stm run hide_run"><a href="#n83">83</a></p>
-<p id="n84" class="stm mis"><a href="#n84">84</a></p>
-<p id="n85" class="stm mis"><a href="#n85">85</a></p>
-<p id="n86" class="stm mis"><a href="#n86">86</a></p>
+<p id="n84" class="stm run hide_run"><a href="#n84">84</a></p>
+<p id="n85" class="stm run hide_run"><a href="#n85">85</a></p>
+<p id="n86" class="stm run hide_run"><a href="#n86">86</a></p>
 <p id="n87" class="stm run hide_run"><a href="#n87">87</a></p>
 <p id="n88" class="stm mis"><a href="#n88">88</a></p>
 <p id="n89" class="pln"><a href="#n89">89</a></p>
@@ -253,13 +253,13 @@
 <p id="t79" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">lmc</span><span class="op">.</span><span class="nam">select_list_item</span> <span class="op">=</span> <span class="str">""</span><span class="strut">&nbsp;</span></p>
 <p id="t80" class="pln">        <span class="com"># &#25991;&#23383;&#12398;&#22823;&#12365;&#12373;</span><span class="strut">&nbsp;</span></p>
 <p id="t81" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">pmc</span><span class="op">.</span><span class="nam">font_size</span> <span class="op">=</span> <span class="num">16</span><span class="strut">&nbsp;</span></p>
-<p id="t82" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="str">""</span><span class="strut">&nbsp;</span></p>
+<p id="t82" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">pmc</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="str">""</span><span class="strut">&nbsp;</span></p>
 <p id="t83" class="stm run hide_run">        <span class="key">if</span> <span class="nam">os</span><span class="op">.</span><span class="nam">path</span><span class="op">.</span><span class="nam">isfile</span><span class="op">(</span><span class="str">"./appid.txt"</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t84" class="stm mis">            <span class="nam">f</span> <span class="op">=</span> <span class="nam">open</span><span class="op">(</span><span class="str">"./appid.txt"</span><span class="op">,</span> <span class="str">"r"</span><span class="op">,</span> <span class="nam">encoding</span><span class="op">=</span><span class="str">"utf-8"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t85" class="stm mis">            <span class="nam">self</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="nam">f</span><span class="op">.</span><span class="nam">read</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t86" class="stm mis">            <span class="nam">f</span><span class="op">.</span><span class="nam">close</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t87" class="stm run hide_run">        <span class="key">if</span> <span class="str">u"&#12371;&#12371;&#12434;&#28040;&#12375;&#12390;&#12289;"</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">APPID</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t88" class="stm mis">            <span class="nam">self</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="str">""</span><span class="strut">&nbsp;</span></p>
+<p id="t84" class="stm run hide_run">            <span class="nam">f</span> <span class="op">=</span> <span class="nam">open</span><span class="op">(</span><span class="str">"./appid.txt"</span><span class="op">,</span> <span class="str">"r"</span><span class="op">,</span> <span class="nam">encoding</span><span class="op">=</span><span class="str">"utf-8"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t85" class="stm run hide_run">            <span class="nam">self</span><span class="op">.</span><span class="nam">pmc</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="nam">f</span><span class="op">.</span><span class="nam">read</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t86" class="stm run hide_run">            <span class="nam">f</span><span class="op">.</span><span class="nam">close</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t87" class="stm run hide_run">        <span class="key">if</span> <span class="str">u"&#12371;&#12371;&#12434;&#28040;&#12375;&#12390;&#12289;"</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">pmc</span><span class="op">.</span><span class="nam">APPID</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t88" class="stm mis">            <span class="nam">self</span><span class="op">.</span><span class="nam">pmc</span><span class="op">.</span><span class="nam">APPID</span> <span class="op">=</span> <span class="str">""</span><span class="strut">&nbsp;</span></p>
 <p id="t89" class="pln">        <span class="com"># &#12501;&#12457;&#12531;&#12488;&#12434;OS&#12372;&#12392;&#12395;&#22793;&#12360;&#12427;</span><span class="strut">&nbsp;</span></p>
 <p id="t90" class="stm run hide_run">        <span class="nam">pf</span> <span class="op">=</span> <span class="nam">platform</span><span class="op">.</span><span class="nam">system</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t91" class="stm run hide_run">        <span class="key">if</span> <span class="nam">pf</span> <span class="op">==</span> <span class="str">'Windows'</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
@@ -284,7 +284,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.4</a>,
-            created at 2020-10-04 15:43
+            created at 2020-10-04 18:51
         </p>
     </div>
 </div>

@@ -79,13 +79,13 @@ class MainProcessingClass(ttk.Frame):
         self.lmc.select_list_item = ""
         # 文字の大きさ
         self.pmc.font_size = 16
-        self.APPID = ""
+        self.pmc.APPID = ""
         if os.path.isfile("./appid.txt"):
             f = open("./appid.txt", "r", encoding="utf-8")
-            self.APPID = f.read()
+            self.pmc.APPID = f.read()
             f.close()
-        if u"ここを消して、" in self.APPID:
-            self.APPID = ""
+        if u"ここを消して、" in self.pmc.APPID:
+            self.pmc.APPID = ""
         # フォントをOSごとに変える
         pf = platform.system()
         if pf == 'Windows':
