@@ -131,6 +131,7 @@ class SubfunctionProcessingClass():
             instance: イメージインスタンス
 
         """
+        resized_image = ""
         if im.size[0] == im.size[1]:
             resized_image = im.resize((150, 150))
         elif im.size[0] > im.size[1]:

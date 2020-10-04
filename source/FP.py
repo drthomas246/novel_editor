@@ -222,20 +222,20 @@ class FindProcessingClass():
         self.APP.text.tag_remove('sel', '1.0', 'end')
 
         # 現在検索ボックスに入力されてる文字
-        now_text = self.text_var.get()
-        if not now_text:
+        text = self.text_var.get()
+        if not text:
             # 空欄だったら処理しない
             pass
-        elif now_text != self.find_text:
+        elif text != self.find_text:
             # 前回の入力と違う文字なら、検索を最初から行う
             index = 'end'
-            self.search_next(now_text, index, 2)
+            self.search_next(text, index, 2)
         else:
             # 前回の入力と同じなら、検索の続きを行う
-            self.search_next(now_text, self.next_pos, 2)
+            self.search_next(text, self.next_pos, 2)
 
         # 今回の入力を、「前回入力文字」にする
-        self.find_text = now_text
+        self.find_text = text
 
     def search_next(self, search, index, case):
         """検索のメイン処理.
