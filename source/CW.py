@@ -6,7 +6,7 @@ import tkinter.ttk as ttk
 class CustomText(tk.Text):
     """Textのイベントを拡張したウィジェット.
 
-    ・textに<<Scroll>>イベントと、<<Change>>イベントを追加する。
+    ・TCl/TKを使って、textに<<Scroll>>イベントと、<<Change>>イベントを追加する。
 
     Args:
         master (instance): toplevelインスタンス
@@ -34,8 +34,9 @@ class CustomText(tk.Text):
             }
             ''')
         self.tk.eval('''
-            # これにより、基になるウィジェットがプロキシに置き換えられます
+            # コマンドをリネームする
             rename {widget} _{widget}
+            # コマンドを置き換える
             interp alias {{}} ::{widget} {{}} widget_proxy {widget} _{widget}
         '''.format(widget=str(self)))
 

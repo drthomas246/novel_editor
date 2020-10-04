@@ -153,7 +153,8 @@
            <div itemprop="articleBody">
             
   <h1>LM のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">import</span> <span class="nn">tkinter.filedialog</span> <span class="k">as</span> <span class="nn">filedialog</span>
@@ -197,8 +198,10 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>              <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>   <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="c1"># 選択アイテムの認識番号取得</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
         <span class="c1"># 親アイテムをクリックしたとき</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
             <span class="c1"># imageタグを選択したとき</span>
@@ -346,8 +349,10 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>              <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>   <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="c1"># 選択アイテムの認識番号取得</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">sub_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
@@ -472,8 +477,10 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>              <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>   <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="c1"># 選択アイテムの認識番号取得</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="c1"># 親アイテムの認識番号取得</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
         <span class="c1"># 開いているファイルを保存</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>

@@ -153,7 +153,8 @@
            <div itemprop="articleBody">
             
   <h1>EP のソースコード</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="EventProcessingClass"><a class="viewcode-back" href="../EP.html#EP.EventProcessingClass">[ドキュメント]</a><span></span><span class="k">class</span> <span class="nc">EventProcessingClass</span><span class="p">():</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<div class="viewcode-block" id="EventProcessingClass"><a class="viewcode-back" href="../EP.html#EP.EventProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">EventProcessingClass</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;ウインドウイベントのクラス.</span>
 
 <span class="sd">    ・ウインドウイベントにあるプログラム群</span>
@@ -205,7 +206,7 @@
         <span class="c1"># 新規作成する</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Key-n&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">new_open</span><span class="p">)</span>
         <span class="c1"># helpページを開く</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Key-h&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">help</span><span class="p">)</span>  <span class="c1"># helpページを開く</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Key-h&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">help</span><span class="p">)</span>
         <span class="c1"># Versionページを開く</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Control-Shift-Key-V&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hmc</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
         <span class="c1"># 文字数と行数をカウントすShift-る</span>

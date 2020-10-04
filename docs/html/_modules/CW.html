@@ -153,14 +153,15 @@
            <div itemprop="articleBody">
             
   <h1>CW のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 
 
 <div class="viewcode-block" id="CustomText"><a class="viewcode-back" href="../CW.html#CW.CustomText">[ドキュメント]</a><span class="k">class</span> <span class="nc">CustomText</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Textのイベントを拡張したウィジェット.</span>
 
-<span class="sd">    ・textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</span>
+<span class="sd">    ・TCl/TKを使って、textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        master (instance): toplevelインスタンス</span>
@@ -170,21 +171,27 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">            proc widget_proxy {widget widget_command args} {</span>
+<span class="s1">                # 引数を使用してtkウィジェットコマンドを呼び出す</span>
 <span class="s1">                set result [uplevel [linsert $args 0 $widget_command]]</span>
+<span class="s1">                # ビューが移動した場合、バインドできるイベントを生成する</span>
 <span class="s1">                if {([lrange $args 0 1] == {xview moveto}) ||</span>
 <span class="s1">                    ([lrange $args 0 1] == {xview scroll}) ||</span>
 <span class="s1">                    ([lrange $args 0 1] == {yview moveto}) ||</span>
 <span class="s1">                    ([lrange $args 0 1] == {yview scroll})} {</span>
 <span class="s1">                    event generate  $widget &lt;&lt;Scroll&gt;&gt; -when tail</span>
 <span class="s1">                }</span>
+<span class="s1">                # 内容が変更された場合、バインドできるイベントを生成する</span>
 <span class="s1">                if {([lindex $args 0] in {insert replace delete})} {</span>
 <span class="s1">                    event generate  $widget &lt;&lt;Change&gt;&gt; -when tail</span>
 <span class="s1">                }</span>
+<span class="s1">                # ウィジェットコマンドから結果を返す</span>
 <span class="s1">                return $result</span>
 <span class="s1">            }</span>
 <span class="s1">            &#39;&#39;&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            # コマンドをリネームする</span>
 <span class="s1">            rename </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
+<span class="s1">            # コマンドを置き換える</span>
 <span class="s1">            interp alias {{}} ::</span><span class="si">{widget}</span><span class="s1"> {{}} widget_proxy </span><span class="si">{widget}</span><span class="s1"> _</span><span class="si">{widget}</span><span class="s1"></span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span></div>
 
