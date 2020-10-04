@@ -118,7 +118,6 @@ extensions = [
 html_theme = 'sphinx_rtd_theme'
 ```
 
-- 
 - ドキュメントを生成します。ルートフォルダで以下のコマンドを実行します。
 
 ```
