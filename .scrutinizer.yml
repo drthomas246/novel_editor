@@ -33,7 +33,6 @@ build:
                     - py-scrutinizer-run
                     -
                         command: 'pylint-run ./source/novel_editor.py'
-                        use_website_config: true
         tests: true
 filter:
     excluded_paths:
