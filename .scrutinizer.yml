@@ -1,0 +1,42 @@
+checks:
+    python:
+        code_rating: true
+        duplicate_code: true
+build:
+    environment:
+        python: 3.7.1
+    nodes:
+        coverage:
+            dependencies:
+                before:
+                    - pip install 'coverage==4.5.4'
+            tests:
+                override:
+                    - command: 'python ./scrutinizer.py'
+                      coverage:
+                        file: './.coverage'
+                        format: 'py-cc'
+        analysis:
+            dependencies:
+                before:
+                    - pip install 'jaconv==0.2.4'
+                    - pip install 'Janome==0.3.9'
+                    - pip install 'pyttsx3==2.71'
+                    - pip install 'wikipedia-api==0.5.4'
+                    - pip install 'Pillow==7.2.0'
+                    - pip install 'requests==2.24.0'
+            project_setup:
+                override:
+                    - 'true'
+            tests:
+                override:
+                    - py-scrutinizer-run
+                    -
+                        command: 'pylint-run ./source/novel_editor.py'
+                        use_website_config: true
+        tests: true
+filter:
+    excluded_paths:
+        - '*/test/*'
+    dependency_paths:
+        - 'lib/*'
