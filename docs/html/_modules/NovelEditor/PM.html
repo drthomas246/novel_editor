@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>NovelEditor.PM &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">NovelEditor</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Novel Editor</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">モジュールコード</a> &raquo;</li>
+        
+          <li><a href="../NovelEditor.html">NovelEditor</a> &raquo;</li>
+        
+      <li>NovelEditor.PM</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>NovelEditor.PM のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
+<span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+
+<span class="kn">import</span> <span class="nn">jaconv</span>
+<span class="kn">import</span> <span class="nn">pyttsx3</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<div class="viewcode-block" id="ProcessingMenuClass"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ProcessingMenuClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;処理メニューバーのクラス.</span>
+
+<span class="sd">    ・処理メニューバーにあるプログラム群</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
+<span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス</span>
+<span class="sd">        tokenizer (instance): Tokenizer のインスタンス</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        font_size (int): フォントのサイズ</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># yahooの校正支援</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span> <span class="o">=</span> <span class="s2">&quot;{urn:yahoo:jp:jlp:KouseiService}&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">WIKI_WIKI</span> <span class="o">=</span> <span class="n">wiki_wiki</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
+
+<div class="viewcode-block" id="ProcessingMenuClass.ruby_huri"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.ruby_huri">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">ruby_huri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ルビをふり.</span>
+
+<span class="sd">        ・選択文字列に小説家になろうのルビを振る。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hon</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="c1"># 選択文字列を切り取る</span>
+        <span class="n">set_ruby</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sel.first&#39;</span><span class="p">,</span> <span class="s1">&#39;sel.last&#39;</span><span class="p">)</span>
+        <span class="c1"># 選択文字列を削除する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;sel.first&#39;</span><span class="p">,</span> <span class="s1">&#39;sel.last&#39;</span><span class="p">)</span>
+        <span class="c1"># 形態素解析を行う</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">set_ruby</span><span class="p">):</span>
+            <span class="c1"># ルビの取得</span>
+            <span class="n">ruby</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">ruby</span> <span class="o">=</span> <span class="n">jaconv</span><span class="o">.</span><span class="n">kata2hira</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">reading</span><span class="p">)</span>
+            <span class="c1"># 解析している文字のひらがなの部分を取得</span>
+            <span class="n">hira</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">token</span><span class="o">.</span><span class="n">surface</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hiragana</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="n">hira</span> <span class="o">+=</span> <span class="n">i</span>
+            <span class="c1"># ルビがないときと、記号の時の処理</span>
+            <span class="k">if</span> <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+            <span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">part_of_speech</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="s2">&quot;,&quot;</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s2">&quot;記号&quot;</span><span class="p">:</span>
+                <span class="n">hon</span> <span class="o">+=</span> <span class="n">token</span><span class="o">.</span><span class="n">surface</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># ルビ振りを行う</span>
+                <span class="n">hon</span> <span class="o">+=</span> <span class="s2">&quot;|</span><span class="si">{0}</span><span class="s2">≪</span><span class="si">{1}</span><span class="s2">≫</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">token</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                    <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                    <span class="n">hira</span>
+                <span class="p">)</span>
+
+        <span class="c1"># テキストを表示する</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">hon</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.is_hiragana"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.is_hiragana">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">is_hiragana</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;文字がひらがなか判断.</span>
+
+<span class="sd">        ・与えられた文字がひらがなかどうか判断する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            char (str): 判断する文字</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: ひらがなならTrue、違うならFalse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mh">0x3040</span> <span class="o">&lt;</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mh">0x3097</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.count_moji"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.count_moji">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">count_moji</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;文字数と行数を表示.</span>
+
+<span class="sd">        ・文字数と行数をカウントして表示する。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 行数の取得</span>
+        <span class="n">new_line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;end-1c&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># 文字列の取得</span>
+        <span class="n">moji</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="c1"># ２０文字で区切ったときの行数を数える</span>
+        <span class="n">gen_mai</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">moji</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+            <span class="n">gen_mai</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="c1"># メッセージボックスの表示</span>
+        <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+            <span class="sa">u</span><span class="s2">&quot;文字数と行数、原稿用紙枚数&quot;</span><span class="p">,</span> <span class="s2">&quot;文字数 :</span><span class="si">{0}</span><span class="s2">文字　行数 : </span><span class="si">{1}</span><span class="s2">行&quot;</span>
+            <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> 原稿用紙 : </span><span class="si">{2}</span><span class="s2">枚&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">moji</span><span class="p">)</span><span class="o">-</span><span class="n">new_line</span><span class="p">,</span>
+                <span class="n">new_line</span><span class="p">,</span>
+                <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">gen_mai</span><span class="o">//</span><span class="mi">20</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.find_wikipedia"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.find_wikipedia">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">find_wikipedia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;意味を検索.</span>
+
+<span class="sd">        ・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を</span>
+<span class="sd">        検索する。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># wikipediaから</span>
+        <span class="n">select_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">selection_get</span><span class="p">()</span>
+        <span class="n">page_py</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WIKI_WIKI</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">select_text</span><span class="p">)</span>
+        <span class="c1"># ページがあるかどうか判断</span>
+        <span class="k">if</span> <span class="n">page_py</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="s2">&quot;「</span><span class="si">{0}</span><span class="s2">」の意味&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
+                <span class="n">page_py</span><span class="o">.</span><span class="n">summary</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showwarning</span><span class="p">(</span>
+                <span class="s2">&quot;「</span><span class="si">{0}</span><span class="s2">」の意味&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
+                <span class="sa">u</span><span class="s2">&quot;見つけられませんでした。&quot;</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.open_becoming_novelist_page"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.open_becoming_novelist_page">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">open_becoming_novelist_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;小説家になろうのユーザーページを開く.</span>
+
+<span class="sd">        ・インターネットブラウザで小説家になろうのユーザーページを開く。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;https://syosetu.com/user/top/&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.read_text"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.read_text">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;テキストを読み上げる.</span>
+
+<span class="sd">        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_texts</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">pyttsx3</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;started-word&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pyttsx3_onword</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;finished-utterance&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pyttsx3_onend</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end - 1c&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">startLoop</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">externalLoop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.externalLoop"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.externalLoop">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">externalLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;文章読み上げ繰り返し処理.</span>
+
+<span class="sd">        ・文章読み上げを繰り返し続ける。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">iterate</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onword"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.pyttsx3_onword">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;文章を読み上げ中の処理.</span>
+
+<span class="sd">        ・文章読み始めるときに止めるダイアログを出してから読み上げる。</span>
+<span class="sd">        読み上げている最中は読み上げている行を選択状態にする。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): 読み上げに関連付けられた名前</span>
+<span class="sd">            location (int): 現在の場所</span>
+<span class="sd">            length (int): 不明</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 今読んでいる場所と選択位置を比較する</span>
+        <span class="k">if</span> <span class="n">location</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_len</span><span class="p">:</span>
+            <span class="c1"># すべての選択一度解除する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+            <span class="c1"># 現在読んでいる場所を選択する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span>
+                <span class="s1">&#39;sel&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.0&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span><span class="p">),</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.0&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1"># 次の行の長さをtextlenに入力する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_len</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span><span class="p">),</span>
+                    <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1"># カーソルを文章の一番後ろに持ってくる</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="c1"># 行を１行増やす</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gyou_su</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 読み初めての処理</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_texts</span><span class="p">:</span>
+            <span class="c1"># 読むのを中止するウインドウを作成する</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">)</span>
+            <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;中止する&#39;</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;中止する&#39;</span><span class="p">),</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pyttsx3_onreadend</span>
+            <span class="p">)</span>
+            <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># 最前面に表示し続ける</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># サイズ変更禁止</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;読み上げ&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_texts</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onreadend"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.pyttsx3_onreadend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onreadend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;中止するボタンを押したときの処理.</span>
+
+<span class="sd">        ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ</span>
+<span class="sd">        を削除する。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">endLoop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onend"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.pyttsx3_onend">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">pyttsx3_onend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">completed</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;文章を読み終えた時の処理.</span>
+
+<span class="sd">        ・文章を読み終えたら中止ウインドウを削除する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): 読み上げに関連付けられた名前</span>
+<span class="sd">            completed (bool): 文章が読み上げ終わった(True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">endLoop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.yahoo"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.yahoo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援.</span>
+
+<span class="sd">        ・Yahoo! 校正支援を呼び出し表示する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoocall</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end -1c&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">APPID</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yahooresult</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Double-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_double_click_yahoo</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.yahoocall"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.yahoocall">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoocall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appid</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;yahooの校正支援を呼び出し.</span>
+
+<span class="sd">        ・Yahoo! 校正支援をClient IDを使って呼び出す。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            appid (str): Yahoo! Client ID</span>
+<span class="sd">            sentence (str): 校正をしたい文字列</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: 校正結果</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">appid</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+                <span class="s2">&quot;Yahoo! Client ID&quot;</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s2">&quot;Yahoo! Client IDが見つかりません。</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Readme.pdfを読んで、設定し直してください。&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://jlp.yahooapis.jp/KouseiService/V1/kousei&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;appid&quot;</span><span class="p">:</span> <span class="n">appid</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;sentence&quot;</span><span class="p">:</span> <span class="n">sentence</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">text</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.yahooresult"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.yahooresult">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahooresult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;校正支援を表示する画面を制作.</span>
+
+<span class="sd">        ・校正結果を表示するダイアログを作成する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            html (str): 校正結果</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xml</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+        <span class="c1"># サブウインドウの表示</span>
+        <span class="n">sub_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">)</span>
+        <span class="c1"># ツリービューの表示</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="n">sub_win</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="c1"># 表スタイルの設定(headingsはツリー形式ではない、通常の表形式)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="p">[</span><span class="s2">&quot;show&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;headings&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;先頭からの文字数&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;対象文字数&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;対象表記&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;言い換え候補文字列&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;指摘の詳細情報&quot;</span><span class="p">)</span>
+        <span class="c1"># 情報を取り出す</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>
+            <span class="n">StartPos</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span><span class="o">+</span><span class="s2">&quot;StartPos&quot;</span><span class="p">))</span>
+            <span class="n">Length</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span><span class="o">+</span><span class="s2">&quot;Length&quot;</span><span class="p">))</span>
+            <span class="n">Surface</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span><span class="o">+</span><span class="s2">&quot;Surface&quot;</span><span class="p">))</span>
+            <span class="n">ShitekiWord</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span><span class="o">+</span><span class="s2">&quot;ShitekiWord&quot;</span><span class="p">))</span>
+            <span class="n">ShitekiInfo</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span><span class="o">+</span><span class="s2">&quot;ShitekiInfo&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;end&quot;</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">StartPos</span><span class="p">,</span>
+                        <span class="n">Length</span><span class="p">,</span>
+                        <span class="n">Surface</span><span class="p">,</span>
+                        <span class="n">ShitekiWord</span><span class="p">,</span>
+                        <span class="n">ShitekiInfo</span>
+                        <span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
+        <span class="c1"># スクロールバーを表示する</span>
+        <span class="n">SCRLBAR_Y</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="n">sub_win</span><span class="p">,</span>
+            <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">yview</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscroll</span><span class="o">=</span><span class="n">SCRLBAR_Y</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+        <span class="n">SCRLBAR_Y</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
+        <span class="c1"># 最前面に表示し続ける</span>
+        <span class="n">sub_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">sub_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;文章校正&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.on_double_click_yahoo"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.on_double_click_yahoo">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_double_click_yahoo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Yahoo! 校正支援リストをダブルクリック.</span>
+
+<span class="sd">        ・Yahoo! 校正支援ダイアログのリストをダブルクリックすると</span>
+<span class="sd">        その該当箇所を選択する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">textlen</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">textforlen</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+        <span class="c1"># 出てくる場所を取得</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># 出てくる文字数を取得</span>
+        <span class="n">lenge</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># 何行目になるか確認する</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">textlen</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">textforlen</span> <span class="o">=</span> <span class="n">textlen</span>
+                <span class="n">textlen</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># 選択状態を一旦削除</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="c1"># 選択状態にする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span>
+            <span class="s1">&#39;sel&#39;</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="p">),</span>
+            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="o">+</span><span class="n">lenge</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># カーソルの移動</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+        <span class="c1"># フォーカスを合わせる</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.font_dialog"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.font_dialog">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">font_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;フォントサイズダイアログを作成.</span>
+
+<span class="sd">        ・フォントサイズダイアログを作成し表示する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            event (instance): tkinter.Event のインスタンス</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">intSpin</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Spinbox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span><span class="p">,</span> <span class="n">from_</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">intSpin</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;サイズ変更&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;サイズ変更&#39;</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">font_size_Change</span>
+        <span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">intSpin</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;フォントサイズの変更&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessingMenuClass.font_size_Change"><a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.PM.ProcessingMenuClass.font_size_Change">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">font_size_Change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;フォントのサイズの変更.</span>
+
+<span class="sd">        ・サイズ変更を押されたときにサイズを変更する。</span>
+<span class="sd">        上は72ptまで下は12ptまでにする。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 比較のため数値列に変更</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">intSpin</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>  <span class="c1"># 12より下の値を入力した時、12にする</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">12</span>
+        <span class="k">elif</span> <span class="mi">72</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span><span class="p">:</span>  <span class="c1"># 72より上の値を入力した時、72にする</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">72</span>
+        <span class="c1"># 文字列にもどす</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">sub_wins</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="c1"># フォントサイズの変更</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_size</span><span class="p">))</span>
+        <span class="c1"># ハイライトのやり直し</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, Yamahara Yoshihiro
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
