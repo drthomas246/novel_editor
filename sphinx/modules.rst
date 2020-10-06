@@ -1,7 +1,7 @@
-NovelEditor
-===========
+neditor
+=======
 
 .. toctree::
    :maxdepth: 4
 
-   NovelEditor
+   neditor

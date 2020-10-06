@@ -2,7 +2,7 @@
 import wikipediaapi
 from janome.tokenizer import Tokenizer
 
-import NovelEditor
+import neditor
 
 
 if __name__ == "__main__":
@@ -17,7 +17,7 @@ if __name__ == "__main__":
         ['data/nobel', u'小説']
     ]
     # タイトルを表示する
-    root = NovelEditor.title_create()
+    root = neditor.title_create()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
     # wikipediaapiを起動
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # メイン画面を削除
     root.destroy()
     # 再度メイン画面を作成
-    root = NovelEditor.window_create(
+    root = neditor.window_create(
         tree_folder,
         tokenizer,
         wiki_wiki,
