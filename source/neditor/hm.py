@@ -54,8 +54,11 @@ class HelpMenuClass():
         ・ウエブブラウザを使ってREADME.htmlを表示する。
         """
         webbrowser.open(
-            'file://' + os.path.dirname(
-                os.path.abspath(os.path.dirname(__file__))
+            'file://' + os.path.abspath(
+                os.path.join(
+                    os.getcwd(),
+                    "../"
+                )
             )
             + "/README.html"
         )
