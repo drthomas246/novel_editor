@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">neditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
 </ul>
 
             
@@ -177,17 +177,17 @@
 <span class="sd">    Args:</span>
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
-<span class="sd">        tree_folder (list): ツリーフォルダの配列</span>
+<span class="sd">        TREE_FOLDER (list): ツリーフォルダの配列</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;現在入力中の初期テキスト.&quot;&quot;&quot;</span>
     <span class="n">select_list_item</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;選択中のリストボックスアイテム名.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">tree_folder</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span> <span class="o">=</span> <span class="n">master</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span> <span class="o">=</span> <span class="n">tree_folder</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">TREE_FOLDER</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">master</span> <span class="o">=</span> <span class="n">master</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">TREE_FOLDER</span>
 
 <div class="viewcode-block" id="ListMenuClass.message_window"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.message_window">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">message_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ツリービューを右クリックしたときの処理.</span>
@@ -199,146 +199,24 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
         <span class="c1"># 親アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
         <span class="c1"># 親アイテムをクリックしたとき</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="c1"># imageタグを選択したとき</span>
-            <span class="n">fTyp</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">u</span><span class="s1">&#39;小説エディタ&#39;</span><span class="p">,</span> <span class="s1">&#39;*.gif&#39;</span><span class="p">)]</span>
-            <span class="n">iDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-            <span class="n">filepath</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
-                <span class="n">filetypes</span><span class="o">=</span><span class="n">fTyp</span><span class="p">,</span>
-                <span class="n">initialdir</span><span class="o">=</span><span class="n">iDir</span>
-            <span class="p">)</span>
-            <span class="c1"># ファイル名があるとき</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                    <span class="n">file_name</span>
-                <span class="p">)</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
-                <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                    <span class="n">file_name</span>
-                <span class="p">)</span>
-                <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                    <span class="s1">&#39;end&#39;</span><span class="p">,</span>
-                    <span class="n">text</span><span class="o">=</span><span class="n">file_name</span>
-                <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-                <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">100</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">path_read_image</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                    <span class="n">file_name</span><span class="p">,</span>
-                    <span class="mi">0</span>
-                <span class="p">)</span>
-
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="c1"># イメージアイテムの親アイテムを選択したとき</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_image_true</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-            <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">str</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-                <span class="p">)</span>
-            <span class="p">):</span>
-                <span class="c1"># サブダイヤログを表示する</span>
-                <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">に挿入&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
-                <span class="n">dialog</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="s2">&quot;挿入&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
-                <span class="n">file_name</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">txt</span>
-                <span class="k">del</span> <span class="n">dialog</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">file_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
-                    <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
-                    <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-                    <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                    <span class="n">tree</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                    <span class="c1"># 選択されているフォルダを見つける</span>
-                    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-                            <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_character</span><span class="p">()</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
-                                    <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span>
-                                    <span class="n">file_name</span>
-                                <span class="p">)</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
-
-                            <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">file_name</span><span class="p">)</span>
-                            <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
-                                <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                <span class="s1">&#39;end&#39;</span><span class="p">,</span>
-                                <span class="n">text</span><span class="o">=</span><span class="n">file_name</span>
-                            <span class="p">)</span>
-                            <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
-                            <span class="k">break</span>
-
-                    <span class="c1"># パスが存在すれば新規作成する</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                        <span class="c1"># ツリービューを選択状態にする</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                            <span class="sa">u</span><span class="s2">&quot;小説エディタ</span><span class="se">\\</span><span class="si">{0}</span><span class="se">\\</span><span class="si">{1}</span><span class="s2">&quot;</span>
-                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
-                        <span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
-                        <span class="c1"># テキストを読み取り専用を解除する</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">create_tags</span><span class="p">()</span>
-            <span class="c1"># 子アイテムを右クリックしたとき</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]):</span>
-                    <span class="c1"># 項目を削除する</span>
-                    <span class="n">file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-                    <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-                    <span class="c1"># ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき</span>
-                    <span class="k">if</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askokcancel</span><span class="p">(</span>
-                        <span class="sa">u</span><span class="s2">&quot;項目削除&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">を削除しますか？&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                        <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+                    <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+                        <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
                     <span class="p">):</span>
-                        <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                        <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                        <span class="c1"># パスを取得する</span>
-                        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-                                <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                                    <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                    <span class="n">file_name</span>
-                                <span class="p">)</span>
-                                <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                                    <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                    <span class="n">file_name</span>
-                                <span class="p">)</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
-                                <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                                <span class="k">break</span>
-                        <span class="c1"># imageパスが存在したとき</span>
-                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
-                            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
-
-                        <span class="c1"># パスが存在したとき</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
+                <span class="c1"># イメージアイテム以外の親アイテムを選択したとき</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">check_image_false</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 子アイテムを右クリックしたとき</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">click_child_item</span><span class="p">(</span><span class="n">curItem</span><span class="p">,</span> <span class="n">parentItem</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.on_name_click"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.on_name_click">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_name_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;名前の変更.</span>
@@ -348,36 +226,87 @@
 <span class="sd">        Args:</span>
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 開いているファイルを保存</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
         <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
         <span class="c1"># 親アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="n">sub_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">の名前を変更&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sub_text</span><span class="p">)</span>
-            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;変更&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">sub_text</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">MASTER</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog2</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
+            <span class="n">old_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Rename </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_file</span><span class="p">)</span>
+            <span class="n">dialog2</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Change&quot;</span><span class="p">),</span>
+                <span class="kc">True</span><span class="p">,</span>
+                <span class="n">title</span><span class="p">,</span>
+                <span class="n">old_file</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog2</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
             <span class="c1"># テキストを読み取り専用を解除する</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
-            <span class="n">co_text</span> <span class="o">=</span> <span class="n">dialog2</span><span class="o">.</span><span class="n">txt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+            <span class="n">new_file</span> <span class="o">=</span> <span class="n">dialog2</span><span class="o">.</span><span class="n">txt</span>
             <span class="k">del</span> <span class="n">dialog2</span>
-            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-                    <span class="n">path1</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sub_text</span><span class="p">)</span>
-                    <span class="n">path2</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">co_text</span><span class="p">)</span>
+                    <span class="n">path1</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">old_file</span><span class="p">)</span>
+                    <span class="n">path2</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_file</span><span class="p">)</span>
                     <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path2</span>
                     <span class="c1"># テキストの名前を変更する</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">path1</span><span class="p">,</span> <span class="n">path2</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
-                    <span class="n">Item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+                    <span class="n">Item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
                         <span class="n">parentItem</span><span class="p">,</span>
                         <span class="s1">&#39;end&#39;</span><span class="p">,</span>
-                        <span class="n">text</span><span class="o">=</span><span class="n">co_text</span>
+                        <span class="n">text</span><span class="o">=</span><span class="n">new_file</span>
                     <span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">Item</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">path_read_text</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">co_text</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">character_rename</span><span class="p">(</span>
+                            <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">,</span>
+                            <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">old_file</span><span class="p">,</span>
+                            <span class="n">new_file</span>
+                        <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rename_gif</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">Item</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">path_read_text</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_file</span><span class="p">)</span>
                     <span class="k">return</span></div>
+
+<div class="viewcode-block" id="ListMenuClass.character_rename"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.character_rename">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">character_rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">now_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;キャラクターの名前変更.</span>
+
+<span class="sd">        ・キャラクターの名前を変更する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            now_path (str): 今の処理ししているファイルのパス</span>
+<span class="sd">            folder (str): 今処理しているフォルダ</span>
+<span class="sd">            old_file (str): 変更前のファイル名</span>
+<span class="sd">            new_file (str): 変更後のファイル名</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rename_gif</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">now_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">save_charactor_file</span><span class="p">(</span><span class="n">new_file</span><span class="p">))</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ListMenuClass.rename_gif"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.rename_gif">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">rename_gif</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;gifの名前変更.</span>
+
+<span class="sd">        ・gifの名前を変更する。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            folder (str): 今処理しているフォルダ</span>
+<span class="sd">            old_file (str): 変更前のファイル名</span>
+<span class="sd">            new_file (str): 変更後のファイル名</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path1</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">)</span>
+        <span class="n">path2</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">new_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path1</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">path1</span><span class="p">,</span> <span class="n">path2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.path_read_image"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.path_read_image">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">path_read_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">image_name</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;イメージを読み込んで表示.</span>
@@ -404,13 +333,13 @@
                     <span class="n">resample</span><span class="o">=</span><span class="n">Image</span><span class="o">.</span><span class="n">LANCZOS</span>
                 <span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">giffile</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">itemconfig</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_on_space</span><span class="p">,</span>
-                <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">giffile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">itemconfig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">image_on_space</span><span class="p">,</span>
+                <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">photo</span>
             <span class="p">)</span>
             <span class="c1"># イメージサイズにキャンバスサイズを合わす</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">image_space</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
                 <span class="n">scrollregion</span><span class="o">=</span><span class="p">(</span>
                     <span class="mi">0</span><span class="p">,</span>
                     <span class="mi">0</span><span class="p">,</span>
@@ -420,8 +349,10 @@
             <span class="p">)</span>
             <span class="n">giffile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;小説エディタ</span><span class="se">\\</span><span class="si">{0}</span><span class="se">\\</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">image_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
+                    <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">image_name</span><span class="p">)</span>
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.path_read_text"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.path_read_text">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">path_read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_path</span><span class="p">,</span> <span class="n">text_name</span><span class="p">):</span>
@@ -434,36 +365,42 @@
 <span class="sd">            text_name (str): テキストファイルの名前</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
                 <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
                 <span class="n">elem</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;call&quot;</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;sex&quot;</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;birthday&quot;</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;call&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;readonly&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;sex&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_birthday</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;birthday&quot;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text_body</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">))</span>
                 <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
                     <span class="n">elem</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s2">&quot;call&quot;</span><span class="p">)</span>
                 <span class="p">)</span>
                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">print_gif</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">print_gif</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
                 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">text_text_input</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_text</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_text</span><span class="p">)</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;小説エディタ</span><span class="se">\\</span><span class="si">{0}</span><span class="se">\\</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_path</span><span class="p">,</span> <span class="n">text_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
+                    <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_path</span><span class="p">,</span> <span class="n">text_name</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="c1"># シンタックスハイライトをする</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.on_double_click"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.on_double_click">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">on_double_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ツリービューをダブルクリック.</span>
@@ -474,34 +411,34 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 選択アイテムの認識番号取得</span>
-        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+        <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
         <span class="c1"># 親アイテムの認識番号取得</span>
-        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+        <span class="n">parentItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
         <span class="c1"># 開いているファイルを保存</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
         <span class="c1"># テキストを読み取り専用を解除する</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span>
         <span class="c1"># 条件によって分離</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
         <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
                     <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item</span>
                     <span class="p">)</span>
                     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
                     <span class="n">zoom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
                     <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">path_read_image</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span>
                     <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -509,25 +446,190 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item</span>
                     <span class="p">)</span>
                     <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
-                    <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_folder</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_character</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_character</span><span class="p">()</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="c1"># テキストを読み取り専用を解除する</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
 
                     <span class="bp">self</span><span class="o">.</span><span class="n">path_read_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item</span><span class="p">)</span>
 
                 <span class="k">return</span>
 
         <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ListMenuClass.check_image_true"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.check_image_true">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_image_true</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;イメージアイテムを右クリックしたとき.</span>
+
+<span class="sd">        ・イメージアイテムの親アイテムを右クリックしたときの処理。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># イメージアイテムを選択したとき</span>
+        <span class="n">fTyp</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span> <span class="s1">&#39;*.gif&#39;</span><span class="p">)]</span>
+        <span class="n">iDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
+            <span class="n">filetypes</span><span class="o">=</span><span class="n">fTyp</span><span class="p">,</span>
+            <span class="n">initialdir</span><span class="o">=</span><span class="n">iDir</span>
+        <span class="p">)</span>
+        <span class="c1"># ファイル名があるとき</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">file_name</span>
+            <span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">file_name</span>
+            <span class="p">)</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;end&#39;</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">file_name</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_read_image</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">file_name</span><span class="p">,</span>
+                <span class="mi">0</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ListMenuClass.check_image_false"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.check_image_false">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">check_image_false</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">curItem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;イメージアイテム以外を右クリックしたとき.</span>
+
+<span class="sd">        ・イメージアイテム以外の親アイテムを右クリックしたときの処理。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            curItem (int): 選択アイテムの認識番号</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># サブダイヤログを表示する</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
+            <span class="s2">&quot;Insert in </span><span class="si">{0}</span><span class="s2">&quot;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="n">MyDialogClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Insert&quot;</span><span class="p">),</span>
+            <span class="kc">True</span><span class="p">,</span>
+            <span class="n">title</span><span class="p">,</span>
+            <span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">wait_window</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">txt</span>
+        <span class="k">del</span> <span class="n">dialog</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">open_file_save</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">)</span>
+            <span class="n">curItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="c1"># 選択されているフォルダを見つける</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_character</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                            <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span>
+                            <span class="n">file_name</span>
+                        <span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">txt_yobi_name</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;readonly&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+
+                    <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">file_name</span><span class="p">)</span>
+                    <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+                        <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                        <span class="s1">&#39;end&#39;</span><span class="p">,</span>
+                        <span class="n">text</span><span class="o">=</span><span class="n">file_name</span>
+                    <span class="p">)</span>
+                    <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
+                    <span class="k">break</span>
+
+            <span class="c1"># パスが存在すれば新規作成する</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="c1"># ツリービューを選択状態にする</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
+                        <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+                <span class="c1"># テキストを読み取り専用を解除する</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">create_tags</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ListMenuClass.click_child_item"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.click_child_item">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">click_child_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">curItem</span><span class="p">,</span> <span class="n">parentItem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;子アイテムを右クリックしたとき.</span>
+
+<span class="sd">        ・子アイテムを右クリックしたときの処理。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            curItem (int): 選択アイテムの認識番号</span>
+<span class="sd">            parentItem (int): 親アイテムの認識番号</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]):</span>
+            <span class="c1"># 項目を削除する</span>
+            <span class="n">file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">curItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">parentItem</span><span class="p">)[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+            <span class="c1"># ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき</span>
+            <span class="k">if</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askokcancel</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Delete item&quot;</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
+                        <span class="s2">&quot;Delete </span><span class="si">{0}</span><span class="s2"> item?&quot;</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="c1"># パスを取得する</span>
+                <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">file_name</span>
+                        <span class="p">)</span>
+                        <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;./</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">.gif&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">file_name</span>
+                        <span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">curItem</span><span class="p">)</span>
+                        <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                        <span class="k">break</span>
+                <span class="c1"># imageパスが存在したとき</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+                <span class="c1"># パスが存在したとき</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.text_text_input"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.text_text_input">[ドキュメント]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">text_text_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text_text</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;現在入力中の初期テキストを入力.</span>
 
-<span class="sd">        現在入力中の初期テキストをクラス変数に入力する。</span>
+<span class="sd">        ・現在入力中の初期テキストをクラス変数に入力する。</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            text_text (str): 現在入力中の初期テキスト</span>
@@ -538,7 +640,7 @@
     <span class="k">def</span> <span class="nf">select_list_item_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">select_list_item</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;選択中のリストボックスアイテム名を入力.</span>
 
-<span class="sd">        選択中のリストボックスアイテム名をクラス変数に入力する。</span>
+<span class="sd">        ・選択中のリストボックスアイテム名をクラス変数に入力する。</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            select_list_item (str): 選択中のリストボックスアイテム名</span>
@@ -552,15 +654,15 @@
 <span class="sd">    ・自作ダイアログを呼び出し表示する。</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        message (instance): 親ウインドウインスタンス</span>
+<span class="sd">        app (instance): 親ウインドウインスタンス</span>
 <span class="sd">        caption (str): ボタンのメッセージ</span>
 <span class="sd">        cancel (bool): キャンセルボタンを表示する(True)</span>
 <span class="sd">        title (str): タイトル</span>
 <span class="sd">        text (bool): 選択状態にする(True)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">caption</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">caption</span><span class="p">,</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">txt_name</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
             <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -582,8 +684,8 @@
         <span class="k">if</span> <span class="n">cancel</span><span class="p">:</span>
             <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="p">,</span>
-                <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">,</span>
-                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;キャンセル&#39;</span><span class="p">),</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Cancel&quot;</span><span class="p">),</span>
+                <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Cancel&quot;</span><span class="p">)),</span>
                 <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
                 <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_name_win</span><span class="o">.</span><span class="n">destroy</span>
             <span class="p">)</span>

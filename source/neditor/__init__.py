@@ -17,22 +17,30 @@ from . import hm as HelpMenu
 from . import pm as ProcessingMenu
 from . import lm as ListMenu
 from . import mp as MainProcessing
+import i18n
 
 
-def title_create():
+def title_create(locale_var):
     """タイトルウインドウの作成.
 
     ・タイトルウインドウを作成する。
+
+    Args:
+        locale_var (str): ロケーション
     """
+    dic = i18n.initialize(locale_var)
     root = tk.Tk()
     root.withdraw()
     if os.path.isdir("./data"):
-        messagebox.showerror(u"小説エディタ", u"二重起動はできません")
+        messagebox.showerror(
+            dic.get_dict("Novel Editor"),
+            dic.get_dict("Double startup is not possible.")
+        )
         sys.exit()
 
     root.geometry('600x300')
-    root.title(u"小説エディタ")
-    img = tk.PhotoImage(data=title_binary)
+    root.title(dic.get_dict("Novel Editor"))
+    img = tk.PhotoImage(data=TITLE_BINARY)
     label = tk.Label(image=img)
     # タイトルを表示する
     label.pack()
@@ -63,17 +71,19 @@ def title_create():
     return root
 
 
-def window_create(tree_folder, tokenizer, wiki_wiki, version):
+def window_create(locale_var, TREE_FOLDER, tokenizer, wiki_wiki, VERSION):
     """メインウインドウの作成.
 
     ・メインウインドウを作成する。
 
     Args:
-        tree_folder (list): ツリーフォルダの配列
+        locale_var (str): ロケーション
+        TREE_FOLDER (list): ツリーフォルダの配列
         tokenizer (instance): Tokenizer のインスタンス
         wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
-        version (str): バージョン情報
+        VERSION (str): バージョン情報
     """
+    dic = i18n.initialize(locale_var)
     class_instance = {
         'cw': CreateWindow,
         'ep': EventProcessing,
@@ -89,17 +99,19 @@ def window_create(tree_folder, tokenizer, wiki_wiki, version):
     }
     root = tk.Tk()
     # アイコンを設定
-    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=ico_binary))
+    root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(data=ICO_BINARY))
     # タイトルの表示
-    root.title(u"小説エディタ")
+    root.title(dic.get_dict("Novel Editor"))
     # フレームを表示する
     app = MainProcessing.MainProcessingClass(
-        tree_folder,
+        TREE_FOLDER,
         tokenizer,
         wiki_wiki,
-        title_binary,
+        TITLE_BINARY,
+        BLANK_IMAGE,
         class_instance,
-        version,
+        VERSION,
+        dic,
         root
     )
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
@@ -117,7 +129,7 @@ def window_create(tree_folder, tokenizer, wiki_wiki, version):
 
 
 # タイトルイメージのbase 64データ
-title_binary = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT
+TITLE_BINARY = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT
     IAAAISQBJgBuJwBuKSUkKgAAKzEbK3hBLTwYLh0bMWAyMYZZMRcAMwEMMw0SM2s/
     M1c5NEooNZdlNYNJNyESODQyOHlIOhcYOxwoO5FTOzw7PTovQQAGQh4NQkwvQqt4
     QwAQRCEgRKJnRC0oSUk/SQAYTHNRTD9DTQcbTj88TpJuUV1KUiIzU1FQU0ZGVDY1
@@ -488,7 +500,7 @@ title_binary = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHh
     nEUP2mmxzbba867N1ltmtzWv22/JHTbc8sYtV11bzyUv3XXhTbVd2gICADs=
     '''
 # アイコンイメージのbase 64データ
-ico_binary = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
+ICO_BINARY = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
     GRoaGhwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoq
     KisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0NDU1NTc3Nzg4ODo6Ojs7Ozw8
     PD4+Pj8/P0BAQEFBQUJCQkNDQ0REREVFRUZGRkdHR0hISElJSUpKSktLS0xMTE1N
@@ -717,4 +729,24 @@ ico_binary = '''R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ
     Ax8QbkVuBFEQF1tYBVfYhfedajAVh2xohll4BCloABYegAKAge1W5DjghE+wBEhY
     FzjB62jQ6y/oa/kGcG/agFCYBVP4hEvgBGEIhTbo7AB3cKiVBEdAgx9o7we38AvH
     8AzX8A3n8A738A8H8RDP8IAAADs=
+    '''
+# 空白のbase 64データ
+BLANK_IMAGE = '''R0lGODlhHgAeAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz
+    /wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDM
+    mQDMzADM/wD/AAD/MwD/ZgD/mQD/zAD//zMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+    MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ
+    /zPMADPMMzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYA
+    mWYAzGYA/2YzAGYzM2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZ
+    M2aZZmaZmWaZzGaZ/2bMAGbMM2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb/
+    /5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkzM5kzZpkzmZkzzJkz/5lmAJlmM5lmZplm
+    mZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnMM5nMZpnMmZnMzJnM/5n/AJn/
+    M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwzM8wzZswzmcwzzMwz
+    /8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzMM8zMZszM
+    mczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+    M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z
+    ///MAP/MM//MZv/Mmf/MzP/M////AP//M///Zv//mf//zP///8DAwICAgIAAAACA
+    AAAAgICAAIAAgACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAACwAAAAAHgAeAAAIMgABCBxIsKDBgwgTKlzIsKHDhxAjSpxI
+    saLFixgzatzIsaPHjyBDihxJsqTJkyhTngwIADs=
     '''

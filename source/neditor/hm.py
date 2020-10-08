@@ -11,14 +11,14 @@ class HelpMenuClass():
 
     Args:
         app (instance): MainProcessingClass のインスタンス
-        title_binary (str): タイトルイメージファイルのbase 64データ
-        version (str): バージョン情報
+        TITLE_BINARY (str): タイトルイメージファイルのbase 64データ
+        VERSION (str): バージョン情報
     """
-    def __init__(self, app, title_binary, version):
+    def __init__(self, app, TITLE_BINARY, VERSION):
         # バージョン情報
-        self.VERSION = version
-        self.APP = app
-        self.TITLE_BINARY = title_binary
+        self.app = app
+        self.TITLE_BINARY = TITLE_BINARY
+        self.VERSION = VERSION
 
     def version(self):
         """バージョン情報を表示.
@@ -27,7 +27,7 @@ class HelpMenuClass():
         ×を押すまで消えないようにする。
         """
         img2 = tk.PhotoImage(data=self.TITLE_BINARY)
-        window = tk.Toplevel(self.APP)
+        window = tk.Toplevel(self.app)
         canvas = tk.Canvas(window, width=600, height=300)
         canvas.create_image(0, 0, anchor='nw', image=img2)
         canvas.create_text(

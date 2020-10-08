@@ -12,8 +12,8 @@ class ComplementProcessingClass():
         tokenizer (instance): Tokenizer のインスタンス
     """
     def __init__(self, app, tokenizer):
-        self.APP = app
-        self.TOKENIZER = tokenizer
+        self.app = app
+        self.tokenizer = tokenizer
 
     def tab(self, event=None):
         """タブ押下時の処理.
@@ -24,7 +24,7 @@ class ComplementProcessingClass():
             event (instance): tkinter.Event のインスタンス
         """
         # 文字を選択していないとき
-        sel_range = self.APP.text.tag_ranges('sel')
+        sel_range = self.app.text.tag_ranges('sel')
         if not sel_range:
             return self.auto_complete()
         else:
@@ -35,7 +35,7 @@ class ComplementProcessingClass():
 
         ・補完リストの設定をする。
         """
-        self.auto_complete_list = tk.Listbox(self.APP.text)
+        self.auto_complete_list = tk.Listbox(self.app.text)
         # エンターでそのキーワードを選択
         self.auto_complete_list.bind('<Return>', self.selection)
         self.auto_complete_list.bind('<Double-1>', self.selection)
@@ -44,7 +44,7 @@ class ComplementProcessingClass():
         self.auto_complete_list.bind('<Tab>', self.remove_list)
         self.auto_complete_list.bind('<FocusOut>', self.remove_list)
         # (x,y,width,height,baseline)
-        x, y, width, height, _ = self.APP.text.dlineinfo(
+        x, y, width, height, _ = self.app.text.dlineinfo(
             'insert'
         )
         # 現在のカーソル位置のすぐ下に補完リストを貼る
@@ -70,9 +70,9 @@ class ComplementProcessingClass():
         text, _, _ = self.get_current_insert_word()
         my_func_and_class = set()
         # コード補完リストをTreeviewにある'名前'から得る
-        children = self.APP.tree.get_children('data/character')
+        children = self.app.tree.get_children('data/character')
         for child in children:
-            childname = self.APP.tree.item(child, "text")
+            childname = self.app.tree.item(child, "text")
             # 前列の文字列と同じものを選び出す
             if childname.startswith(text) or childname.startswith(
                 text.title()
@@ -91,7 +91,7 @@ class ComplementProcessingClass():
             event (instance): tkinter.Event のインスタンス
         """
         self.auto_complete_list.destroy()
-        self.APP.text.focus()  # テキストウィジェットにフォーカスを戻す
+        self.app.text.focus()  # テキストウィジェットにフォーカスを戻す
 
     def selection(self, event=None):
         """補完リストでの選択後の処理.
@@ -109,8 +109,8 @@ class ComplementProcessingClass():
 
             # 現在入力中の単語位置の取得
             _, start, end = self.get_current_insert_word()
-            self.APP.text.delete(start, end)
-            self.APP.text.insert('insert', value)
+            self.app.text.delete(start, end)
+            self.app.text.insert('insert', value)
             self.remove_list()
 
     def get_current_insert_word(self):
@@ -124,20 +124,20 @@ class ComplementProcessingClass():
         while True:
             start = 'insert-{0}c'.format(start_i)
             end = 'insert-{0}c'.format(end_i)
-            text = self.APP.text.get(start, end)
+            text = self.app.text.get(start, end)
             # 1文字ずつ見て、スペース、改行、タブ、空文字、句読点にぶつかったら終わり
             if text in (' ', '　', '\t', '\n', '', '、', '。'):
-                text = self.APP.text.get(end, 'insert')
+                text = self.app.text.get(end, 'insert')
 
                 # 最終単語を取得する
                 pri = [
-                    token.surface for token in self.TOKENIZER.tokenize(
+                    token.surface for token in self.tokenizer.tokenize(
                         text
                     )
                 ]
                 hin = [
                     token.part_of_speech.split(',')[0] for token
-                    in self.TOKENIZER.tokenize(text)
+                    in self.tokenizer.tokenize(text)
                 ]
                 if len(pri) > 0:
                     if hin[len(pri)-1] == u'名詞':

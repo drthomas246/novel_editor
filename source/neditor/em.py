@@ -8,7 +8,7 @@ class EditMenuClass():
         app (instance): MainProcessingClass のインスタンス
     """
     def __init__(self, app):
-        self.APP = app
+        self.app = app
 
     def redo(self, event=None):
         """Redo.
@@ -18,7 +18,7 @@ class EditMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.APP.text.edit_redo()
+        self.app.text.edit_redo()
 
     def undo(self, event=None):
         """Undo.
@@ -28,7 +28,7 @@ class EditMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.APP.text.edit_undo()
+        self.app.text.edit_undo()
 
     def copy(self, event=None):
         """Copy.
@@ -38,8 +38,8 @@ class EditMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.APP.clipboard_clear()
-        self.APP.clipboard_append(self.APP.text.selection_get())
+        self.app.clipboard_clear()
+        self.app.clipboard_append(self.app.text.selection_get())
 
     def cut(self, event=None):
         """Cut.
@@ -50,7 +50,7 @@ class EditMenuClass():
             event (instance): tkinter.Event のインスタンス
         """
         self.copy()
-        self.APP.text.delete("sel.first", "sel.last")
+        self.app.text.delete("sel.first", "sel.last")
 
     def paste(self, event=None):
         """Paste.
@@ -60,4 +60,4 @@ class EditMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.APP.text.insert('insert', self.APP.clipboard_get())
+        self.app.text.insert('insert', self.app.clipboard_get())

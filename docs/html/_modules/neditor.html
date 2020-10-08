@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">neditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">package</a></li>
 </ul>
 
             
@@ -172,22 +172,30 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">pm</span> <span class="k">as</span> <span class="n">ProcessingMenu</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lm</span> <span class="k">as</span> <span class="n">ListMenu</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">mp</span> <span class="k">as</span> <span class="n">MainProcessing</span>
+<span class="kn">import</span> <span class="nn">i18n</span>
 
 
-<div class="viewcode-block" id="title_create"><a class="viewcode-back" href="../neditor.html#neditor.title_create">[ドキュメント]</a><span class="k">def</span> <span class="nf">title_create</span><span class="p">():</span>
+<div class="viewcode-block" id="title_create"><a class="viewcode-back" href="../neditor.html#neditor.title_create">[ドキュメント]</a><span class="k">def</span> <span class="nf">title_create</span><span class="p">(</span><span class="n">locale_var</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;タイトルウインドウの作成.</span>
 
 <span class="sd">    ・タイトルウインドウを作成する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">locale_var</span><span class="p">)</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
     <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">):</span>
-        <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;二重起動はできません&quot;</span><span class="p">)</span>
+        <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
+            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Double startup is not possible.&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
     <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">&#39;600x300&#39;</span><span class="p">)</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">)</span>
-    <span class="n">img</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">title_binary</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">TITLE_BINARY</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
     <span class="c1"># タイトルを表示する</span>
     <span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
@@ -218,17 +226,19 @@
     <span class="k">return</span> <span class="n">root</span></div>
 
 
-<div class="viewcode-block" id="window_create"><a class="viewcode-back" href="../neditor.html#neditor.window_create">[ドキュメント]</a><span class="k">def</span> <span class="nf">window_create</span><span class="p">(</span><span class="n">tree_folder</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+<div class="viewcode-block" id="window_create"><a class="viewcode-back" href="../neditor.html#neditor.window_create">[ドキュメント]</a><span class="k">def</span> <span class="nf">window_create</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">TREE_FOLDER</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">VERSION</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;メインウインドウの作成.</span>
 
 <span class="sd">    ・メインウインドウを作成する。</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        tree_folder (list): ツリーフォルダの配列</span>
+<span class="sd">        locale_var (str): ロケーション</span>
+<span class="sd">        TREE_FOLDER (list): ツリーフォルダの配列</span>
 <span class="sd">        tokenizer (instance): Tokenizer のインスタンス</span>
 <span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス</span>
-<span class="sd">        version (str): バージョン情報</span>
+<span class="sd">        VERSION (str): バージョン情報</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">locale_var</span><span class="p">)</span>
     <span class="n">class_instance</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;cw&#39;</span><span class="p">:</span> <span class="n">CreateWindow</span><span class="p">,</span>
         <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="n">EventProcessing</span><span class="p">,</span>
@@ -244,17 +254,19 @@
     <span class="p">}</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
     <span class="c1"># アイコンを設定</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;wm&#39;</span><span class="p">,</span> <span class="s1">&#39;iconphoto&#39;</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">_w</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ico_binary</span><span class="p">))</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;wm&#39;</span><span class="p">,</span> <span class="s1">&#39;iconphoto&#39;</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">_w</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ICO_BINARY</span><span class="p">))</span>
     <span class="c1"># タイトルの表示</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;小説エディタ&quot;</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
     <span class="c1"># フレームを表示する</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">MainProcessing</span><span class="o">.</span><span class="n">MainProcessingClass</span><span class="p">(</span>
-        <span class="n">tree_folder</span><span class="p">,</span>
+        <span class="n">TREE_FOLDER</span><span class="p">,</span>
         <span class="n">tokenizer</span><span class="p">,</span>
         <span class="n">wiki_wiki</span><span class="p">,</span>
-        <span class="n">title_binary</span><span class="p">,</span>
+        <span class="n">TITLE_BINARY</span><span class="p">,</span>
+        <span class="n">BLANK_IMAGE</span><span class="p">,</span>
         <span class="n">class_instance</span><span class="p">,</span>
-        <span class="n">version</span><span class="p">,</span>
+        <span class="n">VERSION</span><span class="p">,</span>
+        <span class="n">dic</span><span class="p">,</span>
         <span class="n">root</span>
     <span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
@@ -272,7 +284,7 @@
 
 
 <span class="c1"># タイトルイメージのbase 64データ</span>
-<span class="n">title_binary</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT</span>
+<span class="n">TITLE_BINARY</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT</span>
 <span class="s1">    IAAAISQBJgBuJwBuKSUkKgAAKzEbK3hBLTwYLh0bMWAyMYZZMRcAMwEMMw0SM2s/</span>
 <span class="s1">    M1c5NEooNZdlNYNJNyESODQyOHlIOhcYOxwoO5FTOzw7PTovQQAGQh4NQkwvQqt4</span>
 <span class="s1">    QwAQRCEgRKJnRC0oSUk/SQAYTHNRTD9DTQcbTj88TpJuUV1KUiIzU1FQU0ZGVDY1</span>
@@ -643,7 +655,7 @@
 <span class="s1">    nEUP2mmxzbba867N1ltmtzWv22/JHTbc8sYtV11bzyUv3XXhTbVd2gICADs=</span>
 <span class="s1">    &#39;&#39;&#39;</span>
 <span class="c1"># アイコンイメージのbase 64データ</span>
-<span class="n">ico_binary</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ</span>
+<span class="n">ICO_BINARY</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhgACAAPcAAAAAAAQEBAcHBwkJCQoKCg8PDxAQEBERERMTExUVFRgYGBkZ</span>
 <span class="s1">    GRoaGhwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoq</span>
 <span class="s1">    KisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0NDU1NTc3Nzg4ODo6Ojs7Ozw8</span>
 <span class="s1">    PD4+Pj8/P0BAQEFBQUJCQkNDQ0REREVFRUZGRkdHR0hISElJSUpKSktLS0xMTE1N</span>
@@ -872,6 +884,26 @@
 <span class="s1">    Ax8QbkVuBFEQF1tYBVfYhfedajAVh2xohll4BCloABYegAKAge1W5DjghE+wBEhY</span>
 <span class="s1">    FzjB62jQ6y/oa/kGcG/agFCYBVP4hEvgBGEIhTbo7AB3cKiVBEdAgx9o7we38AvH</span>
 <span class="s1">    8AzX8A3n8A738A8H8RDP8IAAADs=</span>
+<span class="s1">    &#39;&#39;&#39;</span>
+<span class="c1"># 空白のbase 64データ</span>
+<span class="n">BLANK_IMAGE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;R0lGODlhHgAeAPcAAAAAAAAAMwAAZgAAmQAAzAAA/wAzAAAzMwAzZgAzmQAzzAAz</span>
+<span class="s1">    /wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDMAADMMwDMZgDM</span>
+<span class="s1">    mQDMzADM/wD/AAD/MwD/ZgD/mQD/zAD//zMAADMAMzMAZjMAmTMAzDMA/zMzADMz</span>
+<span class="s1">    MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ</span>
+<span class="s1">    /zPMADPMMzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYA</span>
+<span class="s1">    mWYAzGYA/2YzAGYzM2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZ</span>
+<span class="s1">    M2aZZmaZmWaZzGaZ/2bMAGbMM2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb/</span>
+<span class="s1">    /5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkzM5kzZpkzmZkzzJkz/5lmAJlmM5lmZplm</span>
+<span class="s1">    mZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnMM5nMZpnMmZnMzJnM/5n/AJn/</span>
+<span class="s1">    M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwzM8wzZswzmcwzzMwz</span>
+<span class="s1">    /8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzMM8zMZszM</span>
+<span class="s1">    mczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z</span>
+<span class="s1">    M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z</span>
+<span class="s1">    ///MAP/MM//MZv/Mmf/MzP/M////AP//M///Zv//mf//zP///8DAwICAgIAAAACA</span>
+<span class="s1">    AAAAgICAAIAAgACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
+<span class="s1">    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>
+<span class="s1">    AAAAAAAAAAAAAAAAACwAAAAAHgAeAAAIMgABCBxIsKDBgwgTKlzIsKHDhxAjSpxI</span>
+<span class="s1">    saLFixgzatzIsaPHjyBDihxJsqTJkyhTngwIADs=</span>
 <span class="s1">    &#39;&#39;&#39;</span>
 </pre></div>
 

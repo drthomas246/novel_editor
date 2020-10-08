@@ -27,9 +27,9 @@ class ProcessingMenuClass():
     def __init__(self, app, wiki_wiki, tokenizer):
         # yahooの校正支援
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
-        self.APP = app
-        self.WIKI_WIKI = wiki_wiki
-        self.TOKENIZER = tokenizer
+        self.app = app
+        self.wiki_wiki = wiki_wiki
+        self.tokenizer = tokenizer
 
     def ruby_huri(self):
         """ルビをふり.
@@ -38,11 +38,11 @@ class ProcessingMenuClass():
         """
         hon = ""
         # 選択文字列を切り取る
-        set_ruby = self.APP.text.get('sel.first', 'sel.last')
+        set_ruby = self.app.text.get('sel.first', 'sel.last')
         # 選択文字列を削除する
-        self.APP.text.delete('sel.first', 'sel.last')
+        self.app.text.delete('sel.first', 'sel.last')
         # 形態素解析を行う
-        for token in self.TOKENIZER.tokenize(set_ruby):
+        for token in self.tokenizer.tokenize(set_ruby):
             # ルビの取得
             ruby = ""
             ruby = jaconv.kata2hira(token.reading)
@@ -67,7 +67,7 @@ class ProcessingMenuClass():
                 )
 
         # テキストを表示する
-        self.APP.text.insert('insert', hon)
+        self.app.text.insert('insert', hon)
 
     @staticmethod
     def is_hiragana(char):
@@ -89,17 +89,20 @@ class ProcessingMenuClass():
         ・文字数と行数をカウントして表示する。
         """
         # 行数の取得
-        new_line = int(self.APP.text.index('end-1c').split('.')[0])
+        new_line = int(self.app.text.index('end-1c').split('.')[0])
         # 文字列の取得
-        moji = self.APP.text.get('1.0', 'end')
+        moji = self.app.text.get('1.0', 'end')
         # ２０文字で区切ったときの行数を数える
         gen_mai = 0
         for val in moji.splitlines():
             gen_mai += len(textwrap.wrap(val, 20))
         # メッセージボックスの表示
         messagebox.showinfo(
-            u"文字数と行数、原稿用紙枚数", "文字数 :{0}文字　行数 : {1}行"
-            u"\n 原稿用紙 : {2}枚".format(
+            self.app.dic.get_dict("Number of characters etc"),
+            self.app.dic.get_dict(
+                "Characters : {0} Lines : {1}\n Manuscript papers : {2}"
+            )
+            .format(
                 len(moji)-new_line,
                 new_line,
                 -(-gen_mai//20)))
@@ -111,18 +114,22 @@ class ProcessingMenuClass():
         検索する。
         """
         # wikipediaから
-        select_text = self.APP.text.selection_get()
-        page_py = self.WIKI_WIKI.page(select_text)
+        select_text = self.app.text.selection_get()
+        page_py = self.wiki_wiki.page(select_text)
         # ページがあるかどうか判断
         if page_py.exists():
             messagebox.showinfo(
-                "「{0}」の意味".format(select_text),
+                self.app.dic.get_dict(
+                    "Meaning of [{0}]"
+                ).format(select_text),
                 page_py.summary
             )
         else:
             messagebox.showwarning(
-                "「{0}」の意味".format(select_text),
-                u"見つけられませんでした。"
+                self.app.dic.get_dict(
+                    "Meaning of [{0}]"
+                ).format(select_text),
+                self.app.dic.get_dict("Can't find.")
             )
 
     def open_becoming_novelist_page(self):
@@ -139,13 +146,13 @@ class ProcessingMenuClass():
         """
         self.gyou_su = 0
         self.text_len = 0
-        self.APP.text.focus()
+        self.app.text.focus()
         self.read_texts = True
         self.engine = pyttsx3.init()
         self.engine.connect('started-word', self.pyttsx3_onword)
         self.engine.connect('finished-utterance', self.pyttsx3_onend)
         self.engine.setProperty('rate', 150)
-        self.engine.say(self.APP.text.get('1.0', 'end - 1c'))
+        self.engine.say(self.app.text.get('1.0', 'end - 1c'))
         self.engine.startLoop(False)
         self.externalLoop()
 
@@ -170,34 +177,34 @@ class ProcessingMenuClass():
         # 今読んでいる場所と選択位置を比較する
         if location > self.text_len:
             # すべての選択一度解除する
-            self.APP.text.tag_remove('sel', '1.0', 'end')
+            self.app.text.tag_remove('sel', '1.0', 'end')
             # 現在読んでいる場所を選択する
-            self.APP.text.tag_add(
+            self.app.text.tag_add(
                 'sel',
                 "{0}.0".format(self.gyou_su),
                 "{0}.0".format(self.gyou_su+1)
             )
             # 次の行の長さをtextlenに入力する
             self.text_len += len(
-                self.APP.text.get(
+                self.app.text.get(
                     '{0}.0'.format(self.gyou_su),
                     '{0}.0'.format(self.gyou_su+1)
                 )
             )
             # カーソルを文章の一番後ろに持ってくる
-            self.APP.text.mark_set('insert', '{0}.0'.format(self.gyou_su+1))
-            self.APP.text.see('insert')
-            self.APP.text.focus()
+            self.app.text.mark_set('insert', '{0}.0'.format(self.gyou_su+1))
+            self.app.text.see('insert')
+            self.app.text.focus()
             # 行を１行増やす
             self.gyou_su += 1
         # 読み初めての処理
         if self.read_texts:
             # 読むのを中止するウインドウを作成する
-            self.sub_read_win = tk.Toplevel(self.APP)
+            self.sub_read_win = tk.Toplevel(self.app)
             button = ttk.Button(
                 self.sub_read_win,
-                text=u'中止する',
-                width=str(u'中止する'),
+                text=self.app.dic.get_dict("Stop"),
+                width=str(self.app.dic.get_dict("Stop")),
                 padding=(100, 5),
                 command=self.pyttsx3_onreadend
             )
@@ -206,7 +213,9 @@ class ProcessingMenuClass():
             self.sub_read_win.attributes("-topmost", True)
             # サイズ変更禁止
             self.sub_read_win.resizable(width=0, height=0)
-            self.sub_read_win.title(u'読み上げ')
+            self.sub_read_win.title(
+                self.app.dic.get_dict("Read aloud")
+            )
             self.read_texts = False
 
     def pyttsx3_onreadend(self):
@@ -218,7 +227,7 @@ class ProcessingMenuClass():
         self.engine.stop()
         self.engine.endLoop()
         self.sub_read_win.destroy()
-        self.APP.text.tag_remove('sel', '1.0', 'end')
+        self.app.text.tag_remove('sel', '1.0', 'end')
 
     def pyttsx3_onend(self, name, completed):
         """文章を読み終えた時の処理.
@@ -232,7 +241,7 @@ class ProcessingMenuClass():
         self.engine.stop()
         self.engine.endLoop()
         self.sub_read_win.destroy()
-        self.APP.text.tag_remove('sel', '1.0', 'end')
+        self.app.text.tag_remove('sel', '1.0', 'end')
 
     def yahoo(self):
         """Yahoo! 校正支援.
@@ -243,36 +252,37 @@ class ProcessingMenuClass():
             event (instance): tkinter.Event のインスタンス
         """
         html = self.yahoocall(
-            self.APPID,
-            self.APP.text.get('1.0', 'end -1c')
+            self.yahoo_appid,
+            self.app.text.get('1.0', 'end -1c')
         )
-        if not self.APPID == "":
+        if not self.yahoo_appid == "":
             self.yahooresult(html)
             self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
 
-    @staticmethod
-    def yahoocall(appid="", sentence=""):
+    def yahoocall(self, yahoo_appid="", sentence=""):
         """yahooの校正支援を呼び出し.
 
         ・Yahoo! 校正支援をClient IDを使って呼び出す。
 
         Args:
-            appid (str): Yahoo! Client ID
+            yahoo_appid (str): Yahoo! Client ID
             sentence (str): 校正をしたい文字列
 
         Returns:
             str: 校正結果
         """
-        if appid == "":
+        if yahoo_appid == "":
             messagebox.showerror(
-                "Yahoo! Client ID",
-                u"Yahoo! Client IDが見つかりません。\n"
-                "Readme.pdfを読んで、設定し直してください。"
+                self.app.dic.get_dict("Yahoo! Client ID"),
+                self.app.dic.get_dict(
+                    "Yahoo! Client ID is not find."
+                    "\nRead Readme.pdf and set it again."
+                )
             )
             return
         url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
         data = {
-            "appid": appid.rstrip('\n'),
+            "appid": yahoo_appid.rstrip('\n'),
             "sentence": sentence,
         }
         html = requests.post(url, data)
@@ -288,7 +298,7 @@ class ProcessingMenuClass():
         """
         xml = ET.fromstring(html)
         # サブウインドウの表示
-        sub_win = tk.Toplevel(self.APP)
+        sub_win = tk.Toplevel(self.app)
         # ツリービューの表示
         self.yahoo_tree = ttk.Treeview(sub_win)
         self.yahoo_tree["columns"] = (1, 2, 3, 4, 5)
@@ -299,11 +309,26 @@ class ProcessingMenuClass():
         self.yahoo_tree.column(3, width=75)
         self.yahoo_tree.column(4, width=150)
         self.yahoo_tree.column(5, width=120)
-        self.yahoo_tree.heading(1, text="先頭からの文字数")
-        self.yahoo_tree.heading(2, text="対象文字数")
-        self.yahoo_tree.heading(3, text="対象表記")
-        self.yahoo_tree.heading(4, text="言い換え候補文字列")
-        self.yahoo_tree.heading(5, text="指摘の詳細情報")
+        self.yahoo_tree.heading(
+            1,
+            text=u"先頭からの文字数"
+        )
+        self.yahoo_tree.heading(
+            2,
+            text=u"対象文字数"
+        )
+        self.yahoo_tree.heading(
+            3,
+            text=u"対象表記"
+        )
+        self.yahoo_tree.heading(
+            4,
+            text=u"言い換え候補文字列"
+        )
+        self.yahoo_tree.heading(
+            5,
+            text=u"指摘の詳細情報"
+        )
         # 情報を取り出す
         for child in list(xml):
             StartPos = (child.findtext(self.KOUSEI+"StartPos"))
@@ -333,7 +358,9 @@ class ProcessingMenuClass():
         SCRLBAR_Y.grid(row=0, column=1, sticky=(tk.N, tk.S))
         # 最前面に表示し続ける
         sub_win.attributes("-topmost", True)
-        sub_win.title(u'文章校正')
+        sub_win.title(
+            self.app.dic.get_dict("Sentence structure")
+        )
 
     def on_double_click_yahoo(self, event=None):
         """Yahoo! 校正支援リストをダブルクリック.
@@ -359,7 +386,7 @@ class ProcessingMenuClass():
                 i += 1
                 textforlen = textlen
                 textlen += len(
-                    self.APP.text.get(
+                    self.app.text.get(
                         '{0}.0'.format(i),
                         '{0}.0'.format(i+1)
                     )
@@ -369,18 +396,18 @@ class ProcessingMenuClass():
         if i == 0:
             i = 1
         # 選択状態を一旦削除
-        self.APP.text.tag_remove('sel', '1.0', 'end')
+        self.app.text.tag_remove('sel', '1.0', 'end')
         # 選択状態にする
-        self.APP.text.tag_add(
+        self.app.text.tag_add(
             'sel',
             "{0}.{1}".format(i, val-textforlen),
             "{0}.{1}".format(i, val-textforlen+lenge)
         )
         # カーソルの移動
-        self.APP.text.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
-        self.APP.text.see('insert')
+        self.app.text.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
+        self.app.text.see('insert')
         # フォーカスを合わせる
-        self.APP.text.focus()
+        self.app.text.focus()
         return
 
     def font_dialog(self, event=None):
@@ -391,9 +418,9 @@ class ProcessingMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.APP.sub_wins = tk.Toplevel(self.APP)
-        self.APP.intSpin = ttk.Spinbox(self.APP.sub_wins, from_=12, to=72)
-        self.APP.intSpin.grid(
+        self.app.sub_wins = tk.Toplevel(self.app)
+        self.app.intSpin = ttk.Spinbox(self.app.sub_wins, from_=12, to=72)
+        self.app.intSpin.grid(
             row=0,
             column=0,
             columnspan=2,
@@ -403,15 +430,17 @@ class ProcessingMenuClass():
             ipady=3
         )
         button = ttk.Button(
-            self.APP.sub_wins,
-            text=u'サイズ変更',
-            width=str(u'サイズ変更'),
+            self.app.sub_wins,
+            text=self.app.dic.get_dict("Resize"),
+            width=str(self.app.dic.get_dict("Resize")),
             padding=(10, 5),
             command=self.font_size_Change
         )
         button.grid(row=1, column=1)
-        self.APP.intSpin.set(ProcessingMenuClass.font_size)
-        self.APP.sub_wins.title(u'フォントサイズの変更')
+        self.app.intSpin.set(ProcessingMenuClass.font_size)
+        self.app.sub_wins.title(
+            self.app.dic.get_dict("Font size")
+        )
 
     def font_size_Change(self):
         """フォントのサイズの変更.
@@ -420,26 +449,26 @@ class ProcessingMenuClass():
         上は72ptまで下は12ptまでにする。
         """
         # 比較のため数値列に変更
-        font_size = int(self.APP.intSpin.get())
+        font_size = int(self.app.intSpin.get())
         if font_size < 12:  # 12より下の値を入力した時、12にする
             font_size = 12
         elif 72 < font_size:  # 72より上の値を入力した時、72にする
             font_size = 72
         # 文字列にもどす
         self.font_size_input(str(font_size))
-        self.APP.sub_wins.destroy()
+        self.app.sub_wins.destroy()
         # フォントサイズの変更
-        self.APP.text.configure(font=(self.APP.font, self.font_size))
+        self.app.text.configure(font=(self.app.font, self.font_size))
         # ラインナンバーの変更
-        self.APP.spc.update_line_numbers()
+        self.app.spc.update_line_numbers()
         # ハイライトのやり直し
-        self.APP.hpc.all_highlight()
+        self.app.hpc.all_highlight()
 
     @classmethod
     def font_size_input(cls, font_size):
         """フォントサイズを入力.
 
-        フォントサイズをクラス変数に入力する。
+        ・フォントサイズをクラス変数に入力する。
 
         Args:
             font_size (str): フォントサイズ

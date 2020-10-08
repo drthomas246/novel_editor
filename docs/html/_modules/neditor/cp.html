@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">neditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
 </ul>
 
             
@@ -169,8 +169,8 @@
 <span class="sd">        tokenizer (instance): Tokenizer のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
 
 <div class="viewcode-block" id="ComplementProcessingClass.tab"><a class="viewcode-back" href="../../neditor.html#neditor.cp.ComplementProcessingClass.tab">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;タブ押下時の処理.</span>
@@ -181,7 +181,7 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 文字を選択していないとき</span>
-        <span class="n">sel_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_ranges</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">)</span>
+        <span class="n">sel_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_ranges</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">sel_range</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -192,7 +192,7 @@
 
 <span class="sd">        ・補完リストの設定をする。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Listbox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Listbox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
         <span class="c1"># エンターでそのキーワードを選択</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Return&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Double-1&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">)</span>
@@ -201,7 +201,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Tab&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_list</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;FocusOut&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_list</span><span class="p">)</span>
         <span class="c1"># (x,y,width,height,baseline)</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">dlineinfo</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">dlineinfo</span><span class="p">(</span>
             <span class="s1">&#39;insert&#39;</span>
         <span class="p">)</span>
         <span class="c1"># 現在のカーソル位置のすぐ下に補完リストを貼る</span>
@@ -227,9 +227,9 @@
         <span class="n">text</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_insert_word</span><span class="p">()</span>
         <span class="n">my_func_and_class</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="c1"># コード補完リストをTreeviewにある&#39;名前&#39;から得る</span>
-        <span class="n">children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;data/character&#39;</span><span class="p">)</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;data/character&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
-            <span class="n">childname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
+            <span class="n">childname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
             <span class="c1"># 前列の文字列と同じものを選び出す</span>
             <span class="k">if</span> <span class="n">childname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">or</span> <span class="n">childname</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span>
                 <span class="n">text</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
@@ -248,7 +248,7 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_complete_list</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>  <span class="c1"># テキストウィジェットにフォーカスを戻す</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>  <span class="c1"># テキストウィジェットにフォーカスを戻す</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.selection"><a class="viewcode-back" href="../../neditor.html#neditor.cp.ComplementProcessingClass.selection">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;補完リストでの選択後の処理.</span>
@@ -266,8 +266,8 @@
 
             <span class="c1"># 現在入力中の単語位置の取得</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_insert_word</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">remove_list</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ComplementProcessingClass.get_current_insert_word"><a class="viewcode-back" href="../../neditor.html#neditor.cp.ComplementProcessingClass.get_current_insert_word">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">get_current_insert_word</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -281,20 +281,20 @@
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;insert-</span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start_i</span><span class="p">)</span>
             <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;insert-</span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_i</span><span class="p">)</span>
-            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
             <span class="c1"># 1文字ずつ見て、スペース、改行、タブ、空文字、句読点にぶつかったら終わり</span>
             <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;　&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;、&#39;</span><span class="p">,</span> <span class="s1">&#39;。&#39;</span><span class="p">):</span>
-                <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">)</span>
 
                 <span class="c1"># 最終単語を取得する</span>
                 <span class="n">pri</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="n">token</span><span class="o">.</span><span class="n">surface</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span>
+                    <span class="n">token</span><span class="o">.</span><span class="n">surface</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span>
                         <span class="n">text</span>
                     <span class="p">)</span>
                 <span class="p">]</span>
                 <span class="n">hin</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">token</span><span class="o">.</span><span class="n">part_of_speech</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">token</span>
-                    <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+                    <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
                 <span class="p">]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pri</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">hin</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pri</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;名詞&#39;</span><span class="p">:</span>

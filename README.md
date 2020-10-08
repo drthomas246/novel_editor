@@ -131,6 +131,8 @@ sphinx-apidoc -o ./sphinx ./source/packages/
 ```
 
 ## 改変履歴
+- Version 0.7.0b  
+多言語化する
 - Version 0.6.0b  
 置換をできるようにする
 - Version 0.5.0b  
@@ -213,7 +215,7 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.6.0b
+- Version：0.7.0b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
 - 著作年：2019-2020
 - HP：https://www.hobofoto.net/

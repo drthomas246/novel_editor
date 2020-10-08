@@ -1,0 +1,21 @@
+i18n package
+============
+
+Submodules
+----------
+
+i18n.llize module
+-----------------
+
+.. automodule:: i18n.llize
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: i18n
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -143,7 +143,7 @@
 <p id="t8" class="pln"><span class="str">        app (instance): MainProcessingClass &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t9" class="pln"><span class="str">    """</span><span class="strut">&nbsp;</span></p>
 <p id="t10" class="stm run hide_run">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">app</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t11" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span> <span class="op">=</span> <span class="nam">app</span><span class="strut">&nbsp;</span></p>
+<p id="t11" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span> <span class="op">=</span> <span class="nam">app</span><span class="strut">&nbsp;</span></p>
 <p id="t12" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t13" class="stm run hide_run">    <span class="key">def</span> <span class="nam">redo</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">event</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t14" class="pln">        <span class="str">"""Redo.</span><span class="strut">&nbsp;</span></p>
@@ -153,7 +153,7 @@
 <p id="t18" class="pln"><span class="str">        Args:</span><span class="strut">&nbsp;</span></p>
 <p id="t19" class="pln"><span class="str">            event (instance): tkinter.Event &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t20" class="pln"><span class="str">        """</span><span class="strut">&nbsp;</span></p>
-<p id="t21" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">edit_redo</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t21" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">edit_redo</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t22" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t23" class="stm run hide_run">    <span class="key">def</span> <span class="nam">undo</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">event</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t24" class="pln">        <span class="str">"""Undo.</span><span class="strut">&nbsp;</span></p>
@@ -163,7 +163,7 @@
 <p id="t28" class="pln"><span class="str">        Args:</span><span class="strut">&nbsp;</span></p>
 <p id="t29" class="pln"><span class="str">            event (instance): tkinter.Event &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t30" class="pln"><span class="str">        """</span><span class="strut">&nbsp;</span></p>
-<p id="t31" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">edit_undo</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t31" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">edit_undo</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t32" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t33" class="stm run hide_run">    <span class="key">def</span> <span class="nam">copy</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">event</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t34" class="pln">        <span class="str">"""Copy.</span><span class="strut">&nbsp;</span></p>
@@ -173,8 +173,8 @@
 <p id="t38" class="pln"><span class="str">        Args:</span><span class="strut">&nbsp;</span></p>
 <p id="t39" class="pln"><span class="str">            event (instance): tkinter.Event &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t40" class="pln"><span class="str">        """</span><span class="strut">&nbsp;</span></p>
-<p id="t41" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">clipboard_clear</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t42" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">clipboard_append</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">selection_get</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t41" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">clipboard_clear</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t42" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">clipboard_append</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">selection_get</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t43" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t44" class="stm run hide_run">    <span class="key">def</span> <span class="nam">cut</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">event</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t45" class="pln">        <span class="str">"""Cut.</span><span class="strut">&nbsp;</span></p>
@@ -185,7 +185,7 @@
 <p id="t50" class="pln"><span class="str">            event (instance): tkinter.Event &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t51" class="pln"><span class="str">        """</span><span class="strut">&nbsp;</span></p>
 <p id="t52" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">copy</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t53" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">delete</span><span class="op">(</span><span class="str">"sel.first"</span><span class="op">,</span> <span class="str">"sel.last"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t53" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">delete</span><span class="op">(</span><span class="str">"sel.first"</span><span class="op">,</span> <span class="str">"sel.last"</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t54" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t55" class="stm run hide_run">    <span class="key">def</span> <span class="nam">paste</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">event</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t56" class="pln">        <span class="str">"""Paste.</span><span class="strut">&nbsp;</span></p>
@@ -195,7 +195,7 @@
 <p id="t60" class="pln"><span class="str">        Args:</span><span class="strut">&nbsp;</span></p>
 <p id="t61" class="pln"><span class="str">            event (instance): tkinter.Event &#12398;&#12452;&#12531;&#12473;&#12479;&#12531;&#12473;</span><span class="strut">&nbsp;</span></p>
 <p id="t62" class="pln"><span class="str">        """</span><span class="strut">&nbsp;</span></p>
-<p id="t63" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">insert</span><span class="op">(</span><span class="str">'insert'</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">APP</span><span class="op">.</span><span class="nam">clipboard_get</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t63" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">text</span><span class="op">.</span><span class="nam">insert</span><span class="op">(</span><span class="str">'insert'</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">app</span><span class="op">.</span><span class="nam">clipboard_get</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -206,7 +206,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.4</a>,
-            created at 2020-10-06 22:11
+            created at 2020-10-08 23:35
         </p>
     </div>
 </div>

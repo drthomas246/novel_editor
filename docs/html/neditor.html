@@ -269,13 +269,16 @@
 <span id="neditor-cw-module"></span><h2>neditor.cw module<a class="headerlink" href="#module-neditor.cw" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py class">
 <dt id="neditor.cw.CreateWindowClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.cw.</code><code class="sig-name descname">CreateWindowClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.cw.</code><code class="sig-name descname">CreateWindowClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">BLANK_IMAGE</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>画面の描画のクラス.</p>
 <p>・画面描画にあるプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
-<dd class="field-odd"><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
+<li><p><strong>BLANK_IMAGE</strong> (<em>str</em>) -- 空白のbase 64データ</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -447,7 +450,7 @@
 <span id="neditor-fm-module"></span><h2>neditor.fm module<a class="headerlink" href="#module-neditor.fm" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py class">
 <dt id="neditor.fm.FileMenuClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.fm.</code><code class="sig-name descname">FileMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">tree_folder</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.fm.</code><code class="sig-name descname">FileMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">TREE_FOLDER</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ファイルメニューバーのクラス.</p>
 <p>・ファイルメニューバーにあるプログラム群</p>
@@ -456,7 +459,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>master</strong> (<em>instance</em>) -- toplevel のインスタンス</p></li>
-<li><p><strong>tree_folder</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
+<li><p><strong>TREE_FOLDER</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
 </ul>
 </dd>
 </dl>
@@ -464,6 +467,18 @@
 <dt id="neditor.fm.FileMenuClass.file_path">
 <code class="sig-name descname">file_path</code><em class="property"> = ''</em><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>現在開いているファイル.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="neditor.fm.FileMenuClass.file_path_input">
+<em class="property">classmethod </em><code class="sig-name descname">file_path_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.file_path_input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path_input" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>現在開いているファイルを入力.</p>
+<p>・現在開いているファイルをクラス変数に入力する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -489,6 +504,18 @@
 <dt id="neditor.fm.FileMenuClass.now_path">
 <code class="sig-name descname">now_path</code><em class="property"> = ''</em><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>今の処理ししているファイルのパス.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="neditor.fm.FileMenuClass.now_path_input">
+<em class="property">classmethod </em><code class="sig-name descname">now_path_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">now_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.now_path_input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path_input" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>今の処理ししているファイルのパスを入力.</p>
+<p>・今の処理ししているファイルのパスをクラス変数に入力する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>now_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -537,9 +564,20 @@
 
 <dl class="py method">
 <dt id="neditor.fm.FileMenuClass.save_charactor_file">
-<code class="sig-name descname">save_charactor_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_charactor_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_charactor_file" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">save_charactor_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_charactor_file"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_charactor_file" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>キャラクターファイルの保存準備.</p>
 <p>・それぞれの項目をxml形式で保存する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) -- 名前</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>セーブメタデータ</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -736,7 +774,7 @@
 <span id="neditor-hm-module"></span><h2>neditor.hm module<a class="headerlink" href="#module-neditor.hm" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py class">
 <dt id="neditor.hm.HelpMenuClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.hm.</code><code class="sig-name descname">HelpMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">title_binary</span></em>, <em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.hm.</code><code class="sig-name descname">HelpMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">TITLE_BINARY</span></em>, <em class="sig-param"><span class="n">VERSION</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ヘルプメニューバーのクラス.</p>
 <p>・ヘルプメニューバーにあるプログラム群</p>
@@ -744,8 +782,8 @@
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
-<li><p><strong>title_binary</strong> (<em>str</em>) -- タイトルイメージファイルのbase 64データ</p></li>
-<li><p><strong>version</strong> (<em>str</em>) -- バージョン情報</p></li>
+<li><p><strong>TITLE_BINARY</strong> (<em>str</em>) -- タイトルイメージファイルのbase 64データ</p></li>
+<li><p><strong>VERSION</strong> (<em>str</em>) -- バージョン情報</p></li>
 </ul>
 </dd>
 </dl>
@@ -829,7 +867,7 @@
 <span id="neditor-lm-module"></span><h2>neditor.lm module<a class="headerlink" href="#module-neditor.lm" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py class">
 <dt id="neditor.lm.ListMenuClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.lm.</code><code class="sig-name descname">ListMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">tree_folder</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.lm.</code><code class="sig-name descname">ListMenuClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">master</span></em>, <em class="sig-param"><span class="n">TREE_FOLDER</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>リストメニューバーのクラス.</p>
 <p>・リストメニューバーにあるプログラム群</p>
@@ -838,10 +876,61 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>master</strong> (<em>instance</em>) -- toplevel のインスタンス</p></li>
-<li><p><strong>tree_folder</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
+<li><p><strong>TREE_FOLDER</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="neditor.lm.ListMenuClass.character_rename">
+<code class="sig-name descname">character_rename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">now_path</span></em>, <em class="sig-param"><span class="n">folder</span></em>, <em class="sig-param"><span class="n">old_file</span></em>, <em class="sig-param"><span class="n">new_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.character_rename"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.character_rename" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>キャラクターの名前変更.</p>
+<p>・キャラクターの名前を変更する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>now_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p></li>
+<li><p><strong>folder</strong> (<em>str</em>) -- 今処理しているフォルダ</p></li>
+<li><p><strong>old_file</strong> (<em>str</em>) -- 変更前のファイル名</p></li>
+<li><p><strong>new_file</strong> (<em>str</em>) -- 変更後のファイル名</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="neditor.lm.ListMenuClass.check_image_false">
+<code class="sig-name descname">check_image_false</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">curItem</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_false"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_false" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>イメージアイテム以外を右クリックしたとき.</p>
+<p>・イメージアイテム以外の親アイテムを右クリックしたときの処理。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>curItem</strong> (<em>int</em>) -- 選択アイテムの認識番号</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="neditor.lm.ListMenuClass.check_image_true">
+<code class="sig-name descname">check_image_true</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_true"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_true" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>イメージアイテムを右クリックしたとき.</p>
+<p>・イメージアイテムの親アイテムを右クリックしたときの処理。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="neditor.lm.ListMenuClass.click_child_item">
+<code class="sig-name descname">click_child_item</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">curItem</span></em>, <em class="sig-param"><span class="n">parentItem</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.click_child_item"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.click_child_item" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>子アイテムを右クリックしたとき.</p>
+<p>・子アイテムを右クリックしたときの処理。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>curItem</strong> (<em>int</em>) -- 選択アイテムの認識番号</p></li>
+<li><p><strong>parentItem</strong> (<em>int</em>) -- 親アイテムの認識番号</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="neditor.lm.ListMenuClass.message_window">
 <code class="sig-name descname">message_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.message_window"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.message_window" title="この定義へのパーマリンク">¶</a></dt>
@@ -910,6 +999,22 @@
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt id="neditor.lm.ListMenuClass.rename_gif">
+<em class="property">static </em><code class="sig-name descname">rename_gif</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em>, <em class="sig-param"><span class="n">old_file</span></em>, <em class="sig-param"><span class="n">new_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.rename_gif"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.rename_gif" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>gifの名前変更.</p>
+<p>・gifの名前を変更する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder</strong> (<em>str</em>) -- 今処理しているフォルダ</p></li>
+<li><p><strong>old_file</strong> (<em>str</em>) -- 変更前のファイル名</p></li>
+<li><p><strong>new_file</strong> (<em>str</em>) -- 変更後のファイル名</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="neditor.lm.ListMenuClass.select_list_item">
 <code class="sig-name descname">select_list_item</code><em class="property"> = ''</em><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item" title="この定義へのパーマリンク">¶</a></dt>
@@ -920,7 +1025,7 @@
 <dt id="neditor.lm.ListMenuClass.select_list_item_input">
 <em class="property">classmethod </em><code class="sig-name descname">select_list_item_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">select_list_item</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.select_list_item_input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item_input" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>選択中のリストボックスアイテム名を入力.</p>
-<p>選択中のリストボックスアイテム名をクラス変数に入力する。</p>
+<p>・選択中のリストボックスアイテム名をクラス変数に入力する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>select_list_item</strong> (<em>str</em>) -- 選択中のリストボックスアイテム名</p>
@@ -938,7 +1043,7 @@
 <dt id="neditor.lm.ListMenuClass.text_text_input">
 <em class="property">classmethod </em><code class="sig-name descname">text_text_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text_text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.text_text_input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.text_text_input" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>現在入力中の初期テキストを入力.</p>
-<p>現在入力中の初期テキストをクラス変数に入力する。</p>
+<p>・現在入力中の初期テキストをクラス変数に入力する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>text_text</strong> (<em>str</em>) -- 現在入力中の初期テキスト</p>
@@ -950,14 +1055,14 @@
 
 <dl class="py class">
 <dt id="neditor.lm.MyDialogClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.lm.</code><code class="sig-name descname">MyDialogClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">caption</span></em>, <em class="sig-param"><span class="n">cancel</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.MyDialogClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.lm.</code><code class="sig-name descname">MyDialogClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">caption</span></em>, <em class="sig-param"><span class="n">cancel</span></em>, <em class="sig-param"><span class="n">title</span></em>, <em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.lm.MyDialogClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ダイアログ作成クラス.</p>
 <p>・自作ダイアログを呼び出し表示する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>message</strong> (<em>instance</em>) -- 親ウインドウインスタンス</p></li>
+<li><p><strong>app</strong> (<em>instance</em>) -- 親ウインドウインスタンス</p></li>
 <li><p><strong>caption</strong> (<em>str</em>) -- ボタンのメッセージ</p></li>
 <li><p><strong>cancel</strong> (<em>bool</em>) -- キャンセルボタンを表示する(True)</p></li>
 <li><p><strong>title</strong> (<em>str</em>) -- タイトル</p></li>
@@ -991,19 +1096,20 @@
 <span id="neditor-mp-module"></span><h2>neditor.mp module<a class="headerlink" href="#module-neditor.mp" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py class">
 <dt id="neditor.mp.MainProcessingClass">
-<em class="property">class </em><code class="sig-prename descclassname">neditor.mp.</code><code class="sig-name descname">MainProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree_folder</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em>, <em class="sig-param"><span class="n">wiki_wiki</span></em>, <em class="sig-param"><span class="n">title_binary</span></em>, <em class="sig-param"><span class="n">class_instance</span></em>, <em class="sig-param"><span class="n">version</span></em>, <em class="sig-param"><span class="n">master</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">neditor.mp.</code><code class="sig-name descname">MainProcessingClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">TREE_FOLDER</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em>, <em class="sig-param"><span class="n">WIKI_WIKI</span></em>, <em class="sig-param"><span class="n">TITLE_BINARY</span></em>, <em class="sig-param"><span class="n">BLANK_IMAGE</span></em>, <em class="sig-param"><span class="n">class_instance</span></em>, <em class="sig-param"><span class="n">VERSION</span></em>, <em class="sig-param"><span class="n">dic</span></em>, <em class="sig-param"><span class="n">master</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
 <p>メインフレーム処理のクラス.</p>
 <p>・初期設定をするプログラム群</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tree_folder</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
+<li><p><strong>TREE_FOLDER</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
 <li><p><strong>wiki_wiki</strong> (<em>instance</em>) -- wikipediaapi.Wikipedia のインスタンス</p></li>
-<li><p><strong>title_binary</strong> (<em>str</em>) -- タイトルイメージファイルバイナリ</p></li>
+<li><p><strong>TITLE_BINARY</strong> (<em>str</em>) -- タイトルイメージファイルバイナリ</p></li>
 <li><p><strong>class_instance</strong> (<em>dict</em>) -- 自作クラスのインスタント群</p></li>
-<li><p><strong>version</strong> (<em>str</em>) -- バージョン情報</p></li>
+<li><p><strong>VERSION</strong> (<em>str</em>) -- バージョン情報</p></li>
+<li><p><strong>locale</strong> (<em>str</em>) -- ロケーション</p></li>
 <li><p><strong>master</strong> (<em>instance</em>) -- toplevel のインスタンス</p></li>
 </ul>
 </dd>
@@ -1087,7 +1193,7 @@
 <dt id="neditor.pm.ProcessingMenuClass.font_size_input">
 <em class="property">classmethod </em><code class="sig-name descname">font_size_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">font_size</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_size_input"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size_input" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>フォントサイズを入力.</p>
-<p>フォントサイズをクラス変数に入力する。</p>
+<p>・フォントサイズをクラス変数に入力する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><p><strong>font_size</strong> (<em>str</em>) -- フォントサイズ</p>
@@ -1201,13 +1307,13 @@
 
 <dl class="py method">
 <dt id="neditor.pm.ProcessingMenuClass.yahoocall">
-<em class="property">static </em><code class="sig-name descname">yahoocall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">appid</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">sentence</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-name descname">yahoocall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yahoo_appid</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">sentence</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>yahooの校正支援を呼び出し.</p>
 <p>・Yahoo! 校正支援をClient IDを使って呼び出す。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>appid</strong> (<em>str</em>) -- Yahoo! Client ID</p></li>
+<li><p><strong>yahoo_appid</strong> (<em>str</em>) -- Yahoo! Client ID</p></li>
 <li><p><strong>sentence</strong> (<em>str</em>) -- 校正をしたい文字列</p></li>
 </ul>
 </dd>
@@ -1362,23 +1468,29 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-neditor" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <dl class="py function">
 <dt id="neditor.title_create">
-<code class="sig-prename descclassname">neditor.</code><code class="sig-name descname">title_create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#title_create"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.title_create" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-prename descclassname">neditor.</code><code class="sig-name descname">title_create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locale_var</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#title_create"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.title_create" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>タイトルウインドウの作成.</p>
 <p>・タイトルウインドウを作成する。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="neditor.window_create">
-<code class="sig-prename descclassname">neditor.</code><code class="sig-name descname">window_create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree_folder</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em>, <em class="sig-param"><span class="n">wiki_wiki</span></em>, <em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#window_create"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.window_create" title="この定義へのパーマリンク">¶</a></dt>
+<code class="sig-prename descclassname">neditor.</code><code class="sig-name descname">window_create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locale_var</span></em>, <em class="sig-param"><span class="n">TREE_FOLDER</span></em>, <em class="sig-param"><span class="n">tokenizer</span></em>, <em class="sig-param"><span class="n">wiki_wiki</span></em>, <em class="sig-param"><span class="n">VERSION</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#window_create"><span class="viewcode-link">[ソース]</span></a><a class="headerlink" href="#neditor.window_create" title="この定義へのパーマリンク">¶</a></dt>
 <dd><p>メインウインドウの作成.</p>
 <p>・メインウインドウを作成する。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tree_folder</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
+<li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
+<li><p><strong>TREE_FOLDER</strong> (<em>list</em>) -- ツリーフォルダの配列</p></li>
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
 <li><p><strong>wiki_wiki</strong> (<em>instance</em>) -- wikipediaapi.Wikipedia のインスタンス</p></li>
-<li><p><strong>version</strong> (<em>str</em>) -- バージョン情報</p></li>
+<li><p><strong>VERSION</strong> (<em>str</em>) -- バージョン情報</p></li>
 </ul>
 </dd>
 </dl>

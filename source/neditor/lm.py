@@ -20,17 +20,17 @@ class ListMenuClass():
     Args:
         app (instance): MainProcessingClass のインスタンス
         master (instance): toplevel のインスタンス
-        tree_folder (list): ツリーフォルダの配列
+        TREE_FOLDER (list): ツリーフォルダの配列
     """
     text_text = ""
     """現在入力中の初期テキスト."""
     select_list_item = ""
     """選択中のリストボックスアイテム名."""
 
-    def __init__(self, app, master, tree_folder):
-        self.APP = app
-        self.MASTER = master
-        self.tree_folder = tree_folder
+    def __init__(self, app, master, TREE_FOLDER):
+        self.app = app
+        self.master = master
+        self.TREE_FOLDER = TREE_FOLDER
 
     def message_window(self, event=None):
         """ツリービューを右クリックしたときの処理.
@@ -42,146 +42,24 @@ class ListMenuClass():
             event (instance): tkinter.Event のインスタンス
         """
         # 選択アイテムの認識番号取得
-        curItem = self.APP.tree.focus()
+        curItem = self.app.tree.focus()
         # 親アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)
+        parentItem = self.app.tree.parent(curItem)
         # 親アイテムをクリックしたとき
-        if self.APP.tree.item(curItem)["text"] == self.tree_folder[4][1]:
-            # imageタグを選択したとき
-            fTyp = [(u'小説エディタ', '*.gif')]
-            iDir = os.path.abspath(os.path.dirname(__file__))
-            filepath = filedialog.askopenfilename(
-                filetypes=fTyp,
-                initialdir=iDir
-            )
-            # ファイル名があるとき
-            if not filepath == "":
-                file_name = os.path.splitext(os.path.basename(filepath))[0]
-                path = "./{0}/{1}.gif".format(
-                    self.tree_folder[4][0],
-                    file_name
-                )
-                shutil.copy2(filepath, path)
-                self.APP.cwc.frame_image()
-                path = "./{0}/{1}.txt".format(
-                    self.tree_folder[4][0],
-                    file_name
-                )
-                tree = self.APP.tree.insert(
-                    self.tree_folder[4][0],
-                    'end',
-                    text=file_name
-                )
-                self.APP.tree.see(tree)
-                self.APP.tree.selection_set(tree)
-                self.APP.tree.focus(tree)
-                self.select_list_item_input(file_name)
-                fm.FileMenuClass.now_path = path
-                f = open(path, 'w', encoding='utf-8')
-                self.APP.spc.zoom = 100
-                f.write(str(self.APP.spc.zoom))
-                f.close()
-                self.APP.cwc.frame_image()
-                self.path_read_image(
-                    self.tree_folder[4][0],
-                    file_name,
-                    0
-                )
-
+        if self.app.tree.item(curItem)["text"] == self.TREE_FOLDER[4][1]:
+            # イメージアイテムの親アイテムを選択したとき
+            self.check_image_true()
         else:
-            if str(
-                self.APP.tree.item(curItem)["text"]
-            ) and (not str(
-                    self.APP.tree.item(parentItem)["text"]
-                )
-            ):
-                # サブダイヤログを表示する
-                title = u'{0}に挿入'.format(self.APP.tree.item(curItem)["text"])
-                dialog = MyDialogClass(self.APP, "挿入", True, title, False)
-                self.MASTER.wait_window(dialog.sub_name_win)
-                file_name = dialog.txt
-                del dialog
-                if not file_name == "":
-                    self.APP.fmc.open_file_save(fm.FileMenuClass.now_path)
-                    curItem = self.APP.tree.focus()
-                    text = self.APP.tree.item(curItem)["text"]
-                    path = ""
-                    tree = ""
-                    # 選択されているフォルダを見つける
-                    for val in self.tree_folder:
-                        if text == val[1]:
-                            if val[0] == self.tree_folder[0][0]:
-                                self.APP.cwc.frame_character()
-                                self.APP.txt_yobi_name.insert(
-                                    tk.END,
-                                    file_name
-                                )
-                            else:
-                                self.APP.cwc.frame()
-
-                            path = "./{0}/{1}.txt".format(val[0], file_name)
-                            tree = self.APP.tree.insert(
-                                val[0],
-                                'end',
-                                text=file_name
-                            )
-                            fm.FileMenuClass.now_path = path
-                            break
-
-                    # パスが存在すれば新規作成する
-                    if not path == "":
-                        f = open(path, 'w', encoding='utf-8')
-                        f.write("")
-                        f.close()
-                        # ツリービューを選択状態にする
-                        self.APP.tree.see(tree)
-                        self.APP.tree.selection_set(tree)
-                        self.APP.tree.focus(tree)
-                        self.select_list_item_input(file_name)
-                        self.APP.winfo_toplevel().title(
-                            u"小説エディタ\\{0}\\{1}"
-                            .format(text, file_name)
-                        )
-                        self.APP.text.focus()
-                        # テキストを読み取り専用を解除する
-                        self.APP.text.configure(state='normal')
-                        self.APP.hpc.create_tags()
-            # 子アイテムを右クリックしたとき
-            else:
-                if str(self.APP.tree.item(curItem)["text"]):
-                    # 項目を削除する
-                    file_name = self.APP.tree.item(curItem)["text"]
-                    text = self.APP.tree.item(parentItem)["text"]
-                    # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
-                    if messagebox.askokcancel(
-                        u"項目削除",
-                        "{0}を削除しますか？".format(file_name)
+            if (
+                        str(self.app.tree.item(curItem)["text"])
+                    ) and (
+                        not str(self.app.tree.item(parentItem)["text"])
                     ):
-                        image_path = ""
-                        path = ""
-                        # パスを取得する
-                        for val in self.tree_folder:
-                            if text == val[1]:
-                                path = "./{0}/{1}.txt".format(
-                                    val[0],
-                                    file_name
-                                )
-                                image_path = "./{0}/{1}.gif".format(
-                                    val[0],
-                                    file_name
-                                )
-                                self.APP.tree.delete(curItem)
-                                fm.FileMenuClass.now_path = ""
-                                break
-                        # imageパスが存在したとき
-                        if os.path.isfile(image_path):
-                            os.remove(image_path)
-
-                        # パスが存在したとき
-                        if not path == "":
-                            os.remove(path)
-                            self.APP.cwc.frame()
-                            self.APP.text.focus()
+                # イメージアイテム以外の親アイテムを選択したとき
+                self.check_image_false(curItem)
+            else:
+                # 子アイテムを右クリックしたとき
+                self.click_child_item(curItem, parentItem)
 
     def on_name_click(self, event=None):
         """名前の変更.
@@ -191,36 +69,87 @@ class ListMenuClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
+        # 開いているファイルを保存
+        self.app.fmc.open_file_save(fm.FileMenuClass.now_path)
         # 選択アイテムの認識番号取得
-        curItem = self.APP.tree.focus()
+        curItem = self.app.tree.focus()
         # 親アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)
-        text = self.APP.tree.item(parentItem)["text"]
+        parentItem = self.app.tree.parent(curItem)
+        text = self.app.tree.item(parentItem)["text"]
         if not text == "":
-            sub_text = self.APP.tree.item(curItem)["text"]
-            title = u'{0}の名前を変更'.format(sub_text)
-            dialog2 = MyDialogClass(self.APP, u"変更", True, title, sub_text)
-            self.MASTER.wait_window(dialog2.sub_name_win)
+            old_file = self.app.tree.item(curItem)["text"]
+            title = self.app.dic.get_dict("Rename {0}").format(old_file)
+            dialog2 = MyDialogClass(
+                self.app,
+                self.app.dic.get_dict("Change"),
+                True,
+                title,
+                old_file
+            )
+            self.master.wait_window(dialog2.sub_name_win)
             # テキストを読み取り専用を解除する
-            self.APP.text.configure(state='normal')
-            co_text = dialog2.txt
+            self.app.text.configure(state='normal')
+            new_file = dialog2.txt
             del dialog2
-            for val in self.tree_folder:
+            for val in self.TREE_FOLDER:
                 if text == val[1]:
-                    path1 = "./{0}/{1}.txt".format(val[0], sub_text)
-                    path2 = "./{0}/{1}.txt".format(val[0], co_text)
+                    path1 = "./{0}/{1}.txt".format(val[0], old_file)
+                    path2 = "./{0}/{1}.txt".format(val[0], new_file)
                     fm.FileMenuClass.now_path = path2
                     # テキストの名前を変更する
                     os.rename(path1, path2)
-                    self.APP.tree.delete(curItem)
-                    Item = self.APP.tree.insert(
+                    self.app.tree.delete(curItem)
+                    Item = self.app.tree.insert(
                         parentItem,
                         'end',
-                        text=co_text
+                        text=new_file
                     )
-                    self.APP.tree.selection_set(Item)
-                    self.path_read_text(val[0], co_text)
+                    if val == self.TREE_FOLDER[0]:
+                        self.character_rename(
+                            fm.FileMenuClass.now_path,
+                            val[0],
+                            old_file,
+                            new_file
+                        )
+
+                    if val == self.TREE_FOLDER[4]:
+                        self.rename_gif(val[0], old_file, new_file)
+
+                    self.app.tree.selection_set(Item)
+                    self.path_read_text(val[0], new_file)
                     return
+
+    def character_rename(self, now_path, folder, old_file, new_file):
+        """キャラクターの名前変更.
+
+        ・キャラクターの名前を変更する。
+
+        Args:
+            now_path (str): 今の処理ししているファイルのパス
+            folder (str): 今処理しているフォルダ
+            old_file (str): 変更前のファイル名
+            new_file (str): 変更後のファイル名
+        """
+        self.rename_gif(folder, old_file, new_file)
+        f = open(now_path, 'w', encoding='utf-8')
+        f.write(self.app.fmc.save_charactor_file(new_file))
+        f.close()
+
+    @staticmethod
+    def rename_gif(folder, old_file, new_file):
+        """gifの名前変更.
+
+        ・gifの名前を変更する。
+
+        Args:
+            folder (str): 今処理しているフォルダ
+            old_file (str): 変更前のファイル名
+            new_file (str): 変更後のファイル名
+        """
+        path1 = "./{0}/{1}.gif".format(folder, old_file)
+        path2 = "./{0}/{1}.gif".format(folder, new_file)
+        if os.path.isfile(path1):
+            os.rename(path1, path2)
 
     def path_read_image(self, image_path, image_name, scale):
         """イメージを読み込んで表示.
@@ -247,13 +176,13 @@ class ListMenuClass():
                     resample=Image.LANCZOS
                 )
 
-            self.APP.image_space.photo = ImageTk.PhotoImage(giffile)
-            self.APP.image_space.itemconfig(
-                self.APP.image_on_space,
-                image=self.APP.image_space.photo
+            self.app.image_space.photo = ImageTk.PhotoImage(giffile)
+            self.app.image_space.itemconfig(
+                self.app.image_on_space,
+                image=self.app.image_space.photo
             )
             # イメージサイズにキャンバスサイズを合わす
-            self.APP.image_space.config(
+            self.app.image_space.config(
                 scrollregion=(
                     0,
                     0,
@@ -263,8 +192,10 @@ class ListMenuClass():
             )
             giffile.close()
 
-        self.APP.winfo_toplevel().title(
-                u"小説エディタ\\{0}\\{1}".format(self.tree_folder[4][1], image_name)
+        self.app.winfo_toplevel().title(
+                self.app.dic.get_dict(
+                    "Novel Editor/{0}/{1}"
+                ).format(self.TREE_FOLDER[4][1], image_name)
             )
 
     def path_read_text(self, text_path, text_name):
@@ -277,36 +208,42 @@ class ListMenuClass():
             text_name (str): テキストファイルの名前
         """
         if not fm.FileMenuClass.now_path == "":
-            if not fm.FileMenuClass.now_path.find(self.tree_folder[0][0]) == -1:
-                self.APP.txt_yobi_name.delete('0', tk.END)
-                self.APP.txt_name.delete('0', tk.END)
-                self.APP.txt_birthday.delete('0', tk.END)
-                self.APP.text_body.delete('1.0', tk.END)
+            if not fm.FileMenuClass.now_path.find(
+                        self.TREE_FOLDER[0][0]
+                    ) == -1:
+                self.app.txt_yobi_name.configure(state='normal')
+                self.app.txt_yobi_name.delete('0', tk.END)
+                self.app.txt_name.delete('0', tk.END)
+                self.app.txt_birthday.delete('0', tk.END)
+                self.app.text_body.delete('1.0', tk.END)
                 tree = ET.parse(fm.FileMenuClass.now_path)
                 elem = tree.getroot()
-                self.APP.txt_yobi_name.insert(tk.END, elem.findtext("call"))
-                self.APP.txt_name.insert(tk.END, elem.findtext("name"))
-                self.APP.var.set(elem.findtext("sex"))
-                self.APP.txt_birthday.insert(tk.END, elem.findtext("birthday"))
-                self.APP.text_body.insert(tk.END, elem.findtext("body"))
+                self.app.txt_yobi_name.insert(tk.END, elem.findtext("call"))
+                self.app.txt_yobi_name.configure(state='readonly')
+                self.app.txt_name.insert(tk.END, elem.findtext("name"))
+                self.app.var.set(elem.findtext("sex"))
+                self.app.txt_birthday.insert(tk.END, elem.findtext("birthday"))
+                self.app.text_body.insert(tk.END, elem.findtext("body"))
                 title = "{0}/{1}.gif".format(
-                    self.tree_folder[0][0],
+                    self.TREE_FOLDER[0][0],
                     elem.findtext("call")
                 )
                 if os.path.isfile(title):
-                    self.APP.spc.print_gif(title)
+                    self.app.spc.print_gif(title)
             else:
-                self.APP.text.delete('1.0', tk.END)
+                self.app.text.delete('1.0', tk.END)
                 f = open(fm.FileMenuClass.now_path, 'r', encoding='utf-8')
                 self.text_text_input(f.read())
-                self.APP.text.insert(tk.END, self.text_text)
+                self.app.text.insert(tk.END, self.text_text)
                 f.close()
 
-            self.APP.winfo_toplevel().title(
-                u"小説エディタ\\{0}\\{1}".format(text_path, text_name)
+            self.app.winfo_toplevel().title(
+                self.app.dic.get_dict(
+                    "Novel Editor/{0}/{1}"
+                ).format(text_path, text_name)
             )
             # シンタックスハイライトをする
-            self.APP.hpc.all_highlight()
+            self.app.hpc.all_highlight()
 
     def on_double_click(self, event=None):
         """ツリービューをダブルクリック.
@@ -317,34 +254,34 @@ class ListMenuClass():
             event (instance): tkinter.Event のインスタンス
         """
         # 選択アイテムの認識番号取得
-        curItem = self.APP.tree.focus()
+        curItem = self.app.tree.focus()
         # 親アイテムの認識番号取得
-        parentItem = self.APP.tree.parent(curItem)
-        text = self.APP.tree.item(parentItem)["text"]
+        parentItem = self.app.tree.parent(curItem)
+        text = self.app.tree.item(parentItem)["text"]
         # 開いているファイルを保存
-        self.APP.fmc.open_file_save(fm.FileMenuClass.now_path)
+        self.app.fmc.open_file_save(fm.FileMenuClass.now_path)
         # テキストを読み取り専用を解除する
-        self.APP.cwc.frame()
-        self.APP.text.configure(state='disabled')
+        self.app.cwc.frame()
+        self.app.text.configure(state='disabled')
         # 条件によって分離
-        self.select_list_item_input(self.APP.tree.item(curItem)["text"])
+        self.select_list_item_input(self.app.tree.item(curItem)["text"])
         path = ""
-        for val in self.tree_folder:
+        for val in self.TREE_FOLDER:
             if text == val[1]:
-                if val[0] == self.tree_folder[4][0]:
+                if val[0] == self.TREE_FOLDER[4][0]:
                     path = "./{0}/{1}.txt".format(
                         val[0],
                         self.select_list_item
                     )
                     f = open(path, 'r', encoding='utf-8')
                     zoom = f.read()
-                    self.APP.spc.zoom = int(zoom)
+                    self.app.spc.zoom = int(zoom)
                     fm.FileMenuClass.now_path = path
-                    self.APP.cwc.frame_image()
+                    self.app.cwc.frame_image()
                     self.path_read_image(
-                        self.tree_folder[4][0],
+                        self.TREE_FOLDER[4][0],
                         self.select_list_item,
-                        self.APP.spc.zoom
+                        self.app.spc.zoom
                     )
                 else:
                     path = "./{0}/{1}.txt".format(
@@ -352,25 +289,190 @@ class ListMenuClass():
                         self.select_list_item
                     )
                     fm.FileMenuClass.now_path = path
-                    if val[0] == self.tree_folder[0][0]:
-                        self.APP.cwc.frame_character()
+                    if val[0] == self.TREE_FOLDER[0][0]:
+                        self.app.cwc.frame_character()
                     else:
                         # テキストを読み取り専用を解除する
-                        self.APP.text.configure(state='normal')
-                        self.APP.text.focus()
+                        self.app.text.configure(state='normal')
+                        self.app.text.focus()
 
                     self.path_read_text(text, self.select_list_item)
 
                 return
 
         fm.FileMenuClass.now_path = ""
-        self.APP.winfo_toplevel().title(u"小説エディタ")
+        self.app.winfo_toplevel().title(
+            self.app.dic.get_dict("Novel Editor")
+        )
+
+    def check_image_true(self):
+        """イメージアイテムを右クリックしたとき.
+
+        ・イメージアイテムの親アイテムを右クリックしたときの処理。
+        """
+        # イメージアイテムを選択したとき
+        fTyp = [(self.app.dic.get_dict("Novel Editor"), '*.gif')]
+        iDir = os.path.abspath(os.path.dirname(__file__))
+        filepath = filedialog.askopenfilename(
+            filetypes=fTyp,
+            initialdir=iDir
+        )
+        # ファイル名があるとき
+        if not filepath == "":
+            file_name = os.path.splitext(os.path.basename(filepath))[0]
+            path = "./{0}/{1}.gif".format(
+                self.TREE_FOLDER[4][0],
+                file_name
+            )
+            shutil.copy2(filepath, path)
+            self.app.cwc.frame_image()
+            path = "./{0}/{1}.txt".format(
+                self.TREE_FOLDER[4][0],
+                file_name
+            )
+            tree = self.app.tree.insert(
+                self.TREE_FOLDER[4][0],
+                'end',
+                text=file_name
+            )
+            self.app.tree.see(tree)
+            self.app.tree.selection_set(tree)
+            self.app.tree.focus(tree)
+            self.select_list_item_input(file_name)
+            fm.FileMenuClass.now_path = path
+            f = open(path, 'w', encoding='utf-8')
+            self.app.spc.zoom = 100
+            f.write(str(self.app.spc.zoom))
+            f.close()
+            self.app.cwc.frame_image()
+            self.path_read_image(
+                self.TREE_FOLDER[4][0],
+                file_name,
+                0
+            )
+
+    def check_image_false(self, curItem):
+        """イメージアイテム以外を右クリックしたとき.
+
+        ・イメージアイテム以外の親アイテムを右クリックしたときの処理。
+
+        Args:
+            curItem (int): 選択アイテムの認識番号
+        """
+        # サブダイヤログを表示する
+        title = self.app.dic.get_dict(
+            "Insert in {0}"
+        ).format(self.app.tree.item(curItem)["text"])
+        dialog = MyDialogClass(
+            self.app,
+            self.app.dic.get_dict("Insert"),
+            True,
+            title,
+            False
+        )
+        self.master.wait_window(dialog.sub_name_win)
+        file_name = dialog.txt
+        del dialog
+        if not file_name == "":
+            self.app.fmc.open_file_save(fm.FileMenuClass.now_path)
+            curItem = self.app.tree.focus()
+            text = self.app.tree.item(curItem)["text"]
+            path = ""
+            tree = ""
+            # 選択されているフォルダを見つける
+            for val in self.TREE_FOLDER:
+                if text == val[1]:
+                    if val[0] == self.TREE_FOLDER[0][0]:
+                        self.app.cwc.frame_character()
+                        self.app.txt_yobi_name.configure(state='normal')
+                        self.app.txt_yobi_name.insert(
+                            tk.END,
+                            file_name
+                        )
+                        self.app.txt_yobi_name.configure(state='readonly')
+                    else:
+                        self.app.cwc.frame()
+
+                    path = "./{0}/{1}.txt".format(val[0], file_name)
+                    tree = self.app.tree.insert(
+                        val[0],
+                        'end',
+                        text=file_name
+                    )
+                    fm.FileMenuClass.now_path = path
+                    break
+
+            # パスが存在すれば新規作成する
+            if not path == "":
+                f = open(path, 'w', encoding='utf-8')
+                f.write("")
+                f.close()
+                # ツリービューを選択状態にする
+                self.app.tree.see(tree)
+                self.app.tree.selection_set(tree)
+                self.app.tree.focus(tree)
+                self.select_list_item_input(file_name)
+                self.app.winfo_toplevel().title(
+                    self.app.dic.get_dict(
+                        "Novel Editor/{0}/{1}"
+                    ).format(text, file_name)
+                )
+                self.app.text.focus()
+                # テキストを読み取り専用を解除する
+                self.app.text.configure(state='normal')
+                self.app.hpc.create_tags()
+
+    def click_child_item(self, curItem, parentItem):
+        """子アイテムを右クリックしたとき.
+
+        ・子アイテムを右クリックしたときの処理。
+
+        Args:
+            curItem (int): 選択アイテムの認識番号
+            parentItem (int): 親アイテムの認識番号
+        """
+        if str(self.app.tree.item(curItem)["text"]):
+            # 項目を削除する
+            file_name = self.app.tree.item(curItem)["text"]
+            text = self.app.tree.item(parentItem)["text"]
+            # ＯＫ、キャンセルダイアログを表示し、ＯＫを押したとき
+            if messagebox.askokcancel(
+                    self.app.dic.get_dict("Delete item"),
+                    self.app.dic.get_dict(
+                        "Delete {0} item?"
+                    ).format(file_name)
+            ):
+                image_path = ""
+                path = ""
+                # パスを取得する
+                for val in self.TREE_FOLDER:
+                    if text == val[1]:
+                        path = "./{0}/{1}.txt".format(
+                            val[0],
+                            file_name
+                        )
+                        image_path = "./{0}/{1}.gif".format(
+                            val[0],
+                            file_name
+                        )
+                        self.app.tree.delete(curItem)
+                        fm.FileMenuClass.now_path = ""
+                        break
+                # imageパスが存在したとき
+                if os.path.isfile(image_path):
+                    os.remove(image_path)
+
+                # パスが存在したとき
+                if not path == "":
+                    os.remove(path)
+                    self.app.cwc.frame()
+                    self.app.text.focus()
 
     @classmethod
     def text_text_input(cls, text_text):
         """現在入力中の初期テキストを入力.
 
-        現在入力中の初期テキストをクラス変数に入力する。
+        ・現在入力中の初期テキストをクラス変数に入力する。
 
         Args:
             text_text (str): 現在入力中の初期テキスト
@@ -381,7 +483,7 @@ class ListMenuClass():
     def select_list_item_input(cls, select_list_item):
         """選択中のリストボックスアイテム名を入力.
 
-        選択中のリストボックスアイテム名をクラス変数に入力する。
+        ・選択中のリストボックスアイテム名をクラス変数に入力する。
 
         Args:
             select_list_item (str): 選択中のリストボックスアイテム名
@@ -395,15 +497,15 @@ class MyDialogClass():
     ・自作ダイアログを呼び出し表示する。
 
     Args:
-        message (instance): 親ウインドウインスタンス
+        app (instance): 親ウインドウインスタンス
         caption (str): ボタンのメッセージ
         cancel (bool): キャンセルボタンを表示する(True)
         title (str): タイトル
         text (bool): 選択状態にする(True)
     """
-    def __init__(self, message, caption, cancel, title, text):
+    def __init__(self, app, caption, cancel, title, text):
         self.txt = ""
-        self.sub_name_win = tk.Toplevel(message)
+        self.sub_name_win = tk.Toplevel(app)
         self.txt_name = ttk.Entry(self.sub_name_win, width=40)
         self.txt_name.grid(
             row=0,
@@ -425,8 +527,8 @@ class MyDialogClass():
         if cancel:
             button2 = ttk.Button(
                 self.sub_name_win,
-                text=u'キャンセル',
-                width=str(u'キャンセル'),
+                text=app.dic.get_dict("Cancel"),
+                width=str(app.dic.get_dict("Cancel")),
                 padding=(10, 5),
                 command=self.sub_name_win.destroy
             )

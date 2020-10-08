@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">neditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
 </ul>
 
             
@@ -196,7 +196,7 @@
             <span class="s1">&#39;orange red&#39;</span><span class="p">,</span>
             <span class="s1">&#39;violet red&#39;</span>
         <span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span> <span class="o">=</span> <span class="n">tokenizer</span>
 
 <div class="viewcode-block" id="HighlightProcessingClass.all_highlight"><a class="viewcode-back" href="../../neditor.html#neditor.hp.HighlightProcessingClass.all_highlight">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">all_highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -205,10 +205,10 @@
 <span class="sd">        ・開く処理等の時にすべての行をハイライトする。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 全てのテキストを取得</span>
-        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end - 1c&#39;</span><span class="p">)</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end - 1c&#39;</span><span class="p">)</span>
         <span class="c1"># 全てのハイライトを一度解除する</span>
-        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_names</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_names</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
 
         <span class="c1"># ハイライトする</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
@@ -221,10 +221,10 @@
         <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;insert linestart&#39;</span>
         <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;insert lineend&#39;</span>
         <span class="c1"># 現在行のテキストを取得</span>
-        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
         <span class="c1"># その行のハイライトを一度解除する</span>
-        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_names</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_names</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 
         <span class="c1"># ハイライトする</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">highlight</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
@@ -235,7 +235,7 @@
                 <span class="n">start</span><span class="p">,</span>
                 <span class="nb">len</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">FindProcessingClass</span><span class="o">.</span><span class="n">find_text</span><span class="p">)</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HighlightProcessingClass.highlight"><a class="viewcode-back" href="../../neditor.html#neditor.hp.HighlightProcessingClass.highlight">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ハイライトの共通処理.</span>
@@ -249,25 +249,25 @@
 <span class="sd">            end (str): 終わりの位置</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">create_tags</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
-        <span class="n">space_count</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\u3000*&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="n">space_count</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\u3000*&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
         <span class="c1"># 形態素解析を行う</span>
         <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">surface</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span>
                 <span class="s1">&#39;range_end&#39;</span><span class="p">,</span> <span class="s1">&#39;range_start+</span><span class="si">{0}</span><span class="s1">c&#39;</span>
                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
             <span class="p">)</span>
             <span class="c1"># 全角スペースの時はずらす</span>
             <span class="k">if</span> <span class="n">space_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span>
                     <span class="n">content</span><span class="p">,</span>
                     <span class="s1">&#39;range_start+</span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">space_count</span><span class="p">),</span>
                     <span class="s1">&#39;range_end+</span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">space_count</span><span class="p">)</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="s1">&#39;range_end&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="s1">&#39;range_end&#39;</span><span class="p">)</span></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="s1">&#39;range_end&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;range_start&#39;</span><span class="p">,</span> <span class="s1">&#39;range_end&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HighlightProcessingClass.create_tags"><a class="viewcode-back" href="../../neditor.html#neditor.hp.HighlightProcessingClass.create_tags">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;タグの作成.</span>
@@ -278,19 +278,19 @@
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">system_dic</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;喜寛,固有名詞,ヨシヒロ&quot;</span>
         <span class="c1"># キャラクターから一覧を作る。</span>
-        <span class="n">children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;data/character&#39;</span><span class="p">)</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;data/character&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
             <span class="c1"># ユーザー定義辞書の設定</span>
             <span class="n">reading</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="n">childname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
+            <span class="n">childname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">TOKENIZER</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">childname</span><span class="p">):</span>
                 <span class="n">reading</span> <span class="o">+=</span> <span class="n">token</span><span class="o">.</span><span class="n">phonetic</span>
             <span class="n">system_dic</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{0}</span><span class="s2">,固有名詞,</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">childname</span><span class="p">,</span> <span class="n">reading</span><span class="p">)</span>
             <span class="c1"># タグの作成</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span>
                 <span class="n">childname</span><span class="p">,</span>
                 <span class="n">foreground</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">COLOR</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">COLOR</span><span class="p">)],</span>
-                <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">APP</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">font_size</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+                <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">font</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">font_size</span><span class="p">,</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./userdic.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>

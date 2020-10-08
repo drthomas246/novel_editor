@@ -39,7 +39,7 @@ class HighlightProcessingClass():
             'orange red',
             'violet red'
         ]
-        self.APP = app
+        self.app = app
         self.TOKENIZER = tokenizer
 
     def all_highlight(self):
@@ -48,10 +48,10 @@ class HighlightProcessingClass():
         ・開く処理等の時にすべての行をハイライトする。
         """
         # 全てのテキストを取得
-        src = self.APP.text.get('1.0', 'end - 1c')
+        src = self.app.text.get('1.0', 'end - 1c')
         # 全てのハイライトを一度解除する
-        for tag in self.APP.text.tag_names():
-            self.APP.text.tag_remove(tag, '1.0', 'end')
+        for tag in self.app.text.tag_names():
+            self.app.text.tag_remove(tag, '1.0', 'end')
 
         # ハイライトする
         self.highlight('1.0', src, 'end')
@@ -64,10 +64,10 @@ class HighlightProcessingClass():
         start = 'insert linestart'
         end = 'insert lineend'
         # 現在行のテキストを取得
-        src = self.APP.text.get(start, end)
+        src = self.app.text.get(start, end)
         # その行のハイライトを一度解除する
-        for tag in self.APP.text.tag_names():
-            self.APP.text.tag_remove(tag, start, end)
+        for tag in self.app.text.tag_names():
+            self.app.text.tag_remove(tag, start, end)
 
         # ハイライトする
         self.highlight(start, src, end)
@@ -78,7 +78,7 @@ class HighlightProcessingClass():
                 start,
                 len(fp.FindProcessingClass.find_text)
             )
-            self.APP.text.tag_add('sel', start, end)
+            self.app.text.tag_add('sel', start, end)
 
     def highlight(self, start, src, end):
         """ハイライトの共通処理.
@@ -92,25 +92,25 @@ class HighlightProcessingClass():
             end (str): 終わりの位置
         """
         self.create_tags()
-        self.APP.text.mark_set('range_start', start)
-        space_count = re.match(r"\u3000*", self.APP.text.get(start, end)).end()
+        self.app.text.mark_set('range_start', start)
+        space_count = re.match(r"\u3000*", self.app.text.get(start, end)).end()
         # 形態素解析を行う
         for token in self.t.tokenize(src):
             content = token.surface
-            self.APP.text.mark_set(
+            self.app.text.mark_set(
                 'range_end', 'range_start+{0}c'
                 .format(len(content))
             )
             # 全角スペースの時はずらす
             if space_count > 0:
-                self.APP.text.tag_add(
+                self.app.text.tag_add(
                     content,
                     'range_start+{0}c'.format(space_count),
                     'range_end+{0}c'.format(space_count)
                 )
             else:
-                self.APP.text.tag_add(content, 'range_start', 'range_end')
-            self.APP.text.mark_set('range_start', 'range_end')
+                self.app.text.tag_add(content, 'range_start', 'range_end')
+            self.app.text.mark_set('range_start', 'range_end')
 
     def create_tags(self):
         """タグの作成.
@@ -121,19 +121,19 @@ class HighlightProcessingClass():
         i = 0
         system_dic = u"喜寛,固有名詞,ヨシヒロ"
         # キャラクターから一覧を作る。
-        children = self.APP.tree.get_children('data/character')
+        children = self.app.tree.get_children('data/character')
         for child in children:
             # ユーザー定義辞書の設定
             reading = ""
-            childname = self.APP.tree.item(child, "text")
+            childname = self.app.tree.item(child, "text")
             for token in self.TOKENIZER.tokenize(childname):
                 reading += token.phonetic
             system_dic += u"\n{0},固有名詞,{1}".format(childname, reading)
             # タグの作成
-            self.APP.text.tag_configure(
+            self.app.text.tag_configure(
                 childname,
                 foreground=self.COLOR[i % len(self.COLOR)],
-                font=(self.APP.font, pm.ProcessingMenuClass.font_size, "bold")
+                font=(self.app.font, pm.ProcessingMenuClass.font_size, "bold")
             )
             i += 1
         f = open("./userdic.csv", 'w', encoding='utf-8')

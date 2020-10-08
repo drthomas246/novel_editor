@@ -17,29 +17,33 @@ class MainProcessingClass(ttk.Frame):
     ・初期設定をするプログラム群
 
     Args:
-        tree_folder (list): ツリーフォルダの配列
+        TREE_FOLDER (list): ツリーフォルダの配列
         tokenizer (instance): Tokenizer のインスタンス
         wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
-        title_binary (str): タイトルイメージファイルバイナリ
+        TITLE_BINARY (str): タイトルイメージファイルバイナリ
         class_instance (dict): 自作クラスのインスタント群
-        version (str): バージョン情報
+        VERSION (str): バージョン情報
+        locale (str): ロケーション
         master (instance): toplevel のインスタンス
     """
 
     def __init__(
         self,
-        tree_folder,
+        TREE_FOLDER,
         tokenizer,
-        wiki_wiki,
-        title_binary,
+        WIKI_WIKI,
+        TITLE_BINARY,
+        BLANK_IMAGE,
         class_instance,
-        version,
+        VERSION,
+        dic,
         master=None
     ):
         super().__init__(master)
-        self.TREE_FOLDER = tree_folder
+        self.TREE_FOLDER = TREE_FOLDER
+        self.dic = dic
         # 自作クラスの読み込み
-        self.cwc = class_instance['cw'].CreateWindowClass(self)
+        self.cwc = class_instance['cw'].CreateWindowClass(self, BLANK_IMAGE)
         self.epc = class_instance['ep'].EventProcessingClass(self)
         self.spc = class_instance['sp'].SubfunctionProcessingClass(
             self
@@ -61,7 +65,7 @@ class MainProcessingClass(ttk.Frame):
         self.emc = class_instance['em'].EditMenuClass(self)
         self.pmc = class_instance['pm'].ProcessingMenuClass(
             self,
-            wiki_wiki,
+            WIKI_WIKI,
             tokenizer
         )
         self.lmc = class_instance['lm'].ListMenuClass(
@@ -71,8 +75,8 @@ class MainProcessingClass(ttk.Frame):
         )
         self.hmc = class_instance['hm'].HelpMenuClass(
             self,
-            title_binary,
-            version
+            TITLE_BINARY,
+            VERSION
         )
         # メニューバーの作成
         self.menu_bar = tk.Menu(self.master)
@@ -98,13 +102,13 @@ class MainProcessingClass(ttk.Frame):
         lm.ListMenuClass.select_list_item = ""
         # 文字の大きさ
         pm.ProcessingMenuClass.font_size = 16
-        self.pmc.APPID = ""
+        self.pmc.yahoo_appid = ""
         if os.path.isfile("./appid.txt"):
             f = open("./appid.txt", "r", encoding="utf-8")
-            self.pmc.APPID = f.read()
+            self.pmc.yahoo_appid = f.read()
             f.close()
-        if u"ここを消して、" in self.pmc.APPID:
-            self.pmc.APPID = ""
+        if u"ここを消して、" in self.pmc.yahoo_appid:
+            self.pmc.yahoo_appid = ""
         # フォントをOSごとに変える
         pf = platform.system()
         if pf == 'Windows':
@@ -113,6 +117,9 @@ class MainProcessingClass(ttk.Frame):
             self.font = "Osaka-等幅"
         elif pf == 'Linux':
             self.font = "IPAゴシック"
+        else:
+            self.font = ""
+
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):
             shutil.rmtree('./data')

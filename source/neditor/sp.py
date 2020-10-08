@@ -20,7 +20,7 @@ class SubfunctionProcessingClass():
     """
     def __init__(self, app):
         self.zoom = 0
-        self.APP = app
+        self.app = app
 
     def mouse_y_scroll(self, event=None):
         """マウスホイール移動の設定.
@@ -32,9 +32,9 @@ class SubfunctionProcessingClass():
             event (instance): tkinter.Event のインスタンス
         """
         if event.delta > 0:
-            self.APP.image_space.yview_scroll(-1, 'units')
+            self.app.image_space.yview_scroll(-1, 'units')
         elif event.delta < 0:
-            self.APP.image_space.yview_scroll(1, 'units')
+            self.app.image_space.yview_scroll(1, 'units')
 
     def mouse_image_scroll(self, event=None):
         """Ctrl+マウスホイールの拡大縮小設定.
@@ -45,7 +45,6 @@ class SubfunctionProcessingClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        curItem = self.APP.tree.focus()
         title = "./data/image/{0}.txt".format(
             lm.ListMenuClass.select_list_item
         )
@@ -63,7 +62,7 @@ class SubfunctionProcessingClass():
         f = open(title, 'w', encoding='utf-8')
         f.write(str(self.zoom))
         f.close()
-        self.APP.lmc.path_read_image(
+        self.app.lmc.path_read_image(
                     'data/image',
                     lm.ListMenuClass.select_list_item,
                     self.zoom
@@ -78,19 +77,19 @@ class SubfunctionProcessingClass():
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        fTyp = [(u"gif画像", ".gif")]
+        fTyp = [(self.app.dic.get_dict("gif image"), ".gif")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        self.APP.filepath = filedialog.askopenfilename(
+        self.app.filepath = filedialog.askopenfilename(
             filetypes=fTyp,
             initialdir=iDir
         )
-        if not self.APP.filepath == "":
+        if not self.app.filepath == "":
             path, ___ = os.path.splitext(
                 os.path.basename(fm.FileMenuClass.now_path)
             )
-            ____, ext = os.path.splitext(os.path.basename(self.APP.filepath))
+            ____, ext = os.path.splitext(os.path.basename(self.app.filepath))
             title = shutil.copyfile(
-                self.APP.filepath,
+                self.app.filepath,
                 "./data/character/{0}{1}".format(
                     path,
                     ext
@@ -112,7 +111,7 @@ class SubfunctionProcessingClass():
         )
         if os.path.isfile(files):
             os.remove(files)
-            self.APP.cv.delete("all")
+            self.app.cv.delete("all")
 
     @staticmethod
     def resize_gif(im):
@@ -149,11 +148,11 @@ class SubfunctionProcessingClass():
 
         if not title == "":
             giffile = Image.open(title)
-            self.APP.cv.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
+            self.app.cv.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
             giffile.close()
-            self.APP.cv.itemconfig(
-                self.APP.image_on_canvas,
-                image=self.APP.cv.photo
+            self.app.cv.itemconfig(
+                self.app.image_on_canvas,
+                image=self.app.cv.photo
             )
 
     def change_setting(self, event=None):
@@ -166,7 +165,7 @@ class SubfunctionProcessingClass():
         """
         self.update_line_numbers()
         # その行のハイライトを行う
-        self.APP.hpc.line_highlight()
+        self.app.hpc.line_highlight()
 
     def update_line_numbers(self, event=None):
         """行番号の描画.
@@ -177,14 +176,14 @@ class SubfunctionProcessingClass():
             event (instance): tkinter.Event のインスタンス
         """
         # 現在の行番号を全て消す
-        self.APP.line_numbers.delete(tk.ALL)
+        self.app.line_numbers.delete(tk.ALL)
 
         # Textの0, 0座標、つまり一番左上が何行目にあたるかを取得
-        i = self.APP.text.index("@0,0")
+        i = self.app.text.index("@0,0")
         while True:
             # dlineinfoは、その行がどの位置にあり、どんなサイズか、を返す
             # (3, 705, 197, 13, 18) のように帰る(x,y,width,height,baseline)
-            dline = self.APP.text.dlineinfo(i)
+            dline = self.app.text.dlineinfo(i)
             # dlineinfoに、存在しない行や、スクロールしないと見えない行を渡すとNoneが帰る
             if dline is None:
                 break
@@ -193,11 +192,11 @@ class SubfunctionProcessingClass():
 
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             linenum = str(i).split(".")[0]
-            self.APP.line_numbers.create_text(
+            self.app.line_numbers.create_text(
                 3,
                 y,
                 anchor=tk.NW,
                 text=linenum,
                 font=("", 12)
             )
-            i = self.APP.text.index("%s+1line" % i)
+            i = self.app.text.index("%s+1line" % i)
