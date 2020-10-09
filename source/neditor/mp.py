@@ -104,9 +104,9 @@ class MainProcessingClass(ttk.Frame):
         pm.ProcessingMenuClass.font_size = 16
         self.pmc.yahoo_appid = ""
         if os.path.isfile("./appid.txt"):
-            f = open("./appid.txt", "r", encoding="utf-8")
-            self.pmc.yahoo_appid = f.read()
-            f.close()
+            with open("./appid.txt", encoding='utf-8') as f:
+                self.pmc.yahoo_appid = f.read()
+
         if u"ここを消して、" in self.pmc.yahoo_appid:
             self.pmc.yahoo_appid = ""
         # フォントをOSごとに変える

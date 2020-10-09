@@ -187,16 +187,17 @@ class FileMenuClass():
         """
         # 編集ファイルを保存する
         if not path == "":
-            f = open(path, 'w', encoding='utf-8')
-            if not path.find(self.TREE_FOLDER[0][0]) == -1:
-                f.write(self.save_charactor_file(self.app.txt_yobi_name.get()))
-                self.charactor_file = ""
-            elif not path.find(self.TREE_FOLDER[4][0]) == -1:
-                f.write(str(self.app.spc.zoom))
-            else:
-                f.write(self.app.text.get("1.0", tk.END+'-1c'))
+            with open(path, mode='w', encoding='utf-8') as f:
+                if not path.find(self.TREE_FOLDER[0][0]) == -1:
+                    f.write(
+                        self.save_charactor_file(self.app.txt_yobi_name.get())
+                    )
+                    self.charactor_file = ""
+                elif not path.find(self.TREE_FOLDER[4][0]) == -1:
+                    f.write(str(self.app.spc.zoom))
+                else:
+                    f.write(self.app.text.get("1.0", tk.END+'-1c'))
 
-            f.close()
             self.now_path_input(path)
 
     def save_charactor_file(self, name):

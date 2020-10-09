@@ -52,7 +52,6 @@
 	"Can I quit?" : "終了してもいいですか？" ,
 	"Change" : "変更" ,
 	"Rename {0}" : "{0}の名前を変更" ,
-	"Novel Editor/{0}/{1}" : "小説エディタ/{0}/{1}" ,
 	"Delete {0} item?" : "{0}を削除しますか" ,
 	"Number of characters etc" : "文字数と行数、原稿用紙枚数" ,
 	"Characters : {0} Lines : {1}\n Manuscript papers : {2}" : "文字数 :{0}文字　行数 : {1}行\n 原稿用紙 : {2}枚" ,
@@ -66,4 +65,5 @@
 	"Asc find" : "" ,
 	"Stop" : "中止する" ,
 	"Resize" : "サイズ変更" ,
+	"I searched to the end, but there were no search characters." : "最後まで検索しましたが検索文字はありませんでした。" ,
 }

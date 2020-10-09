@@ -71,19 +71,26 @@ def title_create(locale_var):
     return root
 
 
-def window_create(locale_var, TREE_FOLDER, tokenizer, wiki_wiki, VERSION):
+def window_create(locale_var, tokenizer, wiki_wiki, VERSION):
     """メインウインドウの作成.
 
     ・メインウインドウを作成する。
 
     Args:
         locale_var (str): ロケーション
-        TREE_FOLDER (list): ツリーフォルダの配列
         tokenizer (instance): Tokenizer のインスタンス
         wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
         VERSION (str): バージョン情報
     """
     dic = i18n.initialize(locale_var)
+    TREE_FOLDER = [
+        ['data/character', dic.get_dict("Character")],
+        ['data/occupation', dic.get_dict("Occupation")],
+        ['data/space', dic.get_dict("Space")],
+        ['data/event', dic.get_dict("Event")],
+        ['data/image', dic.get_dict("Image")],
+        ['data/nobel', dic.get_dict("Novel")]
+    ]
     class_instance = {
         'cw': CreateWindow,
         'ep': EventProcessing,

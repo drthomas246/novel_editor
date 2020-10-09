@@ -45,6 +45,7 @@ class HelpMenuClass():
             font=('', 12)
         )
         canvas.pack()
+        window.title(self.app.dic.get_dict("Novel Editor"))
         window.resizable(width=0, height=0)
         window.mainloop()
 

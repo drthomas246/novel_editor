@@ -71,7 +71,6 @@ NEDITOR = '''{
     "Can I quit?" : "" ,
     "Change" : "" ,
     "Rename {0}" : "" ,
-    "Novel Editor/{0}/{1}" : "" ,
     "Delete {0} item?" : "" ,
     "Number of characters etc" : "" ,
     "Characters : {0} Lines : {1}\\n Manuscript papers : {2}" : "" ,
@@ -85,4 +84,5 @@ NEDITOR = '''{
     "Asc find" : "" ,
     "Stop" : "" ,
     "Resize" : "" ,
+    "I searched to the end, but there were no search characters." : ""
 }'''

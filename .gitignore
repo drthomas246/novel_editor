@@ -1,0 +1,6 @@
+source/__pycache__/
+source/i18n/__pycache__/
+source/neditor/__pycache__/
+build/
+dist/
+novel_editor.spec

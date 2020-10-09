@@ -131,9 +131,8 @@ class ListMenuClass():
             new_file (str): 変更後のファイル名
         """
         self.rename_gif(folder, old_file, new_file)
-        f = open(now_path, 'w', encoding='utf-8')
-        f.write(self.app.fmc.save_charactor_file(new_file))
-        f.close()
+        with open(now_path, mode='w', encoding='utf-8') as f:
+            f.write(self.app.fmc.save_charactor_file(new_file))
 
     @staticmethod
     def rename_gif(folder, old_file, new_file):
@@ -193,9 +192,11 @@ class ListMenuClass():
             giffile.close()
 
         self.app.winfo_toplevel().title(
-                self.app.dic.get_dict(
-                    "Novel Editor/{0}/{1}"
-                ).format(self.TREE_FOLDER[4][1], image_name)
+                "{0}/{1}/{2}".format(
+                    self.app.dic.get_dict("Novel Editor"),
+                    self.TREE_FOLDER[4][1],
+                    image_name
+                )
             )
 
     def path_read_text(self, text_path, text_name):
@@ -232,15 +233,16 @@ class ListMenuClass():
                     self.app.spc.print_gif(title)
             else:
                 self.app.text.delete('1.0', tk.END)
-                f = open(fm.FileMenuClass.now_path, 'r', encoding='utf-8')
-                self.text_text_input(f.read())
-                self.app.text.insert(tk.END, self.text_text)
-                f.close()
+                with open(fm.FileMenuClass.now_path, encoding='utf-8') as f:
+                    self.text_text_input(f.read())
+                    self.app.text.insert(tk.END, self.text_text)
 
             self.app.winfo_toplevel().title(
-                self.app.dic.get_dict(
-                    "Novel Editor/{0}/{1}"
-                ).format(text_path, text_name)
+                "{0}/{1}/{2}".format(
+                    self.app.dic.get_dict("Novel Editor"),
+                    text_path,
+                    text_name
+                )
             )
             # シンタックスハイライトをする
             self.app.hpc.all_highlight()
@@ -273,8 +275,9 @@ class ListMenuClass():
                         val[0],
                         self.select_list_item
                     )
-                    f = open(path, 'r', encoding='utf-8')
-                    zoom = f.read()
+                    with open(path, encoding='utf-8') as f:
+                        zoom = f.read()
+
                     self.app.spc.zoom = int(zoom)
                     fm.FileMenuClass.now_path = path
                     self.app.cwc.frame_image()
@@ -340,10 +343,10 @@ class ListMenuClass():
             self.app.tree.focus(tree)
             self.select_list_item_input(file_name)
             fm.FileMenuClass.now_path = path
-            f = open(path, 'w', encoding='utf-8')
-            self.app.spc.zoom = 100
-            f.write(str(self.app.spc.zoom))
-            f.close()
+            with open(path, mode='w', encoding='utf-8') as f:
+                self.app.spc.zoom = 100
+                f.write(str(self.app.spc.zoom))
+
             self.app.cwc.frame_image()
             self.path_read_image(
                 self.TREE_FOLDER[4][0],
@@ -404,18 +407,20 @@ class ListMenuClass():
 
             # パスが存在すれば新規作成する
             if not path == "":
-                f = open(path, 'w', encoding='utf-8')
-                f.write("")
-                f.close()
+                with open(path, mode='w', encoding='utf-8') as f:
+                    f.write("")
+
                 # ツリービューを選択状態にする
                 self.app.tree.see(tree)
                 self.app.tree.selection_set(tree)
                 self.app.tree.focus(tree)
                 self.select_list_item_input(file_name)
                 self.app.winfo_toplevel().title(
-                    self.app.dic.get_dict(
-                        "Novel Editor/{0}/{1}"
-                    ).format(text, file_name)
+                    "{0}/{1}/{2}".format(
+                        self.app.dic.get_dict("Novel Editor"),
+                        text,
+                        file_name
+                    )
                 )
                 self.app.text.focus()
                 # テキストを読み取り専用を解除する

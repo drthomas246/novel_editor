@@ -271,8 +271,11 @@ class FindProcessingClass():
             )
             if not pos:
                 messagebox.showinfo(
-                    "検索",
-                    "最後まで検索しましたが検索文字はありませんでした。"
+                    self.app.dic.get_dict("Find"),
+                    self.app.dic.get_dict(
+                        "I searched to the end,"
+                        " but there were no search characters."
+                    )
                 )
                 self.replacement_check_input(False)
                 return
