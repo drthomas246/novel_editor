@@ -2,15 +2,18 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
+from . import main
 
 
-class FindProcessingClass():
+class FindProcessingClass(main.MainClass):
     """検索置換のクラス.
 
     ・検索置換するためのプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
     replacement_check = False
     """検索ダイアログが表示されているTrue."""
@@ -19,7 +22,8 @@ class FindProcessingClass():
     find_text = ""
     """検索文字列."""
 
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
 
     def push_keys(self, event=None):

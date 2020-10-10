@@ -3,22 +3,22 @@ import os
 import webbrowser
 import tkinter as tk
 
+from . import main
 
-class HelpMenuClass():
+
+class HelpMenuClass(main.MainClass):
     """ヘルプメニューバーのクラス.
 
     ・ヘルプメニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
-        TITLE_BINARY (str): タイトルイメージファイルのbase 64データ
-        VERSION (str): バージョン情報
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app, TITLE_BINARY, VERSION):
-        # バージョン情報
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
-        self.TITLE_BINARY = TITLE_BINARY
-        self.VERSION = VERSION
 
     def version(self):
         """バージョン情報を表示.
@@ -26,10 +26,10 @@ class HelpMenuClass():
         ・バージョン情報表示ダイアログを表示する。
         ×を押すまで消えないようにする。
         """
-        img2 = tk.PhotoImage(data=self.TITLE_BINARY)
+        img = tk.PhotoImage(data=self.TITLE_BINARY)
         window = tk.Toplevel(self.app)
         canvas = tk.Canvas(window, width=600, height=300)
-        canvas.create_image(0, 0, anchor='nw', image=img2)
+        canvas.create_image(0, 0, anchor='nw', image=img)
         canvas.create_text(
             550,
             290,
@@ -45,7 +45,7 @@ class HelpMenuClass():
             font=('', 12)
         )
         canvas.pack()
-        window.title(self.app.dic.get_dict("Novel Editor"))
+        window.title(self.dic.get_dict("Novel Editor"))
         window.resizable(width=0, height=0)
         window.mainloop()
 

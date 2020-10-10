@@ -10,27 +10,28 @@ import xml.etree.ElementTree as ET
 from PIL import Image, ImageTk
 
 from . import fm
+from . import main
 
 
-class ListMenuClass():
+class ListMenuClass(main.MainClass):
     """リストメニューバーのクラス.
 
     ・リストメニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
-        TREE_FOLDER (list): ツリーフォルダの配列
     """
     text_text = ""
     """現在入力中の初期テキスト."""
     select_list_item = ""
     """選択中のリストボックスアイテム名."""
 
-    def __init__(self, app, master, TREE_FOLDER):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
         self.master = master
-        self.TREE_FOLDER = TREE_FOLDER
 
     def message_window(self, event=None):
         """ツリービューを右クリックしたときの処理.

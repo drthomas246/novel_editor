@@ -7,27 +7,27 @@ import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 
 from . import lm
+from . import main
 
-
-class FileMenuClass():
+class FileMenuClass(main.MainClass):
     """ファイルメニューバーのクラス.
 
     ・ファイルメニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
-        TREE_FOLDER (list): ツリーフォルダの配列
     """
     now_path = ""
     """今の処理ししているファイルのパス."""
     file_path = ""
     """現在開いているファイル."""
 
-    def __init__(self, app, master, TREE_FOLDER):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
         self.master = master
-        self.TREE_FOLDER = TREE_FOLDER
 
     def new_open(self, event=None):
         """新規作成.

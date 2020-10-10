@@ -62,7 +62,7 @@
 	"Yahoo! Client ID" : "Yahoo! Client ID" ,
 	"Yahoo! Client ID is not find.\nRead Readme.pdf and set it again." : "Yahoo! Client IDが見つかりません。\nReadme.pdfを読んで、設定し直してください。" ,
 	"Insert in {0}" : "{0}に挿入" ,
-	"Asc find" : "" ,
+	"Asc find" : "昇順検索" ,
 	"Stop" : "中止する" ,
 	"Resize" : "サイズ変更" ,
 	"I searched to the end, but there were no search characters." : "最後まで検索しましたが検索文字はありませんでした。" ,

@@ -8,17 +8,21 @@ from PIL import Image, ImageTk
 
 from . import fm
 from . import lm
+from . import main
 
 
-class SubfunctionProcessingClass():
+class SubfunctionProcessingClass(main.MainClass):
     """補助機能のクラス.
 
     ・補助機能があるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.zoom = 0
         self.app = app
 

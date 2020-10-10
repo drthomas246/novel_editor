@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import tkinter as tk
 
+from . import main
 
-class ComplementProcessingClass():
+
+class ComplementProcessingClass(main.MainClass):
     """ 補完処理のクラス.
 
     ・補完処理にあるプログラム群
@@ -10,8 +12,11 @@ class ComplementProcessingClass():
     Args:
         app (instance): MainProcessingClass のインスタンス
         tokenizer (instance): Tokenizer のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app, tokenizer):
+    def __init__(self, app, tokenizer, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
         self.tokenizer = tokenizer
 
