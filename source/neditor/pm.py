@@ -63,7 +63,7 @@ class ProcessingMenuClass(main.MainClass):
                 hira, ''
             ) == "" or token.part_of_speech.split(
                 ","
-            )[0] == u"記号":
+            )[0] == self.dic.get_dict("symbol"):
                 hon += token.surface
             else:
                 # ルビ振りを行う
@@ -219,7 +219,7 @@ class ProcessingMenuClass(main.MainClass):
             # 最前面に表示し続ける
             self.sub_read_win.attributes("-topmost", True)
             # サイズ変更禁止
-            self.sub_read_win.resizable(width=0, height=0)
+            self.sub_read_win.resizable(False, False)
             self.sub_read_win.title(
                 self.app.dic.get_dict("Read aloud")
             )
@@ -281,7 +281,7 @@ class ProcessingMenuClass(main.MainClass):
                 self.app.dic.get_dict("Yahoo! Client ID"),
                 self.app.dic.get_dict(
                     "Yahoo! Client ID is not find."
-                    "\nRead Readme.pdf and set it again."
+                    "\nRead Readme.html and set it again."
                 )
             )
             return
@@ -316,23 +316,23 @@ class ProcessingMenuClass(main.MainClass):
         self.yahoo_tree.column(5, width=120)
         self.yahoo_tree.heading(
             1,
-            text=u"先頭からの文字数"
+            text=self.dic.get_dict("Number of characters from the beginning")
         )
         self.yahoo_tree.heading(
             2,
-            text=u"対象文字数"
+            text=self.dic.get_dict("Number of target characters")
         )
         self.yahoo_tree.heading(
             3,
-            text=u"対象表記"
+            text=self.dic.get_dict("Target notation")
         )
         self.yahoo_tree.heading(
             4,
-            text=u"言い換え候補文字列"
+            text=self.dic.get_dict("Paraphrase candidate string")
         )
         self.yahoo_tree.heading(
             5,
-            text=u"指摘の詳細情報"
+            text=self.dic.get_dict("Detailed information on the pointed out")
         )
         # 情報を取り出す
         for child in list(xml):

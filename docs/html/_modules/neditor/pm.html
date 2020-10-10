@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -167,26 +167,33 @@
 <span class="kn">import</span> <span class="nn">pyttsx3</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 
-<div class="viewcode-block" id="ProcessingMenuClass"><a class="viewcode-back" href="../../neditor.html#neditor.pm.ProcessingMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ProcessingMenuClass</span><span class="p">():</span>
+
+<div class="viewcode-block" id="ProcessingMenuClass"><a class="viewcode-back" href="../../neditor.html#neditor.pm.ProcessingMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ProcessingMenuClass</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">MainClass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;処理メニューバーのクラス.</span>
 
 <span class="sd">    ・処理メニューバーにあるプログラム群</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
-<span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス</span>
 <span class="sd">        tokenizer (instance): Tokenizer のインスタンス</span>
+<span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス</span>
+<span class="sd">        locale_var (str): ロケーション</span>
+<span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">font_size</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="sd">&quot;&quot;&quot;フォントのサイズ.&quot;&quot;&quot;</span>
+    <span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Yahoo! Client ID&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="c1"># yahooの校正支援</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">KOUSEI</span> <span class="o">=</span> <span class="s2">&quot;{urn:yahoo:jp:jlp:KouseiService}&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wiki_wiki</span> <span class="o">=</span> <span class="n">wiki_wiki</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wiki_wiki</span> <span class="o">=</span> <span class="n">wiki_wiki</span>
 
 <div class="viewcode-block" id="ProcessingMenuClass.ruby_huri"><a class="viewcode-back" href="../../neditor.html#neditor.pm.ProcessingMenuClass.ruby_huri">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">ruby_huri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ルビをふり.</span>
@@ -213,7 +220,7 @@
                 <span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
             <span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">part_of_speech</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
                 <span class="s2">&quot;,&quot;</span>
-            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">u</span><span class="s2">&quot;記号&quot;</span><span class="p">:</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">):</span>
                 <span class="n">hon</span> <span class="o">+=</span> <span class="n">token</span><span class="o">.</span><span class="n">surface</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># ルビ振りを行う</span>
@@ -409,37 +416,35 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoocall</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end -1c&#39;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahooresult</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Double-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_double_click_yahoo</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProcessingMenuClass.yahoocall"><a class="viewcode-back" href="../../neditor.html#neditor.pm.ProcessingMenuClass.yahoocall">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoocall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yahoo_appid</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="ProcessingMenuClass.yahoocall"><a class="viewcode-back" href="../../neditor.html#neditor.pm.ProcessingMenuClass.yahoocall">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">yahoocall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;yahooの校正支援を呼び出し.</span>
 
 <span class="sd">        ・Yahoo! 校正支援をClient IDを使って呼び出す。</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            yahoo_appid (str): Yahoo! Client ID</span>
 <span class="sd">            sentence (str): 校正をしたい文字列</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: 校正結果</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">yahoo_appid</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Yahoo! Client ID&quot;</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
                     <span class="s2">&quot;Yahoo! Client ID is not find.&quot;</span>
-                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read Readme.pdf and set it again.&quot;</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read Readme.html and set it again.&quot;</span>
                 <span class="p">)</span>
             <span class="p">)</span>
             <span class="k">return</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://jlp.yahooapis.jp/KouseiService/V1/kousei&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;appid&quot;</span><span class="p">:</span> <span class="n">yahoo_appid</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;appid&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span>
             <span class="s2">&quot;sentence&quot;</span><span class="p">:</span> <span class="n">sentence</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
@@ -468,23 +473,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
             <span class="mi">1</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;先頭からの文字数&quot;</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of characters from the beginning&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
             <span class="mi">2</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;対象文字数&quot;</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of target characters&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
             <span class="mi">3</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;対象表記&quot;</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Target notation&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
             <span class="mi">4</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;言い換え候補文字列&quot;</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Paraphrase candidate string&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
             <span class="mi">5</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;指摘の詳細情報&quot;</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Detailed information on the pointed out&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="c1"># 情報を取り出す</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>

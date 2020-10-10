@@ -133,7 +133,7 @@ class CreateWindowClass(main.MainClass):
             command=self.app.pmc.count_moji
         )
         Processing_menu.add_command(
-            label=self.app.dic.get_dict("Meaning of letters"),
+            label=self.app.dic.get_dict("Meaning of selected characters"),
             under=8,
             accelerator='Ctrl+Shift+F',
             command=self.app.pmc.find_wikipedia

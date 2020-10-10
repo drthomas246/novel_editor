@@ -9,6 +9,7 @@ import tkinter.filedialog as filedialog
 from . import lm
 from . import main
 
+
 class FileMenuClass(main.MainClass):
     """ファイルメニューバーのクラス.
 
@@ -20,7 +21,7 @@ class FileMenuClass(main.MainClass):
         master (instance): toplevel のインスタンス
     """
     now_path = ""
-    """今の処理ししているファイルのパス."""
+    """今の処理しているファイルのパス."""
     file_path = ""
     """現在開いているファイル."""
 
@@ -149,7 +150,7 @@ class FileMenuClass(main.MainClass):
         """
         if messagebox.askokcancel(
                 self.app.dic.get_dict("Novel Editor"),
-                self.app.dic.get_dict("Can I quit?")
+                self.app.dic.get_dict("Quit this program?")
         ):
             shutil.rmtree("./data")
             if os.path.isfile("./userdic.csv"):
@@ -243,9 +244,9 @@ class FileMenuClass(main.MainClass):
 
     @classmethod
     def now_path_input(cls, now_path):
-        """今の処理ししているファイルのパスを入力.
+        """今の処理しているファイルのパスを入力.
 
-        ・今の処理ししているファイルのパスをクラス変数に入力する。
+        ・今の処理しているファイルのパスをクラス変数に入力する。
 
         Args:
             now_path (str): 今の処理ししているファイルのパス

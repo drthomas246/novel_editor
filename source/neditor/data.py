@@ -1,3 +1,4 @@
+# バージョン情報
 __version__ = 'Ver 0.7.0 Beta'
 # タイトルイメージのbase 64データ
 TITLE_BINARY = '''R0lGODlhWAIsAfcAAAAAAQ0AAwAABQAAC0oXCzQMEC0VFBAAFQAAGFIfHQ0KHhIT

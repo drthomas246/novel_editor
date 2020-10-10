@@ -27,7 +27,7 @@ def main_window_create(locale_var):
     if os.path.isdir("./data"):
         messagebox.showerror(
             dic.get_dict("Novel Editor"),
-            dic.get_dict("Double startup is not possible.")
+            dic.get_dict("This program cannot be started more than once.")
         )
         sys.exit()
 

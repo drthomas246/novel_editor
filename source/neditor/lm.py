@@ -546,6 +546,8 @@ class MyDialogClass():
                 self.txt_name.select_range(0, 'end')
 
         self.sub_name_win.title(title)
+        self.sub_name_win.attributes("-topmost", True)
+        self.sub_name_win.resizable(False, False)
         self.txt_name.focus()
 
     def sub_name_ok(self, event=None):

@@ -74,6 +74,7 @@ class FindProcessingClass(main.MainClass):
         button2.grid(row=1, column=1)
         # 最前面に表示し続ける
         search_win.attributes("-topmost", True)
+        search_win.resizable(False, False)
         search_win.title(self.app.dic.get_dict("Find"))
         self.text_var.focus()
 
@@ -124,6 +125,7 @@ class FindProcessingClass(main.MainClass):
         button2.grid(row=2, column=1)
         # 最前面に表示し続ける
         self.replacement_win.attributes("-topmost", True)
+        self.replacement_win.resizable(False, False)
         self.replacement_win.title(
             self.app.dic.get_dict("Replacement")
         )

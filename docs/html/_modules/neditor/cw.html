@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -160,20 +160,22 @@
 <span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">pm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 
 
-<div class="viewcode-block" id="CreateWindowClass"><a class="viewcode-back" href="../../neditor.html#neditor.cw.CreateWindowClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">CreateWindowClass</span><span class="p">():</span>
+<div class="viewcode-block" id="CreateWindowClass"><a class="viewcode-back" href="../../neditor.html#neditor.cw.CreateWindowClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">CreateWindowClass</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">MainClass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;画面の描画のクラス.</span>
 
 <span class="sd">    ・画面描画にあるプログラム群</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
-<span class="sd">        BLANK_IMAGE (str): 空白のbase 64データ</span>
+<span class="sd">        locale_var (str): ロケーション</span>
+<span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">BLANK_IMAGE</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">BLANK_IMAGE</span> <span class="o">=</span> <span class="n">BLANK_IMAGE</span>
 
 <div class="viewcode-block" id="CreateWindowClass.create_widgets"><a class="viewcode-back" href="../../neditor.html#neditor.cw.CreateWindowClass.create_widgets">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">create_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;画面の描画.</span>
@@ -288,7 +290,7 @@
             <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">count_moji</span>
         <span class="p">)</span>
         <span class="n">Processing_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span>
-            <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Meaning of letters&quot;</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Meaning of selected characters&quot;</span><span class="p">),</span>
             <span class="n">under</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">accelerator</span><span class="o">=</span><span class="s1">&#39;Ctrl+Shift+F&#39;</span><span class="p">,</span>
             <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">find_wikipedia</span>
