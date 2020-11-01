@@ -3,7 +3,7 @@
 使用するためには、pyinstallerを使いますので、下記のコードをターミナルエディタに記入しインストールしてください。
 
 ```
-pip install 'pyinstaller==3.4'
+pip install pyinstaller
 ```
 
 - バッチファイルを起動してexeファイルを作成します。

@@ -89,8 +89,8 @@ class FileMenuClass(main.MainClass):
             # ツリービューを表示する
             self.tree_get_loop()
             # ファイルパスを拡張子抜きで表示する
-            filepath, ___ = os.path.splitext(filepath)
-            self.file_path_input(filepath)
+            file_path = os.path.splitext(filepath)[0]
+            self.file_path_input(file_path)
             self.now_path_input("")
             # テキストビューを新にする
             self.app.cwc.frame()
@@ -138,8 +138,8 @@ class FileMenuClass(main.MainClass):
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
-            file_path, ___ = os.path.splitext(filepath)
-            self.file_path_input(filepath)
+            file_path = os.path.splitext(filepath)[0]
+            self.file_path_input(file_path)
             # 上書き保存処理
             self.overwrite_save_file()
 
