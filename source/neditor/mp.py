@@ -1,85 +1,98 @@
 #!/usr/bin/env python3
 import os
 import shutil
-import platform
 import tkinter as tk
-import tkinter.ttk as ttk
 
-from . import pm
-from . import fm
+from . import cw
+from . import ep
+from . import sp
+from . import hp
 from . import fp
+from . import cp
+from . import fm
+from . import em
+from . import hm
+from . import pm
 from . import lm
+from . import main
 
 
-class MainProcessingClass(ttk.Frame):
+class MainProcessingClass(main.MainClass):
     """メインフレーム処理のクラス.
 
     ・初期設定をするプログラム群
 
     Args:
-        TREE_FOLDER (list): ツリーフォルダの配列
         tokenizer (instance): Tokenizer のインスタンス
         wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
-        TITLE_BINARY (str): タイトルイメージファイルバイナリ
-        class_instance (dict): 自作クラスのインスタント群
-        VERSION (str): バージョン情報
-        locale (str): ロケーション
+        locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
 
-    def __init__(
-        self,
-        TREE_FOLDER,
-        tokenizer,
-        WIKI_WIKI,
-        TITLE_BINARY,
-        BLANK_IMAGE,
-        class_instance,
-        VERSION,
-        dic,
-        master=None
-    ):
-        super().__init__(master)
-        self.TREE_FOLDER = TREE_FOLDER
-        self.dic = dic
+    def __init__(self, tokenizer, wiki_wiki, locale_var, master=None):
+        super().__init__(locale_var, master)
         # 自作クラスの読み込み
-        self.cwc = class_instance['cw'].CreateWindowClass(self, BLANK_IMAGE)
-        self.epc = class_instance['ep'].EventProcessingClass(self)
-        self.spc = class_instance['sp'].SubfunctionProcessingClass(
-            self
-        )
-        self.hpc = class_instance['hp'].HighlightProcessingClass(
+        self.cwc = cw.CreateWindowClass(
             self,
-            tokenizer
+            locale_var,
+            master
         )
-        self.fpc = class_instance['fp'].FindProcessingClass(self)
-        self.cpc = class_instance['cp'].ComplementProcessingClass(
+        self.epc = ep.EventProcessingClass(
             self,
-            tokenizer
+            locale_var,
+            master
         )
-        self.fmc = class_instance['fm'].FileMenuClass(
+        self.spc = sp.SubfunctionProcessingClass(
             self,
-            master,
-            self.TREE_FOLDER
+            locale_var,
+            master
         )
-        self.emc = class_instance['em'].EditMenuClass(self)
-        self.pmc = class_instance['pm'].ProcessingMenuClass(
+        self.hpc = hp.HighlightProcessingClass(
             self,
-            WIKI_WIKI,
-            tokenizer
+            tokenizer,
+            locale_var,
+            master
         )
-        self.lmc = class_instance['lm'].ListMenuClass(
+        self.fpc = fp.FindProcessingClass(
             self,
-            master,
-            self.TREE_FOLDER
+            locale_var,
+            master
         )
-        self.hmc = class_instance['hm'].HelpMenuClass(
+        self.cpc = cp.ComplementProcessingClass(
             self,
-            TITLE_BINARY,
-            VERSION
+            tokenizer,
+            locale_var,
+            master
+        )
+        self.fmc = fm.FileMenuClass(
+            self,
+            locale_var,
+            master
+        )
+        self.emc = em.EditMenuClass(
+            self,
+            locale_var,
+            master
+        )
+        self.pmc = pm.ProcessingMenuClass(
+            self,
+            tokenizer,
+            wiki_wiki,
+            locale_var,
+            master
+        )
+        self.lmc = lm.ListMenuClass(
+            self,
+            locale_var,
+            master
+        )
+        self.hmc = hm.HelpMenuClass(
+            self,
+            locale_var,
+            master
         )
         # メニューバーの作成
-        self.menu_bar = tk.Menu(self.master)
+        self.menu_bar = tk.Menu(master)
         self.master.config(menu=self.menu_bar)
         # 初期化処理
         self.initialize()
@@ -102,23 +115,13 @@ class MainProcessingClass(ttk.Frame):
         lm.ListMenuClass.select_list_item = ""
         # 文字の大きさ
         pm.ProcessingMenuClass.font_size = 16
-        self.pmc.yahoo_appid = ""
+        pm.ProcessingMenuClass.yahoo_appid = ""
         if os.path.isfile("./appid.txt"):
-            f = open("./appid.txt", "r", encoding="utf-8")
-            self.pmc.yahoo_appid = f.read()
-            f.close()
-        if u"ここを消して、" in self.pmc.yahoo_appid:
-            self.pmc.yahoo_appid = ""
-        # フォントをOSごとに変える
-        pf = platform.system()
-        if pf == 'Windows':
-            self.font = "メイリオ"
-        elif pf == 'Darwin':  # MacOS
-            self.font = "Osaka-等幅"
-        elif pf == 'Linux':
-            self.font = "IPAゴシック"
-        else:
-            self.font = ""
+            with open("./appid.txt", encoding='utf-8') as f:
+                pm.ProcessingMenuClass.yahoo_appid = f.read()
+
+        if u"ここを消して、" in pm.ProcessingMenuClass.yahoo_appid:
+            pm.ProcessingMenuClass.yahoo_appid = ""
 
         # dataフォルダがあるときは、削除する
         if os.path.isdir('./data'):

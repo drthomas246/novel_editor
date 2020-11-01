@@ -8,17 +8,21 @@ from PIL import Image, ImageTk
 
 from . import fm
 from . import lm
+from . import main
 
 
-class SubfunctionProcessingClass():
+class SubfunctionProcessingClass(main.MainClass):
     """補助機能のクラス.
 
     ・補助機能があるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.zoom = 0
         self.app = app
 
@@ -48,8 +52,9 @@ class SubfunctionProcessingClass():
         title = "./data/image/{0}.txt".format(
             lm.ListMenuClass.select_list_item
         )
-        f = open(title, 'r', encoding='utf-8')
-        zoom = f.read()
+        with open(title, encoding='utf-8') as f:
+            zoom = f.read()
+
         self.zoom = int(zoom)
         f.close()
         if event.delta > 0:
@@ -59,9 +64,9 @@ class SubfunctionProcessingClass():
         elif event.delta < 0:
             self.zoom += 5
 
-        f = open(title, 'w', encoding='utf-8')
-        f.write(str(self.zoom))
-        f.close()
+        with open(title, mode='w', encoding='utf-8') as f:
+            f.write(str(self.zoom))
+
         self.app.lmc.path_read_image(
                     'data/image',
                     lm.ListMenuClass.select_list_item,

@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -165,17 +165,21 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fm</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 
 
-<div class="viewcode-block" id="SubfunctionProcessingClass"><a class="viewcode-back" href="../../neditor.html#neditor.sp.SubfunctionProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">SubfunctionProcessingClass</span><span class="p">():</span>
+<div class="viewcode-block" id="SubfunctionProcessingClass"><a class="viewcode-back" href="../../neditor.html#neditor.sp.SubfunctionProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">SubfunctionProcessingClass</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">MainClass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;補助機能のクラス.</span>
 
 <span class="sd">    ・補助機能があるプログラム群</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
+<span class="sd">        locale_var (str): ロケーション</span>
+<span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
 
@@ -205,8 +209,9 @@
         <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;./data/image/</span><span class="si">{0}</span><span class="s2">.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">lm</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="o">.</span><span class="n">select_list_item</span>
         <span class="p">)</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="n">zoom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">zoom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -216,9 +221,9 @@
         <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">zoom</span> <span class="o">+=</span> <span class="mi">5</span>
 
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">lmc</span><span class="o">.</span><span class="n">path_read_image</span><span class="p">(</span>
                     <span class="s1">&#39;data/image&#39;</span><span class="p">,</span>
                     <span class="n">lm</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="o">.</span><span class="n">select_list_item</span><span class="p">,</span>

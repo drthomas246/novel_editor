@@ -10,26 +10,33 @@ import jaconv
 import pyttsx3
 import requests
 
+from . import main
 
-class ProcessingMenuClass():
+
+class ProcessingMenuClass(main.MainClass):
     """処理メニューバーのクラス.
 
     ・処理メニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
-        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
         tokenizer (instance): Tokenizer のインスタンス
+        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
     font_size = 0
     """フォントのサイズ."""
+    yahoo_appid = ""
+    """Yahoo! Client ID"""
 
-    def __init__(self, app, wiki_wiki, tokenizer):
+    def __init__(self, app, tokenizer, wiki_wiki, locale_var, master=None):
+        super().__init__(locale_var, master)
         # yahooの校正支援
         self.KOUSEI = "{urn:yahoo:jp:jlp:KouseiService}"
         self.app = app
-        self.wiki_wiki = wiki_wiki
         self.tokenizer = tokenizer
+        self.wiki_wiki = wiki_wiki
 
     def ruby_huri(self):
         """ルビをふり.
@@ -56,7 +63,7 @@ class ProcessingMenuClass():
                 hira, ''
             ) == "" or token.part_of_speech.split(
                 ","
-            )[0] == u"記号":
+            )[0] == self.dic.get_dict("symbol"):
                 hon += token.surface
             else:
                 # ルビ振りを行う
@@ -212,7 +219,7 @@ class ProcessingMenuClass():
             # 最前面に表示し続ける
             self.sub_read_win.attributes("-topmost", True)
             # サイズ変更禁止
-            self.sub_read_win.resizable(width=0, height=0)
+            self.sub_read_win.resizable(False, False)
             self.sub_read_win.title(
                 self.app.dic.get_dict("Read aloud")
             )
@@ -252,37 +259,35 @@ class ProcessingMenuClass():
             event (instance): tkinter.Event のインスタンス
         """
         html = self.yahoocall(
-            self.yahoo_appid,
             self.app.text.get('1.0', 'end -1c')
         )
         if not self.yahoo_appid == "":
             self.yahooresult(html)
             self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
 
-    def yahoocall(self, yahoo_appid="", sentence=""):
+    def yahoocall(self, sentence=""):
         """yahooの校正支援を呼び出し.
 
         ・Yahoo! 校正支援をClient IDを使って呼び出す。
 
         Args:
-            yahoo_appid (str): Yahoo! Client ID
             sentence (str): 校正をしたい文字列
 
         Returns:
             str: 校正結果
         """
-        if yahoo_appid == "":
+        if self.yahoo_appid == "":
             messagebox.showerror(
                 self.app.dic.get_dict("Yahoo! Client ID"),
                 self.app.dic.get_dict(
                     "Yahoo! Client ID is not find."
-                    "\nRead Readme.pdf and set it again."
+                    "\nRead Readme.html and set it again."
                 )
             )
             return
         url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
         data = {
-            "appid": yahoo_appid.rstrip('\n'),
+            "appid": self.yahoo_appid.rstrip('\n'),
             "sentence": sentence,
         }
         html = requests.post(url, data)
@@ -311,23 +316,23 @@ class ProcessingMenuClass():
         self.yahoo_tree.column(5, width=120)
         self.yahoo_tree.heading(
             1,
-            text=u"先頭からの文字数"
+            text=self.dic.get_dict("Number of characters from the beginning")
         )
         self.yahoo_tree.heading(
             2,
-            text=u"対象文字数"
+            text=self.dic.get_dict("Number of target characters")
         )
         self.yahoo_tree.heading(
             3,
-            text=u"対象表記"
+            text=self.dic.get_dict("Target notation")
         )
         self.yahoo_tree.heading(
             4,
-            text=u"言い換え候補文字列"
+            text=self.dic.get_dict("Paraphrase candidate string")
         )
         self.yahoo_tree.heading(
             5,
-            text=u"指摘の詳細情報"
+            text=self.dic.get_dict("Detailed information on the pointed out")
         )
         # 情報を取り出す
         for child in list(xml):

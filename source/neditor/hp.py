@@ -5,9 +5,10 @@ from janome.tokenizer import Tokenizer
 
 from . import pm
 from . import fp
+from . import main
 
 
-class HighlightProcessingClass():
+class HighlightProcessingClass(main.MainClass):
     """ハイライトのクラス.
 
     ・ハイライトするためのプログラム群
@@ -15,8 +16,11 @@ class HighlightProcessingClass():
     Args:
         app (instance): MainProcessingClass のインスタンス
         tokenizer (instance): Tokenizer のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app, tokenizer):
+    def __init__(self, app, tokenizer, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.COLOR = [
             'sky blue',
             'yellow green',
@@ -136,9 +140,10 @@ class HighlightProcessingClass():
                 font=(self.app.font, pm.ProcessingMenuClass.font_size, "bold")
             )
             i += 1
-        f = open("./userdic.csv", 'w', encoding='utf-8')
-        f.write(system_dic)
-        f.close()
+
+        with open("./userdic.csv", mode='w', encoding='utf-8') as f:
+            f.write(system_dic)
+
         # Janomeを使って日本語の形態素解析
         self.t = Tokenizer(
             "./userdic.csv",

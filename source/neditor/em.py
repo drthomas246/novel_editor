@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-class EditMenuClass():
+from . import main
+
+
+class EditMenuClass(main.MainClass):
     """編集メニューバーのクラス.
 
     ・編集メニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
 
     def redo(self, event=None):

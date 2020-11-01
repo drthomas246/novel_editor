@@ -10,9 +10,10 @@ class Localization():
 
     Args:
         locale_var (str): ロケーション
-        NEDITOR (str): neditor.txtの値
+        FILE_NAME (str): ファイル名
+        TRANSLATION_DATA (str): 翻訳データ
     """
-    def __init__(self, locale_var, NEDITOR):
+    def __init__(self, locale_var, FILE_NAME, TRANSLATION_DATA):
         path_to_locale_dir = os.path.abspath(
             os.path.join(
                 os.getcwd(),
@@ -22,14 +23,14 @@ class Localization():
         if os.path.exists(path_to_locale_dir) is False:
             os.makedirs(path_to_locale_dir)
             with open(
-                    "{0}/neditor.txt".format(path_to_locale_dir),
+                    "{0}/{1}".format(path_to_locale_dir, FILE_NAME),
                     encoding='utf-8',
                     mode='w'
             ) as f:
-                f.write(NEDITOR)
+                f.write(TRANSLATION_DATA)
 
         with open(
-                "{0}/neditor.txt".format(path_to_locale_dir),
+                "{0}/{1}".format(path_to_locale_dir, FILE_NAME),
                 encoding='utf-8'
         ) as f:
             l_strip = f.read()

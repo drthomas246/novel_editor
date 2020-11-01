@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -167,9 +167,10 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        locale_var (str): ロケーション</span>
-<span class="sd">        NEDITOR (str): neditor.txtの値</span>
+<span class="sd">        FILE_NAME (str): ファイル名</span>
+<span class="sd">        TRANSLATION_DATA (str): 翻訳データ</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">NEDITOR</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">FILE_NAME</span><span class="p">,</span> <span class="n">TRANSLATION_DATA</span><span class="p">):</span>
         <span class="n">path_to_locale_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
@@ -179,14 +180,14 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">)</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
-                    <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/neditor.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">),</span>
+                    <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">,</span> <span class="n">FILE_NAME</span><span class="p">),</span>
                     <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span>
                     <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>
             <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">NEDITOR</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">TRANSLATION_DATA</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
-                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/neditor.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">),</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path_to_locale_dir</span><span class="p">,</span> <span class="n">FILE_NAME</span><span class="p">),</span>
                 <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span>
         <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">l_strip</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>

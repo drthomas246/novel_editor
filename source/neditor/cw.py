@@ -3,20 +3,22 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 from . import pm
+from . import main
 
 
-class CreateWindowClass():
+class CreateWindowClass(main.MainClass):
     """画面の描画のクラス.
 
     ・画面描画にあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
-        BLANK_IMAGE (str): 空白のbase 64データ
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app, BLANK_IMAGE):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
-        self.BLANK_IMAGE = BLANK_IMAGE
 
     def create_widgets(self):
         """画面の描画.
@@ -131,7 +133,7 @@ class CreateWindowClass():
             command=self.app.pmc.count_moji
         )
         Processing_menu.add_command(
-            label=self.app.dic.get_dict("Meaning of letters"),
+            label=self.app.dic.get_dict("Meaning of selected characters"),
             under=8,
             accelerator='Ctrl+Shift+F',
             command=self.app.pmc.find_wikipedia

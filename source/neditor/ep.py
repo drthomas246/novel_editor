@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-class EventProcessingClass():
+from . import main
+
+
+class EventProcessingClass(main.MainClass):
     """ウインドウイベントのクラス.
 
     ・ウインドウイベントにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
 
     def create_event_text(self):

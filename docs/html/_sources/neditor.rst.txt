@@ -76,6 +76,14 @@ neditor.lm module
    :undoc-members:
    :show-inheritance:
 
+neditor.main module
+-------------------
+
+.. automodule:: neditor.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 neditor.mp module
 -----------------
 

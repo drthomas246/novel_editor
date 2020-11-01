@@ -2,15 +2,18 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
+from . import main
 
 
-class FindProcessingClass():
+class FindProcessingClass(main.MainClass):
     """検索置換のクラス.
 
     ・検索置換するためのプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
+        master (instance): toplevel のインスタンス
     """
     replacement_check = False
     """検索ダイアログが表示されているTrue."""
@@ -19,7 +22,8 @@ class FindProcessingClass():
     find_text = ""
     """検索文字列."""
 
-    def __init__(self, app):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
 
     def push_keys(self, event=None):
@@ -70,6 +74,7 @@ class FindProcessingClass():
         button2.grid(row=1, column=1)
         # 最前面に表示し続ける
         search_win.attributes("-topmost", True)
+        search_win.resizable(False, False)
         search_win.title(self.app.dic.get_dict("Find"))
         self.text_var.focus()
 
@@ -120,6 +125,7 @@ class FindProcessingClass():
         button2.grid(row=2, column=1)
         # 最前面に表示し続ける
         self.replacement_win.attributes("-topmost", True)
+        self.replacement_win.resizable(False, False)
         self.replacement_win.title(
             self.app.dic.get_dict("Replacement")
         )
@@ -271,8 +277,11 @@ class FindProcessingClass():
             )
             if not pos:
                 messagebox.showinfo(
-                    "検索",
-                    "最後まで検索しましたが検索文字はありませんでした。"
+                    self.app.dic.get_dict("Find"),
+                    self.app.dic.get_dict(
+                        "I searched to the end,"
+                        " but there were no search characters."
+                    )
                 )
                 self.replacement_check_input(False)
                 return

@@ -7,27 +7,28 @@ import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
 
 from . import lm
+from . import main
 
 
-class FileMenuClass():
+class FileMenuClass(main.MainClass):
     """ファイルメニューバーのクラス.
 
     ・ファイルメニューバーにあるプログラム群
 
     Args:
         app (instance): MainProcessingClass のインスタンス
+        locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
-        TREE_FOLDER (list): ツリーフォルダの配列
     """
     now_path = ""
-    """今の処理ししているファイルのパス."""
+    """今の処理しているファイルのパス."""
     file_path = ""
     """現在開いているファイル."""
 
-    def __init__(self, app, master, TREE_FOLDER):
+    def __init__(self, app, locale_var, master=None):
+        super().__init__(locale_var, master)
         self.app = app
         self.master = master
-        self.TREE_FOLDER = TREE_FOLDER
 
     def new_open(self, event=None):
         """新規作成.
@@ -88,8 +89,8 @@ class FileMenuClass():
             # ツリービューを表示する
             self.tree_get_loop()
             # ファイルパスを拡張子抜きで表示する
-            filepath, ___ = os.path.splitext(filepath)
-            self.file_path_input(filepath)
+            file_path = os.path.splitext(filepath)[0]
+            self.file_path_input(file_path)
             self.now_path_input("")
             # テキストビューを新にする
             self.app.cwc.frame()
@@ -137,8 +138,8 @@ class FileMenuClass():
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
-            file_path, ___ = os.path.splitext(filepath)
-            self.file_path_input(filepath)
+            file_path = os.path.splitext(filepath)[0]
+            self.file_path_input(file_path)
             # 上書き保存処理
             self.overwrite_save_file()
 
@@ -149,7 +150,7 @@ class FileMenuClass():
         """
         if messagebox.askokcancel(
                 self.app.dic.get_dict("Novel Editor"),
-                self.app.dic.get_dict("Can I quit?")
+                self.app.dic.get_dict("Quit this program?")
         ):
             shutil.rmtree("./data")
             if os.path.isfile("./userdic.csv"):
@@ -187,16 +188,17 @@ class FileMenuClass():
         """
         # 編集ファイルを保存する
         if not path == "":
-            f = open(path, 'w', encoding='utf-8')
-            if not path.find(self.TREE_FOLDER[0][0]) == -1:
-                f.write(self.save_charactor_file(self.app.txt_yobi_name.get()))
-                self.charactor_file = ""
-            elif not path.find(self.TREE_FOLDER[4][0]) == -1:
-                f.write(str(self.app.spc.zoom))
-            else:
-                f.write(self.app.text.get("1.0", tk.END+'-1c'))
+            with open(path, mode='w', encoding='utf-8') as f:
+                if not path.find(self.TREE_FOLDER[0][0]) == -1:
+                    f.write(
+                        self.save_charactor_file(self.app.txt_yobi_name.get())
+                    )
+                    self.charactor_file = ""
+                elif not path.find(self.TREE_FOLDER[4][0]) == -1:
+                    f.write(str(self.app.spc.zoom))
+                else:
+                    f.write(self.app.text.get("1.0", tk.END+'-1c'))
 
-            f.close()
             self.now_path_input(path)
 
     def save_charactor_file(self, name):
@@ -242,9 +244,9 @@ class FileMenuClass():
 
     @classmethod
     def now_path_input(cls, now_path):
-        """今の処理ししているファイルのパスを入力.
+        """今の処理しているファイルのパスを入力.
 
-        ・今の処理ししているファイルのパスをクラス変数に入力する。
+        ・今の処理しているファイルのパスをクラス変数に入力する。
 
         Args:
             now_path (str): 今の処理ししているファイルのパス

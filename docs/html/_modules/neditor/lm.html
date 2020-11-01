@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -167,27 +167,28 @@
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 
 
-<div class="viewcode-block" id="ListMenuClass"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ListMenuClass</span><span class="p">():</span>
+<div class="viewcode-block" id="ListMenuClass"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">ListMenuClass</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">MainClass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;リストメニューバーのクラス.</span>
 
 <span class="sd">    ・リストメニューバーにあるプログラム群</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
+<span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
-<span class="sd">        TREE_FOLDER (list): ツリーフォルダの配列</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">text_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;現在入力中の初期テキスト.&quot;&quot;&quot;</span>
     <span class="n">select_list_item</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="sd">&quot;&quot;&quot;選択中のリストボックスアイテム名.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">TREE_FOLDER</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">master</span> <span class="o">=</span> <span class="n">master</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">TREE_FOLDER</span>
 
 <div class="viewcode-block" id="ListMenuClass.message_window"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.message_window">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">message_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;ツリービューを右クリックしたときの処理.</span>
@@ -288,9 +289,8 @@
 <span class="sd">            new_file (str): 変更後のファイル名</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rename_gif</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">)</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">now_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">save_charactor_file</span><span class="p">(</span><span class="n">new_file</span><span class="p">))</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">now_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">save_charactor_file</span><span class="p">(</span><span class="n">new_file</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.rename_gif"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.rename_gif">[ドキュメント]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">rename_gif</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">old_file</span><span class="p">,</span> <span class="n">new_file</span><span class="p">):</span>
@@ -350,9 +350,11 @@
             <span class="n">giffile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                    <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">image_name</span><span class="p">)</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">/</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">image_name</span>
+                <span class="p">)</span>
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ListMenuClass.path_read_text"><a class="viewcode-back" href="../../neditor.html#neditor.lm.ListMenuClass.path_read_text">[ドキュメント]</a>    <span class="k">def</span> <span class="nf">path_read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_path</span><span class="p">,</span> <span class="n">text_name</span><span class="p">):</span>
@@ -389,15 +391,16 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">print_gif</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">text_text_input</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_text</span><span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">text_text_input</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_text</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                    <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_path</span><span class="p">,</span> <span class="n">text_name</span><span class="p">)</span>
+                <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">/</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
+                    <span class="n">text_path</span><span class="p">,</span>
+                    <span class="n">text_name</span>
+                <span class="p">)</span>
             <span class="p">)</span>
             <span class="c1"># シンタックスハイライトをする</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">all_highlight</span><span class="p">()</span></div>
@@ -430,8 +433,9 @@
                         <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item</span>
                     <span class="p">)</span>
-                    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                    <span class="n">zoom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">zoom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
                     <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
@@ -497,10 +501,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
             <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="o">.</span><span class="n">now_path</span> <span class="o">=</span> <span class="n">path</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">100</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">100</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">spc</span><span class="o">.</span><span class="n">zoom</span><span class="p">))</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame_image</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">path_read_image</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -561,18 +565,20 @@
 
             <span class="c1"># パスが存在すれば新規作成する</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
                 <span class="c1"># ツリービューを選択状態にする</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">selection_set</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">select_list_item_input</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">winfo_toplevel</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                        <span class="s2">&quot;Novel Editor/</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">&quot;</span>
-                    <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+                    <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">/</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
+                        <span class="n">text</span><span class="p">,</span>
+                        <span class="n">file_name</span>
+                    <span class="p">)</span>
                 <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
                 <span class="c1"># テキストを読み取り専用を解除する</span>

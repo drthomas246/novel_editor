@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
 
             
@@ -158,85 +158,98 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
-<span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">pm</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cw</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">ep</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">sp</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">hp</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fp</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cp</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">em</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">hm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">pm</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lm</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 
 
-<div class="viewcode-block" id="MainProcessingClass"><a class="viewcode-back" href="../../neditor.html#neditor.mp.MainProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MainProcessingClass</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+<div class="viewcode-block" id="MainProcessingClass"><a class="viewcode-back" href="../../neditor.html#neditor.mp.MainProcessingClass">[ドキュメント]</a><span class="k">class</span> <span class="nc">MainProcessingClass</span><span class="p">(</span><span class="n">main</span><span class="o">.</span><span class="n">MainClass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;メインフレーム処理のクラス.</span>
 
 <span class="sd">    ・初期設定をするプログラム群</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        TREE_FOLDER (list): ツリーフォルダの配列</span>
 <span class="sd">        tokenizer (instance): Tokenizer のインスタンス</span>
 <span class="sd">        wiki_wiki (instance): wikipediaapi.Wikipedia のインスタンス</span>
-<span class="sd">        TITLE_BINARY (str): タイトルイメージファイルバイナリ</span>
-<span class="sd">        class_instance (dict): 自作クラスのインスタント群</span>
-<span class="sd">        VERSION (str): バージョン情報</span>
-<span class="sd">        locale (str): ロケーション</span>
+<span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">TREE_FOLDER</span><span class="p">,</span>
-        <span class="n">tokenizer</span><span class="p">,</span>
-        <span class="n">WIKI_WIKI</span><span class="p">,</span>
-        <span class="n">TITLE_BINARY</span><span class="p">,</span>
-        <span class="n">BLANK_IMAGE</span><span class="p">,</span>
-        <span class="n">class_instance</span><span class="p">,</span>
-        <span class="n">VERSION</span><span class="p">,</span>
-        <span class="n">dic</span><span class="p">,</span>
-        <span class="n">master</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span> <span class="o">=</span> <span class="n">TREE_FOLDER</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dic</span> <span class="o">=</span> <span class="n">dic</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="c1"># 自作クラスの読み込み</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;cw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">CreateWindowClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BLANK_IMAGE</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">epc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">EventProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">SubfunctionProcessingClass</span><span class="p">(</span>
-            <span class="bp">self</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hpc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">HighlightProcessingClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cwc</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="n">CreateWindowClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">tokenizer</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fpc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;fp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">FindProcessingClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cpc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ComplementProcessingClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epc</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">EventProcessingClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">tokenizer</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fmc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;fm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spc</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">SubfunctionProcessingClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">master</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">emc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;em&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">EditMenuClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;pm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hpc</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">HighlightProcessingClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">WIKI_WIKI</span><span class="p">,</span>
-            <span class="n">tokenizer</span>
+            <span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lmc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;lm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpc</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">FindProcessingClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">master</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TREE_FOLDER</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hmc</span> <span class="o">=</span> <span class="n">class_instance</span><span class="p">[</span><span class="s1">&#39;hm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">HelpMenuClass</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpc</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">ComplementProcessingClass</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">TITLE_BINARY</span><span class="p">,</span>
-            <span class="n">VERSION</span>
+            <span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fmc</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FileMenuClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emc</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="n">EditMenuClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">tokenizer</span><span class="p">,</span>
+            <span class="n">wiki_wiki</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lmc</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hmc</span> <span class="o">=</span> <span class="n">hm</span><span class="o">.</span><span class="n">HelpMenuClass</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">locale_var</span><span class="p">,</span>
+            <span class="n">master</span>
         <span class="p">)</span>
         <span class="c1"># メニューバーの作成</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">menu_bar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_bar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">menu_bar</span><span class="p">)</span>
         <span class="c1"># 初期化処理</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
@@ -259,23 +272,13 @@
         <span class="n">lm</span><span class="o">.</span><span class="n">ListMenuClass</span><span class="o">.</span><span class="n">select_list_item</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="c1"># 文字の大きさ</span>
         <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">font_size</span> <span class="o">=</span> <span class="mi">16</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s2">&quot;./appid.txt&quot;</span><span class="p">):</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./appid.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">if</span> <span class="sa">u</span><span class="s2">&quot;ここを消して、&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pmc</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="c1"># フォントをOSごとに変える</span>
-        <span class="n">pf</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;メイリオ&quot;</span>
-        <span class="k">elif</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Darwin&#39;</span><span class="p">:</span>  <span class="c1"># MacOS</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;Osaka-等幅&quot;</span>
-        <span class="k">elif</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Linux&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;IPAゴシック&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./appid.txt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="sa">u</span><span class="s2">&quot;ここを消して、&quot;</span> <span class="ow">in</span> <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="p">:</span>
+            <span class="n">pm</span><span class="o">.</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
         <span class="c1"># dataフォルダがあるときは、削除する</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;./data&#39;</span><span class="p">):</span>
