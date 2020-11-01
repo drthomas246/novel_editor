@@ -55,11 +55,6 @@ class HelpMenuClass(main.MainClass):
         ・ウエブブラウザを使ってREADME.htmlを表示する。
         """
         webbrowser.open(
-            'file://' + os.path.abspath(
-                os.path.join(
-                    os.getcwd(),
-                    "../"
-                )
-            )
+            'file://' + os.path.abspath(os.getcwd())
             + "/README.html"
         )

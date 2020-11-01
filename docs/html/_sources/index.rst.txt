@@ -13,7 +13,6 @@ Welcome to Novel Editor's documentation!
    use
    /sub/charactor
    /sub/save
-   /sub/exe
    /sub/coverage
    modules
 

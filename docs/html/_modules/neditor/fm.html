@@ -86,7 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../use.html">使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
@@ -246,8 +245,8 @@
             <span class="c1"># ツリービューを表示する</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tree_get_loop</span><span class="p">()</span>
             <span class="c1"># ファイルパスを拡張子抜きで表示する</span>
-            <span class="n">filepath</span><span class="p">,</span> <span class="n">___</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">file_path_input</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path_input</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">now_path_input</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="c1"># テキストビューを新にする</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cwc</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span></div>
@@ -295,8 +294,8 @@
         <span class="c1"># ファイルパスが決まったとき</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">filepath</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="c1"># 拡張子を除いて保存する</span>
-            <span class="n">file_path</span><span class="p">,</span> <span class="n">___</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">file_path_input</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filepath</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_path_input</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
             <span class="c1"># 上書き保存処理</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">overwrite_save_file</span><span class="p">()</span></div>
 

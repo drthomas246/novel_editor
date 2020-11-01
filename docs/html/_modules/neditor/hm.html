@@ -86,7 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../use.html">使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../sub/exe.html">exe実行ファイルを作成</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
 </ul>
@@ -212,12 +211,7 @@
 <span class="sd">        ・ウエブブラウザを使ってREADME.htmlを表示する。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-            <span class="s1">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
-                    <span class="s2">&quot;../&quot;</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
+            <span class="s1">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
             <span class="o">+</span> <span class="s2">&quot;/README.html&quot;</span>
         <span class="p">)</span></div></div>
 </pre></div>

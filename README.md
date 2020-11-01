@@ -24,7 +24,7 @@
 
 ## 使用方法
 
-- Windows用にコンパイルした物がReleasesにあります(64bit用)。ダブルクリックすれば起動します。  
+- Windows用にコンパイルした物(novel_editor.exe)があります。ダブルクリックすれば起動します。  
 また、削除は、novel_editorフォルダを削除してください。レジストリは汚していません。
 
 - __ver0.2.0b以降からセーブファイルの保存形式が変更になっています。今までのファイルを開くと最悪セーブファイル自身が破壊されてしまいます。  
@@ -261,12 +261,6 @@ This software includes the work that is distributed in the [Apache License 2.0](
 - Yahoo! 校正支援  
 Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
 
-- pyinstaller  
-Copyright (c) 2010-2020, PyInstaller Development Team  
-Copyright (c) 2005–2019, Giovanni Bajo  
-Distributed under the GPL license  
-[https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt](https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/COPYING.txt)
-
 - Coveragepy  
 Copyright(C) 2009–2020, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
@@ -275,6 +269,10 @@ This software includes the work that is distributed in the [Apache License 2.0](
 Copyright(C) 2007-2020 by the Sphinx team (see AUTHOS file).  
 Released under the Sphinx licens  
 [https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE](https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE)
+
+- sphinx-tsegsearch  
+Author: Yasushi Masuda  
+MIT License (MIT)
 
 ### 参考文献
 - naritoブログ  
