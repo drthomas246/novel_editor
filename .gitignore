@@ -2,6 +2,7 @@ source/__pycache__/
 source/locale/
 source/i18n/__pycache__/
 source/neditor/__pycache__/
+sphinx/make.bat
 C#/Release/
 C#/obj/
 build/

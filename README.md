@@ -219,9 +219,9 @@ Yahoo！デベロッパーネットワークへの接続方法を変更
 
 ## Copyright
 - ファイル名：novel_editor.py,novel_editor.exe,change.py,change.exe
-- Version：0.8.0b
+- Version：0.9.0b
 - 作者：山原　喜寛 (Yamahara Yoshihiro)
-- 著作年：2019-2020
+- 著作年：2019-2021
 - HP：https://www.hobofoto.net/
 - E-mail：yoshihiro@yamahara.email
 - ライセンス：[GNU GPL3 License](https://github.com/drthomas246/novel_editor/blob/master/LICENSE.md)
@@ -237,7 +237,7 @@ Copyright(C) 2015, Tomoko Uchida. All Rights Reserved.
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/mocobeta/janome/master/LICENSE.txt).
 
 - pyttsx3 (音声合成)ライブラリ  
-Copyright (C) 2007 Free Software Foundation, Inc.  
+Copyright (C) 2007, Free Software Foundation, Inc.  
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.  
 You should have received a copy of the GNU General Public License along with this program.  If not, see <[http://www.gnu.org/licenses/](http://www.gnu.org/licenses/)>.
@@ -252,23 +252,23 @@ The Python Imaging Library (PIL) is
 　　Copyright © 1997-2011 by Secret Labs AB  
 　　Copyright © 1995-2011 by Fredrik Lundh  
 Pillow is the friendly PIL fork. It is  
-　　Copyright © 2010-2020 by Alex Clark and contributors  
+　　Copyright © 2010, by Alex Clark and contributors  
 Released under the PIL licens  
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
 
 - requests(HTTP)ライブラリ  
-Copyright 2019 Kenneth Reitz  
+Copyright 2019, Kenneth Reitz  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/psf/requests/master/LICENSE)
 
 - Yahoo! 校正支援  
 Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
 
 - Coveragepy  
-Copyright(C) 2009–2020, Ned Batchelder.  
+Copyright(C) 2009, Ned Batchelder.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/nedbat/coveragepy/v4.5.x/LICENSE.txt).
 
 - Sphinx  
-Copyright(C) 2007-2020 by the Sphinx team (see AUTHOS file).  
+Copyright(C) 2007, by the Sphinx team (see AUTHOS file).  
 Released under the Sphinx licens  
 [https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE](https://raw.githubusercontent.com/sphinx-doc/sphinx/3.x/LICENSE)
 
@@ -285,10 +285,10 @@ Copyright Narito Takizawa All Rights Reserved.
 
 ### 使用フォント
 - 数式フォント　ver1.3  
-Copyright(C) 2016-2020 [キユマヤ園](http://sapphire.hacca.jp/font/fontabout.html)
+Copyright(C) 2016, [キユマヤ園](http://sapphire.hacca.jp/font/fontabout.html)
 
 - あいでぃーぽっぷまる  
-Copyright(C) 2017 [Masaru Inoue](http://idfont.jp/infos_mb.htm) All Rights Reserved.
+Copyright(C) 2017, [Masaru Inoue](http://idfont.jp/infos_mb.htm) All Rights Reserved.
 
 ### 使用アイコン
 - accessories text editor  
