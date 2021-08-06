@@ -3,8 +3,7 @@ source/locale/
 source/i18n/__pycache__/
 source/neditor/__pycache__/
 sphinx/make.bat
-C#/Release/
-C#/obj/
+C#
 build/
 dist/
 novel_editor.spec
