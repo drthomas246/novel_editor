@@ -243,7 +243,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <[http://www.gnu.org/licenses/](http://www.gnu.org/licenses/)>.
 
 - Wikipedia-API (wikipedia検索)ライブラリ  
-Copyright (c) 2017 Martin Majlis  
+Copyright (c) 2017, Martin Majlis  
 Released under the MIT license  
 [https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE](https://raw.githubusercontent.com/martin-majlis/Wikipedia-API/master/LICENSE)
 
