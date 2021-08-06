@@ -4,6 +4,14 @@ i18n package
 Submodules
 ----------
 
+i18n.data module
+----------------
+
+.. automodule:: i18n.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 i18n.llize module
 -----------------
 

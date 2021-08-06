@@ -18,11 +18,11 @@ sys.path.insert(0, os.path.abspath('../source'))
 # -- Project information -----------------------------------------------------
 
 project = 'Novel Editor'
-copyright = '2020, Yamahara Yoshihiro'
+copyright = '2020 Yamahara Yoshihiro'
 author = 'Yamahara Yoshihiro'
 
 # The full version, including alpha/beta/rc tags
-release = '0.6.0 beta'
+release = '0.9.0 beta'
 
 
 # -- General configuration ---------------------------------------------------

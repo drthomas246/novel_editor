@@ -1,8 +1,9 @@
 source/__pycache__/
+source/locale/
 source/i18n/__pycache__/
 source/neditor/__pycache__/
-C#/Release
-C#/obj
+C#/Release/
+C#/obj/
 build/
 dist/
 novel_editor.spec

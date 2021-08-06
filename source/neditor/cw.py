@@ -350,13 +350,13 @@ class CreateWindowClass(main.MainClass):
             bd=2,
             text=self.app.dic.get_dict("Portrait")
         )
-        self.app.cv = self.app.foto_canvas = tk.Canvas(
+        self.app.cv = tk.Canvas(
             self.app.f3,
             bg="black",
             width=149,
             height=199
         )
-        self.app.foto_canvas.grid(row=0, column=0)
+        self.app.cv.grid(row=0, column=0)
         self.app.label3 = tk.Label(
             self.app.f1,
             text=self.app.dic.get_dict("Birthday")

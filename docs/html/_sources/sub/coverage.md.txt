@@ -6,14 +6,14 @@
 pip install coverage
 ```
 
-- つぎのコマンドを入力してカバレッジを計測します。
+- sourceフォルダでつぎのコマンドを入力してカバレッジを計測します。
 
 ```
-coverage run ./source/novel_editor.py
+python -m coverage run ./novel_editor.py
 ```
 
 - その後以下のコマンドを実行して、htmlcovフォルダに詳細なカバレッジレポートをHTMLで出力します。
 
 ```
-coverage html
+python -m coverage html
 ```

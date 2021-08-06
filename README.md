@@ -94,9 +94,9 @@ ver0.2.0b以降を初めて使う場合は、申し訳ありませんが、Relea
 - 作成はsphinxを使っています。sphinxをインストールしてフォルダとプロジェクトを作成します。 
 
 ```
-pip install sphinx
-pip install sphinx-rtd-theme
-pip install recommonmark
+python -m pip install sphinx
+python -m pip install sphinx-rtd-theme
+python -m pip install recommonmark
 mkdir sphinx
 sphinx-quickstart sphinx
 ```
@@ -121,7 +121,7 @@ html_theme = 'sphinx_rtd_theme'
 - ドキュメントを生成します。ルートフォルダで以下のコマンドを実行します。
 
 ```
-sphinx-apidoc -o ./sphinx ./source/packages/
+sphinx-apidoc -o ./sphinx ./source
 ```
 
 - htmlファイルを生成します。
@@ -131,6 +131,8 @@ sphinx-apidoc -o ./sphinx ./source/packages/
 ```
 
 ## 改変履歴
+- Version 0.9.0b  
+読み上げ処理の改善
 - Version 0.8.0b  
 起動時間の改善
 - Version 0.7.0b  
