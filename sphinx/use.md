@@ -6,12 +6,12 @@
 - jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリ、requests(HTTP)ライブラリを使用しています。
 - インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。
 ```
-pip install 'jaconv==0.2.4'
-pip install 'Janome==0.3.9'
-pip install 'pyttsx3==2.71'
-pip install 'wikipedia-api==0.5.4'
-pip install 'Pillow==7.2.0'
-pip install 'requests==2.24.0'
+python -m pip install jaconv
+python -m pip install Janome
+python -m pip install 'pyttsx3==2.71'
+python -m pip install wikipedia-api
+python -m pip install Pillow
+python -m pip install requests
 ```
 
 - sourceフォルダにnovel_editor.pyファイルが入っています。これがメインソースファイルです。
