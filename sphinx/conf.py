@@ -22,7 +22,7 @@ copyright = '2020, Yamahara Yoshihiro'
 author = 'Yamahara Yoshihiro'
 
 # The full version, including alpha/beta/rc tags
-release = '0.6.0 beta'
+release = '0.9.0 beta'
 
 
 # -- General configuration ---------------------------------------------------

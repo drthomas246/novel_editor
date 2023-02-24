@@ -20,6 +20,14 @@ neditor.cw module
    :undoc-members:
    :show-inheritance:
 
+neditor.data module
+-------------------
+
+.. automodule:: neditor.data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 neditor.em module
 -----------------
 

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-import locale
+import sys
+import os
+
+sys.path.append(os.getcwd())
 
 import neditor
+import locale
 
 
 if __name__ == "__main__":

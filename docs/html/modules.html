@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>packages &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  <title>source &mdash; Novel Editor 0.9.0 beta ドキュメント</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/translations.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -52,7 +57,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+            <a href="index.html" class="icon icon-home"> Novel Editor
           
 
           
@@ -83,13 +88,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">packages</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">source</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="i18n.html">i18n package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html">neditor package</a></li>
 </ul>
@@ -134,18 +139,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>packages</li>
+      <li>source</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -159,12 +166,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="packages">
-<h1>packages<a class="headerlink" href="#packages" title="このヘッドラインへのパーマリンク">¶</a></h1>
+  <div class="section" id="source">
+<h1>source<a class="headerlink" href="#source" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="i18n.html">i18n package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="i18n.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="i18n.html#module-i18n.data">i18n.data module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="i18n.html#module-i18n.llize">i18n.llize module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="i18n.html#module-i18n">Module contents</a></li>
 </ul>
@@ -173,6 +181,7 @@
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.cp">neditor.cp module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.cw">neditor.cw module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.data">neditor.data module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.em">neditor.em module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.ep">neditor.ep module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neditor.html#module-neditor.fm">neditor.fm module</a></li>
@@ -196,37 +205,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="i18n.html" class="btn btn-neutral float-right" title="i18n package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="sub/coverage.html" class="btn btn-neutral float-left" title="カバレッジの計測について" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="i18n.html" class="btn btn-neutral float-right" title="i18n package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sub/coverage.html" class="btn btn-neutral float-left" title="カバレッジの計測について" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 著作権 2020, Yamahara Yoshihiro
+        &#169; 2020, Yamahara Yoshihiro.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>使用方法 &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  <title>使用方法 &mdash; Novel Editor 0.9.0 beta ドキュメント</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/translations.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -52,7 +57,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Novel Editor
+            <a href="index.html" class="icon icon-home"> Novel Editor
           
 
           
@@ -83,13 +88,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">source</a></li>
 </ul>
 
             
@@ -130,6 +135,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -141,7 +148,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/use.md.txt" rel="nofollow"> View page source</a>
           
         
@@ -158,18 +165,18 @@
   <div class="section" id="id1">
 <h1>使用方法<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <ul class="simple">
-<li><p>開発環境は、Windows 10 Python Version 3.7.4 64bit版を使用しています。</p></li>
+<li><p>開発環境は、Windows 10 Python Version 3.9.5 64bit版を使用しています。</p></li>
 <li><p>Ubuntu 19.04でも起動できることを確認しました。(但し、文章の読み上げはできません。)</p></li>
 <li><p>それ以外の環境でもPythonのバージョンが合えば実行できるかと思いますが、確認は取れていないので自己責任でお願いします。</p></li>
 <li><p>jaconv (文字変換)ライブラリとjanome (形態素解析エンジン)ライブラリ、pyttsx3(音声合成)ライブラリ、Wikipedia-API(wikipedia検索)ライブラリ、Pillow(画像処理)ライブラリ、requests(HTTP)ライブラリを使用しています。</p></li>
 <li><p>インストールされていない方は、下記のコードをターミナルエディタに記入しインストールしてください。</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;jaconv==0.2.4&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;Janome==0.3.9&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;pyttsx3==2.71&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;wikipedia-api==0.5.4&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;Pillow==7.2.0&#39;</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;requests==2.24.0&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jaconv</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">Janome</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pyttsx3</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">wikipedia</span><span class="o">-</span><span class="n">api</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">Pillow</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -183,37 +190,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="sub/charactor.html" class="btn btn-neutral float-right" title="キャラクターファイルについて" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Novel Editor&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="sub/charactor.html" class="btn btn-neutral float-right" title="キャラクターファイルについて" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Novel Editor&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 著作権 2020, Yamahara Yoshihiro
+        &#169; 2020, Yamahara Yoshihiro.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

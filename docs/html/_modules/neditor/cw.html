@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>neditor.cw &mdash; Novel Editor 0.6.0 beta ドキュメント</title>
+  <title>neditor.cw &mdash; Novel Editor 0.9.0 beta ドキュメント</title>
   
 
   
@@ -87,7 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sub/charactor.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sub/coverage.html">カバレッジの計測について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">source</a></li>
 </ul>
 
             
@@ -506,13 +506,13 @@
             <span class="n">bd</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Portrait&quot;</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">foto_canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">f3</span><span class="p">,</span>
             <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
             <span class="n">width</span><span class="o">=</span><span class="mi">149</span><span class="p">,</span>
             <span class="n">height</span><span class="o">=</span><span class="mi">199</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">foto_canvas</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">label3</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">f1</span><span class="p">,</span>
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Birthday&quot;</span><span class="p">)</span>

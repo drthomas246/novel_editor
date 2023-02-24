@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
+import re
 import textwrap
+import threading
+import itertools
 import webbrowser
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -151,104 +154,19 @@ class ProcessingMenuClass(main.MainClass):
 
         ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
         """
-        self.gyou_su = 0
-        self.text_len = 0
-        self.app.text.focus()
-        self.read_texts = True
-        self.engine = pyttsx3.init()
-        self.engine.connect('started-word', self.pyttsx3_onword)
-        self.engine.connect('finished-utterance', self.pyttsx3_onend)
-        self.engine.setProperty('rate', 150)
-        self.engine.say(self.app.text.get('1.0', 'end - 1c'))
-        self.engine.startLoop(False)
-        self.externalLoop()
+        self.app.engine = pyttsx3.init()
+        self.speak = Speaking(self.app.text.get(1.0, tk.END),self.app, daemon=True)
+        self.speak.start()
 
-    def externalLoop(self):
-        """文章読み上げ繰り返し処理.
-
-        ・文章読み上げを繰り返し続ける。
-        """
-        self.engine.iterate()
-
-    def pyttsx3_onword(self, name, location, length):
-        """文章を読み上げ中の処理.
-
-        ・文章読み始めるときに止めるダイアログを出してから読み上げる。
-        読み上げている最中は読み上げている行を選択状態にする。
-
-        Args:
-            name (str): 読み上げに関連付けられた名前
-            location (int): 現在の場所
-            length (int): 不明
-        """
-        # 今読んでいる場所と選択位置を比較する
-        if location > self.text_len:
-            # すべての選択一度解除する
-            self.app.text.tag_remove('sel', '1.0', 'end')
-            # 現在読んでいる場所を選択する
-            self.app.text.tag_add(
-                'sel',
-                "{0}.0".format(self.gyou_su),
-                "{0}.0".format(self.gyou_su+1)
-            )
-            # 次の行の長さをtextlenに入力する
-            self.text_len += len(
-                self.app.text.get(
-                    '{0}.0'.format(self.gyou_su),
-                    '{0}.0'.format(self.gyou_su+1)
-                )
-            )
-            # カーソルを文章の一番後ろに持ってくる
-            self.app.text.mark_set('insert', '{0}.0'.format(self.gyou_su+1))
-            self.app.text.see('insert')
-            self.app.text.focus()
-            # 行を１行増やす
-            self.gyou_su += 1
-        # 読み初めての処理
-        if self.read_texts:
-            # 読むのを中止するウインドウを作成する
-            self.sub_read_win = tk.Toplevel(self.app)
-            button = ttk.Button(
-                self.sub_read_win,
-                text=self.app.dic.get_dict("Stop"),
-                width=str(self.app.dic.get_dict("Stop")),
-                padding=(100, 5),
-                command=self.pyttsx3_onreadend
-            )
-            button.grid(row=1, column=1)
-            # 最前面に表示し続ける
-            self.sub_read_win.attributes("-topmost", True)
-            # サイズ変更禁止
-            self.sub_read_win.resizable(False, False)
-            self.sub_read_win.title(
-                self.app.dic.get_dict("Read aloud")
-            )
-            self.read_texts = False
-
-    def pyttsx3_onreadend(self):
-        """中止するボタンを押したときの処理.
-
-        ・中止ボタンを押したときに読み上げをやめ、中止ウインドウ
-        を削除する。
-        """
-        self.engine.stop()
-        self.engine.endLoop()
-        self.sub_read_win.destroy()
-        self.app.text.tag_remove('sel', '1.0', 'end')
-
-    def pyttsx3_onend(self, name, completed):
+    def pyttsx3_onend(self):
         """文章を読み終えた時の処理.
 
         ・文章を読み終えたら中止ウインドウを削除する。
 
-        Args:
-            name (str): 読み上げに関連付けられた名前
-            completed (bool): 文章が読み上げ終わった(True)
         """
-        self.engine.stop()
-        self.engine.endLoop()
-        self.sub_read_win.destroy()
-        self.app.text.tag_remove('sel', '1.0', 'end')
+        if self.speak:
+            self.speak.stop()
+            self.speak = None
 
     def yahoo(self):
         """Yahoo! 校正支援.
@@ -479,3 +397,76 @@ class ProcessingMenuClass(main.MainClass):
             font_size (str): フォントサイズ
         """
         cls.font_size = font_size
+
+
+class Speaking(threading.Thread):
+    """テキスト読み上げのクラス.
+
+    ・テキスト読み上げのプログラム群
+
+    Args:
+        sentence (str): テキストデータ
+        app (instance): MainProcessingClass のインスタンス
+        **kwargs (dict): 複数のキーワード引数を辞書として受け取る
+    """
+    def __init__(self, sentence, app, **kwargs):
+        super().__init__(**kwargs)
+        self.app = app
+        # 改行と点丸で分割（行ごとの二次元配列）
+        self.words = [re.split("、|。", text) for text in sentence.splitlines()]
+        # 二次元配列を一次元配列に変換
+        self.words = list(itertools.chain.from_iterable(self.words))
+        self.paused = False
+
+    def run(self):
+        """読み上げを実行.
+
+        ・テキストの読み上げを始める。
+
+        """
+        self.running = True
+        # 読むのを中止するウインドウを作成する
+        self.sub_read_win = tk.Toplevel(self.app)
+        button = ttk.Button(
+            self.sub_read_win,
+            text=self.app.dic.get_dict("Stop"),
+            width=str(self.app.dic.get_dict("Stop")),
+            padding=(100, 5),
+            command=self.stop
+        )
+        button.grid(row=1, column=1)
+        # 最前面に表示し続ける
+        self.sub_read_win.attributes("-topmost", True)
+        # サイズ変更禁止
+        self.sub_read_win.resizable(False, False)
+        self.sub_read_win.title(
+            self.app.dic.get_dict("Read aloud")
+        )
+        # 頭から読み上げる
+        pos = [0,0]
+        while self.words and self.running:
+            if not self.paused:
+                # 読み上げ場所の選択
+                word = self.words.pop(0)
+                pos[1] = len(word) + 1 + pos[1]
+                if pos[1]-pos[0]>1:
+                    start = '0.0 + {0}c'.format(pos[0])
+                    end = '0.0 + {0}c'.format(pos[1])
+                    self.app.text.tag_add('sel', start, end)
+                    self.app.text.mark_set('insert', end)
+                    self.app.text.see('insert')
+                    self.app.text.focus()
+                    # 読み上げ開始
+                    self.app.engine.say(word)
+                    self.app.engine.runAndWait()
+                    self.app.text.tag_remove('sel', '1.0', 'end')
+                    # 読み上げ終了
+                pos[0] = pos[1]
+        self.running = False
+        self.sub_read_win.destroy()
+        self.app.text.tag_remove('sel', '1.0', 'end')
+
+    def stop(self):
+        self.running = False
+        self.sub_read_win.destroy()
+        self.app.text.tag_remove('sel', '1.0', 'end')
