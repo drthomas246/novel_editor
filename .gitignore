@@ -7,4 +7,8 @@ C#
 exe/novel_editor.session
 build/
 dist/
-novel_editor.spec
+.venv/
+locale/
+data/
+userdic.csv
+*.whl
