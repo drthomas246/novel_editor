@@ -12,3 +12,4 @@ locale/
 data/
 userdic.csv
 *.whl
+appid.txt

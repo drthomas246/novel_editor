@@ -8,10 +8,11 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
 import xml.etree.ElementTree as ET
+import json
+from urllib import request
 
 import jaconv
-import pyttsx3
-import requests
+import pyttsx4
 
 from . import main
 
@@ -152,13 +153,13 @@ class ProcessingMenuClass(main.MainClass):
     def read_text(self):
         """テキストを読み上げる.
 
-        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
+        ・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。
         """
-        self.app.engine = pyttsx3.init()
+        self.app.engine = pyttsx4.init()
         self.speak = Speaking(self.app.text.get(1.0, tk.END),self.app, daemon=True)
         self.speak.start()
 
-    def pyttsx3_onend(self):
+    def pyttsx4_onend(self):
         """文章を読み終えた時の処理.
 
         ・文章を読み終えたら中止ウインドウを削除する。
@@ -203,13 +204,25 @@ class ProcessingMenuClass(main.MainClass):
                 )
             )
             return
-        url = "https://jlp.yahooapis.jp/KouseiService/V1/kousei"
-        data = {
-            "appid": self.yahoo_appid.rstrip('\n'),
-            "sentence": sentence,
+        APPID = self.yahoo_appid.rstrip('\n')
+        URL = "https://jlp.yahooapis.jp/KouseiService/V2/kousei"
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": "Yahoo AppID: {}".format(APPID),
         }
-        html = requests.post(url, data)
-        return html.text
+        param_dic = {
+            "id": "NovelEditor-Yahoo-Kousei",
+            "jsonrpc" : "2.0",
+            "method" : "jlp.kouseiservice.kousei",
+            "params" : {
+                "q" : sentence
+            }
+        }
+        params = json.dumps(param_dic).encode()
+        req = request.Request(URL, params, headers)
+        with request.urlopen(req) as res:
+            body = res.read()
+        return body.decode()
 
     def yahooresult(self, html):
         """校正支援を表示する画面を制作.
@@ -219,7 +232,7 @@ class ProcessingMenuClass(main.MainClass):
         Args:
             html (str): 校正結果
         """
-        xml = ET.fromstring(html)
+        jsonData = json.loads(html)
         # サブウインドウの表示
         sub_win = tk.Toplevel(self.app)
         # ツリービューの表示
@@ -253,12 +266,12 @@ class ProcessingMenuClass(main.MainClass):
             text=self.dic.get_dict("Detailed information on the pointed out")
         )
         # 情報を取り出す
-        for child in list(xml):
-            StartPos = (child.findtext(self.KOUSEI+"StartPos"))
-            Length = (child.findtext(self.KOUSEI+"Length"))
-            Surface = (child.findtext(self.KOUSEI+"Surface"))
-            ShitekiWord = (child.findtext(self.KOUSEI+"ShitekiWord"))
-            ShitekiInfo = (child.findtext(self.KOUSEI+"ShitekiInfo"))
+        for child in jsonData["result"]["suggestions"]:
+            StartPos = (child["offset"])
+            Length = (child["length"])
+            Surface = (child["word"])
+            ShitekiWord = (child["note"])
+            ShitekiInfo = (child["rule"])
             self.yahoo_tree.insert(
                 "",
                 "end",

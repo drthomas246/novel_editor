@@ -236,11 +236,9 @@ Released under the MIT license
 Copyright(C) 2015, Tomoko Uchida. All Rights Reserved.  
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/mocobeta/janome/master/LICENSE.txt).
 
-- pyttsx3 (音声合成)ライブラリ  
-Copyright (C) 2007, Free Software Foundation, Inc.  
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.  
-You should have received a copy of the GNU General Public License along with this program.  If not, see <[http://www.gnu.org/licenses/](http://www.gnu.org/licenses/)>.
+- pyttsx4 (音声合成)ライブラリ  
+Copyright (C) 2023, Natesh M Bhat.  
+Released under the [Mozilla Public License Version 2.0](https://raw.githubusercontent.com/Jiangshan00001/pyttsx4/master/LICENSE)
 
 - Wikipedia-API (wikipedia検索)ライブラリ  
 Copyright (c) 2017, Martin Majlis  
@@ -261,7 +259,7 @@ Copyright 2019, Kenneth Reitz
 This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/psf/requests/master/LICENSE)
 
 - Yahoo! 校正支援  
-Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/about](https://developer.yahoo.co.jp/about)）
+Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/sitemap/](https://developer.yahoo.co.jp/sitemap/)）
 
 - Coveragepy  
 Copyright(C) 2009, Ned Batchelder.  

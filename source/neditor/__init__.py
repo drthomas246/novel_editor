@@ -64,7 +64,7 @@ def main_window_create(locale_var):
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
     # wikipediaapiを起動
-    wiki_wiki = wikipediaapi.Wikipedia('ja')
+    wiki_wiki = wikipediaapi.Wikipedia('Novel Editor(yoshihiro@yamahara.email)','ja')
     # メイン画面を削除
     root.destroy()
     # 再度メイン画面を作成

@@ -8,7 +8,7 @@
 ```
 pip install jaconv
 pip install Janome
-pip install pyttsx3
+pip install pyttsx4
 pip install wikipedia-api
 pip install Pillow
 pip install requests
