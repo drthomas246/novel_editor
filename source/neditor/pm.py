@@ -480,6 +480,11 @@ class Speaking(threading.Thread):
         self.app.text.tag_remove('sel', '1.0', 'end')
 
     def stop(self):
+        """読み上げを終了する.
+
+        ・テキストの読み上げを終わる。
+
+        """
         self.running = False
         self.sub_read_win.destroy()
         self.app.text.tag_remove('sel', '1.0', 'end')

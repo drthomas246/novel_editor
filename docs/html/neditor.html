@@ -1,205 +1,165 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="ja" >
+<html class="writer-html5" lang="ja" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>neditor package &mdash; Novel Editor 0.9.0 beta ドキュメント</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>neditor package &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
   
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/translations.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=24ad5ec8"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=4dbe4bdc"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="検索" href="search.html" />
     <link rel="prev" title="i18n package" href="i18n.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home"> Novel Editor
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            Novel Editor
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="use.html">使用方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sub/charactor.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sub/character.html">キャラクターファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/save.html">保存ファイルについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub/coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">source</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="i18n.html">i18n package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">neditor package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.cp">neditor.cp module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.cw">neditor.cw module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.cp">neditor.cp module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.cp.ComplementProcessingClass"><code class="docutils literal notranslate"><span class="pre">ComplementProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.cw">neditor.cw module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.cw.CreateWindowClass"><code class="docutils literal notranslate"><span class="pre">CreateWindowClass</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.cw.CustomText"><code class="docutils literal notranslate"><span class="pre">CustomText</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-neditor.data">neditor.data module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.em">neditor.em module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.ep">neditor.ep module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.fm">neditor.fm module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.fp">neditor.fp module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.hm">neditor.hm module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.hp">neditor.hp module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.lm">neditor.lm module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.main">neditor.main module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.mp">neditor.mp module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.pm">neditor.pm module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor.sp">neditor.sp module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-neditor">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.em">neditor.em module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.em.EditMenuClass"><code class="docutils literal notranslate"><span class="pre">EditMenuClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.ep">neditor.ep module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.ep.EventProcessingClass"><code class="docutils literal notranslate"><span class="pre">EventProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.fm">neditor.fm module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.fm.FileMenuClass"><code class="docutils literal notranslate"><span class="pre">FileMenuClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.fp">neditor.fp module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.fp.FindProcessingClass"><code class="docutils literal notranslate"><span class="pre">FindProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.hm">neditor.hm module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.hm.HelpMenuClass"><code class="docutils literal notranslate"><span class="pre">HelpMenuClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.hp">neditor.hp module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.hp.HighlightProcessingClass"><code class="docutils literal notranslate"><span class="pre">HighlightProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.lm">neditor.lm module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.lm.ListMenuClass"><code class="docutils literal notranslate"><span class="pre">ListMenuClass</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.lm.MyDialogClass"><code class="docutils literal notranslate"><span class="pre">MyDialogClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.main">neditor.main module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.main.MainClass"><code class="docutils literal notranslate"><span class="pre">MainClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.mp">neditor.mp module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.mp.MainProcessingClass"><code class="docutils literal notranslate"><span class="pre">MainProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.pm">neditor.pm module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.pm.ProcessingMenuClass"><code class="docutils literal notranslate"><span class="pre">ProcessingMenuClass</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.pm.Speaking"><code class="docutils literal notranslate"><span class="pre">Speaking</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor.sp">neditor.sp module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.sp.SubfunctionProcessingClass"><code class="docutils literal notranslate"><span class="pre">SubfunctionProcessingClass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-neditor">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neditor.main_window_create"><code class="docutils literal notranslate"><span class="pre">main_window_create()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Novel Editor</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="modules.html">source</a> &raquo;</li>
-        
-      <li>neditor package</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">source</a></li>
+      <li class="breadcrumb-item active">neditor package</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/neditor.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="neditor-package">
-<h1>neditor package<a class="headerlink" href="#neditor-package" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="このヘッドラインへのパーマリンク">¶</a></h2>
-</div>
-<div class="section" id="module-neditor.cp">
-<span id="neditor-cp-module"></span><h2>neditor.cp module<a class="headerlink" href="#module-neditor.cp" title="このヘッドラインへのパーマリンク">¶</a></h2>
+             
+  <section id="neditor-package">
+<h1>neditor package<a class="headerlink" href="#neditor-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-neditor.cp">
+<span id="neditor-cp-module"></span><h2>neditor.cp module<a class="headerlink" href="#module-neditor.cp" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.cp.</span></span><span class="sig-name descname"><span class="pre">ComplementProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.cp.</span></span><span class="sig-name descname"><span class="pre">ComplementProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>補完処理のクラス.</p>
 <p>・補完処理にあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
@@ -210,28 +170,28 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.auto_complete">
-<span class="sig-name descname"><span class="pre">auto_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.auto_complete"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.auto_complete" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">auto_complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.auto_complete"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.auto_complete" title="Link to this definition"></a></dt>
 <dd><p>補完リストの設定.</p>
 <p>・補完リストの設定をする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.get_current_insert_word">
-<span class="sig-name descname"><span class="pre">get_current_insert_word</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.get_current_insert_word"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.get_current_insert_word" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_current_insert_word</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.get_current_insert_word"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.get_current_insert_word" title="Link to this definition"></a></dt>
 <dd><p>現在入力中の単語と位置を取得.</p>
 <p>・現在入力している単語とその位置を取得する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.get_keywords">
-<span class="sig-name descname"><span class="pre">get_keywords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.get_keywords"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.get_keywords" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_keywords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.get_keywords"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.get_keywords" title="Link to this definition"></a></dt>
 <dd><p>補完リストの候補キーワードを作成.</p>
 <p>・補完リストに表示するキーワードを得る。</p>
 <dl class="field-list simple">
-<dt class="field-odd">戻り値</dt>
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
 <dd class="field-odd"><p>補完リスト配列</p>
 </dd>
-<dt class="field-even">戻り値の型</dt>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -239,11 +199,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.remove_list">
-<span class="sig-name descname"><span class="pre">remove_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.remove_list"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.remove_list" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">remove_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.remove_list"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.remove_list" title="Link to this definition"></a></dt>
 <dd><p>補完リストの削除処理.</p>
 <p>・補完リストを削除し、テキストボックスにフォーカスを戻す。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -251,11 +211,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.selection">
-<span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.selection"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.selection" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.selection"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.selection" title="Link to this definition"></a></dt>
 <dd><p>補完リストでの選択後の処理.</p>
 <p>・補完リストを選択したときにその文字を入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -263,11 +223,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cp.ComplementProcessingClass.tab">
-<span class="sig-name descname"><span class="pre">tab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.tab"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.tab" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cp.html#ComplementProcessingClass.tab"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cp.ComplementProcessingClass.tab" title="Link to this definition"></a></dt>
 <dd><p>タブ押下時の処理.</p>
 <p>・タブキーを押したときに補完リストを出す。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -275,17 +235,17 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.cw">
-<span id="neditor-cw-module"></span><h2>neditor.cw module<a class="headerlink" href="#module-neditor.cw" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.cw">
+<span id="neditor-cw-module"></span><h2>neditor.cw module<a class="headerlink" href="#module-neditor.cw" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.cw.CreateWindowClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.cw.</span></span><span class="sig-name descname"><span class="pre">CreateWindowClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.cw.</span></span><span class="sig-name descname"><span class="pre">CreateWindowClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>画面の描画のクラス.</p>
 <p>・画面描画にあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -295,14 +255,14 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cw.CreateWindowClass.create_widgets">
-<span class="sig-name descname"><span class="pre">create_widgets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.create_widgets"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.create_widgets" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_widgets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.create_widgets"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.create_widgets" title="Link to this definition"></a></dt>
 <dd><p>画面の描画.</p>
 <p>・メインウインドウにウェジットを配置する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cw.CreateWindowClass.frame">
-<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame" title="Link to this definition"></a></dt>
 <dd><p>フレーム内にテキストボックスを表示.</p>
 <p>・メインウインドウの右側に行番号、テキストボックス、スクロールバー
 を表示する。</p>
@@ -310,14 +270,14 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cw.CreateWindowClass.frame_character">
-<span class="sig-name descname"><span class="pre">frame_character</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame_character"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame_character" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">frame_character</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame_character"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame_character" title="Link to this definition"></a></dt>
 <dd><p>フレーム内にイメージフレーム表示.</p>
 <p>・メインウインドウの右側に呼び名、似顔絵、名前、誕生日、略歴を表示する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.cw.CreateWindowClass.frame_image">
-<span class="sig-name descname"><span class="pre">frame_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame_image" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">frame_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CreateWindowClass.frame_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CreateWindowClass.frame_image" title="Link to this definition"></a></dt>
 <dd><p>フレーム内にイメージフレーム表示.</p>
 <p>・メインウインドウの右側にイメージキャンバス、スクロールバーを表示する。</p>
 </dd></dl>
@@ -326,31 +286,31 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.cw.CustomText">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.cw.</span></span><span class="sig-name descname"><span class="pre">CustomText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CustomText"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CustomText" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Text</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.cw.</span></span><span class="sig-name descname"><span class="pre">CustomText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/cw.html#CustomText"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.cw.CustomText" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Text</span></code></p>
 <p>Textのイベントを拡張したウィジェット.</p>
 <p>・TCl/TKを使って、textに&lt;&lt;Scroll&gt;&gt;イベントと、&lt;&lt;Change&gt;&gt;イベントを追加する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>master</strong> (<em>instance</em>) -- toplevel のインスタンス</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.data">
-<span id="neditor-data-module"></span><h2>neditor.data module<a class="headerlink" href="#module-neditor.data" title="このヘッドラインへのパーマリンク">¶</a></h2>
-</div>
-<div class="section" id="module-neditor.em">
-<span id="neditor-em-module"></span><h2>neditor.em module<a class="headerlink" href="#module-neditor.em" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.data">
+<span id="neditor-data-module"></span><h2>neditor.data module<a class="headerlink" href="#module-neditor.data" title="Link to this heading"></a></h2>
+</section>
+<section id="module-neditor.em">
+<span id="neditor-em-module"></span><h2>neditor.em module<a class="headerlink" href="#module-neditor.em" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.em.</span></span><span class="sig-name descname"><span class="pre">EditMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.em.</span></span><span class="sig-name descname"><span class="pre">EditMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>編集メニューバーのクラス.</p>
 <p>・編集メニューバーにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -360,11 +320,11 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.copy"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.copy" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.copy"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.copy" title="Link to this definition"></a></dt>
 <dd><p>Copy.</p>
 <p>・Copy処理を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -372,11 +332,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass.cut">
-<span class="sig-name descname"><span class="pre">cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.cut"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.cut" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.cut"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.cut" title="Link to this definition"></a></dt>
 <dd><p>Cut.</p>
 <p>・Cut処理を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -384,11 +344,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass.paste">
-<span class="sig-name descname"><span class="pre">paste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.paste"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.paste" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">paste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.paste"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.paste" title="Link to this definition"></a></dt>
 <dd><p>Paste.</p>
 <p>・Paste処理を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -396,11 +356,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass.redo">
-<span class="sig-name descname"><span class="pre">redo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.redo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.redo" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">redo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.redo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.redo" title="Link to this definition"></a></dt>
 <dd><p>Redo.</p>
 <p>・Redo処理を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -408,11 +368,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.em.EditMenuClass.undo">
-<span class="sig-name descname"><span class="pre">undo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.undo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.undo" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">undo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/em.html#EditMenuClass.undo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.em.EditMenuClass.undo" title="Link to this definition"></a></dt>
 <dd><p>Undo.</p>
 <p>・Uedo処理を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -420,17 +380,17 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.ep">
-<span id="neditor-ep-module"></span><h2>neditor.ep module<a class="headerlink" href="#module-neditor.ep" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.ep">
+<span id="neditor-ep-module"></span><h2>neditor.ep module<a class="headerlink" href="#module-neditor.ep" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.ep.EventProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.ep.</span></span><span class="sig-name descname"><span class="pre">EventProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.ep.</span></span><span class="sig-name descname"><span class="pre">EventProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>ウインドウイベントのクラス.</p>
 <p>・ウインドウイベントにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -440,45 +400,45 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.ep.EventProcessingClass.create_event">
-<span class="sig-name descname"><span class="pre">create_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event" title="Link to this definition"></a></dt>
 <dd><p>ツリービューイベントの設定.</p>
 <p>・ツリービューにイベントを追加する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.ep.EventProcessingClass.create_event_character">
-<span class="sig-name descname"><span class="pre">create_event_character</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_character"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_character" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_event_character</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_character"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_character" title="Link to this definition"></a></dt>
 <dd><p>キャラクター欄のイベント設定.</p>
 <p>・キャラクター関係のボックスにイベントを追加する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.ep.EventProcessingClass.create_event_image">
-<span class="sig-name descname"><span class="pre">create_event_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_image" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_event_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_image" title="Link to this definition"></a></dt>
 <dd><p>イメージイベントの設定.</p>
 <p>・イメージキャンバスにイベントを追加する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.ep.EventProcessingClass.create_event_text">
-<span class="sig-name descname"><span class="pre">create_event_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_text" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_event_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/ep.html#EventProcessingClass.create_event_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.ep.EventProcessingClass.create_event_text" title="Link to this definition"></a></dt>
 <dd><p>テキストイベントの設定.</p>
 <p>・テキストボックスにイベントを追加する。</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.fm">
-<span id="neditor-fm-module"></span><h2>neditor.fm module<a class="headerlink" href="#module-neditor.fm" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.fm">
+<span id="neditor-fm-module"></span><h2>neditor.fm module<a class="headerlink" href="#module-neditor.fm" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.fm.</span></span><span class="sig-name descname"><span class="pre">FileMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.fm.</span></span><span class="sig-name descname"><span class="pre">FileMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>ファイルメニューバーのクラス.</p>
 <p>・ファイルメニューバーにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -488,17 +448,17 @@
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.file_path">
-<span class="sig-name descname"><span class="pre">file_path</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">file_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path" title="Link to this definition"></a></dt>
 <dd><p>現在開いているファイル.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.file_path_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">file_path_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.file_path_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_path_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.file_path_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.file_path_input" title="Link to this definition"></a></dt>
 <dd><p>現在開いているファイルを入力.</p>
 <p>・現在開いているファイルをクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p>
 </dd>
 </dl>
@@ -506,18 +466,18 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.new_file">
-<span class="sig-name descname"><span class="pre">new_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.new_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.new_file" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">new_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.new_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.new_file" title="Link to this definition"></a></dt>
 <dd><p>新規作成をするための準備.</p>
 <p>・ファイルの新規作成をするための準備処理をおこなう。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.new_open">
-<span class="sig-name descname"><span class="pre">new_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.new_open"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.new_open" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">new_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.new_open"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.new_open" title="Link to this definition"></a></dt>
 <dd><p>新規作成.</p>
 <p>・変更があれば、ファイル保存するか尋ねて、新規作成する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -525,17 +485,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.now_path">
-<span class="sig-name descname"><span class="pre">now_path</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">now_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path" title="Link to this definition"></a></dt>
 <dd><p>今の処理しているファイルのパス.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.now_path_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">now_path_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.now_path_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">now_path_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.now_path_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.now_path_input" title="Link to this definition"></a></dt>
 <dd><p>今の処理しているファイルのパスを入力.</p>
 <p>・今の処理しているファイルのパスをクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>now_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p>
 </dd>
 </dl>
@@ -543,18 +503,18 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.on_closing">
-<span class="sig-name descname"><span class="pre">on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.on_closing"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.on_closing" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.on_closing"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.on_closing" title="Link to this definition"></a></dt>
 <dd><p>終了時の処理.</p>
 <p>・ソフトを閉じるか確認してから閉じる。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.open_file">
-<span class="sig-name descname"><span class="pre">open_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.open_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.open_file" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.open_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.open_file" title="Link to this definition"></a></dt>
 <dd><p>ファイルを開く処理.</p>
 <p>・ファイルを開くダイアログを作成しファイルを開く。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -562,11 +522,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.open_file_save">
-<span class="sig-name descname"><span class="pre">open_file_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.open_file_save"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.open_file_save" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open_file_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.open_file_save"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.open_file_save" title="Link to this definition"></a></dt>
 <dd><p>開いてるファイルを保存.</p>
 <p>・開いてるファイルをそれぞれの保存形式で保存する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) -- 保存ファイルのパス</p>
 </dd>
 </dl>
@@ -574,12 +534,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.overwrite_save_file">
-<span class="sig-name descname"><span class="pre">overwrite_save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.overwrite_save_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.overwrite_save_file" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">overwrite_save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.overwrite_save_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.overwrite_save_file" title="Link to this definition"></a></dt>
 <dd><p>上書き保存処理.</p>
 <p>・上書き保存するための処理。ファイルがあれば保存して、
 なければ保存ダイアログを出す。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -587,17 +547,17 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.save_charactor_file">
-<span class="sig-name descname"><span class="pre">save_charactor_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_charactor_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_charactor_file" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save_charactor_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_charactor_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_charactor_file" title="Link to this definition"></a></dt>
 <dd><p>キャラクターファイルの保存準備.</p>
 <p>・それぞれの項目をxml形式で保存する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) -- 名前</p>
 </dd>
-<dt class="field-even">戻り値</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>セーブメタデータ</p>
 </dd>
-<dt class="field-odd">戻り値の型</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -605,11 +565,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.save_file">
-<span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_file" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.save_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.save_file" title="Link to this definition"></a></dt>
 <dd><p>ファイルを保存処理.</p>
 <p>・ファイルを保存する。ファイル保存ダイアログを作成し保存をおこなう。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -617,24 +577,24 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fm.FileMenuClass.tree_get_loop">
-<span class="sig-name descname"><span class="pre">tree_get_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.tree_get_loop"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.tree_get_loop" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tree_get_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fm.html#FileMenuClass.tree_get_loop"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fm.FileMenuClass.tree_get_loop" title="Link to this definition"></a></dt>
 <dd><p>ツリービューに挿入.</p>
 <p>・保存データからファイルを取得してツリービューに挿入する。</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.fp">
-<span id="neditor-fp-module"></span><h2>neditor.fp module<a class="headerlink" href="#module-neditor.fp" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.fp">
+<span id="neditor-fp-module"></span><h2>neditor.fp module<a class="headerlink" href="#module-neditor.fp" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.fp.</span></span><span class="sig-name descname"><span class="pre">FindProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.fp.</span></span><span class="sig-name descname"><span class="pre">FindProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>検索置換のクラス.</p>
 <p>・検索置換するためのプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -644,11 +604,11 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.find_dialog">
-<span class="sig-name descname"><span class="pre">find_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.find_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_dialog" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.find_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_dialog" title="Link to this definition"></a></dt>
 <dd><p>検索ダイアログを作成.</p>
 <p>・検索ダイアログを作成する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -656,17 +616,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.find_text">
-<span class="sig-name descname"><span class="pre">find_text</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_text" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_text</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_text" title="Link to this definition"></a></dt>
 <dd><p>検索文字列.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.find_text_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">find_text_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">find_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.find_text_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_text_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_text_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">find_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.find_text_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.find_text_input" title="Link to this definition"></a></dt>
 <dd><p>検索文字を入力.</p>
 <p>・検索文字をクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>find_text</strong> (<em>str</em>) -- 検索文字</p>
 </dd>
 </dl>
@@ -674,17 +634,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.next_pos">
-<span class="sig-name descname"><span class="pre">next_pos</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.next_pos" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">next_pos</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.next_pos" title="Link to this definition"></a></dt>
 <dd><p>次の検索位置 例.(1.0).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.next_pos_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">next_pos_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">next_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.next_pos_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.next_pos_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next_pos_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">next_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.next_pos_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.next_pos_input" title="Link to this definition"></a></dt>
 <dd><p>検索位置を入力.</p>
 <p>・検索位置をクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>next_pos</strong> (<em>str</em>) -- 検索位置</p>
 </dd>
 </dl>
@@ -692,11 +652,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.push_keys">
-<span class="sig-name descname"><span class="pre">push_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.push_keys"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.push_keys" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">push_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.push_keys"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.push_keys" title="Link to this definition"></a></dt>
 <dd><p>キーが押されたときの処理.</p>
 <p>・何かキーが押されたときに検索処理を中断する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -704,12 +664,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.replacement">
-<span class="sig-name descname"><span class="pre">replacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">replacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement" title="Link to this definition"></a></dt>
 <dd><p>置換処理.</p>
 <p>・置換処理をする。空欄なら処理しない、違うなら初めから、
 同じなら次を検索する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -717,17 +677,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.replacement_check">
-<span class="sig-name descname"><span class="pre">replacement_check</span></span><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_check" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">replacement_check</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_check" title="Link to this definition"></a></dt>
 <dd><p>検索ダイアログが表示されているTrue.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.replacement_check_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">replacement_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replacement_check</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_check_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_check_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">replacement_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replacement_check</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_check_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_check_input" title="Link to this definition"></a></dt>
 <dd><p>検索ダイアログが表示されているかを入力.</p>
 <p>・検索ダイアログが表示されているかを入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>replacement_check</strong> (<em>bool</em>) -- 検索ダイアログが表示されているTrue</p>
 </dd>
 </dl>
@@ -735,11 +695,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.replacement_dialog">
-<span class="sig-name descname"><span class="pre">replacement_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_dialog" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">replacement_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_dialog" title="Link to this definition"></a></dt>
 <dd><p>置換ダイアログを作成.</p>
 <p>・置換ダイアログを作成する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -747,19 +707,19 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.replacement_dialog_on_closing">
-<span class="sig-name descname"><span class="pre">replacement_dialog_on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_dialog_on_closing"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_dialog_on_closing" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">replacement_dialog_on_closing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.replacement_dialog_on_closing"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.replacement_dialog_on_closing" title="Link to this definition"></a></dt>
 <dd><p>検索ウインドウが閉じられたときの処理.</p>
 <p>・検索ダイアログが閉じられたことがわかるようにする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.search">
-<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search" title="Link to this definition"></a></dt>
 <dd><p>検索処理.</p>
 <p>・検索処理をする。空欄なら処理しない、違うなら最初から、
 同じなら次のを検索する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -767,12 +727,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.search_forward">
-<span class="sig-name descname"><span class="pre">search_forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search_forward"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search_forward" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">search_forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search_forward"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search_forward" title="Link to this definition"></a></dt>
 <dd><p>昇順検索処理.</p>
 <p>・昇順検索をする。空欄なら処理しない、違うなら初めから、
 同じなら次を検索する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -780,11 +740,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.fp.FindProcessingClass.search_next">
-<span class="sig-name descname"><span class="pre">search_next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search_next"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search_next" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">search_next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/fp.html#FindProcessingClass.search_next"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.fp.FindProcessingClass.search_next" title="Link to this definition"></a></dt>
 <dd><p>検索のメイン処理.</p>
 <p>・検索できれば選択をする。できなければ、ダイアログを出して終了。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>search</strong> (<em>str</em>) -- 検索文字列</p></li>
 <li><p><strong>index</strong> (<em>str</em>) -- 検索位置 ex. (1.0)</p></li>
@@ -796,17 +756,17 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.hm">
-<span id="neditor-hm-module"></span><h2>neditor.hm module<a class="headerlink" href="#module-neditor.hm" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.hm">
+<span id="neditor-hm-module"></span><h2>neditor.hm module<a class="headerlink" href="#module-neditor.hm" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.hm.HelpMenuClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.hm.</span></span><span class="sig-name descname"><span class="pre">HelpMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.hm.</span></span><span class="sig-name descname"><span class="pre">HelpMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>ヘルプメニューバーのクラス.</p>
 <p>・ヘルプメニューバーにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -816,14 +776,14 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hm.HelpMenuClass.help">
-<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass.help"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass.help" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass.help"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass.help" title="Link to this definition"></a></dt>
 <dd><p>helpページを開く.</p>
 <p>・ウエブブラウザを使ってREADME.htmlを表示する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hm.HelpMenuClass.version">
-<span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass.version"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass.version" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hm.html#HelpMenuClass.version"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hm.HelpMenuClass.version" title="Link to this definition"></a></dt>
 <dd><p>バージョン情報を表示.</p>
 <p>・バージョン情報表示ダイアログを表示する。
 ×を押すまで消えないようにする。</p>
@@ -831,17 +791,17 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.hp">
-<span id="neditor-hp-module"></span><h2>neditor.hp module<a class="headerlink" href="#module-neditor.hp" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.hp">
+<span id="neditor-hp-module"></span><h2>neditor.hp module<a class="headerlink" href="#module-neditor.hp" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.hp.HighlightProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.hp.</span></span><span class="sig-name descname"><span class="pre">HighlightProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.hp.</span></span><span class="sig-name descname"><span class="pre">HighlightProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>ハイライトのクラス.</p>
 <p>・ハイライトするためのプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
@@ -852,14 +812,14 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hp.HighlightProcessingClass.all_highlight">
-<span class="sig-name descname"><span class="pre">all_highlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.all_highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.all_highlight" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">all_highlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.all_highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.all_highlight" title="Link to this definition"></a></dt>
 <dd><p>全てハイライト.</p>
 <p>・開く処理等の時にすべての行をハイライトする。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hp.HighlightProcessingClass.create_tags">
-<span class="sig-name descname"><span class="pre">create_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.create_tags"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.create_tags" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create_tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.create_tags"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.create_tags" title="Link to this definition"></a></dt>
 <dd><p>タグの作成.</p>
 <p>・キャラクターの名前をJanomeの形態素解析にかかるようにする。
 キャラクターの名前を色付きにする。</p>
@@ -867,12 +827,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hp.HighlightProcessingClass.highlight">
-<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.highlight" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.highlight" title="Link to this definition"></a></dt>
 <dd><p>ハイライトの共通処理.</p>
 <p>・ハイライトする文字が見つかったらハイライト処理をする。
 先頭の文字が全角スペースならば、一文字ずらしてハイライトする。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start</strong> (<em>str</em>) -- はじめの位置 例.(1.0)</p></li>
 <li><p><strong>src</strong> (<em>str</em>) -- ハイライトする文章</p></li>
@@ -884,24 +844,24 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.hp.HighlightProcessingClass.line_highlight">
-<span class="sig-name descname"><span class="pre">line_highlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.line_highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.line_highlight" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">line_highlight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/hp.html#HighlightProcessingClass.line_highlight"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.hp.HighlightProcessingClass.line_highlight" title="Link to this definition"></a></dt>
 <dd><p>現在行だけハイライト.</p>
 <p>・入力等の変更時に現在の行のみをハイライトする。</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.lm">
-<span id="neditor-lm-module"></span><h2>neditor.lm module<a class="headerlink" href="#module-neditor.lm" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.lm">
+<span id="neditor-lm-module"></span><h2>neditor.lm module<a class="headerlink" href="#module-neditor.lm" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.lm.</span></span><span class="sig-name descname"><span class="pre">ListMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.lm.</span></span><span class="sig-name descname"><span class="pre">ListMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>リストメニューバーのクラス.</p>
 <p>・リストメニューバーにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -911,11 +871,11 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.character_rename">
-<span class="sig-name descname"><span class="pre">character_rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.character_rename"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.character_rename" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">character_rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.character_rename"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.character_rename" title="Link to this definition"></a></dt>
 <dd><p>キャラクターの名前変更.</p>
 <p>・キャラクターの名前を変更する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>now_path</strong> (<em>str</em>) -- 今の処理ししているファイルのパス</p></li>
 <li><p><strong>folder</strong> (<em>str</em>) -- 今処理しているフォルダ</p></li>
@@ -928,11 +888,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.check_image_false">
-<span class="sig-name descname"><span class="pre">check_image_false</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_false"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_false" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_image_false</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_false"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_false" title="Link to this definition"></a></dt>
 <dd><p>イメージアイテム以外を右クリックしたとき.</p>
 <p>・イメージアイテム以外の親アイテムを右クリックしたときの処理。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>curItem</strong> (<em>int</em>) -- 選択アイテムの認識番号</p>
 </dd>
 </dl>
@@ -940,18 +900,18 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.check_image_true">
-<span class="sig-name descname"><span class="pre">check_image_true</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_true"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_true" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_image_true</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.check_image_true"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.check_image_true" title="Link to this definition"></a></dt>
 <dd><p>イメージアイテムを右クリックしたとき.</p>
 <p>・イメージアイテムの親アイテムを右クリックしたときの処理。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.click_child_item">
-<span class="sig-name descname"><span class="pre">click_child_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parentItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.click_child_item"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.click_child_item" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">click_child_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parentItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.click_child_item"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.click_child_item" title="Link to this definition"></a></dt>
 <dd><p>子アイテムを右クリックしたとき.</p>
 <p>・子アイテムを右クリックしたときの処理。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>curItem</strong> (<em>int</em>) -- 選択アイテムの認識番号</p></li>
 <li><p><strong>parentItem</strong> (<em>int</em>) -- 親アイテムの認識番号</p></li>
@@ -962,12 +922,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.message_window">
-<span class="sig-name descname"><span class="pre">message_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.message_window"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.message_window" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.message_window"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.message_window" title="Link to this definition"></a></dt>
 <dd><p>ツリービューを右クリックしたときの処理.</p>
 <p>・子アイテムならば削除ダイアログを表示する。
 親アイテムならば追加を行う。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -975,11 +935,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.on_double_click">
-<span class="sig-name descname"><span class="pre">on_double_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.on_double_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.on_double_click" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_double_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.on_double_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.on_double_click" title="Link to this definition"></a></dt>
 <dd><p>ツリービューをダブルクリック.</p>
 <p>・ファイルを保存して閉じて、選択されたアイテムを表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -987,11 +947,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.on_name_click">
-<span class="sig-name descname"><span class="pre">on_name_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.on_name_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.on_name_click" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_name_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.on_name_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.on_name_click" title="Link to this definition"></a></dt>
 <dd><p>名前の変更.</p>
 <p>・リストボックスの名前を変更する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -999,11 +959,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.path_read_image">
-<span class="sig-name descname"><span class="pre">path_read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.path_read_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.path_read_image" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">path_read_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.path_read_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.path_read_image" title="Link to this definition"></a></dt>
 <dd><p>イメージを読み込んで表示.</p>
 <p>・パスが存在すればイメージファイルを読み込んで表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image_path</strong> (<em>str</em>) -- イメージファイルの相対パス</p></li>
 <li><p><strong>image_name</strong> (<em>str</em>) -- イメージファイルの名前</p></li>
@@ -1015,11 +975,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.path_read_text">
-<span class="sig-name descname"><span class="pre">path_read_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.path_read_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.path_read_text" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">path_read_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.path_read_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.path_read_text" title="Link to this definition"></a></dt>
 <dd><p>テキストを読み込んで表示.</p>
 <p>・パスが存在すればテキストを読み込んで表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>text_path</strong> (<em>str</em>) -- テキストファイルの相対パス</p></li>
 <li><p><strong>text_name</strong> (<em>str</em>) -- テキストファイルの名前</p></li>
@@ -1030,11 +990,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.rename_gif">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">rename_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.rename_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.rename_gif" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rename_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.rename_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.rename_gif" title="Link to this definition"></a></dt>
 <dd><p>gifの名前変更.</p>
 <p>・gifの名前を変更する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>folder</strong> (<em>str</em>) -- 今処理しているフォルダ</p></li>
 <li><p><strong>old_file</strong> (<em>str</em>) -- 変更前のファイル名</p></li>
@@ -1046,17 +1006,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.select_list_item">
-<span class="sig-name descname"><span class="pre">select_list_item</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_list_item</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item" title="Link to this definition"></a></dt>
 <dd><p>選択中のリストボックスアイテム名.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.select_list_item_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">select_list_item_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select_list_item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.select_list_item_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_list_item_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select_list_item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.select_list_item_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.select_list_item_input" title="Link to this definition"></a></dt>
 <dd><p>選択中のリストボックスアイテム名を入力.</p>
 <p>・選択中のリストボックスアイテム名をクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>select_list_item</strong> (<em>str</em>) -- 選択中のリストボックスアイテム名</p>
 </dd>
 </dl>
@@ -1064,17 +1024,17 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.text_text">
-<span class="sig-name descname"><span class="pre">text_text</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.lm.ListMenuClass.text_text" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">text_text</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.lm.ListMenuClass.text_text" title="Link to this definition"></a></dt>
 <dd><p>現在入力中の初期テキスト.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.ListMenuClass.text_text_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">text_text_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.text_text_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.text_text_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">text_text_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text_text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#ListMenuClass.text_text_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.ListMenuClass.text_text_input" title="Link to this definition"></a></dt>
 <dd><p>現在入力中の初期テキストを入力.</p>
 <p>・現在入力中の初期テキストをクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>text_text</strong> (<em>str</em>) -- 現在入力中の初期テキスト</p>
 </dd>
 </dl>
@@ -1084,12 +1044,12 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.lm.MyDialogClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.lm.</span></span><span class="sig-name descname"><span class="pre">MyDialogClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.MyDialogClass" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.lm.</span></span><span class="sig-name descname"><span class="pre">MyDialogClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.MyDialogClass" title="Link to this definition"></a></dt>
 <dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>ダイアログ作成クラス.</p>
 <p>・自作ダイアログを呼び出し表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- 親ウインドウインスタンス</p></li>
 <li><p><strong>caption</strong> (<em>str</em>) -- ボタンのメッセージ</p></li>
@@ -1101,18 +1061,18 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.lm.MyDialogClass.sub_name_ok">
-<span class="sig-name descname"><span class="pre">sub_name_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass.sub_name_ok"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.MyDialogClass.sub_name_ok" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sub_name_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/lm.html#MyDialogClass.sub_name_ok"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.lm.MyDialogClass.sub_name_ok" title="Link to this definition"></a></dt>
 <dd><p>ダイアログボタンクリック時の処理.</p>
 <p>・自作ダイアログのボタンをクリックしたときにインプットボックスに
 入力されている値を取得する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
-<dt class="field-even">戻り値</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>インプットボックスの値</p>
 </dd>
-<dt class="field-odd">戻り値の型</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -1120,17 +1080,17 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.main">
-<span id="neditor-main-module"></span><h2>neditor.main module<a class="headerlink" href="#module-neditor.main" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.main">
+<span id="neditor-main-module"></span><h2>neditor.main module<a class="headerlink" href="#module-neditor.main" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.main.MainClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.main.</span></span><span class="sig-name descname"><span class="pre">MainClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/main.html#MainClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.main.MainClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.main.</span></span><span class="sig-name descname"><span class="pre">MainClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/main.html#MainClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.main.MainClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></p>
 <p>メインクラス.</p>
 <p>定数を定義しておくプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
 <li><p><strong>master</strong> (<em>instance</em>) -- toplevel のインスタンス</p></li>
@@ -1139,17 +1099,17 @@
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.mp">
-<span id="neditor-mp-module"></span><h2>neditor.mp module<a class="headerlink" href="#module-neditor.mp" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.mp">
+<span id="neditor-mp-module"></span><h2>neditor.mp module<a class="headerlink" href="#module-neditor.mp" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.mp.MainProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.mp.</span></span><span class="sig-name descname"><span class="pre">MainProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wiki_wiki</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.mp.</span></span><span class="sig-name descname"><span class="pre">MainProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wiki_wiki</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>メインフレーム処理のクラス.</p>
 <p>・初期設定をするプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
 <li><p><strong>wiki_wiki</strong> (<em>instance</em>) -- wikipediaapi.Wikipedia のインスタンス</p></li>
@@ -1160,24 +1120,24 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.mp.MainProcessingClass.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass.initialize"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass.initialize" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/mp.html#MainProcessingClass.initialize"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.mp.MainProcessingClass.initialize" title="Link to this definition"></a></dt>
 <dd><p>初期化処理.</p>
 <p>・変数の初期化及び起動準備をする。</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.pm">
-<span id="neditor-pm-module"></span><h2>neditor.pm module<a class="headerlink" href="#module-neditor.pm" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.pm">
+<span id="neditor-pm-module"></span><h2>neditor.pm module<a class="headerlink" href="#module-neditor.pm" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.pm.</span></span><span class="sig-name descname"><span class="pre">ProcessingMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wiki_wiki</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.pm.</span></span><span class="sig-name descname"><span class="pre">ProcessingMenuClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wiki_wiki</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>処理メニューバーのクラス.</p>
 <p>・処理メニューバーにあるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>tokenizer</strong> (<em>instance</em>) -- Tokenizer のインスタンス</p></li>
@@ -1189,14 +1149,14 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.count_moji">
-<span class="sig-name descname"><span class="pre">count_moji</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.count_moji"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.count_moji" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">count_moji</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.count_moji"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.count_moji" title="Link to this definition"></a></dt>
 <dd><p>文字数と行数を表示.</p>
 <p>・文字数と行数をカウントして表示する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.find_wikipedia">
-<span class="sig-name descname"><span class="pre">find_wikipedia</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.find_wikipedia"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.find_wikipedia" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_wikipedia</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.find_wikipedia"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.find_wikipedia" title="Link to this definition"></a></dt>
 <dd><p>意味を検索.</p>
 <p>・Wikipedia-APIライブラリを使ってWikipediaから選択文字の意味を
 検索する。</p>
@@ -1204,11 +1164,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.font_dialog">
-<span class="sig-name descname"><span class="pre">font_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_dialog" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">font_dialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_dialog"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_dialog" title="Link to this definition"></a></dt>
 <dd><p>フォントサイズダイアログを作成.</p>
 <p>・フォントサイズダイアログを作成し表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1216,13 +1176,13 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.font_size">
-<span class="sig-name descname"><span class="pre">font_size</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">font_size</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size" title="Link to this definition"></a></dt>
 <dd><p>フォントのサイズ.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.font_size_Change">
-<span class="sig-name descname"><span class="pre">font_size_Change</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_size_Change"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size_Change" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">font_size_Change</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_size_Change"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size_Change" title="Link to this definition"></a></dt>
 <dd><p>フォントのサイズの変更.</p>
 <p>・サイズ変更を押されたときにサイズを変更する。
 上は72ptまで下は12ptまでにする。</p>
@@ -1230,11 +1190,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.font_size_input">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">font_size_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">font_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_size_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size_input" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">font_size_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">font_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.font_size_input"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.font_size_input" title="Link to this definition"></a></dt>
 <dd><p>フォントサイズを入力.</p>
 <p>・フォントサイズをクラス変数に入力する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>font_size</strong> (<em>str</em>) -- フォントサイズ</p>
 </dd>
 </dl>
@@ -1242,17 +1202,17 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.is_hiragana">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">is_hiragana</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">char</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.is_hiragana"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.is_hiragana" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_hiragana</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">char</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.is_hiragana"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.is_hiragana" title="Link to this definition"></a></dt>
 <dd><p>文字がひらがなか判断.</p>
 <p>・与えられた文字がひらがなかどうか判断する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>char</strong> (<em>str</em>) -- 判断する文字</p>
 </dd>
-<dt class="field-even">戻り値</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>ひらがなならTrue、違うならFalse</p>
 </dd>
-<dt class="field-odd">戻り値の型</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -1260,12 +1220,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.on_double_click_yahoo">
-<span class="sig-name descname"><span class="pre">on_double_click_yahoo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.on_double_click_yahoo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.on_double_click_yahoo" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_double_click_yahoo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.on_double_click_yahoo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.on_double_click_yahoo" title="Link to this definition"></a></dt>
 <dd><p>Yahoo! 校正支援リストをダブルクリック.</p>
 <p>・Yahoo! 校正支援ダイアログのリストをダブルクリックすると
 その該当箇所を選択する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1273,39 +1233,39 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.open_becoming_novelist_page">
-<span class="sig-name descname"><span class="pre">open_becoming_novelist_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.open_becoming_novelist_page"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.open_becoming_novelist_page" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open_becoming_novelist_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.open_becoming_novelist_page"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.open_becoming_novelist_page" title="Link to this definition"></a></dt>
 <dd><p>小説家になろうのユーザーページを開く.</p>
 <p>・インターネットブラウザで小説家になろうのユーザーページを開く。</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.pyttsx3_onend">
-<span class="sig-name descname"><span class="pre">pyttsx3_onend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.pyttsx3_onend"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.pyttsx3_onend" title="この定義へのパーマリンク">¶</a></dt>
+<dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.pyttsx4_onend">
+<span class="sig-name descname"><span class="pre">pyttsx4_onend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.pyttsx4_onend"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.pyttsx4_onend" title="Link to this definition"></a></dt>
 <dd><p>文章を読み終えた時の処理.</p>
 <p>・文章を読み終えたら中止ウインドウを削除する。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.read_text">
-<span class="sig-name descname"><span class="pre">read_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.read_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.read_text" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.read_text"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.read_text" title="Link to this definition"></a></dt>
 <dd><p>テキストを読み上げる.</p>
-<p>・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</p>
+<p>・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.ruby_huri">
-<span class="sig-name descname"><span class="pre">ruby_huri</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.ruby_huri"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.ruby_huri" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ruby_huri</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.ruby_huri"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.ruby_huri" title="Link to this definition"></a></dt>
 <dd><p>ルビをふり.</p>
 <p>・選択文字列に小説家になろうのルビを振る。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.yahoo">
-<span class="sig-name descname"><span class="pre">yahoo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoo" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">yahoo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoo"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoo" title="Link to this definition"></a></dt>
 <dd><p>Yahoo! 校正支援.</p>
 <p>・Yahoo! 校正支援を呼び出し表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1313,23 +1273,23 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.yahoo_appid">
-<span class="sig-name descname"><span class="pre">yahoo_appid</span></span><em class="property"> <span class="pre">=</span> <span class="pre">''</span></em><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoo_appid" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">yahoo_appid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoo_appid" title="Link to this definition"></a></dt>
 <dd><p>Yahoo! Client ID</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.yahoocall">
-<span class="sig-name descname"><span class="pre">yahoocall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoocall" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">yahoocall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahoocall"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahoocall" title="Link to this definition"></a></dt>
 <dd><p>yahooの校正支援を呼び出し.</p>
 <p>・Yahoo! 校正支援をClient IDを使って呼び出す。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>sentence</strong> (<em>str</em>) -- 校正をしたい文字列</p>
 </dd>
-<dt class="field-even">戻り値</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>校正結果</p>
 </dd>
-<dt class="field-odd">戻り値の型</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -1337,11 +1297,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.ProcessingMenuClass.yahooresult">
-<span class="sig-name descname"><span class="pre">yahooresult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahooresult"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahooresult" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">yahooresult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#ProcessingMenuClass.yahooresult"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.ProcessingMenuClass.yahooresult" title="Link to this definition"></a></dt>
 <dd><p>校正支援を表示する画面を制作.</p>
 <p>・校正結果を表示するダイアログを作成する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>html</strong> (<em>str</em>) -- 校正結果</p>
 </dd>
 </dl>
@@ -1351,12 +1311,12 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.pm.Speaking">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.pm.</span></span><span class="sig-name descname"><span class="pre">Speaking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.pm.</span></span><span class="sig-name descname"><span class="pre">Speaking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
 <p>テキスト読み上げのクラス.</p>
 <p>・テキスト読み上げのプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sentence</strong> (<em>str</em>) -- テキストデータ</p></li>
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
@@ -1366,29 +1326,31 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.Speaking.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking.run"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking.run" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking.run"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking.run" title="Link to this definition"></a></dt>
 <dd><p>読み上げを実行.</p>
 <p>・テキストの読み上げを始める。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.pm.Speaking.stop">
-<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking.stop"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking.stop" title="この定義へのパーマリンク">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/pm.html#Speaking.stop"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.pm.Speaking.stop" title="Link to this definition"></a></dt>
+<dd><p>読み上げを終了する.</p>
+<p>・テキストの読み上げを終わる。</p>
+</dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor.sp">
-<span id="neditor-sp-module"></span><h2>neditor.sp module<a class="headerlink" href="#module-neditor.sp" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor.sp">
+<span id="neditor-sp-module"></span><h2>neditor.sp module<a class="headerlink" href="#module-neditor.sp" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neditor.sp.</span></span><span class="sig-name descname"><span class="pre">SubfunctionProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass" title="この定義へのパーマリンク">¶</a></dt>
-<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">neditor.main.MainClass</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neditor.sp.</span></span><span class="sig-name descname"><span class="pre">SubfunctionProcessingClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference internal" href="#neditor.main.MainClass" title="neditor.main.MainClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">MainClass</span></code></a></p>
 <p>補助機能のクラス.</p>
 <p>・補助機能があるプログラム群</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> (<em>instance</em>) -- MainProcessingClass のインスタンス</p></li>
 <li><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p></li>
@@ -1398,12 +1360,12 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.btn_click">
-<span class="sig-name descname"><span class="pre">btn_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.btn_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.btn_click" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">btn_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.btn_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.btn_click" title="Link to this definition"></a></dt>
 <dd><p>似顔絵ボタンを押したとき.</p>
 <p>・似顔絵ボタンを押したときに画像イメージを似顔絵フレームに
 貼り付ける。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1411,11 +1373,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.change_setting">
-<span class="sig-name descname"><span class="pre">change_setting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.change_setting"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.change_setting" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">change_setting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.change_setting"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.change_setting" title="Link to this definition"></a></dt>
 <dd><p>テキストの変更時.</p>
 <p>・テキストを変更したときに行番号とハイライトを変更する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1423,12 +1385,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.clear_btn_click">
-<span class="sig-name descname"><span class="pre">clear_btn_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.clear_btn_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.clear_btn_click" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">clear_btn_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.clear_btn_click"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.clear_btn_click" title="Link to this definition"></a></dt>
 <dd><p>消去ボタンをクリックしたとき.</p>
 <p>・消去ボタンをクリックしたときに画像イメージから画像を
 削除する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1436,12 +1398,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.mouse_image_scroll">
-<span class="sig-name descname"><span class="pre">mouse_image_scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.mouse_image_scroll"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.mouse_image_scroll" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mouse_image_scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.mouse_image_scroll"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.mouse_image_scroll" title="Link to this definition"></a></dt>
 <dd><p>Ctrl+マウスホイールの拡大縮小設定.</p>
 <p>・イメージキャンバスでCtrl+マウスホイールを回したときに画像を
 拡大縮小する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1449,12 +1411,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.mouse_y_scroll">
-<span class="sig-name descname"><span class="pre">mouse_y_scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.mouse_y_scroll"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.mouse_y_scroll" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mouse_y_scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.mouse_y_scroll"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.mouse_y_scroll" title="Link to this definition"></a></dt>
 <dd><p>マウスホイール移動の設定.</p>
 <p>・イメージキャンバスでマウスホイールを回したときにイメージキャンバス
 をスクロールする。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1462,11 +1424,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.print_gif">
-<span class="sig-name descname"><span class="pre">print_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.print_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.print_gif" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">print_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.print_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.print_gif" title="Link to this definition"></a></dt>
 <dd><p>gifを表示.</p>
 <p>・似顔絵キャンバスに画像を張り付ける。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>title</strong> (<em>str</em>) -- タイトル</p>
 </dd>
 </dl>
@@ -1474,18 +1436,18 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.resize_gif">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">resize_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.resize_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.resize_gif" title="この定義へのパーマリンク">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resize_gif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.resize_gif"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.resize_gif" title="Link to this definition"></a></dt>
 <dd><p>画像をリサイズ.</p>
 <p>・イメージファイルを縦が長いときは縦を、横が長いときは横を、
 同じときは両方を150pxに設定する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>im</strong> (<em>instance</em>) -- イメージインスタンス</p>
 </dd>
-<dt class="field-even">戻り値</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>イメージインスタンス</p>
 </dd>
-<dt class="field-odd">戻り値の型</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>instance</p>
 </dd>
 </dl>
@@ -1493,11 +1455,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="neditor.sp.SubfunctionProcessingClass.update_line_numbers">
-<span class="sig-name descname"><span class="pre">update_line_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.update_line_numbers"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.update_line_numbers" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update_line_numbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor/sp.html#SubfunctionProcessingClass.update_line_numbers"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.sp.SubfunctionProcessingClass.update_line_numbers" title="Link to this definition"></a></dt>
 <dd><p>行番号の描画.</p>
 <p>・行番号をつけて表示する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>event</strong> (<em>instance</em>) -- tkinter.Event のインスタンス</p>
 </dd>
 </dl>
@@ -1505,69 +1467,52 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-neditor">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-neditor" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</section>
+<section id="module-neditor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-neditor" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="neditor.main_window_create">
-<span class="sig-prename descclassname"><span class="pre">neditor.</span></span><span class="sig-name descname"><span class="pre">main_window_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#main_window_create"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.main_window_create" title="この定義へのパーマリンク">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">neditor.</span></span><span class="sig-name descname"><span class="pre">main_window_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locale_var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neditor.html#main_window_create"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#neditor.main_window_create" title="Link to this definition"></a></dt>
 <dd><p>タイトルウインドウの作成.</p>
 <p>・タイトルウインドウを作成する。</p>
 <dl class="field-list simple">
-<dt class="field-odd">パラメータ</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>locale_var</strong> (<em>str</em>) -- ロケーション</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="i18n.html" class="btn btn-neutral float-left" title="i18n package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 2020, Yamahara Yoshihiro.
-
-    </p>
+    <p>&#169; Copyright 2024, Yamahara Yoshihiro.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

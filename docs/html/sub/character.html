@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>i18n &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
+  <title>キャラクターファイルについて &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -20,7 +21,9 @@
         <script src="../_static/translations.js?v=4dbe4bdc"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="検索" href="../search.html" /> 
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="保存ファイルについて" href="save.html" />
+    <link rel="prev" title="使用方法" href="../use.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,11 +46,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sub/character.html">キャラクターファイルについて</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coverage.html">カバレッジの計測について</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modules.html">source</a></li>
 </ul>
 
@@ -65,9 +68,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">モジュールコード</a></li>
-      <li class="breadcrumb-item active">i18n</li>
+      <li class="breadcrumb-item active">キャラクターファイルについて</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/sub/character.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -75,37 +78,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>i18n のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/env python3</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">llize</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">data</span>
-
-
-<div class="viewcode-block" id="initialize">
-<a class="viewcode-back" href="../i18n.html#i18n.initialize">[ドキュメント]</a>
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">locate_var</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;多言語化の初期処理.</span>
-
-<span class="sd">    ・多言語化の初期処理をする。</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        locale_var (str): ロケーション</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        instance: 多言語化のクラスのインスタンス</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">instance</span> <span class="o">=</span> <span class="n">llize</span><span class="o">.</span><span class="n">Localization</span><span class="p">(</span>
-        <span class="n">locate_var</span><span class="p">,</span>
-        <span class="s2">&quot;neditor.txt&quot;</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">TRANSLATION_DATA</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">instance</span></div>
-
+  <section id="id1">
+<h1>キャラクターファイルについて<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>セーブファイルに保存されているcharacterフォルダの中に入っているファイルの保存形式</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;data&gt;</span>
+<span class="w">        </span><span class="nt">&lt;call&gt;</span>呼び名<span class="nt">&lt;/call&gt;</span>
+<span class="w">       	</span><span class="nt">&lt;name&gt;</span>本名<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sex&gt;</span>性別(0.男<span class="w"> </span>1.女<span class="w"> </span>2.その他)<span class="nt">&lt;/sex&gt;</span>
+<span class="w">        </span><span class="nt">&lt;birthday&gt;</span>誕生日<span class="nt">&lt;/birthday&gt;</span>
+<span class="w">        </span><span class="nt">&lt;body&gt;</span>略歴<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/data&gt;</span>
 </pre></div>
+</div>
+</section>
+
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../use.html" class="btn btn-neutral float-left" title="使用方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="save.html" class="btn btn-neutral float-right" title="保存ファイルについて" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

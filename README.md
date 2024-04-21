@@ -98,15 +98,15 @@ python -m pip install sphinx
 python -m pip install sphinx-rtd-theme
 python -m pip install recommonmark
 mkdir sphinx
-sphinx-quickstart sphinx
+sphinx-quickstart
 ```
 
-- ./sphinx/conf.pyを変更します。
+- ./sphinx/source/conf.pyを変更します。
 
 ```python
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../source'))
+sys.path.insert(0, os.path.abspath('../../source'))
 # ～～～～～～～～～～～～～～～～～～～～～～～～～～
 extensions = [
     'recmmonmark',
@@ -121,7 +121,7 @@ html_theme = 'sphinx_rtd_theme'
 - ドキュメントを生成します。ルートフォルダで以下のコマンドを実行します。
 
 ```
-sphinx-apidoc -o ./sphinx ./source
+sphinx-apidoc -o ./sphinx/source ./source
 ```
 
 - htmlファイルを生成します。
