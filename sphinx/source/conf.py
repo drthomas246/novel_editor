@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath('../../source'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Novel Editor'
-copyright = '2024, Yamahara Yoshihiro'
+copyright = '2020, Yamahara Yoshihiro'
 author = 'Yamahara Yoshihiro'
 release = '0.9.0 bata'
 
@@ -35,4 +35,4 @@ language = 'ja'
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
-autodoc_mock_imports = ["wikipediaapi", "janome", "jaconv", "pyttsx4", "PIL"]
+autodoc_mock_imports = ["wikipediaapi", "janome", "jaconv", "pyttsx4", "PIL", "customtkinter"]

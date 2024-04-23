@@ -254,10 +254,6 @@ Pillow is the friendly PIL fork. It is
 Released under the PIL licens  
 [https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE](https://raw.githubusercontent.com/python-pillow/Pillow/master/LICENSE)
 
-- requests(HTTP)ライブラリ  
-Copyright 2019, Kenneth Reitz  
-This software includes the work that is distributed in the [Apache License 2.0](https://raw.githubusercontent.com/psf/requests/master/LICENSE)
-
 - Yahoo! 校正支援  
 Web Services by Yahoo! JAPAN （[https://developer.yahoo.co.jp/sitemap/](https://developer.yahoo.co.jp/sitemap/)）
 

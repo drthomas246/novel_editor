@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovelEditor &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=24ad5ec8"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=4dbe4bdc"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Novel Editor
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use.html">使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/character.html">キャラクターファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/save.html">保存ファイルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sub/coverage.html">カバレッジの計測について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">リファレンス</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Novel Editor</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">NovelEditor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>NovelEditor のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
+<span class="kn">import</span> <span class="nn">customtkinter</span>
+
+<span class="kn">import</span> <span class="nn">wikipediaapi</span>
+<span class="kn">from</span> <span class="nn">janome.tokenizer</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MainProcessing</span> <span class="k">as</span> <span class="n">MainProcessing</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">import</span> <span class="nn">i18n</span>
+
+
+<div class="viewcode-block" id="main_window_create">
+<a class="viewcode-back" href="../NovelEditor.html#NovelEditor.main_window_create">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">main_window_create</span><span class="p">(</span><span class="n">locale_var</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;タイトルウインドウの作成.</span>
+
+<span class="sd">    ・タイトルウインドウを作成する。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        locale_var (str): ロケーション</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">locale_var</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">):</span>
+        <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
+            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;This program cannot be started more than once.&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">&#39;600x300&#39;</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">TITLE_BINARY</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
+    <span class="c1"># タイトルを表示する</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+    <span class="c1"># センターに表示する</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">update_idletasks</span><span class="p">()</span>
+    <span class="n">ww</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span>
+    <span class="n">lw</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_width</span><span class="p">()</span>
+    <span class="n">wh</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span>
+    <span class="n">lh</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_height</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">x</span><span class="si">{1}</span><span class="s2">+</span><span class="si">{2}</span><span class="s2">+</span><span class="si">{3}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">lw</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">lh</span><span class="p">),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ww</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">lw</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+            <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wh</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">lh</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>
+
+    <span class="c1"># windowsのみタイトルバーを削除</span>
+    <span class="c1"># OS別判断</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">overrideredirect</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">wm_attributes</span><span class="p">(</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span> <span class="s1">&#39;splash&#39;</span><span class="p">)</span>
+    <span class="c1"># 描画するが処理は止めない</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+    <span class="c1"># Janomeを使って日本語の形態素解析を起動</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">()</span>
+    <span class="c1"># wikipediaapiを起動</span>
+    <span class="n">wiki_wiki</span> <span class="o">=</span> <span class="n">wikipediaapi</span><span class="o">.</span><span class="n">Wikipedia</span><span class="p">(</span><span class="s1">&#39;Novel Editor(yoshihiro@yamahara.email)&#39;</span><span class="p">,</span><span class="s1">&#39;ja&#39;</span><span class="p">)</span>
+    <span class="c1"># メイン画面を削除</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+    <span class="c1"># 再度メイン画面を作成</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">customtkinter</span><span class="o">.</span><span class="n">CTk</span><span class="p">()</span>
+    <span class="c1"># アイコンを設定</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+        <span class="s1">&#39;wm&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;iconphoto&#39;</span><span class="p">,</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">_w</span><span class="p">,</span>
+        <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">ICO_BINARY</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1"># タイトルの表示</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
+    <span class="c1"># フレームを表示する</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">MainProcessing</span><span class="o">.</span><span class="n">MainProcessingClass</span><span class="p">(</span>
+        <span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">wiki_wiki</span><span class="p">,</span>
+        <span class="n">locale_var</span><span class="p">,</span>
+        <span class="n">root</span>
+    <span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
+    <span class="c1"># 終了時にon_closingを行う</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">on_closing</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pf</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">state</span><span class="p">(</span><span class="s1">&#39;zoomed&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-zoomed&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">root</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Yamahara Yoshihiro.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
