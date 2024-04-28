@@ -2,6 +2,7 @@
 import os
 import zipfile
 import shutil
+import matplotlib.pyplot as plt
 import tkinter as tk
 import tkinter.messagebox as messagebox
 import tkinter.filedialog as filedialog
@@ -20,6 +21,7 @@ class FileMenuClass(Definition.DefinitionClass):
         locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
+
     now_path = ""
     """今の処理しているファイルのパス."""
     file_path = ""
@@ -38,23 +40,22 @@ class FileMenuClass(Definition.DefinitionClass):
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        if not self.app.NovelEditor.get(
-                    '1.0',
-                    'end - 1c'
-                ) == ListMenuClass.ListMenuClass.text_text:
+        if (
+            not self.app.NovelEditor.get("1.0", "end - 1c")
+            == ListMenuClass.ListMenuClass.text_text
+        ):
             if messagebox.askokcancel(
                 self.app.dic.get_dict("Novel Editor"),
-                self.app.dic.get_dict("Do you want to overwrite?")
+                self.app.dic.get_dict("Do you want to overwrite?"),
             ):
                 self.overwrite_save_file()
                 self.new_file()
 
             elif messagebox.askokcancel(
-                    self.app.dic.get_dict("Novel Editor"),
-                    self.app.dic.get_dict(
-                        "Do you want to discard the current edit"
-                        " and create a new one?"
-                    )
+                self.app.dic.get_dict("Novel Editor"),
+                self.app.dic.get_dict(
+                    "Do you want to discard the current edit" " and create a new one?"
+                ),
             ):
                 self.new_file()
         else:
@@ -69,19 +70,16 @@ class FileMenuClass(Definition.DefinitionClass):
             event (instance): tkinter.Event のインスタンス
         """
         # ファイルを開くダイアログを開く
-        fTyp = [(self.app.dic.get_dict("Novel Editor"), '*.ned')]
+        fTyp = [(self.app.dic.get_dict("Novel Editor"), "*.ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.askopenfilename(
-            filetypes=fTyp,
-            initialdir=iDir
-        )
+        filepath = filedialog.askopenfilename(filetypes=fTyp, initialdir=iDir)
         # ファイル名があるとき
         if not filepath == "":
             # 初期化する
             self.app.initialize()
             # ファイルを開いてdataフォルダに入れる
             with zipfile.ZipFile(filepath) as existing_zip:
-                existing_zip.extractall('./data')
+                existing_zip.extractall("./data")
             # ツリービューを削除する
             for val in self.TREE_FOLDER:
                 self.app.tree.delete(val[0])
@@ -112,8 +110,7 @@ class FileMenuClass(Definition.DefinitionClass):
             shutil.make_archive(self.file_path, "zip", "./data")
             # 拡張子の変更を行う
             shutil.move(
-                "{0}.zip".format(self.file_path),
-                "{0}.ned".format(self.file_path)
+                "{0}.zip".format(self.file_path), "{0}.ned".format(self.file_path)
             )
         # ファイルパスが存在しないとき
         else:
@@ -131,10 +128,7 @@ class FileMenuClass(Definition.DefinitionClass):
         # ファイル保存ダイアログを表示する
         fTyp = [(self.app.dic.get_dict("Novel Editor"), ".ned")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        filepath = filedialog.asksaveasfilename(
-            filetypes=fTyp,
-            initialdir=iDir
-        )
+        filepath = filedialog.asksaveasfilename(filetypes=fTyp, initialdir=iDir)
         # ファイルパスが決まったとき
         if not filepath == "":
             # 拡張子を除いて保存する
@@ -149,13 +143,16 @@ class FileMenuClass(Definition.DefinitionClass):
         ・ソフトを閉じるか確認してから閉じる。
         """
         if messagebox.askokcancel(
-                self.app.dic.get_dict("Novel Editor"),
-                self.app.dic.get_dict("Quit this program?")
+            self.app.dic.get_dict("Novel Editor"),
+            self.app.dic.get_dict("Quit this program?"),
         ):
             shutil.rmtree("./data")
             if os.path.isfile("./userdic.csv"):
                 os.remove("./userdic.csv")
 
+            # キャラクター作成画面のキャッシュを削除してから閉じる
+            plt.clf()
+            plt.close()
             self.master.destroy()
 
     def new_file(self):
@@ -170,11 +167,9 @@ class FileMenuClass(Definition.DefinitionClass):
         # ツリービューを表示する
         self.tree_get_loop()
         self.app.cwc.frame()
-        self.app.winfo_toplevel().title(
-            self.app.dic.get_dict("Novel Editor")
-        )
+        self.app.winfo_toplevel().title(self.app.dic.get_dict("Novel Editor"))
         # テキストを読み取り専用にする
-        self.app.NovelEditor.configure(state='disabled')
+        self.app.NovelEditor.configure(state="disabled")
         # テキストにフォーカスを当てる
         self.app.NovelEditor.focus()
 
@@ -188,16 +183,14 @@ class FileMenuClass(Definition.DefinitionClass):
         """
         # 編集ファイルを保存する
         if not path == "":
-            with open(path, mode='w', encoding='utf-8') as f:
+            with open(path, mode="w", encoding="utf-8") as f:
                 if not path.find(self.TREE_FOLDER[0][0]) == -1:
-                    f.write(
-                        self.save_charactor_file(self.app.EntryCallName.get())
-                    )
+                    f.write(self.save_charactor_file(self.app.EntryCallName.get()))
                     self.charactor_file = ""
                 elif not path.find(self.TREE_FOLDER[4][0]) == -1:
                     f.write(str(self.app.spc.zoom))
                 else:
-                    f.write(self.app.NovelEditor.get("1.0", tk.END+'-1c'))
+                    f.write(self.app.NovelEditor.get("1.0", tk.END + "-1c"))
 
             self.now_path_input(path)
 
@@ -218,10 +211,7 @@ class FileMenuClass(Definition.DefinitionClass):
             self.app.EntryName.get(),
             self.app.var.get(),
             self.app.EntryBirthday.get(),
-            self.app.TextboxBiography.get(
-                '1.0',
-                'end -1c'
-            )
+            self.app.TextboxBiography.get("1.0", "end -1c"),
         )
 
     def tree_get_loop(self):
@@ -230,16 +220,14 @@ class FileMenuClass(Definition.DefinitionClass):
         ・保存データからファイルを取得してツリービューに挿入する。
         """
         for val in self.TREE_FOLDER:
-            self.app.tree.insert('', 'end', val[0], text=val[1])
+            self.app.tree.insert("", "end", val[0], text=val[1])
             # フォルダのファイルを取得
             path = "./{0}".format(val[0])
             files = os.listdir(path)
             for filename in files:
                 if os.path.splitext(filename)[1] == ".txt":
                     self.app.tree.insert(
-                        val[0],
-                        'end',
-                        text=os.path.splitext(filename)[0]
+                        val[0], "end", text=os.path.splitext(filename)[0]
                     )
 
     @classmethod

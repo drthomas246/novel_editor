@@ -29,6 +29,7 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
+
     font_size = 0
     """フォントのサイズ."""
     yahoo_appid = ""
@@ -49,9 +50,9 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         """
         hon = ""
         # 選択文字列を切り取る
-        set_ruby = self.app.NovelEditor.get('sel.first', 'sel.last')
+        set_ruby = self.app.NovelEditor.get("sel.first", "sel.last")
         # 選択文字列を削除する
-        self.app.NovelEditor.delete('sel.first', 'sel.last')
+        self.app.NovelEditor.delete("sel.first", "sel.last")
         # 形態素解析を行う
         for token in self.tokenizer.tokenize(set_ruby):
             # ルビの取得
@@ -63,22 +64,18 @@ class ProcessingMenuClass(Definition.DefinitionClass):
                 if self.is_hiragana(i):
                     hira += i
             # ルビがないときと、記号の時の処理
-            if ruby.replace(
-                hira, ''
-            ) == "" or token.part_of_speech.split(
-                ","
-            )[0] == self.dic.get_dict("symbol"):
+            if ruby.replace(hira, "") == "" or token.part_of_speech.split(",")[
+                0
+            ] == self.dic.get_dict("symbol"):
                 hon += token.surface
             else:
                 # ルビ振りを行う
                 hon += "|{0}≪{1}≫{2}".format(
-                    token.surface.replace(hira, ''),
-                    ruby.replace(hira, ''),
-                    hira
+                    token.surface.replace(hira, ""), ruby.replace(hira, ""), hira
                 )
 
         # テキストを表示する
-        self.app.NovelEditor.insert('insert', hon)
+        self.app.NovelEditor.insert("insert", hon)
 
     @staticmethod
     def is_hiragana(char):
@@ -92,7 +89,7 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         Returns:
             bool: ひらがなならTrue、違うならFalse
         """
-        return (0x3040 < ord(char) < 0x3097)
+        return 0x3040 < ord(char) < 0x3097
 
     def count_moji(self):
         """文字数と行数を表示.
@@ -100,9 +97,9 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         ・文字数と行数をカウントして表示する。
         """
         # 行数の取得
-        new_line = int(self.app.NovelEditor.index('end-1c').split('.')[0])
+        new_line = int(self.app.NovelEditor.index("end-1c").split(".")[0])
         # 文字列の取得
-        moji = self.app.NovelEditor.get('1.0', 'end')
+        moji = self.app.NovelEditor.get("1.0", "end")
         # ２０文字で区切ったときの行数を数える
         gen_mai = 0
         for val in moji.splitlines():
@@ -112,11 +109,8 @@ class ProcessingMenuClass(Definition.DefinitionClass):
             self.app.dic.get_dict("Number of characters etc"),
             self.app.dic.get_dict(
                 "Characters : {0} Lines : {1}\n Manuscript papers : {2}"
-            )
-            .format(
-                len(moji)-new_line,
-                new_line,
-                -(-gen_mai//20)))
+            ).format(len(moji) - new_line, new_line, -(-gen_mai // 20)),
+        )
 
     def find_wikipedia(self):
         """意味を検索.
@@ -130,17 +124,13 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         # ページがあるかどうか判断
         if page_py.exists():
             messagebox.showinfo(
-                self.app.dic.get_dict(
-                    "Meaning of [{0}]"
-                ).format(select_text),
-                page_py.summary
+                self.app.dic.get_dict("Meaning of [{0}]").format(select_text),
+                page_py.summary,
             )
         else:
             messagebox.showwarning(
-                self.app.dic.get_dict(
-                    "Meaning of [{0}]"
-                ).format(select_text),
-                self.app.dic.get_dict("Can't find.")
+                self.app.dic.get_dict("Meaning of [{0}]").format(select_text),
+                self.app.dic.get_dict("Can't find."),
             )
 
     def open_becoming_novelist_page(self):
@@ -156,7 +146,9 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         ・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。
         """
         self.app.engine = pyttsx4.init()
-        self.speak = Speaking(self.app.NovelEditor.get(1.0, tk.END),self.app, daemon=True)
+        self.speak = Speaking(
+            self.app.NovelEditor.get(1.0, tk.END), self.app, daemon=True
+        )
         self.speak.start()
 
     def pyttsx4_onend(self):
@@ -177,9 +169,7 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        html = self.yahoocall(
-            self.app.NovelEditor.get('1.0', 'end -1c')
-        )
+        html = self.yahoocall(self.app.NovelEditor.get("1.0", "end -1c"))
         if not self.yahoo_appid == "":
             self.yahooresult(html)
             self.yahoo_tree.bind("<Double-1>", self.on_double_click_yahoo)
@@ -201,10 +191,10 @@ class ProcessingMenuClass(Definition.DefinitionClass):
                 self.app.dic.get_dict(
                     "Yahoo! Client ID is not find."
                     "\nRead Readme.html and set it again."
-                )
+                ),
             )
             return
-        APPID = self.yahoo_appid.rstrip('\n')
+        APPID = self.yahoo_appid.rstrip("\n")
         URL = "https://jlp.yahooapis.jp/KouseiService/V2/kousei"
         headers = {
             "Content-Type": "application/json",
@@ -212,11 +202,9 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         }
         param_dic = {
             "id": "NovelEditor-Yahoo-Kousei",
-            "jsonrpc" : "2.0",
-            "method" : "jlp.kouseiservice.kousei",
-            "params" : {
-                "q" : sentence
-            }
+            "jsonrpc": "2.0",
+            "method": "jlp.kouseiservice.kousei",
+            "params": {"q": sentence},
         }
         params = json.dumps(param_dic).encode()
         req = request.Request(URL, params, headers)
@@ -246,57 +234,39 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         self.yahoo_tree.column(4, width=150)
         self.yahoo_tree.column(5, width=120)
         self.yahoo_tree.heading(
-            1,
-            text=self.dic.get_dict("Number of characters from the beginning")
+            1, text=self.dic.get_dict("Number of characters from the beginning")
         )
         self.yahoo_tree.heading(
-            2,
-            text=self.dic.get_dict("Number of target characters")
+            2, text=self.dic.get_dict("Number of target characters")
+        )
+        self.yahoo_tree.heading(3, text=self.dic.get_dict("Target notation"))
+        self.yahoo_tree.heading(
+            4, text=self.dic.get_dict("Paraphrase candidate string")
         )
         self.yahoo_tree.heading(
-            3,
-            text=self.dic.get_dict("Target notation")
-        )
-        self.yahoo_tree.heading(
-            4,
-            text=self.dic.get_dict("Paraphrase candidate string")
-        )
-        self.yahoo_tree.heading(
-            5,
-            text=self.dic.get_dict("Detailed information on the pointed out")
+            5, text=self.dic.get_dict("Detailed information on the pointed out")
         )
         # 情報を取り出す
         for child in jsonData["result"]["suggestions"]:
-            StartPos = (child["offset"])
-            Length = (child["length"])
-            Surface = (child["word"])
-            ShitekiWord = (child["note"])
-            ShitekiInfo = (child["rule"])
+            StartPos = child["offset"]
+            Length = child["length"]
+            Surface = child["word"]
+            ShitekiWord = child["note"]
+            ShitekiInfo = child["rule"]
             self.yahoo_tree.insert(
-                "",
-                "end",
-                values=(StartPos,
-                        Length,
-                        Surface,
-                        ShitekiWord,
-                        ShitekiInfo
-                        )
-                )
+                "", "end", values=(StartPos, Length, Surface, ShitekiWord, ShitekiInfo)
+            )
 
         self.yahoo_tree.grid(row=0, column=0, sticky=(tk.N, tk.S, tk.E, tk.W))
         # スクロールバーを表示する
         SCRLBAR_Y = ttk.Scrollbar(
-            sub_win,
-            orient=tk.VERTICAL,
-            command=self.yahoo_tree.yview
+            sub_win, orient=tk.VERTICAL, command=self.yahoo_tree.yview
         )
         self.yahoo_tree.configure(yscroll=SCRLBAR_Y.set)
         SCRLBAR_Y.grid(row=0, column=1, sticky=(tk.N, tk.S))
         # 最前面に表示し続ける
         sub_win.attributes("-topmost", True)
-        sub_win.title(
-            self.app.dic.get_dict("Sentence structure")
-        )
+        sub_win.title(self.app.dic.get_dict("Sentence structure"))
 
     def on_double_click_yahoo(self, event=None):
         """Yahoo! 校正支援リストをダブルクリック.
@@ -322,26 +292,23 @@ class ProcessingMenuClass(Definition.DefinitionClass):
                 i += 1
                 textforlen = textlen
                 textlen += len(
-                    self.app.NovelEditor.get(
-                        '{0}.0'.format(i),
-                        '{0}.0'.format(i+1)
-                    )
+                    self.app.NovelEditor.get("{0}.0".format(i), "{0}.0".format(i + 1))
                 )
             else:
                 break
         if i == 0:
             i = 1
         # 選択状態を一旦削除
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")
         # 選択状態にする
         self.app.NovelEditor.tag_add(
-            'sel',
-            "{0}.{1}".format(i, val-textforlen),
-            "{0}.{1}".format(i, val-textforlen+lenge)
+            "sel",
+            "{0}.{1}".format(i, val - textforlen),
+            "{0}.{1}".format(i, val - textforlen + lenge),
         )
         # カーソルの移動
-        self.app.NovelEditor.mark_set('insert', '{0}.{1}'.format(i, val-textforlen))
-        self.app.NovelEditor.see('insert')
+        self.app.NovelEditor.mark_set("insert", "{0}.{1}".format(i, val - textforlen))
+        self.app.NovelEditor.see("insert")
         # フォーカスを合わせる
         self.app.NovelEditor.focus()
         return
@@ -357,26 +324,18 @@ class ProcessingMenuClass(Definition.DefinitionClass):
         self.app.sub_wins = tk.Toplevel(self.app)
         self.app.intSpin = ttk.Spinbox(self.app.sub_wins, from_=12, to=72)
         self.app.intSpin.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
+            row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W + tk.E, ipady=3
         )
         button = ttk.Button(
             self.app.sub_wins,
             text=self.app.dic.get_dict("Resize"),
             width=str(self.app.dic.get_dict("Resize")),
             padding=(10, 5),
-            command=self.font_size_Change
+            command=self.font_size_Change,
         )
         button.grid(row=1, column=1)
         self.app.intSpin.set(ProcessingMenuClass.font_size)
-        self.app.sub_wins.title(
-            self.app.dic.get_dict("Font size")
-        )
+        self.app.sub_wins.title(self.app.dic.get_dict("Font size"))
 
     def font_size_Change(self):
         """フォントのサイズの変更.
@@ -422,6 +381,7 @@ class Speaking(threading.Thread):
         app (instance): MainProcessingClass のインスタンス
         **kwargs (dict): 複数のキーワード引数を辞書として受け取る
     """
+
     def __init__(self, sentence, app, **kwargs):
         super().__init__(**kwargs)
         self.app = app
@@ -445,39 +405,37 @@ class Speaking(threading.Thread):
             text=self.app.dic.get_dict("Stop"),
             width=str(self.app.dic.get_dict("Stop")),
             padding=(100, 5),
-            command=self.stop
+            command=self.stop,
         )
         button.grid(row=1, column=1)
         # 最前面に表示し続ける
         self.sub_read_win.attributes("-topmost", True)
         # サイズ変更禁止
         self.sub_read_win.resizable(False, False)
-        self.sub_read_win.title(
-            self.app.dic.get_dict("Read aloud")
-        )
+        self.sub_read_win.title(self.app.dic.get_dict("Read aloud"))
         # 頭から読み上げる
-        pos = [0,0]
+        pos = [0, 0]
         while self.words and self.running:
             if not self.paused:
                 # 読み上げ場所の選択
                 word = self.words.pop(0)
                 pos[1] = len(word) + 1 + pos[1]
-                if pos[1]-pos[0]>1:
-                    start = '0.0 + {0}c'.format(pos[0])
-                    end = '0.0 + {0}c'.format(pos[1])
-                    self.app.NovelEditor.tag_add('sel', start, end)
-                    self.app.NovelEditor.mark_set('insert', end)
-                    self.app.NovelEditor.see('insert')
+                if pos[1] - pos[0] > 1:
+                    start = "0.0 + {0}c".format(pos[0])
+                    end = "0.0 + {0}c".format(pos[1])
+                    self.app.NovelEditor.tag_add("sel", start, end)
+                    self.app.NovelEditor.mark_set("insert", end)
+                    self.app.NovelEditor.see("insert")
                     self.app.NovelEditor.focus()
                     # 読み上げ開始
                     self.app.engine.say(word)
                     self.app.engine.runAndWait()
-                    self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+                    self.app.NovelEditor.tag_remove("sel", "1.0", "end")
                     # 読み上げ終了
                 pos[0] = pos[1]
         self.running = False
         self.sub_read_win.destroy()
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")
 
     def stop(self):
         """読み上げを終了する.
@@ -487,4 +445,4 @@ class Speaking(threading.Thread):
         """
         self.running = False
         self.sub_read_win.destroy()
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")

@@ -28,11 +28,11 @@ def main_window_create(locale_var):
     if os.path.isdir("./data"):
         messagebox.showerror(
             dic.get_dict("Novel Editor"),
-            dic.get_dict("This program cannot be started more than once.")
+            dic.get_dict("This program cannot be started more than once."),
         )
         sys.exit()
 
-    root.geometry('600x300')
+    root.geometry("600x300")
     root.title(dic.get_dict("Novel Editor"))
     img = tk.PhotoImage(data=data.TITLE_BINARY)
     label = tk.Label(image=img)
@@ -46,54 +46,41 @@ def main_window_create(locale_var):
     lh = root.winfo_height()
     root.geometry(
         "{0}x{1}+{2}+{3}".format(
-            str(lw),
-            str(lh),
-            str(int(ww/2-lw/2)),
-            str(int(wh/2-lh/2))
+            str(lw), str(lh), str(int(ww / 2 - lw / 2)), str(int(wh / 2 - lh / 2))
         )
     )
     root.deiconify()
 
     # windowsのみタイトルバーを削除
     # OS別判断
-    if os.name == 'nt':
+    if os.name == "nt":
         root.overrideredirect(True)
-    elif os.name == 'posix':
-        root.wm_attributes('-type', 'splash')
+    elif os.name == "posix":
+        root.wm_attributes("-type", "splash")
     # 描画するが処理は止めない
     root.update()
     # Janomeを使って日本語の形態素解析を起動
     tokenizer = Tokenizer()
     # wikipediaapiを起動
-    wiki_wiki = wikipediaapi.Wikipedia('Novel Editor(yoshihiro@yamahara.email)','ja')
+    wiki_wiki = wikipediaapi.Wikipedia("Novel Editor(yoshihiro@yamahara.email)", "ja")
     # メイン画面を削除
     root.destroy()
     # 再度メイン画面を作成
     root = customtkinter.CTk()
     # アイコンを設定
-    root.tk.call(
-        'wm',
-        'iconphoto',
-        root._w,
-        tk.PhotoImage(data=data.ICO_BINARY)
-    )
+    root.tk.call("wm", "iconphoto", root._w, tk.PhotoImage(data=data.ICO_BINARY))
     # タイトルの表示
     root.title(dic.get_dict("Novel Editor"))
     # フレームを表示する
-    app = MainProcessing.MainProcessingClass(
-        tokenizer,
-        wiki_wiki,
-        locale_var,
-        root
-    )
+    app = MainProcessing.MainProcessingClass(tokenizer, wiki_wiki, locale_var, root)
     app.grid(column=0, row=0, sticky=(tk.N, tk.S, tk.E, tk.W))
     # 終了時にon_closingを行う
     root.protocol("WM_DELETE_WINDOW", app.fmc.on_closing)
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
     pf = platform.system()
-    if pf == 'Windows':
-        root.state('zoomed')
+    if pf == "Windows":
+        root.state("zoomed")
     else:
         root.attributes("-zoomed", "1")
 

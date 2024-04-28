@@ -1,4 +1,4 @@
-TRANSLATION_DATA = '''{
+TRANSLATION_DATA = """{
 #
 # Enter the translation data here.
 #
@@ -7,6 +7,22 @@ TRANSLATION_DATA = '''{
 #   "Novel Editor" : "Roman Editor" ,
 #
 #
+    "Closed": "",
+    "Open": "",
+    "Stable": "",
+    "Neurotic": "",
+    "Spontaneous": "",
+    "Conscientious": "",
+    "Hostile": "",
+    "Agreeable": "",
+    "Introverted": "",
+    "Extraverted": "",
+    "CharacterChart": "",
+    "Openness": "",
+    "Neuroticism": "",
+    "Conscientiousness": "",
+    "Agreeableness": "",
+    "Extraversion": "",
     "Novel Editor" : "" ,
     "Character" : "" ,
     "Occupation" : "" ,
@@ -15,7 +31,7 @@ TRANSLATION_DATA = '''{
     "Image" : "" ,
     "Novel" : "",
     "Newfile" : "" ,
-    "Open" : "" ,
+    "FileOpen" : "" ,
     "Save" : "" ,
     "Save as" : "" ,
     "Close" : "" ,
@@ -97,4 +113,4 @@ TRANSLATION_DATA = '''{
 # '\\n' represents a line break.
 #
     "Characters : {0} Lines : {1}\\n Manuscript papers : {2}" : ""
-}'''
+}"""

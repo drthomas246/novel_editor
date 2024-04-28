@@ -15,6 +15,7 @@ class FindProcessingClass(Definition.DefinitionClass):
         locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
+
     replacement_check = False
     """検索ダイアログが表示されているTrue."""
     next_pos = ""
@@ -48,20 +49,14 @@ class FindProcessingClass(Definition.DefinitionClass):
         search_win = tk.Toplevel(self.app)
         self.text_var = ttk.Entry(search_win, width=40)
         self.text_var.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
+            row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W + tk.E, ipady=3
         )
         button = ttk.Button(
             search_win,
             text=self.app.dic.get_dict("Find"),
             width=str(self.app.dic.get_dict("Find")),
             padding=(10, 5),
-            command=self.search
+            command=self.search,
         )
         button.grid(row=1, column=0)
         button2 = ttk.Button(
@@ -69,7 +64,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             text=self.app.dic.get_dict("Asc find"),
             width=str(self.app.dic.get_dict("Asc find")),
             padding=(10, 5),
-            command=self.search_forward
+            command=self.search_forward,
         )
         button2.grid(row=1, column=1)
         # 最前面に表示し続ける
@@ -89,30 +84,18 @@ class FindProcessingClass(Definition.DefinitionClass):
         self.replacement_win = tk.Toplevel(self.app)
         self.text_var = ttk.Entry(self.replacement_win, width=40)
         self.text_var.grid(
-            row=0,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
+            row=0, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W + tk.E, ipady=3
         )
         self.replacement_var = ttk.Entry(self.replacement_win, width=40)
         self.replacement_var.grid(
-            row=1,
-            column=0,
-            columnspan=2,
-            padx=5,
-            pady=5,
-            sticky=tk.W+tk.E,
-            ipady=3
+            row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W + tk.E, ipady=3
         )
         button = ttk.Button(
             self.replacement_win,
             text=self.app.dic.get_dict("Find"),
             width=str(self.app.dic.get_dict("Find")),
             padding=(10, 5),
-            command=self.search
+            command=self.search,
         )
         button.grid(row=2, column=0)
         button2 = ttk.Button(
@@ -120,21 +103,18 @@ class FindProcessingClass(Definition.DefinitionClass):
             text=self.app.dic.get_dict("Replacement"),
             width=str(self.app.dic.get_dict("Replacement")),
             padding=(10, 5),
-            command=self.replacement
+            command=self.replacement,
         )
         button2.grid(row=2, column=1)
         # 最前面に表示し続ける
         self.replacement_win.attributes("-topmost", True)
         self.replacement_win.resizable(False, False)
-        self.replacement_win.title(
-            self.app.dic.get_dict("Replacement")
-        )
+        self.replacement_win.title(self.app.dic.get_dict("Replacement"))
         self.text_var.focus()
         # ウインドウが閉じられたときの処理
         self.replacement_win.protocol(
-            "WM_DELETE_WINDOW",
-            self.replacement_dialog_on_closing
-            )
+            "WM_DELETE_WINDOW", self.replacement_dialog_on_closing
+        )
 
     def replacement_dialog_on_closing(self):
         """検索ウインドウが閉じられたときの処理.
@@ -154,7 +134,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             event (instance): tkinter.Event のインスタンス
         """
         # 現在選択中の部分を解除
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")
 
         # 現在検索ボックスに入力されてる文字
         now_text = self.text_var.get()
@@ -163,7 +143,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             pass
         elif now_text != self.find_text:
             # 前回の入力と違う文字なら、検索を最初から行う
-            index = '0.0'
+            index = "0.0"
             self.search_next(now_text, index, 0)
         else:
             # 前回の入力と同じなら、検索の続きを行う
@@ -182,7 +162,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             event (instance): tkinter.Event のインスタンス
         """
         # 現在選択中の部分を解除
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")
 
         # 現在検索ボックスに入力されてる文字
         now_text = self.text_var.get()
@@ -193,14 +173,14 @@ class FindProcessingClass(Definition.DefinitionClass):
         elif now_text != self.find_text:
             # 前回の入力と違う文字なら、検索を最初から行う
             self.replacement_check_input(True)
-            index = '0.0'
+            index = "0.0"
             self.search_next(now_text, index, 0)
         else:
             # 前回の入力と同じなら、検索の続きを行う
             self.replacement_check_input(True)
             # 検索文字の置換を行なう
             start = self.next_pos
-            end = '{0} + {1}c'.format(self.next_pos, len(now_text))
+            end = "{0} + {1}c".format(self.next_pos, len(now_text))
             self.app.NovelEditor.delete(start, end)
             self.app.NovelEditor.insert(start, replacement_text)
             self.search_next(now_text, self.next_pos, 1)
@@ -218,7 +198,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             event (instance): tkinter.Event のインスタンス
         """
         # 現在選択中の部分を解除
-        self.app.NovelEditor.tag_remove('sel', '1.0', 'end')
+        self.app.NovelEditor.tag_remove("sel", "1.0", "end")
 
         # 現在検索ボックスに入力されてる文字
         text = self.text_var.get()
@@ -227,7 +207,7 @@ class FindProcessingClass(Definition.DefinitionClass):
             pass
         elif text != self.find_text:
             # 前回の入力と違う文字なら、検索を最初から行う
-            index = 'end'
+            index = "end"
             self.search_next(text, index, 2)
         else:
             # 前回の入力と同じなら、検索の続きを行う
@@ -248,21 +228,19 @@ class FindProcessingClass(Definition.DefinitionClass):
         """
         if case == 2:
             backwards = True
-            stopindex = '0.0'
-            index = '{0}'.format(index)
+            stopindex = "0.0"
+            index = "{0}".format(index)
         elif case == 0:
             backwards = False
-            stopindex = 'end'
-            index = '{0}'.format(index)
+            stopindex = "end"
+            index = "{0}".format(index)
         else:
             backwards = False
-            stopindex = 'end'
-            index = '{0} + 1c'.format(index)
+            stopindex = "end"
+            index = "{0} + 1c".format(index)
 
         pos = self.app.NovelEditor.search(
-            search, index,
-            stopindex=stopindex,
-            backwards=backwards
+            search, index, stopindex=stopindex, backwards=backwards
         )
         if not pos:
             if case == 2:
@@ -271,27 +249,24 @@ class FindProcessingClass(Definition.DefinitionClass):
                 index = "0.0"
 
             pos = self.app.NovelEditor.search(
-                search, index,
-                stopindex=stopindex,
-                backwards=backwards
+                search, index, stopindex=stopindex, backwards=backwards
             )
             if not pos:
                 messagebox.showinfo(
                     self.app.dic.get_dict("Find"),
                     self.app.dic.get_dict(
-                        "I searched to the end,"
-                        " but there were no search characters."
-                    )
+                        "I searched to the end," " but there were no search characters."
+                    ),
                 )
                 self.replacement_check_input(False)
                 return
 
         self.next_pos_input(pos)
         start = pos
-        end = '{0} + {1}c'.format(pos, len(search))
-        self.app.NovelEditor.tag_add('sel', start, end)
-        self.app.NovelEditor.mark_set('insert', start)
-        self.app.NovelEditor.see('insert')
+        end = "{0} + {1}c".format(pos, len(search))
+        self.app.NovelEditor.tag_add("sel", start, end)
+        self.app.NovelEditor.mark_set("insert", start)
+        self.app.NovelEditor.see("insert")
         self.app.NovelEditor.focus()
 
     @classmethod

@@ -3,6 +3,10 @@ import os
 import shutil
 import tkinter as tk
 import tkinter.filedialog as filedialog
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from pycirclize import Circos
+import pandas as pd
 
 from PIL import Image, ImageTk
 
@@ -21,6 +25,7 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
         locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
+
     def __init__(self, app, locale_var, master=None):
         super().__init__(locale_var, master)
         self.zoom = 0
@@ -36,9 +41,9 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
             event (instance): tkinter.Event のインスタンス
         """
         if event.delta > 0:
-            self.app.CanvasImage.yview_scroll(-1, 'units')
+            self.app.CanvasImage.yview_scroll(-1, "units")
         elif event.delta < 0:
-            self.app.CanvasImage.yview_scroll(1, 'units')
+            self.app.CanvasImage.yview_scroll(1, "units")
 
     def mouse_image_scroll(self, event=None):
         """Ctrl+マウスホイールの拡大縮小設定.
@@ -52,7 +57,7 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
         title = "./data/image/{0}.txt".format(
             ListMenuClass.ListMenuClass.select_list_item
         )
-        with open(title, encoding='utf-8') as f:
+        with open(title, encoding="utf-8") as f:
             zoom = f.read()
 
         self.zoom = int(zoom)
@@ -64,14 +69,12 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
         elif event.delta < 0:
             self.zoom += 5
 
-        with open(title, mode='w', encoding='utf-8') as f:
+        with open(title, mode="w", encoding="utf-8") as f:
             f.write(str(self.zoom))
 
         self.app.lmc.path_read_image(
-                    'data/image',
-                    ListMenuClass.ListMenuClass.select_list_item,
-                    self.zoom
-                )
+            "data/image", ListMenuClass.ListMenuClass.select_list_item, self.zoom
+        )
 
     def btn_click(self, event=None):
         """似顔絵ボタンを押したとき.
@@ -84,21 +87,14 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
         """
         fTyp = [(self.app.dic.get_dict("gif image"), ".gif")]
         iDir = os.path.abspath(os.path.dirname(__file__))
-        self.app.filepath = filedialog.askopenfilename(
-            filetypes=fTyp,
-            initialdir=iDir
-        )
+        self.app.filepath = filedialog.askopenfilename(filetypes=fTyp, initialdir=iDir)
         if not self.app.filepath == "":
             path, ___ = os.path.splitext(
                 os.path.basename(FileMenu.FileMenuClass.now_path)
             )
             ____, ext = os.path.splitext(os.path.basename(self.app.filepath))
             title = shutil.copyfile(
-                self.app.filepath,
-                "./data/character/{0}{1}".format(
-                    path,
-                    ext
-                )
+                self.app.filepath, "./data/character/{0}{1}".format(path, ext)
             )
             self.print_gif(title)
 
@@ -156,8 +152,7 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
             self.app.CanvasPortrait.photo = ImageTk.PhotoImage(self.resize_gif(giffile))
             giffile.close()
             self.app.CanvasPortrait.itemconfig(
-                self.app.ImageOnPortrait,
-                image=self.app.CanvasPortrait.photo
+                self.app.ImageOnPortrait, image=self.app.CanvasPortrait.photo
             )
 
     def change_setting(self, event=None):
@@ -198,10 +193,50 @@ class SubfunctionProcessingClass(Definition.DefinitionClass):
             # (x座標, y座標, 方向, 表示テキスト)を渡して行番号のテキストを作成
             linenum = str(i).split(".")[0]
             self.app.CanvasLineNumbers.create_text(
-                3,
-                y,
-                anchor=tk.NW,
-                text=linenum,
-                font=("", 12)
+                3, y, anchor=tk.NW, text=linenum, font=("", 12)
             )
             i = self.app.NovelEditor.index("%s+1line" % i)
+
+    def update_character_chart(self, event=None):
+        """キャラクター画面のレーダーチャートを再描画.
+
+        ・スライダーバーから値をとって再描画する。
+
+        Args:
+            event (instance): tkinter.Event のインスタンス
+        """
+        # print(self.app.SliderExtraversion.get())
+        df = pd.DataFrame(
+            data=[
+                [
+                    self.app.SliderExtraversion.get(),
+                    self.app.SliderAgreeableness.get(),
+                    self.app.SliderConscientiousness.get(),
+                    self.app.SliderNeuroticism.get(),
+                    self.app.SliderOpenness.get(),
+                ]
+            ],
+            index=["Hero"],
+            columns=[
+                self.app.dic.get_dict("Extraversion"),
+                self.app.dic.get_dict("Agreeableness"),
+                self.app.dic.get_dict("Conscientiousness"),
+                self.app.dic.get_dict("Neuroticism"),
+                self.app.dic.get_dict("Openness"),
+            ],
+        )
+        circos = Circos.radar_chart(
+            df,
+            vmax=6,
+            grid_interval_ratio=0.166666666666666,
+            grid_label_kws=dict(size=20),
+            label_kws_handler=lambda v: dict(size=20),
+        )
+        fig = circos.plotfig(dpi=50)
+        plt.close()
+        self.app.canvasCharacterChart.get_tk_widget().pack_forget()
+        self.app.canvasCharacterChart = FigureCanvasTkAgg(
+            fig, master=self.app.FrameCharacterChartMap
+        )
+        self.app.canvasCharacterChart.draw()
+        self.app.canvasCharacterChart.get_tk_widget().pack()

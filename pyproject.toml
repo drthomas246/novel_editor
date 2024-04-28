@@ -14,6 +14,11 @@ jaconv = "^0.3.4"
 pyttsx4 = "^3.0.15"
 pillow = "^10.3.0"
 customtkinter = "^5.2.2"
+numpy = [
+  {version = ">=1.26", python = ">=3.9"},
+  {version = "<1.25", python = "=3.8"}
+]
+pycirclize = "^1.4.0"
 
 
 [tool.poetry.group.dev.dependencies]

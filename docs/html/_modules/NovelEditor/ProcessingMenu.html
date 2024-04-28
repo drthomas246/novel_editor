@@ -110,6 +110,7 @@
 <span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">font_size</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;フォントのサイズ.&quot;&quot;&quot;</span>
     <span class="n">yahoo_appid</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -132,9 +133,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">hon</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="c1"># 選択文字列を切り取る</span>
-        <span class="n">set_ruby</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sel.first&#39;</span><span class="p">,</span> <span class="s1">&#39;sel.last&#39;</span><span class="p">)</span>
+        <span class="n">set_ruby</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sel.first&quot;</span><span class="p">,</span> <span class="s2">&quot;sel.last&quot;</span><span class="p">)</span>
         <span class="c1"># 選択文字列を削除する</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;sel.first&#39;</span><span class="p">,</span> <span class="s1">&#39;sel.last&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;sel.first&quot;</span><span class="p">,</span> <span class="s2">&quot;sel.last&quot;</span><span class="p">)</span>
         <span class="c1"># 形態素解析を行う</span>
         <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">set_ruby</span><span class="p">):</span>
             <span class="c1"># ルビの取得</span>
@@ -146,22 +147,18 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hiragana</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
                     <span class="n">hira</span> <span class="o">+=</span> <span class="n">i</span>
             <span class="c1"># ルビがないときと、記号の時の処理</span>
-            <span class="k">if</span> <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
-            <span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">part_of_speech</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-                <span class="s2">&quot;,&quot;</span>
-            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">part_of_speech</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)[</span>
+                <span class="mi">0</span>
+            <span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">):</span>
                 <span class="n">hon</span> <span class="o">+=</span> <span class="n">token</span><span class="o">.</span><span class="n">surface</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># ルビ振りを行う</span>
                 <span class="n">hon</span> <span class="o">+=</span> <span class="s2">&quot;|</span><span class="si">{0}</span><span class="s2">≪</span><span class="si">{1}</span><span class="s2">≫</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">token</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
-                    <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
-                    <span class="n">hira</span>
+                    <span class="n">token</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">ruby</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hira</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">hira</span>
                 <span class="p">)</span>
 
         <span class="c1"># テキストを表示する</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">hon</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="n">hon</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProcessingMenuClass.is_hiragana">
@@ -178,7 +175,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: ひらがなならTrue、違うならFalse</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="mh">0x3040</span> <span class="o">&lt;</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mh">0x3097</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="mh">0x3040</span> <span class="o">&lt;</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mh">0x3097</span></div>
 
 
 <div class="viewcode-block" id="ProcessingMenuClass.count_moji">
@@ -189,9 +186,9 @@
 <span class="sd">        ・文字数と行数をカウントして表示する。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 行数の取得</span>
-        <span class="n">new_line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;end-1c&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">new_line</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;end-1c&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
         <span class="c1"># 文字列の取得</span>
-        <span class="n">moji</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="n">moji</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
         <span class="c1"># ２０文字で区切ったときの行数を数える</span>
         <span class="n">gen_mai</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">moji</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
@@ -201,11 +198,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of characters etc&quot;</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
                 <span class="s2">&quot;Characters : </span><span class="si">{0}</span><span class="s2"> Lines : </span><span class="si">{1}</span><span class="se">\n</span><span class="s2"> Manuscript papers : </span><span class="si">{2}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-            <span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">moji</span><span class="p">)</span><span class="o">-</span><span class="n">new_line</span><span class="p">,</span>
-                <span class="n">new_line</span><span class="p">,</span>
-                <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">gen_mai</span><span class="o">//</span><span class="mi">20</span><span class="p">)))</span></div>
+            <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">moji</span><span class="p">)</span> <span class="o">-</span> <span class="n">new_line</span><span class="p">,</span> <span class="n">new_line</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">gen_mai</span> <span class="o">//</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProcessingMenuClass.find_wikipedia">
@@ -222,17 +216,13 @@
         <span class="c1"># ページがあるかどうか判断</span>
         <span class="k">if</span> <span class="n">page_py</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                    <span class="s2">&quot;Meaning of [</span><span class="si">{0}</span><span class="s2">]&quot;</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
-                <span class="n">page_py</span><span class="o">.</span><span class="n">summary</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Meaning of [</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
+                <span class="n">page_py</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">messagebox</span><span class="o">.</span><span class="n">showwarning</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                    <span class="s2">&quot;Meaning of [</span><span class="si">{0}</span><span class="s2">]&quot;</span>
-                <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Meaning of [</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">select_text</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find.&quot;</span><span class="p">),</span>
             <span class="p">)</span></div>
 
 
@@ -254,7 +244,9 @@
 <span class="sd">        ・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">pyttsx4</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">speak</span> <span class="o">=</span> <span class="n">Speaking</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speak</span> <span class="o">=</span> <span class="n">Speaking</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 
@@ -281,9 +273,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoocall</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end -1c&#39;</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoocall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end -1c&quot;</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahooresult</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Double-1&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_double_click_yahoo</span><span class="p">)</span></div>
@@ -308,10 +298,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
                     <span class="s2">&quot;Yahoo! Client ID is not find.&quot;</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read Readme.html and set it again.&quot;</span>
-                <span class="p">)</span>
+                <span class="p">),</span>
             <span class="p">)</span>
             <span class="k">return</span>
-        <span class="n">APPID</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">APPID</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_appid</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://jlp.yahooapis.jp/KouseiService/V2/kousei&quot;</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
@@ -319,11 +309,9 @@
         <span class="p">}</span>
         <span class="n">param_dic</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;NovelEditor-Yahoo-Kousei&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;jsonrpc&quot;</span> <span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span> <span class="p">:</span> <span class="s2">&quot;jlp.kouseiservice.kousei&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;params&quot;</span> <span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;q&quot;</span> <span class="p">:</span> <span class="n">sentence</span>
-            <span class="p">}</span>
+            <span class="s2">&quot;jsonrpc&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;jlp.kouseiservice.kousei&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">sentence</span><span class="p">},</span>
         <span class="p">}</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">param_dic</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="n">req</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
@@ -356,57 +344,39 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
-            <span class="mi">1</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of characters from the beginning&quot;</span><span class="p">)</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of characters from the beginning&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
-            <span class="mi">2</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of target characters&quot;</span><span class="p">)</span>
+            <span class="mi">2</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Number of target characters&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Target notation&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
+            <span class="mi">4</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Paraphrase candidate string&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
-            <span class="mi">3</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Target notation&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
-            <span class="mi">4</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Paraphrase candidate string&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span>
-            <span class="mi">5</span><span class="p">,</span>
-            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Detailed information on the pointed out&quot;</span><span class="p">)</span>
+            <span class="mi">5</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Detailed information on the pointed out&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="c1"># 情報を取り出す</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">jsonData</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">][</span><span class="s2">&quot;suggestions&quot;</span><span class="p">]:</span>
-            <span class="n">StartPos</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">])</span>
-            <span class="n">Length</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">])</span>
-            <span class="n">Surface</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">])</span>
-            <span class="n">ShitekiWord</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s2">&quot;note&quot;</span><span class="p">])</span>
-            <span class="n">ShitekiInfo</span> <span class="o">=</span> <span class="p">(</span><span class="n">child</span><span class="p">[</span><span class="s2">&quot;rule&quot;</span><span class="p">])</span>
+            <span class="n">StartPos</span> <span class="o">=</span> <span class="n">child</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">]</span>
+            <span class="n">Length</span> <span class="o">=</span> <span class="n">child</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">]</span>
+            <span class="n">Surface</span> <span class="o">=</span> <span class="n">child</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span>
+            <span class="n">ShitekiWord</span> <span class="o">=</span> <span class="n">child</span><span class="p">[</span><span class="s2">&quot;note&quot;</span><span class="p">]</span>
+            <span class="n">ShitekiInfo</span> <span class="o">=</span> <span class="n">child</span><span class="p">[</span><span class="s2">&quot;rule&quot;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
-                <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;end&quot;</span><span class="p">,</span>
-                <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">StartPos</span><span class="p">,</span>
-                        <span class="n">Length</span><span class="p">,</span>
-                        <span class="n">Surface</span><span class="p">,</span>
-                        <span class="n">ShitekiWord</span><span class="p">,</span>
-                        <span class="n">ShitekiInfo</span>
-                        <span class="p">)</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">StartPos</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Surface</span><span class="p">,</span> <span class="n">ShitekiWord</span><span class="p">,</span> <span class="n">ShitekiInfo</span><span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
         <span class="c1"># スクロールバーを表示する</span>
         <span class="n">SCRLBAR_Y</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
-            <span class="n">sub_win</span><span class="p">,</span>
-            <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">yview</span>
+            <span class="n">sub_win</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">yview</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">yahoo_tree</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscroll</span><span class="o">=</span><span class="n">SCRLBAR_Y</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
         <span class="n">SCRLBAR_Y</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">))</span>
         <span class="c1"># 最前面に表示し続ける</span>
         <span class="n">sub_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">sub_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Sentence structure&quot;</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="n">sub_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Sentence structure&quot;</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ProcessingMenuClass.on_double_click_yahoo">
@@ -435,26 +405,23 @@
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">textforlen</span> <span class="o">=</span> <span class="n">textlen</span>
                 <span class="n">textlen</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
-                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.0&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.0&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="c1"># 選択状態を一旦削除</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
         <span class="c1"># 選択状態にする</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span>
-            <span class="s1">&#39;sel&#39;</span><span class="p">,</span>
-            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="p">),</span>
-            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="o">+</span><span class="n">lenge</span><span class="p">)</span>
+            <span class="s2">&quot;sel&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="o">-</span> <span class="n">textforlen</span><span class="p">),</span>
+            <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="o">-</span> <span class="n">textforlen</span> <span class="o">+</span> <span class="n">lenge</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="c1"># カーソルの移動</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span><span class="o">-</span><span class="n">textforlen</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="o">-</span> <span class="n">textforlen</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">)</span>
         <span class="c1"># フォーカスを合わせる</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
         <span class="k">return</span></div>
@@ -473,26 +440,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">sub_wins</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">intSpin</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Spinbox</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">sub_wins</span><span class="p">,</span> <span class="n">from_</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">intSpin</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
-            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
-            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span> <span class="o">+</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
         <span class="p">)</span>
         <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">sub_wins</span><span class="p">,</span>
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Resize&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Resize&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">font_size_Change</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">font_size_Change</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">intSpin</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ProcessingMenuClass</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">sub_wins</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Font size&quot;</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">sub_wins</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Font size&quot;</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ProcessingMenuClass.font_size_Change">
@@ -548,6 +507,7 @@
 <span class="sd">        app (instance): MainProcessingClass のインスタンス</span>
 <span class="sd">        **kwargs (dict): 複数のキーワード引数を辞書として受け取る</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
@@ -573,39 +533,37 @@
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Stop&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Stop&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># 最前面に表示し続ける</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="c1"># サイズ変更禁止</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Read aloud&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Read aloud&quot;</span><span class="p">))</span>
         <span class="c1"># 頭から読み上げる</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">paused</span><span class="p">:</span>
                 <span class="c1"># 読み上げ場所の選択</span>
                 <span class="n">word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
-                    <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;0.0 + </span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                    <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;0.0 + </span><span class="si">{0}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;0.0 + </span><span class="si">{0}</span><span class="s2">c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;0.0 + </span><span class="si">{0}</span><span class="s2">c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
                     <span class="c1"># 読み上げ開始</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">runAndWait</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
                     <span class="c1"># 読み上げ終了</span>
                 <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Speaking.stop">
@@ -618,7 +576,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_read_win</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

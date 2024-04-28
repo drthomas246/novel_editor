@@ -93,6 +93,7 @@
 <span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">locale_var</span><span class="p">,</span> <span class="n">master</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
@@ -161,7 +162,7 @@
 <span class="sd">        Args:</span>
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clipboard_get</span><span class="p">())</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">clipboard_get</span><span class="p">())</span></div>
 </div>
 
 </pre></div>

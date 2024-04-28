@@ -12,6 +12,7 @@ class EditMenuClass(Definition.DefinitionClass):
         locale_var (str): ロケーション
         master (instance): toplevel のインスタンス
     """
+
     def __init__(self, app, locale_var, master=None):
         super().__init__(locale_var, master)
         self.app = app
@@ -66,4 +67,4 @@ class EditMenuClass(Definition.DefinitionClass):
         Args:
             event (instance): tkinter.Event のインスタンス
         """
-        self.app.NovelEditor.insert('insert', self.app.clipboard_get())
+        self.app.NovelEditor.insert("insert", self.app.clipboard_get())

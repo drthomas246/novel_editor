@@ -32,65 +32,25 @@ class MainProcessingClass(Definition.DefinitionClass):
     def __init__(self, tokenizer, wiki_wiki, locale_var, master=None):
         super().__init__(locale_var, master)
         # 自作クラスの読み込み
-        self.cwc = CreateWindow.CreateWindowClass(
-            self,
-            locale_var,
-            master
-        )
-        self.epc = EventProcessing.EventProcessingClass(
-            self,
-            locale_var,
-            master
-        )
+        self.cwc = CreateWindow.CreateWindowClass(self, locale_var, master)
+        self.epc = EventProcessing.EventProcessingClass(self, locale_var, master)
         self.spc = SubfunctionProcessing.SubfunctionProcessingClass(
-            self,
-            locale_var,
-            master
+            self, locale_var, master
         )
         self.hpc = HighlightProcessing.HighlightProcessingClass(
-            self,
-            tokenizer,
-            locale_var,
-            master
+            self, tokenizer, locale_var, master
         )
-        self.fpc = FindProcessing.FindProcessingClass(
-            self,
-            locale_var,
-            master
-        )
+        self.fpc = FindProcessing.FindProcessingClass(self, locale_var, master)
         self.cpc = ComplementProcessing.ComplementProcessingClass(
-            self,
-            tokenizer,
-            locale_var,
-            master
+            self, tokenizer, locale_var, master
         )
-        self.fmc = FileMenu.FileMenuClass(
-            self,
-            locale_var,
-            master
-        )
-        self.emc = EditMenu.EditMenuClass(
-            self,
-            locale_var,
-            master
-        )
+        self.fmc = FileMenu.FileMenuClass(self, locale_var, master)
+        self.emc = EditMenu.EditMenuClass(self, locale_var, master)
         self.pmc = ProcessingMenu.ProcessingMenuClass(
-            self,
-            tokenizer,
-            wiki_wiki,
-            locale_var,
-            master
+            self, tokenizer, wiki_wiki, locale_var, master
         )
-        self.lmc = ListMenuClass.ListMenuClass(
-            self,
-            locale_var,
-            master
-        )
-        self.hmc = HelpMenu.HelpMenuClass(
-            self,
-            locale_var,
-            master
-        )
+        self.lmc = ListMenuClass.ListMenuClass(self, locale_var, master)
+        self.hmc = HelpMenu.HelpMenuClass(self, locale_var, master)
         # メニューバーの作成
         self.menu_bar = tk.Menu(master)
         self.master.config(menu=self.menu_bar)
@@ -117,15 +77,15 @@ class MainProcessingClass(Definition.DefinitionClass):
         ProcessingMenu.ProcessingMenuClass.font_size = 16
         ProcessingMenu.ProcessingMenuClass.yahoo_appid = ""
         if os.path.isfile("./appid.txt"):
-            with open("./appid.txt", encoding='utf-8') as f:
+            with open("./appid.txt", encoding="utf-8") as f:
                 ProcessingMenu.ProcessingMenuClass.yahoo_appid = f.read()
 
-        if u"ここを消して、" in ProcessingMenu.ProcessingMenuClass.yahoo_appid:
+        if "ここを消して、" in ProcessingMenu.ProcessingMenuClass.yahoo_appid:
             ProcessingMenu.ProcessingMenuClass.yahoo_appid = ""
 
         # dataフォルダがあるときは、削除する
-        if os.path.isdir('./data'):
-            shutil.rmtree('./data')
+        if os.path.isdir("./data"):
+            shutil.rmtree("./data")
         # 新しくdataフォルダを作成する
         for val in self.TREE_FOLDER:
-            os.makedirs('./{0}'.format(val[0]))
+            os.makedirs("./{0}".format(val[0]))

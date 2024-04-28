@@ -14,9 +14,5 @@ def initialize(locate_var):
     Returns:
         instance: 多言語化のクラスのインスタンス
     """
-    instance = llize.Localization(
-        locate_var,
-        "neditor.txt",
-        data.TRANSLATION_DATA
-    )
+    instance = llize.Localization(locate_var, "neditor.txt", data.TRANSLATION_DATA)
     return instance

@@ -108,11 +108,11 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s2">&quot;./data&quot;</span><span class="p">):</span>
         <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
             <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">),</span>
-            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;This program cannot be started more than once.&quot;</span><span class="p">)</span>
+            <span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;This program cannot be started more than once.&quot;</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
-    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">&#39;600x300&#39;</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;600x300&quot;</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">TITLE_BINARY</span><span class="p">)</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
@@ -126,54 +126,41 @@
     <span class="n">lh</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">winfo_height</span><span class="p">()</span>
     <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span>
         <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">x</span><span class="si">{1}</span><span class="s2">+</span><span class="si">{2}</span><span class="s2">+</span><span class="si">{3}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">lw</span><span class="p">),</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">lh</span><span class="p">),</span>
-            <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ww</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">lw</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
-            <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wh</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">lh</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">lw</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">lh</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ww</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">lw</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">wh</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">lh</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
         <span class="p">)</span>
     <span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>
 
     <span class="c1"># windowsのみタイトルバーを削除</span>
     <span class="c1"># OS別判断</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;nt&quot;</span><span class="p">:</span>
         <span class="n">root</span><span class="o">.</span><span class="n">overrideredirect</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">wm_attributes</span><span class="p">(</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span> <span class="s1">&#39;splash&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;posix&quot;</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">wm_attributes</span><span class="p">(</span><span class="s2">&quot;-type&quot;</span><span class="p">,</span> <span class="s2">&quot;splash&quot;</span><span class="p">)</span>
     <span class="c1"># 描画するが処理は止めない</span>
     <span class="n">root</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="c1"># Janomeを使って日本語の形態素解析を起動</span>
     <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">()</span>
     <span class="c1"># wikipediaapiを起動</span>
-    <span class="n">wiki_wiki</span> <span class="o">=</span> <span class="n">wikipediaapi</span><span class="o">.</span><span class="n">Wikipedia</span><span class="p">(</span><span class="s1">&#39;Novel Editor(yoshihiro@yamahara.email)&#39;</span><span class="p">,</span><span class="s1">&#39;ja&#39;</span><span class="p">)</span>
+    <span class="n">wiki_wiki</span> <span class="o">=</span> <span class="n">wikipediaapi</span><span class="o">.</span><span class="n">Wikipedia</span><span class="p">(</span><span class="s2">&quot;Novel Editor(yoshihiro@yamahara.email)&quot;</span><span class="p">,</span> <span class="s2">&quot;ja&quot;</span><span class="p">)</span>
     <span class="c1"># メイン画面を削除</span>
     <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
     <span class="c1"># 再度メイン画面を作成</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">customtkinter</span><span class="o">.</span><span class="n">CTk</span><span class="p">()</span>
     <span class="c1"># アイコンを設定</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-        <span class="s1">&#39;wm&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;iconphoto&#39;</span><span class="p">,</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">_w</span><span class="p">,</span>
-        <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">ICO_BINARY</span><span class="p">)</span>
-    <span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">tk</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;wm&quot;</span><span class="p">,</span> <span class="s2">&quot;iconphoto&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">_w</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">ICO_BINARY</span><span class="p">))</span>
     <span class="c1"># タイトルの表示</span>
     <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Novel Editor&quot;</span><span class="p">))</span>
     <span class="c1"># フレームを表示する</span>
-    <span class="n">app</span> <span class="o">=</span> <span class="n">MainProcessing</span><span class="o">.</span><span class="n">MainProcessingClass</span><span class="p">(</span>
-        <span class="n">tokenizer</span><span class="p">,</span>
-        <span class="n">wiki_wiki</span><span class="p">,</span>
-        <span class="n">locale_var</span><span class="p">,</span>
-        <span class="n">root</span>
-    <span class="p">)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">MainProcessing</span><span class="o">.</span><span class="n">MainProcessingClass</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">wiki_wiki</span><span class="p">,</span> <span class="n">locale_var</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">))</span>
     <span class="c1"># 終了時にon_closingを行う</span>
     <span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">fmc</span><span class="o">.</span><span class="n">on_closing</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">pf</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">pf</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">:</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">state</span><span class="p">(</span><span class="s1">&#39;zoomed&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pf</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">state</span><span class="p">(</span><span class="s2">&quot;zoomed&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">root</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-zoomed&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
 

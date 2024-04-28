@@ -96,6 +96,7 @@
 <span class="sd">        locale_var (str): ロケーション</span>
 <span class="sd">        master (instance): toplevel のインスタンス</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">replacement_check</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;検索ダイアログが表示されているTrue.&quot;&quot;&quot;</span>
     <span class="n">next_pos</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -134,20 +135,14 @@
         <span class="n">search_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">search_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
-            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
-            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span> <span class="o">+</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
         <span class="p">)</span>
         <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="n">search_win</span><span class="p">,</span>
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Find&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Find&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
@@ -155,7 +150,7 @@
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Asc find&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Asc find&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_forward</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search_forward</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># 最前面に表示し続ける</span>
@@ -178,30 +173,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
-            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
-            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span> <span class="o">+</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_var</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_var</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
-            <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
-            <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span> <span class="o">+</span> <span class="n">tk</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="n">ipady</span><span class="o">=</span><span class="mi">3</span>
         <span class="p">)</span>
         <span class="n">button</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="p">,</span>
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Find&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Find&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">button2</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
@@ -209,21 +192,18 @@
             <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Replacement&quot;</span><span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Replacement&quot;</span><span class="p">)),</span>
             <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replacement</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">button2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># 最前面に表示し続ける</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s2">&quot;-topmost&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Replacement&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Replacement&quot;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
         <span class="c1"># ウインドウが閉じられたときの処理</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">replacement_win</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span>
-            <span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">replacement_dialog_on_closing</span>
-            <span class="p">)</span></div>
+            <span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">replacement_dialog_on_closing</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FindProcessingClass.replacement_dialog_on_closing">
@@ -249,7 +229,7 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 現在選択中の部分を解除</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
 
         <span class="c1"># 現在検索ボックスに入力されてる文字</span>
         <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
@@ -258,7 +238,7 @@
             <span class="k">pass</span>
         <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
             <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
@@ -280,7 +260,7 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 現在選択中の部分を解除</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
 
         <span class="c1"># 現在検索ボックスに入力されてる文字</span>
         <span class="n">now_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
@@ -291,14 +271,14 @@
         <span class="k">elif</span> <span class="n">now_text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
             <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check_input</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check_input</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="c1"># 検索文字の置換を行なう</span>
             <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + </span><span class="si">{1}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">now_text</span><span class="p">))</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> + </span><span class="si">{1}</span><span class="s2">c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">now_text</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">replacement_text</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">now_text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -319,7 +299,7 @@
 <span class="sd">            event (instance): tkinter.Event のインスタンス</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># 現在選択中の部分を解除</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
 
         <span class="c1"># 現在検索ボックスに入力されてる文字</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
@@ -328,7 +308,7 @@
             <span class="k">pass</span>
         <span class="k">elif</span> <span class="n">text</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_text</span><span class="p">:</span>
             <span class="c1"># 前回の入力と違う文字なら、検索を最初から行う</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;end&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">search_next</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># 前回の入力と同じなら、検索の続きを行う</span>
@@ -352,21 +332,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">backwards</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;0.0&#39;</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">backwards</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s2">&quot;end&quot;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">backwards</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">stopindex</span> <span class="o">=</span> <span class="s1">&#39;end&#39;</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + 1c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">stopindex</span> <span class="o">=</span> <span class="s2">&quot;end&quot;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> + 1c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
         <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
-            <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
-            <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span>
-            <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
+            <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span> <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">pos</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">case</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -375,27 +353,24 @@
                 <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
 
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
-                <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span>
-                <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span>
-                <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
+                <span class="n">search</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">stopindex</span><span class="o">=</span><span class="n">stopindex</span><span class="p">,</span> <span class="n">backwards</span><span class="o">=</span><span class="n">backwards</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">pos</span><span class="p">:</span>
                 <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span><span class="s2">&quot;Find&quot;</span><span class="p">),</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">get_dict</span><span class="p">(</span>
-                        <span class="s2">&quot;I searched to the end,&quot;</span>
-                        <span class="s2">&quot; but there were no search characters.&quot;</span>
-                    <span class="p">)</span>
+                        <span class="s2">&quot;I searched to the end,&quot;</span> <span class="s2">&quot; but there were no search characters.&quot;</span>
+                    <span class="p">),</span>
                 <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">replacement_check_input</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
                 <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">next_pos_input</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">pos</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> + </span><span class="si">{1}</span><span class="s1">c&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">search</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s1">&#39;sel&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> + </span><span class="si">{1}</span><span class="s2">c&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">search</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s2">&quot;sel&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">mark_set</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
 
 
