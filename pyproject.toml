@@ -11,7 +11,6 @@ python = "<3.13,>=3.8"
 wikipedia-api = "^0.6.0"
 janome = "^0.5.0"
 jaconv = "^0.3.4"
-pyttsx4 = "^3.0.15"
 pillow = "^10.3.0"
 customtkinter = "^5.2.2"
 numpy = [
@@ -19,6 +18,7 @@ numpy = [
   {version = "<1.25", python = "=3.8"}
 ]
 pycirclize = "^1.4.0"
+pyttsx3 = "^2.90"
 
 
 [tool.poetry.group.dev.dependencies]

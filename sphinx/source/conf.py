@@ -40,7 +40,7 @@ autodoc_mock_imports = [
     "wikipediaapi",
     "janome",
     "jaconv",
-    "pyttsx4",
+    "pyttsx3",
     "PIL",
     "customtkinter",
     "matplotlib",

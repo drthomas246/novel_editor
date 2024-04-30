@@ -6,3 +6,4 @@
 
    i18n
    NovelEditor
+   novel_editor

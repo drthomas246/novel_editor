@@ -86,12 +86,11 @@
 <span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">import</span> <span class="nn">tkinter.ttk</span> <span class="k">as</span> <span class="nn">ttk</span>
 <span class="kn">import</span> <span class="nn">tkinter.messagebox</span> <span class="k">as</span> <span class="nn">messagebox</span>
-<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
 
 <span class="kn">import</span> <span class="nn">jaconv</span>
-<span class="kn">import</span> <span class="nn">pyttsx4</span>
+<span class="kn">import</span> <span class="nn">pyttsx3</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Definition</span>
 
@@ -241,18 +240,18 @@
     <span class="k">def</span> <span class="nf">read_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;テキストを読み上げる.</span>
 
-<span class="sd">        ・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。</span>
+<span class="sd">        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">pyttsx4</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">pyttsx3</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">speak</span> <span class="o">=</span> <span class="n">Speaking</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">NovelEditor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="ProcessingMenuClass.pyttsx4_onend">
-<a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.ProcessingMenu.ProcessingMenuClass.pyttsx4_onend">[ドキュメント]</a>
-    <span class="k">def</span> <span class="nf">pyttsx4_onend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProcessingMenuClass.pyttsx3_onend">
+<a class="viewcode-back" href="../../NovelEditor.html#NovelEditor.ProcessingMenu.ProcessingMenuClass.pyttsx3_onend">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">pyttsx3_onend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;文章を読み終えた時の処理.</span>
 
 <span class="sd">        ・文章を読み終えたら中止ウインドウを削除する。</span>

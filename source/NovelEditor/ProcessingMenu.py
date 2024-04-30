@@ -7,12 +7,11 @@ import webbrowser
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as messagebox
-import xml.etree.ElementTree as ET
 import json
 from urllib import request
 
 import jaconv
-import pyttsx4
+import pyttsx3
 
 from . import Definition
 
@@ -143,15 +142,15 @@ class ProcessingMenuClass(Definition.DefinitionClass):
     def read_text(self):
         """テキストを読み上げる.
 
-        ・pyttsx4ライブラリを使ってテキストボックスに書かれているものを読み上げる。
+        ・pyttsx3ライブラリを使ってテキストボックスに書かれているものを読み上げる。
         """
-        self.app.engine = pyttsx4.init()
+        self.app.engine = pyttsx3.init()
         self.speak = Speaking(
             self.app.NovelEditor.get(1.0, tk.END), self.app, daemon=True
         )
         self.speak.start()
 
-    def pyttsx4_onend(self):
+    def pyttsx3_onend(self):
         """文章を読み終えた時の処理.
 
         ・文章を読み終えたら中止ウインドウを削除する。

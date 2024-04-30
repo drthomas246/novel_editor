@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>概要: モジュールコード &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
+  <title>novel_editor &mdash; Novel Editor 0.9.0 bata ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -65,7 +65,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">概要: モジュールコード</li>
+          <li class="breadcrumb-item"><a href="index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">novel_editor</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -74,25 +75,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>全モジュールのうち、コードを読めるもの</h1>
-<ul><li><a href="NovelEditor.html">NovelEditor</a></li>
-<ul><li><a href="NovelEditor/ComplementProcessing.html">NovelEditor.ComplementProcessing</a></li>
-<li><a href="NovelEditor/CreateWindow.html">NovelEditor.CreateWindow</a></li>
-<li><a href="NovelEditor/Definition.html">NovelEditor.Definition</a></li>
-<li><a href="NovelEditor/EditMenu.html">NovelEditor.EditMenu</a></li>
-<li><a href="NovelEditor/EventProcessing.html">NovelEditor.EventProcessing</a></li>
-<li><a href="NovelEditor/FileMenu.html">NovelEditor.FileMenu</a></li>
-<li><a href="NovelEditor/FindProcessing.html">NovelEditor.FindProcessing</a></li>
-<li><a href="NovelEditor/HelpMenu.html">NovelEditor.HelpMenu</a></li>
-<li><a href="NovelEditor/HighlightProcessing.html">NovelEditor.HighlightProcessing</a></li>
-<li><a href="NovelEditor/ListMenuClass.html">NovelEditor.ListMenuClass</a></li>
-<li><a href="NovelEditor/MainProcessing.html">NovelEditor.MainProcessing</a></li>
-<li><a href="NovelEditor/ProcessingMenu.html">NovelEditor.ProcessingMenu</a></li>
-<li><a href="NovelEditor/SubfunctionProcessing.html">NovelEditor.SubfunctionProcessing</a></li>
-</ul><li><a href="i18n.html">i18n</a></li>
-<ul><li><a href="i18n/llize.html">i18n.llize</a></li>
-</ul><li><a href="novel_editor.html">novel_editor</a></li>
-</ul>
+  <h1>novel_editor のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+<span class="kn">import</span> <span class="nn">NovelEditor</span>
+<span class="kn">import</span> <span class="nn">locale</span>
+
+
+<div class="viewcode-block" id="StartProsess">
+<a class="viewcode-back" href="../novel_editor.html#novel_editor.StartProsess">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">StartProsess</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;スタートプロセスクラス.</span>
+
+<span class="sd">    ・一番初めに開かれるクラス</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+        <span class="c1"># 多言語化処理</span>
+        <span class="n">locale_var</span> <span class="o">=</span> <span class="n">locale</span><span class="o">.</span><span class="n">getlocale</span><span class="p">()</span>
+        <span class="c1"># タイトルを表示する</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">NovelEditor</span><span class="o">.</span><span class="n">main_window_create</span><span class="p">(</span><span class="n">locale_var</span><span class="p">)</span>
+        <span class="c1"># ループする</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span></div>
+
+
+
+<span class="n">StartProsess</span><span class="p">()</span>
+</pre></div>
 
            </div>
           </div>

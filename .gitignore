@@ -1,8 +1,8 @@
+.vscode/
 source/__pycache__/
 source/locale/
 source/i18n/__pycache__/
-source/neditor/__pycache__/
-C#
+source/NovelEditor/__pycache__/
 exe/novel_editor.session
 build/
 dist/
